@@ -127,64 +127,78 @@
                     <div id="weatherForm">
                         <h4>Weatherdata</h4>
                         <form>
-                            <div>
-                                <label >Wind Strength</label>
-                                <input  type="text" id="wstr"/>
-                            </div>
-                            <div>
-                                <label >Wind Direction</label>
-                                <select name="wind_direction" id="winddir">
-                                    <option value="Value 1">West</option>
-                                    <option value="Value 2">North</option>
-                                    <option value="Value 3">East</option>
-                                    <option value="Value 3">South</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label >Air Pressure</label>
-                                <input  type="text" id="airpress"/>
-                            </div>
-                            <div>
-                                <label >Temperature</label>
-                                <input  type="text" id="temp"/>
-                            </div>
-                            <div>
-                                <label >Clouds</label>
-                                <select name="clouds" id="clou">
-                                    <option value="Value 1">Light Clouds</option>
-                                    <option value="Value 2">Middle Clouds</option>
-                                    <option value="Value 3">Strong Clouds</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label >Rain</label>
-                                <select name="rain" id="rai">
-                                    <option value="Value 1">Strong Rain</option>
-                                    <option value="Value 2">Light Rain</option>
-                                    <option value="Value 3">Freeze Rain</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label >Wave Hight</label>
-                                <input  type="text" id="whight"/>
-                            </div>
-                            <div>
-                                <label >Wave Direction</label>
-                                <select name="wave_direction" id="wavedir">
-                                    <option value="Value 1">West</option>
-                                    <option value="Value 2">North</option>
-                                    <option value="Value 3">East</option>
-                                    <option value="Value 3">South</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label >Recording Date</label>
-                                <input type="date" id="recdate"/>
-                            </div>
-                            <div>
-                                <label>Recording Time</label>
-                                <input type="time" id="rectime"/>
-                            </div>
+                        	<fieldset>
+    							<legend>Temperature:</legend>
+    								
+    							<div>
+                                	<label >Temperature</label>
+                                	<input  type="text" id="temp"/>
+                            	</div>
+    						</fieldset>			
+                            <fieldset>
+    							<legend>Wind:</legend>
+    							<div>
+                                	<label >Wind Strength</label>
+                                	<input  type="text" id="wstr"/>
+                            	</div>
+                            	<div>
+                                	<label >Wind Direction</label>
+                                	<select name="wind_direction" id="winddir">
+                                    	<option value="Value 1">West</option>
+                                    	<option value="Value 2">North</option>
+                                    	<option value="Value 3">East</option>
+                                   	 	<option value="Value 3">South</option>
+                                	</select>
+                            	</div>                            
+          					</fieldset>
+	                        <fieldset>
+	    						<legend>Weather:</legend>
+	                            <div>
+	                                <label >Air Pressure</label>
+	                                <input  type="text" id="airpress"/>
+	                            </div>
+	                            <div>
+	                                <label >Clouds</label>
+	                                <select name="clouds" id="clou">
+	                                    <option value="Value 1">Light Clouds</option>
+	                                    <option value="Value 2">Middle Clouds</option>
+	                                    <option value="Value 3">Strong Clouds</option>
+	                                </select>
+	                            </div>
+	                            <div>
+	                                <label >Rain</label>
+	                                <select name="rain" id="rai">
+	                                    <option value="Value 1">Strong Rain</option>
+	                                    <option value="Value 2">Light Rain</option>
+	                                    <option value="Value 3">Freeze Rain</option>
+	                                </select>
+	                     		</div>
+	                                            
+	                        </fieldset>
+	                        <fieldset>
+	    						<legend>Waves:</legend>
+	                            <div>
+	                                <label >Wave Hight</label>
+	                                <input  type="text" id="whight"/>
+	                            </div>
+	                            <div>
+	                                <label >Wave Direction</label>
+	                                <select name="wave_direction" id="wavedir">
+	                                    <option value="Value 1">West</option>
+	                                    <option value="Value 2">North</option>
+	                                    <option value="Value 3">East</option>
+	                                    <option value="Value 3">South</option>
+	                                </select>
+	                            </div>                               
+	                        </fieldset>
+	                        <fieldset>
+	    						<legend>Date:</legend>
+	                            <div>
+	                                <label >Recording Date</label>
+	                                <input type="datetime" id="recdatetTme"/>
+	                           </div>
+	                    	</fieldset>
+	                    </form>
                     </div>
                 </div>
             </div>
