@@ -128,13 +128,27 @@
                         <h4>Weatherdata</h4>
                         <form>
                         	<fieldset>
-    							<legend>Temperature:</legend>
-    								
+    							<legend>Weather:</legend>    								
     							<div>
                                 	<label >Temperature</label>
                                 	<input  type="text" id="temp"/>
                             	</div>
-    						</fieldset>			
+                            	<div>
+	                                <label >Air Pressure</label>
+	                                <input  type="text" id="airpress"/>
+	                            </div>
+    						</fieldset>	
+    						<fieldset>
+	    						<legend>Date:</legend>
+	                             <div>
+                                	<label >Recording Date</label>
+                                	<input type="date" id="recdate"/>
+                            	</div>
+                            	<div>
+                                	<label>Recording Time</label>
+                                	<input type="time" id="rectime"/>
+                            	</div>
+	                    	</fieldset>		
                             <fieldset>
     							<legend>Wind:</legend>
     							<div>
@@ -152,11 +166,7 @@
                             	</div>                            
           					</fieldset>
 	                        <fieldset>
-	    						<legend>Weather:</legend>
-	                            <div>
-	                                <label >Air Pressure</label>
-	                                <input  type="text" id="airpress"/>
-	                            </div>
+	    						<legend>Weather:</legend>	                            
 	                            <div>
 	                                <label >Clouds</label>
 	                                <select name="clouds" id="clou">
@@ -190,14 +200,7 @@
 	                                    <option value="Value 3">South</option>
 	                                </select>
 	                            </div>                               
-	                        </fieldset>
-	                        <fieldset>
-	    						<legend>Date:</legend>
-	                            <div>
-	                                <label >Recording Date</label>
-	                                <input type="datetime" id="recdatetTme"/>
-	                           </div>
-	                    	</fieldset>
+	                        </fieldset>	                        
 	                    </form>
                     </div>
                 </div>
