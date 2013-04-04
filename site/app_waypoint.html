@@ -76,96 +76,104 @@
 						<br />
 						<div class="span4" align="center">
 							<div class="control-group">
-								<label class="control-label">Name</label> <input
-									class="input-medium" type="text" id="name" />
+								<label class="control-label">Name</label> 
+								<input class="input-medium" type="text" id="name" />
 							</div>
 							<div class="control-group">
-								<label class="control-label">Time</label> <input
-									class="input-medium" type="time" id="wdate" />
+								<label class="control-label">Time</label> 
+								<input class="input-medium" type="time" id="wdate" />
 							</div>
 							<div class="control-group">
-								<label class="control-label">Date</label> <input
-									class="input-medium" type="date" id="wtime" />
-							</div>
-						</div>
-						<div class="span4">
-							<div class="control-group">
-								<label class="control-label">Latitude</label> <input
-									class="input-medium" type="text" id="lat" />
-							</div>
-							<div class="control-group">
-								<label class="control-label">Longitude</label> <input
-									class="input-medium" type="text" id="lng" />
-							</div>
-							<div class="control-group">
-								<label class="control-label">Fahrt nach</label> <select
-									name="fahrtziel" id="marker" class="select-medium"></select>
+								<label class="control-label">Date</label> 
+								<input class="input-medium" type="date" id="wtime" />
 							</div>
 						</div>
 						<div class="span4">
 							<div class="control-group">
-								<label class="control-label">COG</label> <input
-									class="input-medium" type="text" id="cog" />
+								<label class="control-label">Latitude</label> 
+								<input class="input-medium" type="text" id="lat" />
 							</div>
 							<div class="control-group">
-								<label class="control-label">SOG</label> <input
-									class="input-medium" type="text" id="sog" />
+								<label class="control-label">Longitude</label> 
+								<input class="input-medium" type="text" id="lng" />
+							</div>
+							<div class="control-group">
+								<label class="control-label">Fahrt nach</label> 
+								<select name="fahrtziel" id="marker" class="select-medium"></select>
+							</div>
+						</div>
+						<div class="span4">
+							<div class="control-group">
+								<label class="control-label">COG</label> 
+								<input class="input-medium" type="text" id="cog" />
+							</div>
+							<div class="control-group">
+								<label class="control-label">SOG</label> 
+								<input class="input-medium" type="text" id="sog" />
 							</div>
 
 							<div class="control-group">
-								<label class="control-label">Manoever</label> <select
-									name="manoever" id="manoever" class="select-medium"></select>
+								<label class="control-label">Manoever</label>  
+								<select name="manoever" id="manoever" class="select-medium"></select>
 							</div>
 						</div>
 						<div class="span4">
 							<div class="control-group">
-								<label class="control-label">BTM</label> <input
-									class="input-medium" type="text" id="btm" />
+								<label class="control-label">BTM</label> 
+								<input class="input-medium" type="text" id="btm" />
 							</div>
 							<div class="control-group">
-								<label class="control-label">DTM</label> <input
-									class="input-medium" type="text" id="dtm" />
+								<label class="control-label">DTM</label> 
+								<input class="input-medium" type="text" id="dtm" />
 							</div>
 							<div class="control-group">
-								<label class="control-label">Vorsegel</label> <select
-									name="vorsegel" id="vorsegel" class="select-medium"></select>
+								<label class="control-label">Vorsegel</label>
+								<select	name="vorsegel" id="vorsegel" class="select-medium"></select>
 							</div>
 						</div>
-					</div>
-					<div class="row well" style="margin-left: 15%;" align="center">
 						<!--Weather Formular-->
+						<div class="span12">
+						<hr style="color: #cccccc; background: #cccccc; height: 1px; width:100%" />
 						<br />
 						<h2>Weather</h2>
 						<br />
+						</div>
 						<div class="span4">
 							<div class="control-group">
-								<label class="control-label">Temperature</label> <input
-									class="input-medium" type="text" id="temp" /> <span title="C°"
-									style="cursor: pointer">*</span>
+								<label class="control-label">Temperature</label> 								 
+								<div class="input-append">
+									<input class="input-medium" type="text" id="temp" /> 
+									<span title="C°" style="cursor: pointer" class="add-on">C°</span>
+								</div>
 							</div>
 							<div class="control-group">
-								<label class="control-label">Air Pressure</label> <input
-									class="input-medium" type="text" id="airpress" /> <span
-									title="Pa" style="cursor: pointer">*</span>
+								<label class="control-label">Air Pressure</label>  
+								<div class="input-append">
+									<input class="input-medium" type="text" id="airpress" /> 
+									<span title="Pa" style="cursor: pointer" class="add-on">Pa</span>
+								</div>
 							</div>
 							<div class="control-group">
-								<label class="control-label">Clouds</label> <select
-									name="clouds" id="clou" class="select-medium">
-									<option value="okta 0">0/8 (sky completely clear)</option>
-									<option value="okta 1">1/8 (sunny)</option>
-									<option value="okta 2">2/8 (mainly clear)</option>
-									<option value="okta 3">3/8 (partly cloudy)</option>
-									<option value="okta 4">4/8 (sky half cloudy)</option>
-									<option value="okta 5">5/8 (cloudy)</option>
-									<option value="okta 6">6/8 (strong cloudy)</option>
-									<option value="okta 7">7/8 (almost overcast)</option>
-									<option value="okta 8">8/8 (completely overcast)</option>
-									<option value="okta 9">9/8 (sky not visible)</option>
-								</select> <span title="Octa" style="cursor: pointer">*</span>
+								<label class="control-label">Clouds</label> 
+								<div class="input-append">
+									<select name="clouds" id="clou" class="select-medium">
+										<option value="okta 0">0/8 (sky completely clear)</option>
+										<option value="okta 1">1/8 (sunny)</option>
+										<option value="okta 2">2/8 (mainly clear)</option>
+										<option value="okta 3">3/8 (partly cloudy)</option>
+										<option value="okta 4">4/8 (sky half cloudy)</option>
+										<option value="okta 5">5/8 (cloudy)</option>
+										<option value="okta 6">6/8 (strong cloudy)</option>
+										<option value="okta 7">7/8 (almost overcast)</option>
+										<option value="okta 8">8/8 (completely overcast)</option>
+										<option value="okta 9">9/8 (sky not visible)</option>
+									</select> 
+									<span title="Octa" style="cursor: pointer" class="add-on">Octa</span>
+								</div>
 							</div>
 							<div class="control-group">
-								<label class="control-label">Rain</label> <select name="rain"
-									id="rai" class="select-medium">
+								<label class="control-label">Rain</label> 
+								<select name="rain" id="rai" class="select-medium">
 									<option value="Value 1">Light rain &lt 0.5 mm/h</option>
 									<option value="Value 2">Moderate rain &lt 4 mm/h</option>
 									<option value="Value 3">Heavy rain &lt 10 mm/h</option>
@@ -176,26 +184,29 @@
 						<div class="span4">
 							<div class="control-group">
 								<div class="control-group">
-									<label class="control-label">Wind Strength</label> <select
-										name="wind_strength" id="windstr" class="select-medium">
-										<option value="bft 0">0 (0 - 2 km/h)</option>
-										<option value="bft 1">1 (2 - 5 km/h)</option>
-										<option value="bft 2">2 (6 - 11 km/h)</option>
-										<option value="bft 3">3 (12 - 19 km/h)</option>
-										<option value="bft 4">4 (20 - 28 km/h)</option>
-										<option value="bft 5">5 (29 - 38 km/h)</option>
-										<option value="bft 6">6 (39 - 49 km/h)</option>
-										<option value="bft 7">7 (50 - 61 km/h)</option>
-										<option value="bft 8">8 (62 - 74 km/h)</option>
-										<option value="bft 9">9 (75 - 88 km/h)</option>
-										<option value="bft 10">10 (89 - 102 km/h)</option>
-										<option value="bft 11">11 (103 - 117 km/h)</option>
-										<option value="bft 12">12 (≥ 117 km/h)</option>
-									</select> <span title="Beaufort Scale" style="cursor: pointer;">*</span>
+									<label class="control-label">Wind Strength</label> 
+									<div class="input-append">
+										<select	name="wind_strength" id="windstr" class="select-medium">
+											<option value="bft 0">0 (0 - 2 km/h)</option>
+											<option value="bft 1">1 (2 - 5 km/h)</option>
+											<option value="bft 2">2 (6 - 11 km/h)</option>
+											<option value="bft 3">3 (12 - 19 km/h)</option>
+											<option value="bft 4">4 (20 - 28 km/h)</option>
+											<option value="bft 5">5 (29 - 38 km/h)</option>
+											<option value="bft 6">6 (39 - 49 km/h)</option>
+											<option value="bft 7">7 (50 - 61 km/h)</option>
+											<option value="bft 8">8 (62 - 74 km/h)</option>
+											<option value="bft 9">9 (75 - 88 km/h)</option>
+											<option value="bft 10">10 (89 - 102 km/h)</option>
+											<option value="bft 11">11 (103 - 117 km/h)</option>
+											<option value="bft 12">12 (≥ 117 km/h)</option>
+										</select> 
+										<span title="Beaufort Scale" style="cursor: pointer;" class="add-on">bft</span>
+									</div>
 								</div>
 								<div class="control-group">
-									<label class="control-label">Wind Direction</label> <select
-										name="wind_direction" id="winddir" class="select-medium">
+									<label class="control-label">Wind Direction</label> 
+									<select name="wind_direction" id="winddir" class="select-medium">
 										<option value="Value 1">North</option>
 										<option value="Value 2">East</option>
 										<option value="Value 3">South</option>
@@ -207,13 +218,15 @@
 									</select>
 								</div>
 								<div class="control-group">
-									<label class="control-label">Wave Hight</label> <input
-										class="input-medium" type="text" id="whight" /> <span
-										title="meter" style="cursor: pointer">*</span>
+									<label class="control-label">Wave Hight</label> 
+									<div class="input-append">
+										<input class="input-medium" type="text" id="whight" /> 
+										<span title="meter" style="cursor: pointer" class="add-on">m</span>
+									</div>
 								</div>
 								<div class="control-group">
-									<label class="control-label">Wave Direction</label> <select
-										name="wave_direction" id="wavedir" class="select-medium">
+									<label class="control-label">Wave Direction</label> 
+									<select name="wave_direction" id="wavedir" class="select-medium">
 										<option value="Value 1">North</option>
 										<option value="Value 2">East</option>
 										<option value="Value 3">South</option>
