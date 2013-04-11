@@ -113,20 +113,14 @@
                                     <label class="control-label padding-right10">Wind Strength</label> 
                                     <div class="input-append">
                                         <select	name="wind_strength" id="windstr" class="select-medium">
-                                            <option value="default"></option>
-                                            <option value="bft 0">0 (0 - 2 km/h)</option>
-                                            <option value="bft 1">1 (2 - 5 km/h)</option>
-                                            <option value="bft 2">2 (6 - 11 km/h)</option>
-                                            <option value="bft 3">3 (12 - 19 km/h)</option>
-                                            <option value="bft 4">4 (20 - 28 km/h)</option>
-                                            <option value="bft 5">5 (29 - 38 km/h)</option>
-                                            <option value="bft 6">6 (39 - 49 km/h)</option>
-                                            <option value="bft 7">7 (50 - 61 km/h)</option>
-                                            <option value="bft 8">8 (62 - 74 km/h)</option>
-                                            <option value="bft 9">9 (75 - 88 km/h)</option>
-                                            <option value="bft 10">10 (89 - 102 km/h)</option>
-                                            <option value="bft 11">11 (103 - 117 km/h)</option>
-                                            <option value="bft 12">12 (≥ 117 km/h)</option>
+                                           <?php  
+                                           		$con = mysql_connect("localhost", "root", "root")or die("Connection Error: " . mysql_error());
+    											mysql_select_db("seapal", $con);		
+												$result = mysql_query("SELECT id, description FROM wind_strength ORDER BY id asc;");														
+												while($row = mysql_fetch_array($result)){													
+													echo "<option value=\"".$row[0]."\">".$row[1]."</option>";
+												}                                            
+                                           	?>
                                         </select> 
                                         <span title="Beaufort Scale" style="cursor: pointer;" class="add-on">bft</span>
                                     </div>
@@ -146,18 +140,15 @@
                                     <div class="control-group">
                                         <label class="control-label padding-right10">Clouds</label> 
                                         <div class="input-append">
-                                            <select name="clouds" id="clou" class="select-medium">
-                                                <option value="default"></option>
-                                                <option value="okta 0">0/8 (sky completely clear)</option>
-                                                <option value="okta 1">1/8 (sunny)</option>
-                                                <option value="okta 2">2/8 (mainly clear)</option>
-                                                <option value="okta 3">3/8 (partly cloudy)</option>
-                                                <option value="okta 4">4/8 (sky half cloudy)</option>
-                                                <option value="okta 5">5/8 (cloudy)</option>
-                                                <option value="okta 6">6/8 (strong cloudy)</option>
-                                                <option value="okta 7">7/8 (almost overcast)</option>
-                                                <option value="okta 8">8/8 (completely overcast)</option>
-                                                <option value="okta 9">9/8 (sky not visible)</option>
+                                            <select name="clouds" id="cloud" class="select-medium">
+                                                <?php  
+                                           		$con = mysql_connect("localhost", "root", "root")or die("Connection Error: " . mysql_error());
+    											mysql_select_db("seapal", $con);		
+												$result = mysql_query("SELECT id, description FROM clouds ORDER BY id asc;");														
+												while($row = mysql_fetch_array($result)){													
+													echo "<option value=\"".$row[0]."\">".$row[1]."</option>";
+												}                                            
+                                           	?>
                                             </select> 
                                             <span title="Octa" style="cursor: pointer" class="add-on">Octa</span>
                                         </div>
@@ -165,39 +156,40 @@
                                     <div class="control-group">
                                         <label class="control-label padding-right10">Rain</label> 
                                         <select name="rain" id="rai" class="select-medium">
-                                            <option value="default"></option>
-                                            <option value="Value 1">Light rain &lt 0.5 mm/h</option>
-                                            <option value="Value 2">Moderate rain &lt 4 mm/h</option>
-                                            <option value="Value 3">Heavy rain &lt 10 mm/h</option>
-                                            <option value="Value 4">Violent rain &gt 8 mm/min</option>
+                                            <?php  
+                                           		$con = mysql_connect("localhost", "root", "root")or die("Connection Error: " . mysql_error());
+    											mysql_select_db("seapal", $con);		
+												$result = mysql_query("SELECT id, description FROM rain ORDER BY id asc;");														
+												while($row = mysql_fetch_array($result)){													
+													echo "<option value=\"".$row[0]."\">".$row[1]."</option>";
+												}                                            
+                                           	?>
                                         </select>
                                     </div>
                                     <div class="control-group">
                                         <label class="control-label padding-right10">Wind Direction</label> 
                                         <select name="wind_direction" id="winddir" class="select-medium">
-                                            <option value="default"></option>
-                                            <option value="Value 1">North</option>
-                                            <option value="Value 2">East</option>
-                                            <option value="Value 3">South</option>
-                                            <option value="Value 4">West</option>
-                                            <option value="Value 5">North-East</option>
-                                            <option value="Value 6">North-West</option>
-                                            <option value="Value 7">South-East</option>
-                                            <option value="Value 8">South-West</option>
+                                            <?php  
+                                           		$con = mysql_connect("localhost", "root", "root")or die("Connection Error: " . mysql_error());
+    											mysql_select_db("seapal", $con);		
+												$result = mysql_query("SELECT wd.id as id, d.description as description FROM wind_direction as wd left join direction as d on wd.direction_id = d.id ORDER BY id asc;");													
+												while($row = mysql_fetch_array($result)){													
+													echo "<option value=\"".$row[0]."\">".$row[1]."</option>";
+												}                                            
+                                           	?>
                                         </select>
                                     </div>
                                     <div class="control-group">
                                         <label class="control-label padding-right10">Wave Direction</label> 
                                         <select name="wave_direction" id="wavedir" class="select-medium">
-                                            <option value="default"></option>
-                                            <option value="Value 1">North</option>
-                                            <option value="Value 2">East</option>
-                                            <option value="Value 3">South</option>
-                                            <option value="Value 4">West</option>
-                                            <option value="Value 5">North-East</option>
-                                            <option value="Value 6">North-West</option>
-                                            <option value="Value 7">South-East</option>
-                                            <option value="Value 8">South-West</option>
+                                            <?php  
+                                           		$con = mysql_connect("localhost", "root", "root")or die("Connection Error: " . mysql_error());
+    											mysql_select_db("seapal", $con);		
+												$result = mysql_query("SELECT wd.id as id, d.description as description FROM wave_direction as wd left join direction as d on wd.direction_id = d.id ORDER BY id asc;");														
+												while($row = mysql_fetch_array($result)){													
+													echo "<option value=\"".$row[0]."\">".$row[1]."</option>";
+												}                                            
+                                           	?>
                                         </select>
                                     </div>
                                 </div>
