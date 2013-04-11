@@ -3,12 +3,12 @@
 <html lang="de">
     <head>
         <!-- Headerinformation -->
-        <?php include("header.php")?>
+        <?php include("header.php") ?>
     </head>
     <body>
 
         <!-- Navigation -->
-        <?php include("navigation.php")?>
+        <?php include("navigation.php") ?>
 
 
         <!-- Container -->
@@ -61,7 +61,7 @@
         </div><!-- Container -->
 
         <!-- Footer -->
-        <?php include("footer.php")?>
+        <?php include("footer.php") ?>
 
     </body>
 </html>
