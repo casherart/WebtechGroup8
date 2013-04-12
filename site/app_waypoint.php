@@ -6,7 +6,7 @@ include('database_library.php');
 <html lang="de">
     <head>
         <!-- Headerinformation -->
-        <?php include("header.php") ?>
+        <?php include("header.php") ?>        
     </head>
     <body>
 
@@ -22,7 +22,7 @@ include('database_library.php');
                     <h2>LogBook</h2>
                     <br>
                 </div>
-                <form class="form-horizontal">
+                <form class="form-horizontal" method="POST" action="//<?php echo "$_SERVER[HTTP_HOST]" ?>/seapal/server/handleWetherdata.php">
                     <div class="container-fluid">
                         <div class="row well" style="margin-left: 15%;">
                             <div class="">
@@ -101,14 +101,14 @@ include('database_library.php');
                                 <div class="control-group">
                                     <label class="control-label padding-right10">Temperature</label> 								 
                                     <div class="input-append">
-                                        <input class="input-medium" type="text" id="temp" /> 
+                                        <input name="temp" class="input-medium" type="text" id="temp"/> 
                                         <span title="C°" style="cursor: pointer" class="add-on">C°</span>
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label padding-right10">Air Pressure</label>  
                                     <div class="input-append">
-                                        <input class="input-medium" type="text" id="airpress" /> 
+                                        <input name="airpress" class="input-medium" type="text" id="airpress" /> 
                                         <span title="Pa" style="cursor: pointer" class="add-on">Pa</span>
                                     </div>
                                 </div>
@@ -126,7 +126,7 @@ include('database_library.php');
                                 <div class="control-group">
                                     <label class="control-label padding-right10">Wave Hight</label> 
                                     <div class="input-append">
-                                        <input class="input-medium" type="text" id="whight" /> 
+                                        <input name="whight" class="input-medium" type="text" id="whight" /> 
                                         <span title="meter" style="cursor: pointer" class="add-on">m</span>
                                     </div>
                                 </div>
@@ -148,7 +148,7 @@ include('database_library.php');
                                     </div>
                                     <div class="control-group">
                                         <label class="control-label padding-right10">Rain</label> 
-                                        <select name="rain" id="rai" class="select-medium">
+                                        <select name="rain" id="rain" class="select-medium">
                                             <?php
                                             get_select_options("localhost", "root", "root", "seapal", "SELECT id, description FROM rain ORDER BY id asc;");
                                             ?>
