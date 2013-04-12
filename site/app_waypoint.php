@@ -172,12 +172,15 @@ include('database_library.php');
                                     </div>
                                 </div>
                             </div>
-
+                            <div class="clearfix"></div>
+                            <div class="align-center">
+                                <button type="submit" class="btn">Submit</button>
+                                <button type="reset" class="btn">Reset</button>
+                            </div>
                         </div>
                     </div>
                 </form>
             </div>
-            <form></form>
         </div>
         <div></div>
         <div class="container" align="center">
