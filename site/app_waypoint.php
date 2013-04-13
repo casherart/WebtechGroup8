@@ -6,7 +6,7 @@ include('database_library.php');
 <html lang="de">
     <head>
         <!-- Headerinformation -->
-        <?php include("header.php") ?>
+        <?php include("header.php") ?>        
     </head>
     <body>
 
@@ -148,7 +148,7 @@ include('database_library.php');
                                     </div>
                                     <div class="control-group">
                                         <label class="control-label padding-right10">Rain</label> 
-                                        <select name="rain" id="rai" class="select-medium">
+                                        <select name="rain" id="rain" class="select-medium">
                                             <?php
                                             get_select_options("localhost", "root", "root", "seapal", "SELECT id, description FROM rain ORDER BY id asc;");
                                             ?>
