@@ -9,5 +9,11 @@ function get_select_options($host, $username, $password, $database_name, $query)
         echo "<option value=\"" . $row[0] . "\">" . $row[1] . "</option>";
     }
 }
+
+// connect to database
+function connect_database($host, $username, $password, $database_name) {
+    $con = mysql_connect($host, $username, $password) or die("Connection Error: " . mysql_error());
+    mysql_select_db($database_name, $con);
+}
 ?>
 

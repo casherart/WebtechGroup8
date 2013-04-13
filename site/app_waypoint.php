@@ -22,7 +22,7 @@ include('database_library.php');
                     <h2>LogBook</h2>
                     <br>
                 </div>
-                <form class="form-horizontal">
+                <form class="form-horizontal" action="receive_form.php" method="get">
                     <div class="container-fluid">
                         <div class="row well" style="margin-left: 15%;">
                             <div class="">
@@ -101,14 +101,14 @@ include('database_library.php');
                                 <div class="control-group">
                                     <label class="control-label padding-right10">Temperature</label> 								 
                                     <div class="input-append">
-                                        <input class="input-medium" type="text" id="temp" /> 
+                                        <input class="input-medium" type="text" id="temp" name="temp" /> 
                                         <span title="C°" style="cursor: pointer" class="add-on">C°</span>
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <label class="control-label padding-right10">Air Pressure</label>  
                                     <div class="input-append">
-                                        <input class="input-medium" type="text" id="airpress" /> 
+                                        <input class="input-medium" type="text" id="airpress" name="airpress" /> 
                                         <span title="Pa" style="cursor: pointer" class="add-on">Pa</span>
                                     </div>
                                 </div>
@@ -126,7 +126,7 @@ include('database_library.php');
                                 <div class="control-group">
                                     <label class="control-label padding-right10">Wave Hight</label> 
                                     <div class="input-append">
-                                        <input class="input-medium" type="text" id="whight" /> 
+                                        <input class="input-medium" type="text" id="whight" name="whight"/> 
                                         <span title="meter" style="cursor: pointer" class="add-on">m</span>
                                     </div>
                                 </div>
@@ -174,7 +174,7 @@ include('database_library.php');
                             </div>
                             <div class="clearfix"></div>
                             <div class="align-center">
-                                <button type="submit" class="btn">Submit</button>
+                                <button type="submit" class="btn btn-large btn-inverse">Submit</button>
                                 <button type="reset" class="btn">Reset</button>
                             </div>
                         </div>
