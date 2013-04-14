@@ -22,7 +22,7 @@ include('database_library.php');
                     <h2>LogBook</h2>
                     <br>
                 </div>
-                <form class="form-horizontal" action="receive_form.php" method="get">
+                <form class="form-horizontal" action="../server/receive_form.php" method="get">
                     <div class="container-fluid">
                         <div class="row well" style="margin-left: 15%;">
                             <div class="">

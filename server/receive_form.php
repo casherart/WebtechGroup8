@@ -1,5 +1,5 @@
 <?php
-include('database_library.php');
+include('../site/database_library.php');
 
 $query = "INSERT INTO seapal_main(templeratur, airpreasure, wind_strength, 
           wind_direction, wave_height, wave_direction, clouds, rain) VALUES(";
