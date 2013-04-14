@@ -14,5 +14,18 @@ function connect_database($host, $username, $password, $database_name) {
     $con = mysql_connect($host, $username, $password) or die("Connection Error: " . mysql_error());
     mysql_select_db($database_name, $con);
 }
+
+// build the form query
+function build_form_query($param, $sql , $last = false) {
+    if (isset($_GET[$param])) {
+        $result_param = $_GET[$param];
+        if ($last == false) {
+            $sql .= "'" . $result_param . "'" . ",";
+        } else {
+            $sql .= "'" . $result_param . "'";
+        }
+    }
+    return $sql;
+}
 ?>
 
