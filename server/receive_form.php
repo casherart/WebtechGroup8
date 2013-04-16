@@ -1,5 +1,5 @@
 <?php
-
+include('../site/header.php');
 include('../site/database_library.php');
 
 $query = "INSERT INTO seapal_main(templeratur, airpreasure, wind_strength, 
@@ -20,3 +20,15 @@ connect_database("localhost", "root", "root", "seapal");
 mysql_query($query);
 mysql_close();
 ?>
+<div class="container-fluid">
+    <div class="span6 offset3">
+        <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Success!</strong> Your Formular was submitted to the database.
+        </div>
+        <div class="clearfix"></div>
+        <div class="align-center">
+            <a href="../site/app_waypoint.php"><button type="" class="btn">Back to Seapal</button></a>
+        </div>
+    </div>
+</div>
