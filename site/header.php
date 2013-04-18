@@ -19,3 +19,4 @@
 <link href="../css/bootstrap/bootstrap-responsive.css" rel="stylesheet">
 
 <script src="../js/jquery-1.9.1.js"></script>
+<script src="../js/script.js"></script>

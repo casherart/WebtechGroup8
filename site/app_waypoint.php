@@ -22,7 +22,7 @@ include('database_library.php');
                     <h2>LogBook</h2>
                     <br>
                 </div>
-                <form class="form-horizontal" action="../server/receive_form.php" method="get">
+                <form id="appForm" class="form-horizontal" onsubmit="return false;">
                     <div class="container-fluid">
                         <div class="row well" style="margin-left: 15%;">
                             <div class="">
@@ -174,7 +174,7 @@ include('database_library.php');
                             </div>
                             <div class="clearfix"></div>
                             <div class="align-center">
-                                <button type="submit" class="btn btn-large btn-inverse">Submit</button>
+                                <button class="btn btn-large btn-inverse" onclick="submitForm();">Submit</button>
                                 <button type="reset" class="btn">Reset</button>
                             </div>
                         </div>
