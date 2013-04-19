@@ -6,12 +6,12 @@ include('database_library.php');
 <html lang="de">
     <head>
         <!-- Headerinformation -->
-        <?php include("header.php") ?>        
+        <?php include("./_include/header.php") ?>        
     </head>
     <body>
 
         <!-- Navigation -->
-        <?php include("navigation.php") ?>
+        <?php include("./_include/navigation.php") ?>
         <!-- Container -->
         <div class="container-fluid">
 
@@ -203,6 +203,6 @@ include('database_library.php');
         </div>
         <!-- Content -->
         <!-- Footer -->
-        <?php include("footer.php") ?>
+        <?php include("./_include/footer.php") ?>
     </body>
 </html>
