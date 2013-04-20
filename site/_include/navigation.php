@@ -17,6 +17,7 @@
             	<ul class="nav nav-pills" style="padding-left:0px; padding-top: 24px; font-size: 18px;">
 			        <li <?php if ($filename == "index") echo("class='active'"); ?>><a href='index.php'>Home</a></li>
 			        <li <?php if ($filename == "app_map") echo("class='active'"); ?>><a href='app_map.php'>App</a></li>
+                                <li <?php if ($filename == "app_waypoint") echo("class='active'"); ?>><a href='app_waypoint.php'>Log</a></li>
 			        <li <?php if ($filename == "userguide") echo("class='active'"); ?>><a href='userguide.php'>User Guide</a></li>
 			        <li <?php if ($filename == "screenshots") echo("class='active'"); ?>><a href='screenshots.php'>Screenshots</a></li>
 			        <li <?php if ($filename == "about") echo("class='active'"); ?>><a href='about.php'>About</a></li>
