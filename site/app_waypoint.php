@@ -14,92 +14,20 @@ include('database_library.php');
         <?php include("./_include/navigation.php") ?>
         <!-- Container -->
         <div class="container-fluid">
-            
-                <!-- App Navigation -->
-    		<?php include('_include/navigation_app.php'); ?>
-                
+
+            <!-- App Navigation -->
+            <?php include('_include/navigation_app.php'); ?>
+
             <!-- Content -->
             <div id="appWrapper">
                 <div class="align-center">
                     <br>
-                    <h2>LogBook</h2>
+                    <h2>Wetter Informationen</h2>
                     <br>
                 </div>
                 <form id="appForm" class="form-horizontal" onsubmit="return false;">
                     <div class="container-fluid">
                         <div class="row well" style="margin-left: 15%;">
-                            <div class="">
-                                <br />
-                                <h4>Wegpunkt</h4>
-                                <br />
-                            </div>
-                            <div class="span4">
-                                <div class="control-group">
-                                    <label class="control-label padding-right10">Name</label> 
-                                    <input class="input-medium" type="text" id="name" />
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label padding-right10">Time</label> 
-                                    <input class="input-medium" type="time" id="wdate" />
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label padding-right10">Date</label> 
-                                    <input class="input-medium" type="date" id="wtime" />
-                                </div>
-                            </div>
-                            <div class="span4">
-                                <div class="control-group">
-                                    <label class="control-label padding-right10">Latitude</label> 
-                                    <input class="input-medium" type="text" id="lat" />
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label padding-right10">Longitude</label> 
-                                    <input class="input-medium" type="text" id="lng" />
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label padding-right10">Fahrt nach</label> 
-                                    <select name="fahrtziel" id="marker" class="select-medium"></select>
-                                </div>
-                            </div>
-                            <div class="span4">
-                                <div class="control-group">
-                                    <label class="control-label padding-right10">COG</label> 
-                                    <input class="input-medium" type="text" id="cog" />
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label padding-right10">SOG</label> 
-                                    <input class="input-medium" type="text" id="sog" />
-                                </div>
-
-                                <div class="control-group">
-                                    <label class="control-label padding-right10">Manoever</label>  
-                                    <select name="manoever" id="manoever" class="select-medium"></select>
-                                </div>
-                            </div>
-                            <div class="span4">
-                                <div class="control-group">
-                                    <label class="control-label padding-right10">BTM</label> 
-                                    <input class="input-medium" type="text" id="btm" />
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label padding-right10">DTM</label> 
-                                    <input class="input-medium" type="text" id="dtm" />
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label padding-right10">Vorsegel</label>
-                                    <select	name="vorsegel" id="vorsegel" class="select-medium"></select>
-                                </div>
-                            </div>
-                            <div class="clearfix"></div>
-                            <hr style="color: #cccccc; background: #cccccc; height: 3px;" />
-
-                            <!--Weather Formular-->
-                            <div class="clearfix"></div>
-                            <div class="">
-                                <h4>Wetterdaten</h4>
-                                <br />
-                            </div>
-
                             <div class="span4">
                                 <div class="control-group">
                                     <label class="control-label padding-right10">Temperature</label> 								 
@@ -176,10 +104,10 @@ include('database_library.php');
                                 </div>
                             </div>
                             <div class="clearfix"></div>
-                            <div class="align-center">
-                                <button class="btn btn-large btn-inverse" onclick="submitForm();">Submit</button>
-                                <button type="reset" class="btn">Reset</button>
-                            </div>
+                        </div>
+                        <div class="control-group">
+                            <input type="reset" class="btn" id="delete" value="L&ouml;schen" class="button"/>
+                            <input type="submit" class="btn" id="save" name="submit" value="Speichern" onclick="submitForm();" class="button"/>
                         </div>
                     </div>
                 </form>
