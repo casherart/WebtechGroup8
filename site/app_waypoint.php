@@ -14,7 +14,10 @@ include('database_library.php');
         <?php include("./_include/navigation.php") ?>
         <!-- Container -->
         <div class="container-fluid">
-
+            
+                <!-- App Navigation -->
+    		<?php include('_include/navigation_app.php'); ?>
+                
             <!-- Content -->
             <div id="appWrapper">
                 <div class="align-center">
