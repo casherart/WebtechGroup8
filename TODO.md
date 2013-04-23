@@ -1,0 +1,5 @@
+- Verknüpfungstabelle für Wetterdaten und User
+- FORM/URL Parameter in den SQL-Statements absichern (auch in den, die nicht von uns sind)
+- JS-CHECK bei senden des Wetter-Forms
+- app_wether_LOAD JS und SQL/PHP Function
+- app_wether_DELETE JS Fuction
