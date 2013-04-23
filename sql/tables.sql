@@ -95,7 +95,7 @@ CREATE TABLE IF NOT EXISTS seapal.wind_direction(
 	id int AUTO_INCREMENT,
 	direction_id int,	
 	PRIMARY KEY (id),
-	FOREIGN KEY (direction_id) REFERENCES direction(id)
+	FOREIGN KEY (direction_id) REFERENCES seapal.direction(id)
 );
 
 
@@ -103,7 +103,7 @@ CREATE TABLE IF NOT EXISTS seapal.wave_direction(
 	id int AUTO_INCREMENT,
 	direction_id int,	
 	PRIMARY KEY (id),
-	FOREIGN KEY (direction_id) REFERENCES direction(id)
+	FOREIGN KEY (direction_id) REFERENCES seapal.direction(id)
 );
 
 CREATE TABLE IF NOT EXISTS seapal.rain(
@@ -124,7 +124,7 @@ CREATE TABLE IF NOT EXISTS seapal.wind_strength(
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS seapal.seapal_main(
+CREATE TABLE IF NOT EXISTS seapal.seapal_weather(
 	id int AUTO_INCREMENT,
 	templeratur FLOAT,
 	airpreasure FLOAT,
@@ -135,7 +135,9 @@ CREATE TABLE IF NOT EXISTS seapal.seapal_main(
 	clouds int,
 	rain int,
 	PRIMARY KEY (id),
-	FOREIGN KEY (wind_strength) REFERENCES wind_strength(id),
-	FOREIGN KEY (wind_direction) REFERENCES wind_direction(id),
-	FOREIGN KEY (wave_direction) REFERENCES wave_direction(id)
+	FOREIGN KEY (wind_strength) REFERENCES seapal.wind_strength(id),
+	FOREIGN KEY (wind_direction) REFERENCES seapal.wind_direction(id),
+	FOREIGN KEY (wave_direction) REFERENCES seapal.wave_direction(id),
+	FOREIGN KEY (clouds) REFERENCES seapal.clouds(id),
+	FOREIGN KEY (rain) REFERENCES seapal.rain(id)
 );

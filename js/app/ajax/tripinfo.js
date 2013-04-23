@@ -34,7 +34,7 @@ $(function() {
 	    entry += "<td style='width:30px; text-align:right;'><div class='btn-group'>";
 	    entry += "<a class='btn btn-small view' id='" + wnr + "'><span><i class='icon-eye-open'></i></span></a>";
 		entry += "<a class='btn btn-small remove' id='" + wnr + "'><span><i class='icon-remove'></i></span></a>";
-		entry += "<a href='app_waypoint.php?wnr=" + wnr  + "' class='btn btn-small redirect' id='" + wnr + "'><span><i class='icon-chevron-right'></i></span></a>";
+		entry += "<a href='app_weather.php?wnr=" + wnr  + "' class='btn btn-small redirect' id='" + wnr + "'><span><i class='icon-chevron-right'></i></span></a>";
 		entry += "</div></td>";
 	    entry += "</tr>";
 	    

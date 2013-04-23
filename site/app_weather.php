@@ -112,6 +112,82 @@ include('database_library.php');
                     </div>
                 </form>
             </div>
+            <div class="appTableDiv" align="center">
+	                <table class="appTable table table-hover" cellspacing="0px" cellpadding="5px">
+	                    <thead>
+	                        <tr>
+	                            <th>Temperature</th>
+	                            <th>Air Pressure</th>
+	                            <th>Wind Strength</th>
+	                            <th>Wind Direction</th>
+	                            <th>Wave Hight</th>
+	                            <th>Wave Direction</th>
+	                            <th>Clouds</th>
+	                            <th>Rain</th>
+	                            <th></th>
+	                        </tr>
+	                    </thead>
+		                <tbody id="entries">
+	
+	                        <?php
+	                        	/*
+	                        		extract to php-function	                        		
+	                        	*/
+		                        $conn = mysql_connect("localhost", "root", "root");
+		
+		                        $db_selected = mysql_select_db('seapal', $conn);
+		
+		                        if (!$db_selected) {
+		                            die('Can\'t use foo : ' . mysql_error());
+		                        }
+		
+		                        $sql = "
+		                        	SELECT sw.templeratur, 
+		                        		sw.airpreasure, 
+		                        		windStr.description as wind_strength, 
+		                        		windDir.description as wind_direction,	
+		                        		sw.wave_height,	                        		 
+		                        		waveDir.description as wave_direction, 
+		                        		clouds.description as clouds, 
+		                        		rain.description as rain 
+		                        	FROM seapal_weather as sw LEFT JOIN wind_strength as windStr ON (sw.wind_strength = windStr.id)
+		                        							  LEFT JOIN wind_direction as windDir ON (sw.wind_direction = windDir.id)		                        							  	                        							  
+		                        							  LEFT JOIN wave_direction as waveDir ON (sw.wave_direction = waveDir.id)		                        							  
+		                        							  LEFT JOIN clouds ON (sw.clouds = clouds.id)
+		                        							  LEFT JOIN rain ON (sw.rain = rain.id)
+		                        ";
+		
+		                        $result = mysql_query($sql, $conn);
+		
+		                        if (!$result) {
+		                            die('Invalid query: ' . mysql_error());
+		                        }
+		
+		                        while ($row = mysql_fetch_array($result)) {
+		
+		                            echo("<tr class='selectable' id='" . $row['bnr'] . "'>");
+		                            echo("<td>" . $row['templeratur'] . "</td>");
+		                            echo("<td>" . $row['airpreasure'] . "</td>");
+		                            echo("<td>" . $row['wind_strength'] . "</td>");
+		                            echo("<td>" . $row['wind_direction'] . "</td>");
+		                            echo("<td>" . $row['wave_height'] . "</td>");
+		                            echo("<td>" . $row['wave_direction'] . "</td>");
+		                            echo("<td>" . $row['clouds'] . "</td>");
+		                            echo("<td>" . $row['rain'] . "</td>");
+		                            echo("<td style='width:30px; text-align:left;'><div class='btn-group'>");
+		                            echo("<a class='btn btn-small view' id='" . $row['bnr'] . "'><span><i class='icon-eye-open'></i></span></a>");
+		                            echo("<a class='btn btn-small remove' id='" . $row['bnr'] . "'><span><i class='icon-remove'></i></span></a>");
+		                            echo("</div></td>");
+		                            echo("</tr>");
+		                        }
+		
+		                        mysql_close($conn);
+	                        ?>
+	
+	                    </tbody>
+	                </table>
+	                <br /><br />
+	            </div>
         </div>
         <div></div>
         <div class="container" align="center">

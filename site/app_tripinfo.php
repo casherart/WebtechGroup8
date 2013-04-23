@@ -139,7 +139,7 @@
 	                            echo("<td style='width:30px; text-align:right;'><div class='btn-group'>");
 	                            echo("<a class='btn btn-small view' id='" . $row['wnr'] . "'><span><i class='icon-eye-open'></i></span></a>");
 		                        echo("<a class='btn btn-small remove' id='" . $row['wnr'] . "'><span><i class='icon-remove'></i></span></a>");
-		                        echo("<a href='app_waypoint.php?wnr=" . $row['wnr'] . "&tnr=" . $tnr . "' class='btn btn-small redirect' id='" . $row['wnr'] . "'><span><i class='icon-chevron-right'></i></span></a>");
+		                        echo("<a href='app_weather.php?wnr=" . $row['wnr'] . "&tnr=" . $tnr . "' class='btn btn-small redirect' id='" . $row['wnr'] . "'><span><i class='icon-chevron-right'></i></span></a>");
 		                        echo("</div></td>");
 	                            echo("</tr>");
 	                        }
