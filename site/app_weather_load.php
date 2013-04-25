@@ -1,9 +1,3 @@
-  <!-- 
-  //TODO ID is url.id
-  //TODO check id and incase send error
-  //TODO return JSON String
-  //TODO check user and incase send error
-   -->
   <?php
 	                        	/*
 	                        		extract to php-function	                        		
@@ -17,12 +11,13 @@
 		                        }
 		
 		                        $sql = "
-		                        	SELECT sw.temperatur, 
+		                        	SELECT  sw.id,
+                                                        sw.temperatur, 
 		                        		sw.airpreasure, 
 		                        		windStr.description as wind_strength, 
-		                        		windDir.description as wind_direction,	
+		                        		windDesc.description as wind_direction,	
 		                        		sw.wave_height,	                        		 
-		                        		waveDir.description as wave_direction, 
+		                        		waveDesc.description as wave_direction, 
 		                        		clouds.description as clouds, 
 		                        		rain.description as rain 
 		                        	FROM seapal_weather as sw LEFT JOIN wind_strength as windStr ON (sw.wind_strength = windStr.id)
@@ -30,6 +25,8 @@
 		                        							  LEFT JOIN wave_direction as waveDir ON (sw.wave_direction = waveDir.id)		                        							  
 		                        							  LEFT JOIN clouds ON (sw.clouds = clouds.id)
 		                        							  LEFT JOIN rain ON (sw.rain = rain.id)
+                                                                                                  LEFT JOIN direction as windDesc ON (windDesc.id = windDir.direction_id)
+                                                                                                  LEFT JOIN direction as waveDesc ON (waveDesc.id = waveDir.direction_id)
 		                        ";
 		
 		                        $result = mysql_query($sql, $conn);
@@ -44,14 +41,14 @@
 		                        		{
 		                        			'status':'ok',
 		                        			'id':'" . $row['id'] . "',
-		                        			'XXXX':'" . $row['temperatur'] . "',
-		                        			'airpreasure':'" . $row['airpreasure'] . "'',
+		                        			'temperature':'" . $row['temperatur'] . "',
+		                        			'airpreasure':'" . $row['airpreasure'] . "',
 		                        			'wind_strength':'" . $row['wind_strength'] . "',
-		                        			'wind_direction':'" . $row['wind_direction'] . "'',
+		                        			'wind_direction':'" . $row['wind_direction'] . "',
 		                        			'wave_height':'" . $row['wave_height'] . "',
-		                        			'wave_direction':'" . $row['wave_direction'] . "'',
-		                        			'clouds':'" . $row['clouds'] . ",
-		                        			'rain':'" . $row['rain'] . "',
+		                        			'wave_direction':'" . $row['wave_direction'] . "',
+		                        			'clouds':'" . $row['clouds'] . "',
+		                        			'rain':'" . $row['rain'] . "'
 		                        		}	
 		                        	");
 		                        }
