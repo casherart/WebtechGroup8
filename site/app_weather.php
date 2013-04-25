@@ -29,7 +29,7 @@ include('database_library.php');
                     <br>
                 </div>
                 <!--  -->
-                <form id="appForm" class="form-horizontal" action="app_weather_insert.php"><!--onsubmit="return handleWeatherForm(this);"-->
+                <form id="appForm" class="form-horizontal" action="app_weather_insert.php">
                     <div class="container-fluid">
                         <div class="row well" style="margin-left: 15%;">
                             <div class="span4">
@@ -151,12 +151,12 @@ include('database_library.php');
 		                       clouds.description as clouds, 
 		                       rain.description as rain
 		               FROM seapal_weather as sw LEFT JOIN wind_strength as windStr ON (sw.wind_strength = windStr.id)
-		                        							  LEFT JOIN wind_direction as windDir ON (sw.wind_direction = windDir.id)		                        							  	                        							  
-		                        							  LEFT JOIN wave_direction as waveDir ON (sw.wave_direction = waveDir.id)		                        							  
-		                        							  LEFT JOIN clouds ON (sw.clouds = clouds.id)
-		                        							  LEFT JOIN rain ON (sw.rain = rain.id)
-                                                              LEFT JOIN direction as windDesc ON (windDesc.id = windDir.direction_id)
-                                                              LEFT JOIN direction as waveDesc ON (waveDesc.id = waveDir.direction_id)";
+                                            LEFT JOIN wind_direction as windDir ON (sw.wind_direction = windDir.id)		                        							  	                        							  
+                                            LEFT JOIN wave_direction as waveDir ON (sw.wave_direction = waveDir.id)		                        							  
+                                            LEFT JOIN clouds ON (sw.clouds = clouds.id)
+                                            LEFT JOIN rain ON (sw.rain = rain.id)
+                                            LEFT JOIN direction as windDesc ON (windDesc.id = windDir.direction_id)
+                                            LEFT JOIN direction as waveDesc ON (waveDesc.id = waveDir.direction_id)";
 
                         $result = mysql_query($sql, $conn);
 
@@ -189,14 +189,6 @@ include('database_library.php');
                 <br /><br />
             </div>
         </div>
-        <!-- Java-Script -->
-        <script src="../js/bootstrap/bootstrap-transition.js"></script>
-        <script src="../js/bootstrap/bootstrap-dropdown.js"></script>
-        <script src="../js/bootstrap/bootstrap-button.js"></script>
-        <script src="../js/bootstrap/bootstrap-modal.js"></script>
-
-        <!-- Additional Java-Script -->
-        <script src="../js/app/ajax/boatinfo.js" type="text/javascript"></script>
         <!-- Footer -->
         <?php /* include("./_include/footer.php") */ ?>
     </body>

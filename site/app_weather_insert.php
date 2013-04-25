@@ -1,5 +1,5 @@
 <?php 
-include('/_include/header.php');
+include('./_include/header.php');
 include('./database_library.php');
 
 $query = "INSERT INTO seapal_weather(bnr, temperatur, airpreasure, wind_strength, 
@@ -21,4 +21,3 @@ mysql_query($query);
 mysql_close();
 
 ?>
-{"status":"ok", "weather_id":"1"}
