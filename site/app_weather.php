@@ -55,7 +55,7 @@ include('database_library.php');
                     <br>
                 </div>
                  <!--  -->
-                <form id="appForm" class="form-horizontal" onsubmit="return handleWeatherForm(this);">
+                 <form id="appForm" class="form-horizontal" action="app_weather_insert.php"><!--onsubmit="return handleWeatherForm(this);"-->
                     <div class="container-fluid">
                         <div class="row well" style="margin-left: 15%;">
                             <div class="span4">
