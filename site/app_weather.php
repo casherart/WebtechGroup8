@@ -164,26 +164,7 @@ include('database_library.php');
 	                <br /><br />
 	            </div>
         </div>
-        <div></div>
-        <div class="container" align="center">
-            <div class="row" style="margin-left: 5%;">
-                <div class="span4" id="appNotes">
-                    <h4>Notes</h4>
-                    <textarea style="width: 96%; height: 360px;"></textarea>
-                </div>
-                <div class="span4" id="markerMap">
-                    <h4>Map</h4>
-                    <img src="../img/icons/marker_map.png" id="appInfoPhoto"
-                         style="width: 100%; heigt: 100%;" />
-                </div>
-                <div class="span4" id="appPhotos">
-                    <h4>Photos</h4>
-                    <img src="../img/icons/no_image.jpg" id="appInfoPhoto"
-                         style="width: 100%; heigt: 100%;" />
-                </div>
-            </div>
-        </div>
-        <!-- Content -->
+
         <!-- Footer -->
         <?php /* include("./_include/footer.php") */?>
     </body>
