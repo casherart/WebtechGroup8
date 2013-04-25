@@ -7,35 +7,9 @@ include('database_library.php');
     <head>
         <!-- Headerinformation -->
         <?php include("./_include/header.php") ?>  
-        
-	    <!-- Additional Java-Script -->
-	    <script src="../js/app/ajax/weather.js" type="text/javascript"></script>      
-	    
-	    <!-- when doc ready start loading weatherdatatable content -->
-		<script>
-			$(document).ready(function() {//
-				<?php
-					$conn = mysql_connect("localhost", "root", "root");
-					$db_selected = mysql_select_db('seapal', $conn);
-		
-		        	if (!$db_selected) {
-		        		die('Can\'t use foo : ' . mysql_error());
-		        	}
-		
-		        	$sql = "SELECT id FROM seapal_weather WHERE bnr = 1 OR bnr = 2";/*TODO USER*/
-					$result = mysql_query($sql, $conn);
-		
-		            if (!$result) {
-		            	die('Invalid query: ' . mysql_error());
-		            }
-		
-		            while ($row = mysql_fetch_array($result)) {		
-		            	echo("addWeatherToTable(" . $row['id'] . ");");
-		            }
-	 			?>
-			});
-		</script>
 
+        <!-- Additional Java-Script -->
+        <script src="../js/app/ajax/weather.js" type="text/javascript"></script>      
     </head>
     <body>
 
@@ -54,8 +28,8 @@ include('database_library.php');
                     <h2>Wetter Informationen</h2>
                     <br>
                 </div>
-                 <!--  -->
-                 <form id="appForm" class="form-horizontal" action="app_weather_insert.php"><!--onsubmit="return handleWeatherForm(this);"-->
+                <!--  -->
+                <form id="appForm" class="form-horizontal" action="app_weather_insert.php"><!--onsubmit="return handleWeatherForm(this);"-->
                     <div class="container-fluid">
                         <div class="row well" style="margin-left: 15%;">
                             <div class="span4">
@@ -143,28 +117,65 @@ include('database_library.php');
                 </form>
             </div>
             <div class="appTableDiv" align="center">
-	                <table class="appTable table table-hover" cellspacing="0px" cellpadding="5px">
-	                    <thead>
-	                        <tr>
-	                            <th>Temperature</th>
-	                            <th>Air Pressure</th>
-	                            <th>Wind Strength</th>
-	                            <th>Wind Direction</th>
-	                            <th>Wave Hight</th>
-	                            <th>Wave Direction</th>
-	                            <th>Clouds</th>
-	                            <th>Rain</th>
-	                            <th></th>
-	                        </tr>
-	                    </thead>
-		                <tbody id="weather_entries">
-	                    </tbody>
-	                </table>
-	                <br /><br />
-	            </div>
+                <table class="appTable table table-hover" cellspacing="0px" cellpadding="5px">
+                    <thead>
+                        <tr>
+                            <th>Temperature</th>
+                            <th>Air Pressure</th>
+                            <th>Wind Strength</th>
+                            <th>Wind Direction</th>
+                            <th>Wave Hight</th>
+                            <th>Wave Direction</th>
+                            <th>Clouds</th>
+                            <th>Rain</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="weather_entries">
+                        <?php
+                        $conn = mysql_connect("localhost", "root", "root");
+
+                        $db_selected = mysql_select_db('seapal', $conn);
+
+                        if (!$db_selected) {
+                            die('Can\'t use foo : ' . mysql_error());
+                        }
+
+                        $sql = "SELECT * FROM seapal_weather;";
+
+                        $result = mysql_query($sql, $conn);
+
+                        if (!$result) {
+                            die('Invalid query: ' . mysql_error());
+                        }
+
+                        while ($row = mysql_fetch_array($result)) {
+
+                            echo("<tr class='selectable' id='" . $row['bnr'] . "'>");
+                            echo("<td>" . $row['temperatur'] . "</td>");
+                            echo("<td>" . $row['airpreasure'] . "</td>");
+                            echo("<td>" . $row['wind_strength'] . "</td>");
+                            echo("<td>" . $row['wind_direction'] . "</td>");
+                            echo("<td>" . $row['wave_height'] . "</td>");
+                            echo("<td>" . $row['wave_direction'] . "</td>");
+                            echo("<td>" . $row['clouds'] . "</td>");
+                            echo("<td>" . $row['rain'] . "</td>");
+                            echo("<td style='width:30px; text-align:left;'><div class='btn-group'>");
+                            echo("<a class='btn btn-small view' id='" . $row['bnr'] . "'><span><i class='icon-eye-open'></i></span></a>");
+                            echo("<a class='btn btn-small remove' id='" . $row['bnr'] . "'><span><i class='icon-remove'></i></span></a>");
+                            echo("</div></td>");
+                            echo("</tr>");
+                        }
+
+                        mysql_close($conn);
+                        ?>
+                    </tbody>
+                </table>
+                <br /><br />
+            </div>
         </div>
 
         <!-- Footer -->
-        <?php /* include("./_include/footer.php") */?>
+        <?php /* include("./_include/footer.php") */ ?>
     </body>
 </html>
