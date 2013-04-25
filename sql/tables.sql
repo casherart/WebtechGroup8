@@ -1,7 +1,7 @@
 /* to use in console:
 	mysql --user=root -p < tables.sql
 */
-
+DROP database seapal;
 CREATE DATABASE seapal;
 
 /* table for users */
@@ -126,7 +126,8 @@ CREATE TABLE IF NOT EXISTS seapal.wind_strength(
 
 CREATE TABLE IF NOT EXISTS seapal.seapal_weather(
 	id int AUTO_INCREMENT,
-	templeratur FLOAT,
+	bnr int  NOT NULL,
+	temperatur FLOAT,
 	airpreasure FLOAT,
 	wind_strength int,
 	wind_direction int,
@@ -139,5 +140,6 @@ CREATE TABLE IF NOT EXISTS seapal.seapal_weather(
 	FOREIGN KEY (wind_direction) REFERENCES seapal.wind_direction(id),
 	FOREIGN KEY (wave_direction) REFERENCES seapal.wave_direction(id),
 	FOREIGN KEY (clouds) REFERENCES seapal.clouds(id),
-	FOREIGN KEY (rain) REFERENCES seapal.rain(id)
+	FOREIGN KEY (rain) REFERENCES seapal.rain(id),
+	FOREIGN KEY (bnr) REFERENCES seapal.benutzer(bnr)
 );
