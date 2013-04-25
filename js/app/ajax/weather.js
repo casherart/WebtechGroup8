@@ -52,48 +52,48 @@ function addWeatherToTable(weather_id){
 			type: "GET",
 			url: "app_weather_load.php?wID="+weather_id		
 		}).done(function(jsonData){
-			//jsonData = $.parseJSON(jsonData);
-			console.log(jsonData);
+			console.log(jsonData);console.log("_______________");
+			jsonData = $.parseJSON(jsonData);
 			if(jsonData.status != "ok"){
 				$("#wTR_"+jsonData.weather_id).html("<td colspan='"+weatherTableColCount+"'>Error when loading Data!</td>");
 			}else{
 				var tr = $("#wTR_"+weather_id);
-				tr.children.remove();
+				tr.html("");
 				var td_temperatur= document.createElement("td");				
-				td_temperatur.innerText = json.temperatur;
+				td_temperatur.innerText = jsonData.temperatur;
 				tr.append(td_temperatur);
 				
 				var td_airpreasure = document.createElement("td");				
-				td_airpreasure.innerText = json.airpreasure;
+				td_airpreasure.innerText = jsonData.airpreasure;
 				tr.append(td_airpreasure);
 				
 				var td_wind_strength = document.createElement("td");				
-				td_wind_strength.innerText = json.wind_strength;
+				td_wind_strength.innerText = jsonData.wind_strength;
 				tr.append(td_wind_strength);
 				
 				var td_wind_direction = document.createElement("td");				
-				td_wind_direction.innerText = json.wind_direction;
+				td_wind_direction.innerText = jsonData.wind_direction;
 				tr.append(td_wind_direction);
 				
 				var td_wave_height = document.createElement("td");				
-				td_wave_height.innerText = json.wave_height;
+				td_wave_height.innerText = jsonData.wave_height;
 				tr.append(td_wave_height);
 				
 				var td_wave_direction = document.createElement("td");				
-				td_wave_direction.innerText = json.wave_direction;
+				td_wave_direction.innerText = jsonData.wave_direction;
 				tr.append(td_wave_direction);
 				
 				var td_clouds = document.createElement("td");
-				td_clouds.innerText = json.clouds;
+				td_clouds.innerText = jsonData.clouds;
 				tr.append(td_clouds);
 				
 				var td_rain = document.createElement("td");
-				td_rain.innerText = json.rain;
+				td_rain.innerText = jsonData.rain;
 				tr.append(td_rain);
 				
 				var td_button = document.createElement("td");
 				var buttonDiv = document.createElement("div");
-				buttonDic.className = "btn-group";
+				buttonDiv.className = "btn-group";
 				
 				var button_view = document.createElement("a");
 				button_view.className = "btn btn-small view";
@@ -111,12 +111,12 @@ function addWeatherToTable(weather_id){
 				button_remove.id = "viewWeatherDetails_"+weather_id;
 				var button_remove_span = document.createElement("span");
 				var button_remove_i = document.createElement("i");
-				button_remove_i.className = "icon-eye-open";
+				button_remove_i.className = "icon-eye-delete";
 				button_remove_span.appendChild(button_remove_i);
 				button_view.appendChild(button_remove_span);
 				buttonDiv.appendChild(button_view);
 				
-				td_button.appendCild(buttonDiv)
+				td_button.appendChild(buttonDiv)
 				tr.append(td_button);
 			}			
 		});

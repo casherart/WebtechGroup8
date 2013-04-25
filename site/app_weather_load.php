@@ -25,8 +25,9 @@
 		                        							  LEFT JOIN wave_direction as waveDir ON (sw.wave_direction = waveDir.id)		                        							  
 		                        							  LEFT JOIN clouds ON (sw.clouds = clouds.id)
 		                        							  LEFT JOIN rain ON (sw.rain = rain.id)
-                                                                                                  LEFT JOIN direction as windDesc ON (windDesc.id = windDir.direction_id)
-                                                                                                  LEFT JOIN direction as waveDesc ON (waveDesc.id = waveDir.direction_id)
+                                                              LEFT JOIN direction as windDesc ON (windDesc.id = windDir.direction_id)
+                                                              LEFT JOIN direction as waveDesc ON (waveDesc.id = waveDir.direction_id)
+		                        	WHERE sw.id = 3
 		                        ";
 		
 		                        $result = mysql_query($sql, $conn);
@@ -37,19 +38,18 @@
 		
 		                        while ($row = mysql_fetch_array($result)) {
 									
-		                        	echo("
-		                        		{
-		                        			'status':'ok',
-		                        			'id':'" . $row['id'] . "',
-		                        			'temperature':'" . $row['temperatur'] . "',
-		                        			'airpreasure':'" . $row['airpreasure'] . "',
-		                        			'wind_strength':'" . $row['wind_strength'] . "',
-		                        			'wind_direction':'" . $row['wind_direction'] . "',
-		                        			'wave_height':'" . $row['wave_height'] . "',
-		                        			'wave_direction':'" . $row['wave_direction'] . "',
-		                        			'clouds':'" . $row['clouds'] . "',
-		                        			'rain':'" . $row['rain'] . "'
-		                        		}	
+		                        	echo("{
+		                        			\"status\":\"ok\",
+		                        			\"id\":\"" . $row['id'] . "\",
+		                        			\"temperature\":\"" . $row['temperatur'] . "\",
+		                        			\"airpreasure\":\"" . $row['airpreasure'] . "\",
+		                        			\"wind_strength\":\"" . $row['wind_strength'] . "\",
+		                        			\"wind_direction\":\"" . $row['wind_direction'] . "\",
+		                        			\"wave_height\":\"" . $row['wave_height'] . "\",
+		                        			\"wave_direction\":\"" . $row['wave_direction'] . "\",
+		                        			\"clouds\":\"" . $row['clouds'] . "\",
+		                        			\"rain\":\"" . $row['rain'] . "\"
+		                        		}
 		                        	");
 		                        }
 		
