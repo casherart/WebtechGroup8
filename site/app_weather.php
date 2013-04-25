@@ -138,7 +138,6 @@ include('database_library.php');
                         <div class="control-group">
                             <input type="reset" class="btn" id="delete" value="L&ouml;schen" class="button"/>
                             <input type="submit" class="btn" id="save" name="submit" value="Speichern" class="button"/>
-                            <input type="submit">
                         </div>
                     </div>
                 </form>
