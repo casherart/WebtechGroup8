@@ -7,9 +7,6 @@ include('database_library.php');
     <head>
         <!-- Headerinformation -->
         <?php include("./_include/header.php") ?>  
-
-        <!-- Additional Java-Script -->
-        <script src="../js/app/ajax/weather.js" type="text/javascript"></script>      
     </head>
     <body>
 
@@ -189,6 +186,21 @@ include('database_library.php');
                 <br /><br />
             </div>
         </div>
+        <!-- Menu Modal -->
+        <div class="modal hide fade" id="messageBox">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3 id="dialogTitle"></h3>
+            </div>
+            <div class="modal-body">
+                <p id="dialogMessage"></p>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn" data-dismiss="modal"><i class="icon-ok"></i> Ok</a>
+            </div>
+        </div>
+        <!-- Additional Java-Script -->
+        <script src="../js/app/ajax/weather.js" type="text/javascript"></script>
         <!-- Footer -->
         <?php /* include("./_include/footer.php") */ ?>
     </body>

@@ -1,132 +1,103 @@
-/*
- * checks and sends form
- */
-var weatherTableColCount = 10;
+$(function() {
 
+    function loadEntry(id) {
 
-function handleWeatherForm(formular){
-	var isOK = true;
-	//TODO check entries
-	
-	
-	if(!isOK){
-		alert("please verify entered Data");
-	}else{
-		$.ajax({
-		  type: "POST",
-		  url: "app_weather_insert.php",
-		  data: $(formular).serialize(),
-		  dataType: "html",
-		  error: function(){}
-		}).done(function( jsonData ) {
-			jsonData = $.parseJSON(jsonData);
-			if(jsonData.status != "ok"){
-				showAlert("error", "<strong>ERROR!</strong> Something went horrible wrong!")
-			}else{
-				addWeatherToTable(jsonData.weather_id);
-				showAlert("success", "<strong>Success!</strong> Your weather data has been stored and are now visible in table below.")
-				
-			}
-		});
-	}
-	return false;
-}
+        jQuery.get("app_weather_load.php", {'id': id}, function(data) {
 
+            $('#temperatur').val(data['temperatur']);
+            $('#airpreasure').val(data['airpreasure']);
+            $('#wind_strength').val(data['wind_strength']);
+            $('#wind_direction').val(data['wind_direction']);
+            $('#wave_height').val(data['wave_height']);
+            $('#wave_direction').val(data['wave_direction']);
+            $('#clouds').val(data['clouds']);
+            $('#rain').val(data['rain']);
+        }, "json");
+    }
 
-function addWeatherToTable(weather_id){
-	var tr = document.createElement("tr");
-	tr.id = "wTR_"+weather_id;
-	tr.className = "selectable";
-	
-	var td = document.createElement("td");
-	td.style.colspan = weatherTableColCount;
-	var img = document.createElement("img");
-	img.src="load";//TODO
-	
-	td.appendChild(img);
-	tr.appendChild(td);
-	$("#weather_entries").append(tr);
-	
-	if($.isNumeric(weather_id)){
-		$.ajax({
-			type: "GET",
-			url: "app_weather_load.php?wID="+weather_id		
-		}).done(function(jsonData){
-			console.log(jsonData);console.log("_______________");
-			jsonData = $.parseJSON(jsonData);
-			if(jsonData.status != "ok"){
-				$("#wTR_"+jsonData.weather_id).html("<td colspan='"+weatherTableColCount+"'>Error when loading Data!</td>");
-			}else{
-				var tr = $("#wTR_"+weather_id);
-				tr.html("");
-				var td_temperatur= document.createElement("td");				
-				td_temperatur.innerText = jsonData.temperatur;
-				tr.append(td_temperatur);
-				
-				var td_airpreasure = document.createElement("td");				
-				td_airpreasure.innerText = jsonData.airpreasure;
-				tr.append(td_airpreasure);
-				
-				var td_wind_strength = document.createElement("td");				
-				td_wind_strength.innerText = jsonData.wind_strength;
-				tr.append(td_wind_strength);
-				
-				var td_wind_direction = document.createElement("td");				
-				td_wind_direction.innerText = jsonData.wind_direction;
-				tr.append(td_wind_direction);
-				
-				var td_wave_height = document.createElement("td");				
-				td_wave_height.innerText = jsonData.wave_height;
-				tr.append(td_wave_height);
-				
-				var td_wave_direction = document.createElement("td");				
-				td_wave_direction.innerText = jsonData.wave_direction;
-				tr.append(td_wave_direction);
-				
-				var td_clouds = document.createElement("td");
-				td_clouds.innerText = jsonData.clouds;
-				tr.append(td_clouds);
-				
-				var td_rain = document.createElement("td");
-				td_rain.innerText = jsonData.rain;
-				tr.append(td_rain);
-				
-				var td_button = document.createElement("td");
-				var buttonDiv = document.createElement("div");
-				buttonDiv.className = "btn-group";
-				
-				var button_view = document.createElement("a");
-				button_view.className = "btn btn-small view";
-				button_view.id = "viewWeatherDetails_"+weather_id;
-				var button_view_span = document.createElement("span");
-				var button_view_i = document.createElement("i");
-				button_view_i.className = "icon-eye-open";
-				button_view_span.appendChild(button_view_i);
-				button_view.appendChild(button_view_span);
-				buttonDiv.appendChild(button_view);
-				
-				
-				var button_remove = document.createElement("a");
-				button_remove.className = "btn btn-small view";
-				button_remove.id = "viewWeatherDetails_"+weather_id;
-				var button_remove_span = document.createElement("span");
-				var button_remove_i = document.createElement("i");
-				button_remove_i.className = "icon-eye-delete";
-				button_remove_span.appendChild(button_remove_i);
-				button_view.appendChild(button_remove_span);
-				buttonDiv.appendChild(button_view);
-				
-				td_button.appendChild(buttonDiv)
-				tr.append(td_button);
-			}			
-		});
-	}
-}
+    function addEntry(id, json) {
 
-function showAlert(className, text){
-	var alertDiv = document.getElementById("alertDiv") || document.createElement("div");
-	alertDiv.id = "alertDiv";
-	alertDiv.className = "alert alert-"+className;
-	alertDiv.innerHTML = "<button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><span>"+text+"</span></div>";
-	$("#appForm").prepend(alertDiv);
-}
+        var entry = "";
+
+        entry += "<tr class='selectable' id='" + id + "'>";
+        entry += "<td>" + json.temperatur + "</td>";
+        entry += "<td>" + json.airpreasure + "</td>";
+        entry += "<td>" + json.wind_strength + "</td>";
+        entry += "<td>" + json.wind_direction + "</td>";
+        entry += "<td>" + json.wave_height + "</td>";
+        entry += "<td>" + json.wave_direction + "</td>";
+        entry += "<td>" + json.clouds + "</td>";
+        entry += "<td>" + json.rain + "</td>";
+        entry += "<td style='width:30px; text-align:left;'><div class='btn-group'>";
+        entry += "<a class='btn btn-small view' id='" + id + "'><span><i class='icon-eye-open'></i></span></a>";
+        entry += "<a class='btn btn-small remove' id='" + id + "'><span><i class='icon-remove'></i></span></a>";
+        entry += "</div></td>";
+        entry += "</tr>";
+
+        $('#entries').append(entry);
+    }
+
+    $('a.view').live("click", function(event) {
+        loadEntry($(this).attr('id'));
+    });
+
+    $('a.remove').live("click", function(event) {
+        var buttonID = this;
+        var boatnr = $(this).attr('id');
+        jQuery.post("app_weather_delete.php", {"bnr": boatnr}, function(data) {
+
+            if (data['bnr'].match(/Error/)) {
+
+                $('#dialogTitle').text('Error');
+                $('#dialogMessage').text(data['bnr'].replace(/Error: /, ""));
+
+            } else {
+
+                $(buttonID).parents('tr').remove();
+
+                $('#dialogTitle').text('Succes');
+                $('#dialogMessage').text("Eintrag wurde erfolgreich gelöscht.");
+            }
+
+            $('#messageBox').modal('show');
+        }, "json");
+    });
+
+    $('#save').click(function(event) {
+
+        event.preventDefault();
+
+        var json = {
+            "temperatur": $('#temperatur').val(),
+            "airpreasure": $('#airpreasure').val(),
+            "wind_strength": $('#wind_strength').val(),
+            "wind_direction": $('#wind_direction').val(),
+            "wave_height": $('#wave_height').val(),
+            "wave_direction": $('#wave_direction').val(),
+            "clouds": $('#clouds').val(),
+            "rain": $('#rain').val(),
+        };
+
+        jQuery.post("app_weather_insert.php", json, function(data) {
+
+            if (data['bnr'].match(/Error/)) {
+
+                $('#dialogTitle').text('Error');
+                $('#dialogMessage').text(data['bnr'].replace(/Error: /, ""));
+
+            } else {
+
+                addEntry(data['bnr'], json);
+
+                $('#dialogTitle').text('Success');
+                $('#dialogMessage').text("Eintrag wurde erfolgreich gespeichert.");
+            }
+
+            $('#messageBox').modal('show');
+
+        }, "json");
+
+    });
+
+});
+
