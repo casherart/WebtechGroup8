@@ -22,7 +22,7 @@ include('database_library.php');
 		        		die('Can\'t use foo : ' . mysql_error());
 		        	}
 		
-		        	$sql = "SELECT id FROM seapal_weather WHERE bnr = 1 OR bnr = 2";/*TODO USER*/
+		        	$sql = "SELECT id FROM seapal_weather WHERE bnr = 1 OR bnr = 2 order by id";/*TODO USER*/
 					$result = mysql_query($sql, $conn);
 		
 		            if (!$result) {
@@ -55,7 +55,7 @@ include('database_library.php');
                     <br>
                 </div>
                  <!--  -->
-                 <form id="appForm" class="form-horizontal" action="app_weather_insert.php"><!--onsubmit="return handleWeatherForm(this);"-->
+                 <form id="appForm" class="form-horizontal" onsubmit="return handleWeatherForm(this);">
                     <div class="container-fluid">
                         <div class="row well" style="margin-left: 15%;">
                             <div class="span4">

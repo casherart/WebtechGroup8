@@ -1,5 +1,4 @@
 <?php 
-include('/_include/header.php');
 include('./database_library.php');
 
 $query = "INSERT INTO seapal_weather(bnr, temperatur, airpreasure, wind_strength, 
@@ -18,7 +17,14 @@ $query .= ");";
 
 connect_database("localhost", "root", "root", "seapal");
 mysql_query($query);
-mysql_close();
+$lastid = mysql_insert_id();
 
+if ($lastid == 0) {
+	echo("{\"status\":\"ERROR\",\"text\":\"".mysql_error()."\"}");
+}else{
+	echo("{\"status\":\"ok\",\"id\":\"".$lastid."\"}");
+}
+
+
+mysql_close();
 ?>
-{"status":"ok", "weather_id":"1"}

@@ -7,13 +7,11 @@ var weatherTableColCount = 10;
 function handleWeatherForm(formular){
 	var isOK = true;
 	//TODO check entries
-	
-	
 	if(!isOK){
 		alert("please verify entered Data");
 	}else{
 		$.ajax({
-		  type: "POST",
+		  type: "GET",
 		  url: "app_weather_insert.php",
 		  data: $(formular).serialize(),
 		  dataType: "html",
@@ -21,9 +19,10 @@ function handleWeatherForm(formular){
 		}).done(function( jsonData ) {
 			jsonData = $.parseJSON(jsonData);
 			if(jsonData.status != "ok"){
-				showAlert("error", "<strong>ERROR!</strong> Something went horrible wrong!")
+				showAlert("error", "<strong>ERROR!</strong> Something went horrible wrong!");
+				//console.log(jsonData.text);
 			}else{
-				addWeatherToTable(jsonData.weather_id);
+				addWeatherToTable(jsonData.id);
 				showAlert("success", "<strong>Success!</strong> Your weather data has been stored and are now visible in table below.")
 				
 			}
@@ -41,7 +40,7 @@ function addWeatherToTable(weather_id){
 	var td = document.createElement("td");
 	td.style.colspan = weatherTableColCount;
 	var img = document.createElement("img");
-	img.src="load";//TODO
+	img.src="../img/icons/ajax-loader.gif";
 	
 	td.appendChild(img);
 	tr.appendChild(td);
@@ -51,8 +50,7 @@ function addWeatherToTable(weather_id){
 		$.ajax({
 			type: "GET",
 			url: "app_weather_load.php?wID="+weather_id		
-		}).done(function(jsonData){
-			console.log(jsonData);console.log("_______________");
+		}).done(function(jsonData){	
 			jsonData = $.parseJSON(jsonData);
 			if(jsonData.status != "ok"){
 				$("#wTR_"+jsonData.weather_id).html("<td colspan='"+weatherTableColCount+"'>Error when loading Data!</td>");
@@ -60,7 +58,7 @@ function addWeatherToTable(weather_id){
 				var tr = $("#wTR_"+weather_id);
 				tr.html("");
 				var td_temperatur= document.createElement("td");				
-				td_temperatur.innerText = jsonData.temperatur;
+				td_temperatur.innerText = jsonData.temperature;
 				tr.append(td_temperatur);
 				
 				var td_airpreasure = document.createElement("td");				
