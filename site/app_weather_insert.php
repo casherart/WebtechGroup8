@@ -19,7 +19,7 @@ connect_database("localhost", "root", "root", "seapal");
 mysql_query($query);
 $lastid = mysql_insert_id();
 
-if ($lastid == 0) {
+if ($lastid == 0 || mysql_error != "") {
 	echo("{\"status\":\"ERROR\",\"text\":\"".mysql_error()."\"}");
 }else{
 	echo("{\"status\":\"ok\",\"id\":\"".$lastid."\"}");

@@ -105,14 +105,20 @@ function addWeatherToTable(weather_id){
 				
 				
 				var button_remove = document.createElement("a");
-				button_remove.className = "btn btn-small view";
-				button_remove.id = "viewWeatherDetails_"+weather_id;
+				button_remove.className = "btn btn-small remove";
+				button_remove.id = "removeWeatherDetails_"+weather_id;				
 				var button_remove_span = document.createElement("span");
 				var button_remove_i = document.createElement("i");
-				button_remove_i.className = "icon-eye-delete";
+				button_remove_i.className = "icon-remove";
 				button_remove_span.appendChild(button_remove_i);
-				button_view.appendChild(button_remove_span);
-				buttonDiv.appendChild(button_view);
+				button_remove.appendChild(button_remove_span);
+				buttonDiv.appendChild(button_remove);
+				
+				$(button_remove).click(function(){
+					removeWeatherData(weather_id);
+				});
+				
+				
 				
 				td_button.appendChild(buttonDiv)
 				tr.append(td_button);
@@ -120,6 +126,30 @@ function addWeatherToTable(weather_id){
 		});
 	}
 }
+
+
+function removeWeatherData(weather_id){
+	if(!confirm('Do you realy want to remove this entry')){
+		return false;
+	}
+	
+	if($.isNumeric(weather_id)){
+		$.ajax({
+			type: "GET",
+			url: "app_weather_delete.php?wID="+weather_id		
+		}).done(function(jsonData){	
+			console.log(jsonData);
+			jsonData = $.parseJSON(jsonData);
+			if(jsonData.status != "ok"){
+				showAlert("error", "<strong>ERROR!</strong> The Entry may be deleted or may be not.")
+			}else{
+				$("#wTR_"+weather_id).remove();			
+				showAlert("success", "<strong>DELETED!</strong> The Entry has been deleted successfully.");
+			}
+		});
+	}
+}
+
 
 function showAlert(className, text){
 	var alertDiv = document.getElementById("alertDiv") || document.createElement("div");

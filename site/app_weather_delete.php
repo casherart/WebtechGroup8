@@ -1,29 +1,26 @@
-<?php
-
+  <?php
+	/*
+		extract to php-function	                        		
+	*/
 	$conn = mysql_connect("localhost", "root", "root");
-	
+		
 	$db_selected = mysql_select_db('seapal', $conn);
-	
+		
 	if (!$db_selected) {
-	    $err = array( "tnr" => 'Error: ' . mysql_error() );
-	    echo json_encode($err);
-	    exit;
-	}
-	
-	$sql = "DELETE FROM seapal.seapal_weather WHERE id = ". val($_POST['id']) . ";";
-	
-	$result = mysql_query($sql, $conn);
-	
-	if (!$result) {
-	    $err = array( "tnr" => 'Error: ' . mysql_error() );
-	    echo json_encode($err);
-	    exit;
+    	die('Can\'t use foo : ' . mysql_error());
 	}
 		
-	$bnr = array( "tnr" => 'ok');
-	
-	echo json_encode($bnr);
+	$sql = "
+		DELETE FROM seapal_weather
+		WHERE id = " . $_GET["wID"];
+		
+	mysql_query($sql);
+		
+	if (mysql_error() != "") {
+		echo("{\"status\":\"ERROR\",\"text\":\"".mysql_error()."\"}");
+	}else{
+		echo("{\"status\":\"ok\"}");
+	}
 		
 	mysql_close($conn);
-
 ?>
