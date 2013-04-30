@@ -9,7 +9,10 @@
 	if (!$db_selected) {
     	die('Can\'t use foo : ' . mysql_error());
 	}
-		
+	/*
+	 * Some SQL-Injektion Protection
+	*/
+	settype( $_GET["wID"], 'integer');
 	$sql = "
 		SELECT  sw.id,
         	sw.temperatur, 
@@ -19,7 +22,13 @@
 			sw.wave_height,	                        		 
 			waveDesc.description as wave_direction, 
 			clouds.description as clouds, 
-			rain.description as rain 
+			rain.description as rain,
+
+			windDir.id as windDirId,
+			windStr.id as windStrId,
+			waveDir.id as waveDirId,
+			clouds.id as cloudsId,
+			rain.id as rainId
 		FROM seapal_weather as sw LEFT JOIN wind_strength as windStr ON (sw.wind_strength = windStr.id)
 			LEFT JOIN wind_direction as windDir ON (sw.wind_direction = windDir.id)							  	                        							  
 			LEFT JOIN wave_direction as waveDir ON (sw.wave_direction = waveDir.id)							  
@@ -47,6 +56,11 @@
 			\"wave_height\":\"" . $row['wave_height'] . "\",
 			\"wave_direction\":\"" . $row['wave_direction'] . "\",
 			\"clouds\":\"" . $row['clouds'] . "\",
+			\"windDirId\":\"" . $row['windDirId'] . "\",
+			\"windStrId\":\"" . $row['windStrId'] . "\",
+			\"waveDirId\":\"" . $row['waveDirId'] . "\",
+			\"cloudsId\":\"" . $row['cloudsId'] . "\",
+			\"rainId\":\"" . $row['rainId'] . "\",					
 			\"rain\":\"" . $row['rain'] . "\"
 		}");
 	}

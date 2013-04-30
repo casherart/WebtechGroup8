@@ -9,7 +9,11 @@
 	    echo json_encode($err);
 	    exit;
 	}
-	
+
+	/*
+	 * Some SQL-Injektion Protection
+	*/
+	settype($_POST['tank'], 'integer');
 	$sql = "INSERT INTO seapal.tripinfo (titel, von, nach, skipper, crew, tstart, tende, tdauer, motor, tank) VALUES (
 				'" . $_POST['titel'] . "',
 				'" . $_POST['von'] . "',

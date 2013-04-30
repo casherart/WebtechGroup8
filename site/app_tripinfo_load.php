@@ -7,7 +7,10 @@
 	if (!$db_selected) {
 	    die('Error: ' . mysql_error());
 	}
-	
+	/*
+	 * Some SQL-Injektion Protection
+	*/
+	settype( $_GET['wnr'], 'integer');
 	$sql = "SELECT * FROM seapal.wegpunkte WHERE wnr = " . $_GET['wnr'] . ";";
 	
 	$result = mysql_query($sql, $conn);

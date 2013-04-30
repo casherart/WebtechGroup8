@@ -23,8 +23,7 @@ function handleWeatherForm(formular){
 				//console.log(jsonData.text);
 			}else{
 				addWeatherToTable(jsonData.id);
-				showAlert("success", "<strong>Success!</strong> Your weather data has been stored and are now visible in table below.")
-				
+				showAlert("success", "<strong>Success!</strong> Your weather data has been stored and are now visible in table below.");				
 			}
 		});
 	}
@@ -33,9 +32,16 @@ function handleWeatherForm(formular){
 
 
 function addWeatherToTable(weather_id){
-	var tr = document.createElement("tr");
-	tr.id = "wTR_"+weather_id;
-	tr.className = "selectable";
+	var tr = document.getElementById("wTR_"+weather_id)
+	if(!tr){
+		tr = document.createElement("tr");
+		tr.id = "wTR_"+weather_id;
+		tr.className = "selectable";	
+		$("#weather_entries").append(tr);	
+	}else{
+		$("#wTR_"+weather_id).empty();
+		console.log(tr);
+	}
 	
 	var td = document.createElement("td");
 	td.style.colspan = weatherTableColCount;
@@ -44,7 +50,6 @@ function addWeatherToTable(weather_id){
 	
 	td.appendChild(img);
 	tr.appendChild(td);
-	$("#weather_entries").append(tr);
 	
 	if($.isNumeric(weather_id)){
 		$.ajax({
@@ -102,7 +107,10 @@ function addWeatherToTable(weather_id){
 				button_view_span.appendChild(button_view_i);
 				button_view.appendChild(button_view_span);
 				buttonDiv.appendChild(button_view);
-				
+
+				$(button_view).click(function(){
+					weatherDataToForm(weather_id);
+				});
 				
 				var button_remove = document.createElement("a");
 				button_remove.className = "btn btn-small remove";
@@ -118,13 +126,37 @@ function addWeatherToTable(weather_id){
 					removeWeatherData(weather_id);
 				});
 				
-				
-				
 				td_button.appendChild(buttonDiv)
 				tr.append(td_button);
 			}			
 		});
 	}
+}
+
+function weatherDataToForm(weather_id){
+	$.ajax({
+		type: "GET",
+		url: "app_weather_load.php?wID="+weather_id		
+	}).done(function(jsonData){	
+		jsonData = $.parseJSON(jsonData);
+		if(jsonData.status != "ok"){
+			$("#wTR_"+jsonData.weather_id).html("<td colspan='"+weatherTableColCount+"'>Error when loading Data!</td>");
+		}else{
+			console.log(jsonData);
+			var form = $("#appForm");
+			$("#temp").val(jsonData.temperature);
+			$("#airpress").val(jsonData.airpreasure);
+			$("#whight").val(jsonData.wave_height);
+			
+
+			$("#windstr").val(jsonData.windStrId);
+			$("#cloud").val(jsonData.cloudsId);
+			$("#rain").val(jsonData.rainId);
+			$("#winddir").val(jsonData.windDirId);
+			$("#wavedir").val(jsonData.waveDirId);
+			$("#wId").val(weather_id);
+		}
+	});
 }
 
 

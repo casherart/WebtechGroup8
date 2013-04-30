@@ -9,7 +9,11 @@
 	    echo json_encode($err);
 	    exit;
 	}
-	
+
+	/*
+	 * Some SQL-Injektion Protection
+	*/
+	settype($_POST['tnr'], 'integer');
 	$sql = "DELETE FROM seapal.tripinfo WHERE tnr = " . $_POST['tnr'] . ";";
 	
 	$result = mysql_query($sql, $conn);

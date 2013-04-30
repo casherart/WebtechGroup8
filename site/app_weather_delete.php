@@ -9,7 +9,10 @@
 	if (!$db_selected) {
     	die('Can\'t use foo : ' . mysql_error());
 	}
-		
+	/*
+	 * Some SQL-Injektion Protection
+	*/
+	settype( $_GET["wID"], 'integer');
 	$sql = "
 		DELETE FROM seapal_weather
 		WHERE id = " . $_GET["wID"];

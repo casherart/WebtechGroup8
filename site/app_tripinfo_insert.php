@@ -9,7 +9,11 @@
 	    echo json_encode($err);
 	    exit;
 	}
-	
+
+	/*
+	 * Some SQL-Injektion Protection
+	*/
+	settype( $_POST['tnr'], 'integer');
 	$sql = "INSERT INTO seapal.wegpunkte(tnr, name, btm, dtm, lat, lng, sog, cog, manoever, vorsegel, wdate, wtime, marker) VALUES (
 				" . $_POST['tnr'] . ", 
 				'" . $_POST['name'] . "',

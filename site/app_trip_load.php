@@ -7,7 +7,11 @@
 	if (!$db_selected) {
 	    die('Error: ' . mysql_error());
 	}
-	
+
+	/*
+	 * Some SQL-Injektion Protection
+	*/
+	settype($_GET['tnr'], 'integer');
 	$sql = "SELECT * FROM seapal.tripinfo WHERE tnr = '" . $_GET['tnr'] . "';";
 	
 	$result = mysql_query($sql, $conn);

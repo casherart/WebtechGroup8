@@ -9,7 +9,10 @@
 	    echo json_encode($err);
 	    exit;
 	}
-	
+	/*
+	 * Some SQL-Injektion Protection
+	 */
+	settype($_POST['bnr'], 'integer');
 	$sql = "DELETE FROM seapal.bootinfo WHERE bnr = " . $_POST['bnr'] . ";";
 	
 	$result = mysql_query($sql, $conn);

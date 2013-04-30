@@ -9,7 +9,11 @@
 	    echo json_encode($err);
 	    exit;
 	}
-	
+
+	/*
+	 * Some SQL-Injektion Protection
+	*/
+	settype($_GET['wnr'], 'integer');
 	$sql = "DELETE FROM seapal.wegpunkte WHERE wnr = " . $_POST['wnr'] . ";";
 	
 	$result = mysql_query($sql, $conn);

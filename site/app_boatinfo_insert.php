@@ -9,7 +9,22 @@
 	    echo json_encode($err);
 	    exit;
 	}
-	
+	/*
+	 * Some SQL-Injektion Protection
+	 */
+	settype($_POST['registernummer'], 'integer');
+	settype($_POST['laenge'], 'integer');
+	settype($_POST['breite'], 'integer');
+	settype($_POST['tiefgang'], 'integer');
+	settype($_POST['verdraengung'], 'integer');
+	settype($_POST['baujahr'], 'integer');
+	settype($_POST['tankgroesse'], 'integer');
+	settype($_POST['wassertankgroesse'], 'integer');
+	settype($_POST['abwassertankgroesse'], 'integer');
+	settype($_POST['grosssegelgroesse'], 'integer');
+	settype($_POST['genuagroesse'], 'integer');
+	settype($_POST['spigroesse'], 'integer');
+		
 	$sql = "INSERT INTO seapal.bootinfo (bootname, registernummer, segelzeichen, heimathafen, yachtclub, eigner, versicherung,
 			rufzeichen, typ, konstrukteur, laenge, breite, tiefgang, masthoehe, verdraengung, rigart,	
 			baujahr, motor, tankgroesse, wassertankgroesse, abwassertankgroesse, grosssegelgroesse,

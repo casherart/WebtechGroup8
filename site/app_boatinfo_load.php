@@ -7,7 +7,11 @@
 	if (!$db_selected) {
 	    die('Error: ' . mysql_error());
 	}
-	
+
+	/*
+	 * Some SQL-Injektion Protection
+	*/
+	settype($_GET['bnr'], 'integer');
 	$sql = "SELECT * FROM seapal.bootinfo WHERE bnr = '" . $_GET['bnr'] . "';";
 	
 	$result = mysql_query($sql, $conn);
