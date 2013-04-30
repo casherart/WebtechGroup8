@@ -19,11 +19,11 @@ function handleWeatherForm(formular){
 		}).done(function( jsonData ) {
 			jsonData = $.parseJSON(jsonData);
 			if(jsonData.status != "ok"){
-				showAlert("error", "<strong>ERROR!</strong> Something went horrible wrong!");
+				showAlert("error", "Something went horrible wrong!");
 				//console.log(jsonData.text);
 			}else{
 				addWeatherToTable(jsonData.id);
-				showAlert("success", "<strong>Success!</strong> Your weather data has been stored and are now visible in table below.");				
+				showAlert("success", "Your weather data has been stored and are now visible in table below.");				
 			}
 		});
 	}
@@ -173,10 +173,10 @@ function removeWeatherData(weather_id){
 			console.log(jsonData);
 			jsonData = $.parseJSON(jsonData);
 			if(jsonData.status != "ok"){
-				showAlert("error", "<strong>ERROR!</strong> The Entry may be deleted or may be not.")
+				showAlert("error", "The Entry may be deleted or may be not.")
 			}else{
 				$("#wTR_"+weather_id).remove();			
-				showAlert("success", "<strong>DELETED!</strong> The Entry has been deleted successfully.");
+				showAlert("success", "The Entry has been deleted successfully.");
 			}
 		});
 	}
@@ -184,9 +184,8 @@ function removeWeatherData(weather_id){
 
 
 function showAlert(className, text){
-	var alertDiv = document.getElementById("alertDiv") || document.createElement("div");
-	alertDiv.id = "alertDiv";
-	alertDiv.className = "alert alert-"+className;
-	alertDiv.innerHTML = "<button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button><span>"+text+"</span></div>";
-	$("#appForm").prepend(alertDiv);
+	
+	$('#dialogTitle').text(className.toUpperCase());
+	$('#dialogMessage').text(text);
+	$('#messageBox').modal('show');
 }
