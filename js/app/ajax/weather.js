@@ -66,35 +66,35 @@ function addWeatherToTable(weather_id){
 				var tr = $("#wTR_"+weather_id);
 				tr.html("");
 				var td_temperatur= document.createElement("td");				
-				td_temperatur.innerText = jsonData.temperature;
+				td_temperatur.innerHTML = jsonData.temperature;
 				tr.append(td_temperatur);
 				
 				var td_airpreasure = document.createElement("td");				
-				td_airpreasure.innerText = jsonData.airpreasure;
+				td_airpreasure.innerHTML = jsonData.airpreasure;
 				tr.append(td_airpreasure);
 				
 				var td_wind_strength = document.createElement("td");				
-				td_wind_strength.innerText = jsonData.wind_strength;
+				td_wind_strength.innerHTML = jsonData.wind_strength;
 				tr.append(td_wind_strength);
 				
 				var td_wind_direction = document.createElement("td");				
-				td_wind_direction.innerText = jsonData.wind_direction;
+				td_wind_direction.innerHTML = jsonData.wind_direction;
 				tr.append(td_wind_direction);
 				
 				var td_wave_height = document.createElement("td");				
-				td_wave_height.innerText = jsonData.wave_height;
+				td_wave_height.innerHTML = jsonData.wave_height;
 				tr.append(td_wave_height);
 				
 				var td_wave_direction = document.createElement("td");				
-				td_wave_direction.innerText = jsonData.wave_direction;
+				td_wave_direction.innerHTML = jsonData.wave_direction;
 				tr.append(td_wave_direction);
 				
 				var td_clouds = document.createElement("td");
-				td_clouds.innerText = jsonData.clouds;
+				td_clouds.innerHTML = jsonData.clouds;
 				tr.append(td_clouds);
 				
 				var td_rain = document.createElement("td");
-				td_rain.innerText = jsonData.rain;
+				td_rain.innerHTML = jsonData.rain;
 				tr.append(td_rain);
 				
 				var td_button = document.createElement("td");
