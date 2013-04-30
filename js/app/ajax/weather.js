@@ -20,7 +20,6 @@ function handleWeatherForm(formular){
 			jsonData = $.parseJSON(jsonData);
 			if(jsonData.status != "ok"){
 				showAlert("error", "Something went horrible wrong!");
-				//console.log(jsonData.text);
 			}else{
 				addWeatherToTable(jsonData.id);
 				showAlert("success", "Your weather data has been stored and are now visible in table below.");				
