@@ -27,10 +27,9 @@ if($_GET["wId"] != ""){
 	$query .= ", rain = " . $_GET["rain"];
 	$query .= " WHERE ID = " . $_GET["wId"] . " AND (bnr = 1 OR bnr = 2);";
 }else{	
-	$query = "INSERT INTO seapal_weather(bnr, temperatur, airpreasure, wind_strength, 
-	          wind_direction, wave_height, wave_direction, clouds, rain) VALUES(";
+	$query = "INSERT INTO seapal_weather(temperatur, airpreasure, wind_strength, 
+	          wind_direction, wave_height, wave_direction, clouds, rain, bnr) VALUES(";
 	
-	$query .= build_form_query("bnr", "'". 1 ."', ");
 	$query = build_form_query("temp", $query);
 	$query = build_form_query("airpress", $query);
 	$query = build_form_query("wind_strength", $query);
@@ -39,7 +38,7 @@ if($_GET["wId"] != ""){
 	$query = build_form_query("wave_direction", $query);
 	$query = build_form_query("clouds", $query);
 	$query = build_form_query("rain", $query, true);
-	$query .= ");";
+	$query .= ",1);";
 }
 
 connect_database("localhost", "root", "root", "seapal");

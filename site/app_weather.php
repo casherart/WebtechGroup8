@@ -54,7 +54,6 @@ include('database_library.php');
                     <h2>Wetter Informationen</h2>
                     <br>
                 </div>
-                 <!--  -->
                  <form id="appForm" class="form-horizontal" onsubmit="return handleWeatherForm(this);">
                  	<input type="hidden" id="wId" name="wId" value="">
                     <div class="container-fluid">
@@ -181,14 +180,6 @@ include('database_library.php');
 		
         <!-- Footer -->
         <?php /* include("./_include/footer.php") */?><!-- Java-Script -->
-	    <script src="../js/bootstrap/bootstrap-dropdown.js"></script>
-	    <script src="../js/bootstrap/bootstrap-button.js"></script>
 	    <script src="../js/bootstrap/bootstrap-modal.js"></script>
-	    <script src="../js/bootstrap/bootstrap-transition.js"></script>
-	    <script src="../js/bootstrap/bootstrap-collapse.js"></script>
-	    <script src="../js/bootstrap/bootstrap-affix.js"></script>
-	    
-	    <!-- Additional Java-Script -->
-	    <script src="../js/app/ajax/trip.js" type="text/javascript"></script>
     </body>
 </html>

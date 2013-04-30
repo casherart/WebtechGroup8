@@ -17,7 +17,11 @@ function handleWeatherForm(formular){
 		  dataType: "html",
 		  error: function(){}
 		}).done(function( jsonData ) {
-			jsonData = $.parseJSON(jsonData);
+			try{
+				jsonData = $.parseJSON(jsonData);
+			}catch(e){
+				console.error(jsonData);
+			}
 			if(jsonData.status != "ok"){
 				showAlert("error", "Something went horrible wrong!");
 			}else{
