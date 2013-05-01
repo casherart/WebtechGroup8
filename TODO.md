@@ -7,4 +7,5 @@
 - is it possible in php to set global variable for db user and pw? The problem currently is that on funpic 
 "root/root" is not allowed. And i don't want to make if else on every db connection.
 
+
 ?? User validation ??
