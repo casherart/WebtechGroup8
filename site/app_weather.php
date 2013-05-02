@@ -54,7 +54,7 @@ include('database_library.php');
                     <h2>Wetter Informationen</h2>
                     <br>
                 </div>
-                 <form id="appForm" class="form-horizontal" onsubmit="return handleWeatherForm(this);">
+                 <form id="appForm" class="form-horizontal" onsubmit="return handleWeatherForm($(this).serialize());">
                  	<input type="hidden" id="wId" name="wId" value="">
                     <div class="container-fluid">
                         <div class="row well" style="margin-left: 15%;">

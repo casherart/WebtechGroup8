@@ -4,7 +4,8 @@
 var weatherTableColCount = 10;
 
 
-function handleWeatherForm(formular){
+function handleWeatherForm(formularData, showMessage){
+	var showMessage = showMessage || true;
 	var isOK = true;
 	//TODO check entries
 	if(!isOK){
@@ -13,7 +14,7 @@ function handleWeatherForm(formular){
 		$.ajax({
 		  type: "GET",
 		  url: "app_weather_insert.php",
-		  data: $(formular).serialize(),
+		  data: formularData,
 		  dataType: "html",
 		  error: function(){}
 		}).done(function( jsonData ) {
@@ -22,11 +23,13 @@ function handleWeatherForm(formular){
 			}catch(e){
 				console.error(jsonData);
 			}
-			if(jsonData.status != "ok"){
-				showAlert("error", "Something went horrible wrong!");
-			}else{
-				addWeatherToTable(jsonData.id);
-				showAlert("success", "Your weather data has been stored and are now visible in table below.");				
+			if(showMessage){
+				if(jsonData.status != "ok"){
+					showAlert("error", "Something went horrible wrong!");
+				}else{
+					addWeatherToTable(jsonData.id);
+					showAlert("success", "Your weather data has been stored and are now visible in table below.");				
+				}
 			}
 		});
 	}

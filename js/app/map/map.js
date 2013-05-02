@@ -142,10 +142,11 @@ function initialize() {
     }));   
     
     map.overlayMapTypes.push(new google.maps.ImageMapType({
+    	getTileUrl: function (coord, zoom) {
     		return "http://www.openportguide.org/tiles/actual/wind_vector/5/" + zoom + "/" + coord.x + "/" + coord.y + ".png";
     	},
     	tileSize: new google.maps.Size(256, 256),
-    	name: "weather",
+    	name: "wind",
     	maxZoom: 7
     }));
     
@@ -211,6 +212,9 @@ $(function () {
             } else if (key == "delete") {
                 temporaryMarker.setMap(null);
                 temporaryMarkerInfobox.setMap(null);
+                
+            } else if (key == "weather") {
+            	addWeatherForPosition(currentPositionMarker.position);
             }
         },
         items: {
@@ -218,6 +222,7 @@ $(function () {
             "startroute": { name: "Neue Route setzen", icon: "startroute" },
             "distance": { name: "Distanz messen", icon: "distance" },
             "destination": { name: "Zum Ziel machen", icon: "destination" },
+            "weather": { name: "Wetterdaten speichern", icon: "certificate" },
             "sep1": "---------",
             "delete": { name: "L&ouml;schen", icon: "delete" }
         }
@@ -237,10 +242,14 @@ $(function () {
                 selectedMarker.reference.setMap(null);
                 selectedMarker.infobox.setMap(null);
                 fixedMarkerArray.splice(fixedMarkerArray.indexOf(selectedMarker), 1);
+                
+            } else if (key == "weather") {
+            	addWeatherForPosition(currentPositionMarker.position);
             }
         },
         items: {
             "destination": { name: "Zum Ziel machen", icon: "destination" },
+            "weather": { name: "Wetterdaten speichern", icon: "certificate" },
             "sep1": "---------",
             "delete": { name: "L&ouml;schen", icon: "delete" }
         }
@@ -276,14 +285,12 @@ function drawTemporaryMarkerInfobox(latLng) {
 
 // draw fixedMarkerInfobox 
 function drawFixedMarkerInfobox(latLng, counter) {
-
     customTxt = "<div class='markerInfoBox label' id='fixedMarkerInfobox'>"
      + "Markierung " + (counter) + "</div>";
     return new TxtOverlay(latLng, customTxt, "coordinate_info_box", map, 40, -29);
 }
 
 function getMarkerWithInfobox(event) {
-
     for (var i = 0; i < fixedMarkerArray.length; i++) {
         if (fixedMarkerArray[i].reference.position == event.latLng) {
             return fixedMarkerArray[i];
@@ -401,16 +408,3 @@ function toggleFollowCurrentPosition() {
     }
     document.getElementById('followCurrentPositionContainer').style.width = document.body.offsetWidth + "px";
 }
-/*
- * from google maps coordination to tile coordination
- * source: http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames#X_and_Y
- */
-function long2tile(lon,zoom) { return (Math.floor((lon+180)/360*Math.pow(2,zoom))); }
-function lat2tile(lat,zoom)  { return (Math.floor((1-Math.log(Math.tan(lat*Math.PI/180) + 1/Math.cos(lat*Math.PI/180))/Math.PI)/2 *Math.pow(2,zoom))); }
-function tile2long(x,z) {
-  return (x/Math.pow(2,z)*360-180);
- }
- function tile2lat(y,z) {
-  var n=Math.PI-2*Math.PI*y/Math.pow(2,z);
-  return (180/Math.PI*Math.atan(0.5*(Math.exp(n)-Math.exp(-n))));
- }
