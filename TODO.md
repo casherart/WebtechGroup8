@@ -1,3 +1,19 @@
+Toggle fucntion for overlay on maps
+
+new menu entry in maps to add weather to form.
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 - FORM/URL Parameter in den SQL-Statements absichern (auch in den, die nicht von uns sind)
 - User check for DB Querys

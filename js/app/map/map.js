@@ -201,16 +201,6 @@ function initialize() {
 
     }));
 
-//    map.overlayMapTypes.push(new google.maps.ImageMapType({
-//    	getTileUrl: function (coord, zoom) {
-//    	return "http://www.openportguide.org/tiles/actual/wind_vector/7/" + zoom + "/" + 
-//    	coord.x + "/" + coord.y + ".png";
-//    	},
-//    	tileSize: new google.maps.Size(256, 256),
-//    	name: "OpenSeaMap",
-//    	maxZoom: 18
-//    }));
-
     overlay.draw = function() {
     };
     overlay.setMap(map);
