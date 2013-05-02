@@ -159,6 +159,36 @@ function initialize() {
     	maxZoom: 7
     }));
 
+
+    map.overlayMapTypes.push(new google.maps.ImageMapType({
+        getTileUrl: function(coord, zoom) {
+            return "http://www.openportguide.org/tiles/actual/surface_pressure/5/" + zoom + "/" + coord.x + "/" + coord.y + ".png";
+        },
+        tileSize: new google.maps.Size(256, 256),
+        name: "air_pressure",
+        maxZoom: 7
+    }));
+
+    map.overlayMapTypes.push(new google.maps.ImageMapType({
+        getTileUrl: function(coord, zoom) {
+            return "http://www.openportguide.org/tiles/actual/precipitation/5/" + zoom + "/" + coord.x + "/" + coord.y + ".png";
+        },
+        tileSize: new google.maps.Size(256, 256),
+        name: "rain",
+        maxZoom: 7
+
+    }));
+    
+    map.overlayMapTypes.push(new google.maps.ImageMapType({
+        getTileUrl: function(coord, zoom) {
+            return "http://www.openportguide.org/tiles/actual/significant_wave_height/5/" + zoom + "/" + coord.x + "/" + coord.y + ".png";
+        },
+        tileSize: new google.maps.Size(256, 256),
+        name: "wave_height",
+        maxZoom: 7
+
+    }));
+
     overlay.draw = function () { };
     overlay.setMap(map);
 
