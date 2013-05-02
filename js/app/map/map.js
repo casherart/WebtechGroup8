@@ -131,16 +131,6 @@ function initialize() {
             updateNavigation(currentPositionMarker.position, destinationMarker.position);
         }
     });
-
-//    map.overlayMapTypes.push(new google.maps.ImageMapType({
-//    	getTileUrl: function (coord, zoom) {
-//      		return  "http://tiles.openseamap.org/seamark/"  + zoom + "/" + coord.x + "/" + coord.y + ".png";    	
-//    	},
-//    	tileSize: new google.maps.Size(256, 256),
-//    	name: "OpenStreetMap1",
-//    	maxZoom: 18
-//    }));
- // set map types
     
     map.mapTypes.set("weather", new google.maps.ImageMapType({
         getTileUrl: function (coord, zoom) {
@@ -152,8 +142,6 @@ function initialize() {
     }));   
     
     map.overlayMapTypes.push(new google.maps.ImageMapType({
-    	getTileUrl: function (coord, zoom) {
-    		//return "http://tiles.openseamap.org/seamark/" + zoom + "/" + coord.x + "/" + coord.y + ".png";
     		return "http://www.openportguide.org/tiles/actual/wind_vector/5/" + zoom + "/" + coord.x + "/" + coord.y + ".png";
     	},
     	tileSize: new google.maps.Size(256, 256),
@@ -163,23 +151,12 @@ function initialize() {
     
     map.overlayMapTypes.push(new google.maps.ImageMapType({
     	getTileUrl: function (coord, zoom) {
-    		//return "http://tiles.openseamap.org/seamark/" + zoom + "/" + coord.x + "/" + coord.y + ".png";
     		return "http://www.openportguide.org/tiles/actual/air_temperature/5/" + zoom + "/" + coord.x + "/" + coord.y + ".png";
     	},
     	tileSize: new google.maps.Size(256, 256),
     	name: "temp",
     	maxZoom: 7
     }));
-
-//    map.overlayMapTypes.push(new google.maps.ImageMapType({
-//    	getTileUrl: function (coord, zoom) {
-//    	return "http://www.openportguide.org/tiles/actual/wind_vector/7/" + zoom + "/" + 
-//    	coord.x + "/" + coord.y + ".png";
-//    	},
-//    	tileSize: new google.maps.Size(256, 256),
-//    	name: "OpenSeaMap",
-//    	maxZoom: 18
-//    }));
 
     overlay.draw = function () { };
     overlay.setMap(map);
