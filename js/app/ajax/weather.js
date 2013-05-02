@@ -164,9 +164,6 @@ function weatherDataToForm(weather_id){
 
 
 function removeWeatherData(weather_id){
-	if(!confirm('Do you realy want to remove this entry')){
-		return false;
-	}
 	
 	if($.isNumeric(weather_id)){
 		$.ajax({
