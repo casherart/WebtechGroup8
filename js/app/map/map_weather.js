@@ -5,53 +5,55 @@ var currentTripToLog = 1;
 
 
 function openWeatherLogWindow(){
-	if(document.getElementById("weatherLog")){
-		$('#weatherLog').empty();		
-	}
 	$.ajax({
 		url: "app_weather_log_window.php",
 		type: "GET",
 		dataType: 'html'
 	}).done(function ( data ) {
-		$('#weatherLog').append(data);
-		 $('#weatherLog').fadeIn('slow');
+		$('#weatherLog').html(data);
 		 $('#weatherLog').css("zIndex","999999999");
 		 $('#weatherLog').css("position","absolute");
 		 $('#weatherLog').css("top",$("#startLog").offset().top+35);
 		 $('#weatherLog').css("left",$("#startLog").offset().left-250);
+		 $('#weatherLog').fadeIn('slow');
 	});
 }
 
 function closeWeatherLog(){
-	if(weatherLogIntervall){
-		alert("Please Stop Log first");
-		return;
-	}
-	 $('#weatherLog').fadeOut('slow');
-}
-
-function startStopWeatherLog(){
-	if(weatherLogIntervall){
-		endWeatherlogging();
-		$("#startStopWeatherLog").val("Start Logging");
-	}else{
-		currentTripToLog = $("trip_log").val();
-		addWeatherForPosition();// initial Log
-		startWeatherlogging();
-		$("#startStopWeatherLog").val("Stop Logging");
-	}
+	 $('#weatherLog').fadeOut('slow');	
 }
 
 function startWeatherlogging(){
+	currentTripToLog = $("#trip_log").val();
+	if(!currentTripToLog){
+		alert("Error geting Trip");
+		return;
+	}
+	closeWeatherLog();
+	$('#startLog').children().first().removeClass("icon-pencil");
+	$('#startLog').children().first().addClass("icon-stop");
+	$('#startLog').removeAttr("onclick");
+	$('#startLog').unbind("click");
+	$('#startLog').click(function(){
+		endWeatherlogging();
+	});
+	addWeatherForPosition();// initial Log
 	weatherLogIntervall = window.setInterval("addWeatherForPosition()", inserTimeMin);
+	
 }
 
 function endWeatherlogging(){
 	window.clearInterval(weatherLogIntervall);
+	$('#startLog').children().first().removeClass("icon-stop");
+	$('#startLog').children().first().addClass("icon-pencil");
+	$('#startLog').removeAttr("onclick");
+	$('#startLog').unbind("click");
+	$('#startLog').click(function(){
+		openWeatherLogWindow();
+	});
 }
 
 function addWeatherForPosition(time){
-	console.log("###################### LOG INSERT")
 	/*
 	 * get Weather data from Position and create urlString with correct data.
 	 */

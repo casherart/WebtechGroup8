@@ -14,7 +14,7 @@
 				<li><a class="btn" id="startSimulation" title="start Simulation"><i class="icon-play"></i></a><li>
 			</ul>
 			<ul class="navbar-form pull-right" style="list-style-type: none;">
-				<li><a class="btn" id="startLog" title="start weather log" onclick="openWeatherLogWindow()"><i class="icon-pencil"></i></a><li>
+				<li><a class="btn" id="startLog" title="start weather log" onclick="openWeatherLogWindow();"><i class="icon-pencil"></i></a><li>
 			</ul>
 		</div>
 	</div>
