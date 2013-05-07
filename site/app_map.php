@@ -13,13 +13,13 @@
     <body onload="initialize();">
 
         <!-- Navigation -->
-<?php include('_include/navigation.php'); ?>
+        <?php include('_include/navigation.php'); ?>
 
         <!-- Container -->
         <div class="container-fluid">
 
             <!-- App Navigation -->
-<?php include('_include/navigation_app.php'); ?>
+            <?php include('_include/navigation_app.php'); ?>
 
             <!-- Route Menu -->
             <div id="routeMenuContainer">
@@ -65,19 +65,19 @@
             <!-- Weather Bar -->
             <div id="weatherBar" class="well well-large" style="display:none;">
                 <label class="checkbox">
-                    <input type="checkbox" id="weatherRain" value="rainOverlay" onclick="javascript: weatherBar()"> Niederschlag
+                    <input type="checkbox" class="weat" id="3" value="rainOverlay"> Niederschlag
                 </label>
                 <label class="checkbox">
-                    <input type="checkbox" id="weatherAirPressure" value="airOverlay" onclick="javascript: weatherBar()"> Luftdruck
+                    <input type="checkbox" class="weat" id="2" value="airOverlay"> Luftdruck
                 </label>
                 <label class="checkbox">
-                    <input type="checkbox" id="weatherWaveHeight" value="waveOverlay" onclick="javascript: weatherBar()"> Wellenhöhe
+                    <input type="checkbox" class="weat" id="4" value="waveOverlay"> Wellenhöhe
                 </label>
                 <label class="checkbox">
-                    <input type="checkbox" id="weatherTemperature" value="tempOverlay" onclick="javascript: weatherBar()"> Temperatur
+                    <input type="checkbox" class="weat" id="1" value="tempOverlay"> Temperatur
                 </label>
                 <label class="checkbox">
-                    <input type="checkbox" id="weatherClouds" value="cloudsOverlay" onclick="javascript: weatherBar()"> Wolken
+                    <input type="checkbox" class="weat" id="0" value="cloudsOverlay"> Wolken
                 </label>
             </div>
 

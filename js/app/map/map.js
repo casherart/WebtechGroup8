@@ -11,6 +11,7 @@ var overlay = new google.maps.OverlayView();
 var MODE = {DEFAULT: {value: 0, name: "default"}, ROUTE: {value: 1, name: "route"}, DISTANCE: {value: 2, name: "distance"}, NAVIGATION: {value: 3, name: "navigation"}};
 var currentMode = MODE.DEFAULT;
 
+var overlayMaps;
 var currentPositionMarker = null;
 var followCurrentPosition = false;
 var noToggleOfFollowCurrentPositionButton = false;
@@ -141,53 +142,55 @@ function initialize() {
         maxZoom: 7
     }));
 
-    map.overlayMapTypes.push(new google.maps.ImageMapType({
-        getTileUrl: function(coord, zoom) {
-            return "http://www.openportguide.org/tiles/actual/wind_vector/5/" + zoom + "/" + coord.x + "/" + coord.y + ".png";
+    overlayMaps = [
+        {
+            getTileUrl: function(coord, zoom) {
+                return "http://www.openportguide.org/tiles/actual/wind_vector/5/" + zoom + "/" + coord.x + "/" + coord.y + ".png";
+            },
+            tileSize: new google.maps.Size(256, 256),
+            name: "wind",
+            maxZoom: 7
         },
-        tileSize: new google.maps.Size(256, 256),
-        name: "wind",
-        maxZoom: 7
-    }));
-
-    map.overlayMapTypes.push(new google.maps.ImageMapType({
-        getTileUrl: function(coord, zoom) {
-            return "http://www.openportguide.org/tiles/actual/air_temperature/5/" + zoom + "/" + coord.x + "/" + coord.y + ".png";
+        {
+            getTileUrl: function(coord, zoom) {
+                return "http://www.openportguide.org/tiles/actual/air_temperature/5/" + zoom + "/" + coord.x + "/" + coord.y + ".png";
+            },
+            tileSize: new google.maps.Size(256, 256),
+            name: "temp",
+            maxZoom: 7
         },
-        tileSize: new google.maps.Size(256, 256),
-        name: "temp",
-        maxZoom: 7
-    }));
-
-
-    map.overlayMapTypes.push(new google.maps.ImageMapType({
-        getTileUrl: function(coord, zoom) {
-            return "http://www.openportguide.org/tiles/actual/surface_pressure/5/" + zoom + "/" + coord.x + "/" + coord.y + ".png";
+        {
+            getTileUrl: function(coord, zoom) {
+                return "http://www.openportguide.org/tiles/actual/surface_pressure/5/" + zoom + "/" + coord.x + "/" + coord.y + ".png";
+            },
+            tileSize: new google.maps.Size(256, 256),
+            name: "air_pressure",
+            maxZoom: 7
         },
-        tileSize: new google.maps.Size(256, 256),
-        name: "air_pressure",
-        maxZoom: 7
-    }));
+        {
+            getTileUrl: function(coord, zoom) {
+                return "http://www.openportguide.org/tiles/actual/precipitation/5/" + zoom + "/" + coord.x + "/" + coord.y + ".png";
+            },
+            tileSize: new google.maps.Size(256, 256),
+            name: "rain",
+            maxZoom: 7
 
-    map.overlayMapTypes.push(new google.maps.ImageMapType({
-        getTileUrl: function(coord, zoom) {
-            return "http://www.openportguide.org/tiles/actual/precipitation/5/" + zoom + "/" + coord.x + "/" + coord.y + ".png";
         },
-        tileSize: new google.maps.Size(256, 256),
-        name: "rain",
-        maxZoom: 7
+        {
+            getTileUrl: function(coord, zoom) {
+                return "http://www.openportguide.org/tiles/actual/significant_wave_height/5/" + zoom + "/" + coord.x + "/" + coord.y + ".png";
+            },
+            tileSize: new google.maps.Size(256, 256),
+            name: "wave_height",
+            maxZoom: 7
 
-    }));
+        }
+    ];
 
-    map.overlayMapTypes.push(new google.maps.ImageMapType({
-        getTileUrl: function(coord, zoom) {
-            return "http://www.openportguide.org/tiles/actual/significant_wave_height/5/" + zoom + "/" + coord.x + "/" + coord.y + ".png";
-        },
-        tileSize: new google.maps.Size(256, 256),
-        name: "wave_height",
-        maxZoom: 7
-
-    }));
+    // placeholders for ImageMapTypes
+    //for (i = 0; i < overlayMaps.length; i++){
+    //    map.overlayMapTypes.push(null);
+    //}
 
     overlay.draw = function() {
     };
@@ -200,8 +203,12 @@ function initialize() {
             $('#weatherBar').fadeIn('slow');
         } else {
             $('#weatherBar').fadeOut('slow');
+            if (map.overlayMapTypes.getLength() > 0) {
+                map.overlayMapTypes.clear();
+                $('.weat').attr('checked', false);
+            }
         }
-    });  
+    });
     //addDropDown(map);
 
     // click on map
@@ -224,25 +231,18 @@ function initialize() {
     });
 }
 
-function weatherBar() {
-    if (document.getElementById('weatherRain').checked === true) {
-        alert("RAIN");
+// filter for Google Maps
+$('.weat').click(function() {
+    var layerID = parseInt($(this).attr('id'));
+    if ($(this).attr('checked')) {
+        var overlayMap = new google.maps.ImageMapType(overlayMaps[layerID]);
+        map.overlayMapTypes.setAt(layerID, overlayMap);
+    } else {
+        if (map.overlayMapTypes.getLength() > 0) {
+            map.overlayMapTypes.setAt(layerID, null);
+        }
     }
-    else if(document.getElementById('weatherAirPressure').checked === true) {
-        alert("AIR");
-    }
-    else if(document.getElementById('weatherWaveHeight').checked === true) {
-        alert("wave");
-    }
-    else if(document.getElementById('weatherTemperature').checked === true) {
-             alert("Temp");
-   
-    }
-    else if(document.getElementById('weatherClouds').checked === true) {
-                alert("Clouds");
-
-    }
-}
+});
 
 // temporary marker context menu ----------------------------------------- //
 $(function() {
