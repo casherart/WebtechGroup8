@@ -69,7 +69,7 @@ VALUES
 
 INSERT INTO seapal.rain (description)
 VALUES
-	(''), 
+	('No rain'), 
 	('Light rain < 0.5 mm/h'), 
 	('Moderate rain < 4 mm/h'), 
 	('Heavy rain < 10 mm/h'), 

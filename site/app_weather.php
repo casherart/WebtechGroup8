@@ -57,6 +57,18 @@ include('database_library.php');
                  <form id="appForm" class="form-horizontal" onsubmit="return handleWeatherForm($(this).serialize());">
                  	<input type="hidden" id="wId" name="wId" value="">
                     <div class="container-fluid">
+                    	<div class="row well" style="margin-left: 15%;">
+                            <div class="span4">
+                                <div class="control-group">
+                                	<label class="control-label padding-right10">Trip</label> 
+                                    <select name="trip" id="trip" class="select-long">
+                                    	<?php
+                                            get_select_options("localhost", "root", "root", "seapal", "SELECT tnr as id, titel as description FROM tripinfo ORDER BY tnr asc;");
+                                        ?>
+                                    </select>
+                                </div>
+                        	</div>                        	
+                        </div>
                         <div class="row well" style="margin-left: 15%;">
                             <div class="span4">
                                 <div class="control-group">
@@ -146,6 +158,7 @@ include('database_library.php');
 	                <table class="appTable table table-hover" cellspacing="0px" cellpadding="5px">
 	                    <thead>
 	                        <tr>
+	                            <th>Trip</th>
 	                            <th>Temperature</th>
 	                            <th>Air Pressure</th>
 	                            <th>Wind Strength</th>

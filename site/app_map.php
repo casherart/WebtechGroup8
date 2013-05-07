@@ -80,7 +80,8 @@
                     <input type="checkbox" class="weat" id="0" value="cloudsOverlay"> Wolken
                 </label>
             </div>
-
+			<!-- Weather log -->
+			<div id="weatherLog" class="well well-large" style="display:none;"></div>
             <!-- Map -->
             <div id="appWrapper">
                 <div id="map_canvas"></div>
@@ -98,6 +99,9 @@
         </div><!-- Container -->
 
         <!-- Java-Script -->
+        
+        <script src="../js/app/ajax/weather.js" type="text/javascript"></script>
+        
         <script src="../js/bootstrap/bootstrap-dropdown.js"></script>
         <script src="../js/bootstrap/bootstrap-modal.js"></script>
         <script src="../js/bootstrap/bootstrap-transition.js"></script>
@@ -111,6 +115,7 @@
         <script src="../js/app/map/labels.js" type="text/javascript"></script>
         <script src="../js/app/map/map.js" type="text/javascript"></script>
         <script src="../js/app/map/map_routes.js" type="text/javascript"></script>
+        <script src="../js/app/map/map_weather.js" type="text/javascript"></script>
         <script src="../js/app/map/validation.js" type="text/javascript"></script>
         <script src="../js/app/map/contextMenu.js" type="text/javascript"></script>
         <script src="../js/app/map/TxtOverlay.js" type="text/javascript"></script>

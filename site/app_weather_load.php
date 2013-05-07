@@ -28,7 +28,8 @@
 			windStr.id as windStrId,
 			waveDir.id as waveDirId,
 			clouds.id as cloudsId,
-			rain.id as rainId
+			rain.id as rainId,
+			trip.titel as trip
 		FROM seapal_weather as sw LEFT JOIN wind_strength as windStr ON (sw.wind_strength = windStr.id)
 			LEFT JOIN wind_direction as windDir ON (sw.wind_direction = windDir.id)							  	                        							  
 			LEFT JOIN wave_direction as waveDir ON (sw.wave_direction = waveDir.id)							  
@@ -36,6 +37,7 @@
 			LEFT JOIN rain ON (sw.rain = rain.id)
             LEFT JOIN direction as windDesc ON (windDesc.id = windDir.direction_id)
             LEFT JOIN direction as waveDesc ON (waveDesc.id = waveDir.direction_id)
+            LEFT JOIN tripinfo as trip ON (sw.tnr = trip.tnr)
 		WHERE sw.id = " . $_GET["wID"];
 		
 	$result = mysql_query($sql, $conn);
@@ -61,7 +63,8 @@
 			\"waveDirId\":\"" . $row['waveDirId'] . "\",
 			\"cloudsId\":\"" . $row['cloudsId'] . "\",
 			\"rainId\":\"" . $row['rainId'] . "\",					
-			\"rain\":\"" . $row['rain'] . "\"
+			\"rain\":\"" . $row['rain'] . "\",					
+			\"trip\":\"" . $row['trip'] . "\"
 		}");
 	}
 		
