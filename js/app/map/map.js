@@ -200,9 +200,9 @@ function initialize() {
     google.maps.event.addListener(map, 'maptypeid_changed', function(event) {
         // if WeatherMap
         if (map.getMapTypeId() === 'weather') {
-            $('#weatherBar').fadeIn('slow');
+            $('#weatherBar').slideDown('slow');
         } else {
-            $('#weatherBar').fadeOut('slow');
+            $('#weatherBar').slideUp('slow');
             if (map.overlayMapTypes.getLength() > 0) {
                 map.overlayMapTypes.clear();
                 $('.weat').attr('checked', false);

@@ -63,20 +63,20 @@
             </div>
 
             <!-- Weather Bar -->
-            <div id="weatherBar" class="well well-large" style="display:none;">
-                <label class="checkbox">
+            <div id="weatherBar" style="display:none;">
+                <label class="checkbox inline">
                     <input type="checkbox" class="weat" id="3" value="rainOverlay"> Niederschlag
                 </label>
-                <label class="checkbox">
+                <label class="checkbox inline">
                     <input type="checkbox" class="weat" id="2" value="airOverlay"> Luftdruck
                 </label>
-                <label class="checkbox">
+                <label class="checkbox inline">
                     <input type="checkbox" class="weat" id="4" value="waveOverlay"> Wellenhöhe
                 </label>
-                <label class="checkbox">
+                <label class="checkbox inline">
                     <input type="checkbox" class="weat" id="1" value="tempOverlay"> Temperatur
                 </label>
-                <label class="checkbox">
+                <label class="checkbox inline">
                     <input type="checkbox" class="weat" id="0" value="cloudsOverlay"> Wolken
                 </label>
             </div>
