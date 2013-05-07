@@ -14,6 +14,8 @@ settype( $_GET["rain"], 'integer');
 settype( $_GET["temp"], 'integer');
 settype( $_GET["airpress"], 'integer');
 settype( $_GET["whight"], 'integer');
+settype( $_GET["trip"], 'integer');
+
 
 if($_GET["wId"] != ""){
 	$query = "UPDATE seapal_weather SET";	
@@ -28,7 +30,7 @@ if($_GET["wId"] != ""){
 	$query .= " WHERE ID = " . $_GET["wId"] . " AND (bnr = 1 OR bnr = 2);";
 }else{	
 	$query = "INSERT INTO seapal_weather(temperatur, airpreasure, wind_strength, 
-	          wind_direction, wave_height, wave_direction, clouds, rain, bnr) VALUES(";
+	          wind_direction, wave_height, wave_direction, clouds, rain, tnr, bnr) VALUES(";
 	
 	$query = build_form_query("temp", $query);
 	$query = build_form_query("airpress", $query);
@@ -37,7 +39,8 @@ if($_GET["wId"] != ""){
 	$query = build_form_query("whight", $query);
 	$query = build_form_query("wave_direction", $query);
 	$query = build_form_query("clouds", $query);
-	$query = build_form_query("rain", $query, true);
+	$query = build_form_query("rain", $query);
+	$query = build_form_query("trip", $query, true);
 	$query .= ",1);";
 }
 

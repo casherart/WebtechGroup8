@@ -1,13 +1,56 @@
 
 var weatherLogIntervall = null;
 var inserTimeMin = 15*1000*60; //value in ms -> time x 6000 = Minut.
+var currentTripToLog = 1;
 
-var startWeatherlogging(){
-	weatherLogIntervall = window.setInterval("addWeatherForPosition()", inserTimeMin);
+
+function openWeatherLogWindow(){
+	$.ajax({
+		url: "app_weather_log_window.php",
+		type: "GET",
+		dataType: 'html'
+	}).done(function ( data ) {
+		$('#weatherLog').html(data);
+		 $('#weatherLog').css("zIndex","999999999");
+		 $('#weatherLog').css("position","absolute");
+		 $('#weatherLog').css("top",$("#startLog").offset().top+35);
+		 $('#weatherLog').css("left",$("#startLog").offset().left-250);
+		 $('#weatherLog').fadeIn('slow');
+	});
 }
 
-var endWeatherlogging(){
+function closeWeatherLog(){
+	 $('#weatherLog').fadeOut('slow');	
+}
+
+function startWeatherlogging(){
+	currentTripToLog = $("#trip_log").val();
+	if(!currentTripToLog){
+		alert("Error geting Trip");
+		return;
+	}
+	closeWeatherLog();
+	$('#startLog').children().first().removeClass("icon-pencil");
+	$('#startLog').children().first().addClass("icon-stop");
+	$('#startLog').removeAttr("onclick");
+	$('#startLog').unbind("click");
+	$('#startLog').click(function(){
+		endWeatherlogging();
+	});
+	addWeatherForPosition();// initial Log
+	weatherLogIntervall = window.setInterval("addWeatherForPosition()", inserTimeMin);
+	
+}
+
+function endWeatherlogging(){
 	window.clearInterval(weatherLogIntervall);
+	$('#startLog').children().first().removeClass("icon-stop");
+	$('#startLog').children().first().addClass("icon-pencil");
+	$('#startLog').removeAttr("onclick");
+	$('#startLog').unbind("click");
+	$('#startLog').click(function(){
+		openWeatherLogWindow();
+	});
 }
 
 function addWeatherForPosition(time){
@@ -15,8 +58,8 @@ function addWeatherForPosition(time){
 	 * get Weather data from Position and create urlString with correct data.
 	 */
 	
-	var lat = 0;
-	var lon = 0;
+	var lat = map.getCenter().lat();
+	var lon = map.getCenter().lng();
 	var time = time || "weather"; //history
 		
 	/*
@@ -61,24 +104,30 @@ function addWeatherForPosition(time){
 	 * 
 	 */
 	$.ajax({
-		url: "api.openweathermap.org/data/2.5/weather?units=metric&lat=+"lat"+&lon="+lon,
+		url: "http://api.openweathermap.org/data/2.5/weather?units=metric&lat="+lat+"&lon="+lon,
+		type: "GET",dataType: 'jsonp',
+		crossDomain: true
 	}).done(function ( data ) {
 		if(data) {
-			
 			var temp = data.main.temp;
 			var airpress = data.main.pressure; //hPa
 			
 			var wind_strength = data.wind.speed;
 			var wind_direction = dagreeToSkyDir(data.wind.deg);//degree
 
-			var clouds = percentToCloud(data.clouds.all);//Percent	
-			var rain = mm3ToMM(data.rain && data.rain.3h || data.snow && data.snow.3h);//mm per 3 Hour
+			var clouds = percentToCloud(data.clouds.all);//Percent
+			var rain = 1;
+			if(data.rain){ //mm per 3 Hour
+				rain = mm3ToMM(data.rain);
+			}else if(data.snow){
+				rain =  mm3ToMM(data.snow);
+			}			
 			
-			var wave_direction = 0;
+			var wave_direction = 1;
 			var whight = 0;
 			
-			var urlString = "wId=&temp="+temp+"&airpress="+airpress+"&wind_strength="+wind_strength+"&whight="+whight+"&clouds="+clouds+"&rain="+rain+"&wind_direction="+wind_direction+"&wave_direction="+wave_direction;
-			handleWeatherForm(urlString, false);
+			var urlString = "trip="+currentTripToLog+"&wId=&temp="+temp+"&airpress="+airpress+"&wind_strength="+wind_strength+"&whight="+whight+"&clouds="+clouds+"&rain="+rain+"&wind_direction="+wind_direction+"&wave_direction="+wave_direction;
+			handleWeatherForm(urlString, true);
 		}
 	});
 }
@@ -92,7 +141,7 @@ function dagreeToSkyDir(deg){
 	else if(deg > 202 && deg <= 247) return 9;
 	else if(deg > 247 && deg <= 292) return 5; 
 	else if(deg > 292 && deg <= 337) return 7; 
-	return 0;
+	return 1;
 }
 
 function mm3ToMM(mm){
@@ -104,5 +153,5 @@ function mm3ToMM(mm){
 }
 
 function percentToCloud(perc){
-	return 0;
+	return 1;
 }

@@ -5,6 +5,7 @@ var weatherTableColCount = 10;
 
 
 function handleWeatherForm(formularData, showMessage){
+	console.log(formularData);
 	var showMessage = showMessage || true;
 	var isOK = true;
 	//TODO check entries
@@ -23,6 +24,7 @@ function handleWeatherForm(formularData, showMessage){
 			}catch(e){
 				console.error(jsonData);
 			}
+			console.log(jsonData);
 			if(showMessage){
 				if(jsonData.status != "ok"){
 					showAlert("error", "Something went horrible wrong!");
@@ -67,7 +69,12 @@ function addWeatherToTable(weather_id){
 				$("#wTR_"+jsonData.weather_id).html("<td colspan='"+weatherTableColCount+"'>Error when loading Data!</td>");
 			}else{
 				var tr = $("#wTR_"+weather_id);
-				tr.html("");
+				tr.html("");				
+
+				var td_trip = document.createElement("td");				
+				td_trip.innerHTML = jsonData.trip;
+				tr.append(td_trip);
+				
 				var td_temperatur= document.createElement("td");				
 				td_temperatur.innerHTML = jsonData.temperature;
 				tr.append(td_temperatur);
