@@ -11,11 +11,12 @@ function openWeatherLogWindow(){
 		dataType: 'html'
 	}).done(function ( data ) {
 		$('#weatherLog').html(data);
-		 $('#weatherLog').css("zIndex","999999999");
-		 $('#weatherLog').css("position","absolute");
-		 $('#weatherLog').css("top",$("#startLog").offset().top+35);
-		 $('#weatherLog').css("left",$("#startLog").offset().left-250);
-		 $('#weatherLog').fadeIn('slow');
+		$("#trip_log").val(currentTripToLog);
+		$('#weatherLog').css("zIndex","999999999");
+		$('#weatherLog').css("position","absolute");
+		$('#weatherLog').css("top",$("#startLog").offset().top+35);
+		$('#weatherLog').css("left",$("#startLog").offset().left-250);
+		$('#weatherLog').fadeIn('slow');
 	});
 }
 
@@ -26,7 +27,7 @@ function closeWeatherLog(){
 function startWeatherlogging(){
 	currentTripToLog = $("#trip_log").val();
 	if(!currentTripToLog){
-		alert("Error geting Trip");
+		alert("Error getting Trip");
 		return;
 	}
 	closeWeatherLog();

@@ -5,7 +5,7 @@ DROP database IF EXISTS seapal;
 CREATE DATABASE seapal;
 
 /* table for users */
-CREATE TABLE IF NOT EXISTS seapal.benutzer (
+CREATE TABLE IF NOT EXISTS benutzer (
 	bnr INT NOT NULL AUTO_INCREMENT,
 	benutzername VARCHAR(20) NOT NULL,
 	passwort VARCHAR(10) NOT NULL,
@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS seapal.benutzer (
 
 
 /* table for bootinformations */
-CREATE TABLE IF NOT EXISTS seapal.bootinfo (
+CREATE TABLE IF NOT EXISTS bootinfo (
 	bnr INT NOT NULL AUTO_INCREMENT,
 	bootname VARCHAR(30) NOT NULL,
 	registernummer INT NOT NULL,
@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS seapal.bootinfo (
 );
 
 /* table for tripinformations */
-CREATE TABLE IF NOT EXISTS seapal.tripinfo (
+CREATE TABLE IF NOT EXISTS tripinfo (
 	tnr INT NOT NULL AUTO_INCREMENT,
 	titel VARCHAR(30) NOT NULL,
 	von VARCHAR(30) NOT NULL,
@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS seapal.tripinfo (
 );
 
 /* table for waypoints */
-CREATE TABLE IF NOT EXISTS seapal.wegpunkte (
+CREATE TABLE IF NOT EXISTS wegpunkte (
 	wnr INT NOT NULL AUTO_INCREMENT,
 	tnr INT NOT NULL,
 	name VARCHAR(30) NOT NULL,
@@ -85,46 +85,46 @@ CREATE TABLE IF NOT EXISTS seapal.wegpunkte (
 );
 
 
-CREATE TABLE IF NOT EXISTS seapal.direction(
+CREATE TABLE IF NOT EXISTS direction(
 	id int AUTO_INCREMENT,
 	description varchar(50) UNIQUE,
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS seapal.wind_direction(
+CREATE TABLE IF NOT EXISTS wind_direction(
 	id int AUTO_INCREMENT,
 	direction_id int,	
 	PRIMARY KEY (id),
-	FOREIGN KEY (direction_id) REFERENCES seapal.direction(id)
+	FOREIGN KEY (direction_id) REFERENCES direction(id)
 );
 
 
-CREATE TABLE IF NOT EXISTS seapal.wave_direction(
+CREATE TABLE IF NOT EXISTS wave_direction(
 	id int AUTO_INCREMENT,
 	direction_id int,	
 	PRIMARY KEY (id),
-	FOREIGN KEY (direction_id) REFERENCES seapal.direction(id)
+	FOREIGN KEY (direction_id) REFERENCES direction(id)
 );
 
-CREATE TABLE IF NOT EXISTS seapal.rain(
+CREATE TABLE IF NOT EXISTS rain(
 	id int AUTO_INCREMENT,
 	description varchar(50) UNIQUE,
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS seapal.clouds(
+CREATE TABLE IF NOT EXISTS clouds(
 	id int AUTO_INCREMENT,
 	description varchar(50) UNIQUE,
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS seapal.wind_strength(
+CREATE TABLE IF NOT EXISTS wind_strength(
 	id int AUTO_INCREMENT,
 	description varchar(50) UNIQUE,
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS seapal.seapal_weather(
+CREATE TABLE IF NOT EXISTS seapal_weather(
 	id int AUTO_INCREMENT,
 	bnr int NOT NULL,
 	tnr int NOT NULL,
@@ -138,11 +138,11 @@ CREATE TABLE IF NOT EXISTS seapal.seapal_weather(
 	rain int,
 	insertDate TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY (id),
-	FOREIGN KEY (wind_strength) REFERENCES seapal.wind_strength(id),
-	FOREIGN KEY (wind_direction) REFERENCES seapal.wind_direction(id),
-	FOREIGN KEY (wave_direction) REFERENCES seapal.wave_direction(id),
-	FOREIGN KEY (clouds) REFERENCES seapal.clouds(id),
-	FOREIGN KEY (rain) REFERENCES seapal.rain(id),
-	FOREIGN KEY (bnr) REFERENCES seapal.benutzer(bnr) ON DELETE CASCADE,
-	FOREIGN KEY (tnr) REFERENCES seapal.tripinfo(tnr) ON DELETE CASCADE
+	FOREIGN KEY (wind_strength) REFERENCES wind_strength(id),
+	FOREIGN KEY (wind_direction) REFERENCES wind_direction(id),
+	FOREIGN KEY (wave_direction) REFERENCES wave_direction(id),
+	FOREIGN KEY (clouds) REFERENCES clouds(id),
+	FOREIGN KEY (rain) REFERENCES rain(id),
+	FOREIGN KEY (bnr) REFERENCES benutzer(bnr) ON DELETE CASCADE,
+	FOREIGN KEY (tnr) REFERENCES tripinfo(tnr) ON DELETE CASCADE
 );

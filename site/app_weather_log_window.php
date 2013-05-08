@@ -8,6 +8,7 @@
         	get_select_options("localhost", "root", "root", "seapal", "SELECT tnr as id, titel as description FROM tripinfo ORDER BY tnr asc;");
         ?>
 	</select>
+	<div id="logTimer"></div>
 	</div>
 	<div class="control-group">
     	<input type="reset" class="btn" id="closeWeatherLog" value="Close" class="button" onclick="closeWeatherLog()"/>
