@@ -1,4 +1,5 @@
 <?php
+require_once ('db_configuration.php');
 include('database_library.php');
 ?>
 
@@ -15,8 +16,8 @@ include('database_library.php');
 		<script>
 			$(document).ready(function() {//
 				<?php
-					$conn = mysql_connect("localhost", "root", "root");
-					$db_selected = mysql_select_db('seapal', $conn);
+					$conn = mysql_connect(MYSQL_HOST, MYSQL_USER, MYSQL_PW);
+					$db_selected = mysql_select_db(MYSQL_DB, $conn);
 		
 		        	if (!$db_selected) {
 		        		die('Can\'t use foo : ' . mysql_error());
@@ -63,7 +64,7 @@ include('database_library.php');
                                 	<label class="control-label padding-right10">Trip</label> 
                                     <select name="trip" id="trip" class="select-long">
                                     	<?php
-                                            get_select_options("localhost", "root", "root", "seapal", "SELECT tnr as id, titel as description FROM tripinfo ORDER BY tnr asc;");
+                                            get_select_options(MYSQL_HOST, MYSQL_USER, MYSQL_PW, MYSQL_DB, "SELECT tnr as id, titel as description FROM tripinfo ORDER BY tnr asc;");
                                         ?>
                                     </select>
                                 </div>
@@ -90,7 +91,7 @@ include('database_library.php');
                                     <div class="input-append">
                                         <select	name="wind_strength" id="windstr" class="select-medium">
                                             <?php
-                                            get_select_options("localhost", "root", "root", "seapal", "SELECT id, description FROM wind_strength ORDER BY id asc;");
+                                            get_select_options(MYSQL_HOST, MYSQL_USER, MYSQL_PW, MYSQL_DB, "SELECT id, description FROM wind_strength ORDER BY id asc;");
                                             ?>
                                         </select> 
                                         <span title="Beaufort Scale" style="cursor: pointer;" class="add-on">bft</span>
@@ -113,7 +114,7 @@ include('database_library.php');
                                         <div class="input-append">
                                             <select name="clouds" id="cloud" class="select-medium">
                                                 <?php
-                                                get_select_options("localhost", "root", "root", "seapal", "SELECT id, description FROM clouds ORDER BY id asc;");
+                                                get_select_options(MYSQL_HOST, MYSQL_USER, MYSQL_PW, MYSQL_DB, "SELECT id, description FROM clouds ORDER BY id asc;");
                                                 ?>
                                             </select> 
                                             <span title="Octa" style="cursor: pointer" class="add-on">Octa</span>
@@ -123,7 +124,7 @@ include('database_library.php');
                                         <label class="control-label padding-right10">Rain</label> 
                                         <select name="rain" id="rain" class="select-medium">
                                             <?php
-                                            get_select_options("localhost", "root", "root", "seapal", "SELECT id, description FROM rain ORDER BY id asc;");
+                                            get_select_options(MYSQL_HOST, MYSQL_USER, MYSQL_PW, MYSQL_DB, "SELECT id, description FROM rain ORDER BY id asc;");
                                             ?>
                                         </select>
                                     </div>
@@ -131,7 +132,7 @@ include('database_library.php');
                                         <label class="control-label padding-right10">Wind Direction</label> 
                                         <select name="wind_direction" id="winddir" class="select-medium">
                                             <?php
-                                            get_select_options("localhost", "root", "root", "seapal", "SELECT wd.id as id, d.description as description FROM wind_direction as wd left join direction as d on wd.direction_id = d.id ORDER BY id asc;");
+                                            get_select_options(MYSQL_HOST, MYSQL_USER, MYSQL_PW, MYSQL_DB, "SELECT wd.id as id, d.description as description FROM wind_direction as wd left join direction as d on wd.direction_id = d.id ORDER BY id asc;");
                                             ?>
                                         </select>
                                     </div>
@@ -139,7 +140,7 @@ include('database_library.php');
                                         <label class="control-label padding-right10">Wave Direction</label> 
                                         <select name="wave_direction" id="wavedir" class="select-medium">
                                             <?php
-                                            get_select_options("localhost", "root", "root", "seapal", "SELECT wd.id as id, d.description as description FROM wave_direction as wd left join direction as d on wd.direction_id = d.id ORDER BY id asc;");
+                                            get_select_options(MYSQL_HOST, MYSQL_USER, MYSQL_PW, MYSQL_DB, "SELECT wd.id as id, d.description as description FROM wave_direction as wd left join direction as d on wd.direction_id = d.id ORDER BY id asc;");
                                             ?>
                                         </select>
                                     </div>

@@ -1,5 +1,6 @@
 <?php 
 include('./database_library.php');
+require_once ('db_configuration.php');
 
 /*
  * Some SQL-Injektion Protection
@@ -44,7 +45,7 @@ if($_GET["wId"] != ""){
 	$query .= ",1);";
 }
 
-connect_database("localhost", "root", "root", "seapal");
+connect_database(MYSQL_HOST, MYSQL_USER, MYSQL_PW, MYSQL_DB);
 mysql_query($query);
 if($_GET["wId"] != ""){
 	$lastid = $_GET["wId"];
