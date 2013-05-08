@@ -5,6 +5,7 @@ var weatherTableColCount = 10;
 
 
 function handleWeatherForm(formularData, showMessage){
+	$("#save").val("Speichern");
 	console.log(formularData);
 	var showMessage = showMessage || true;
 	var isOK = true;
@@ -168,6 +169,7 @@ function weatherDataToForm(weather_id){
 			$("#winddir").val(jsonData.windDirId);
 			$("#wavedir").val(jsonData.waveDirId);
 			$("#wId").val(weather_id);
+			$("#save").val("Aktualisieren");
 		}
 	});
 }
