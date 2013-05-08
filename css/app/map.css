@@ -95,17 +95,14 @@ label {
 }
 
 #weatherBar {
-    left: 1109px;
     padding: 5px 0px 0px 10px;
-    position: absolute;
-    top: 201px;
-    z-index: 2;
     box-shadow: 5px 5px 15px #424242;
     height: 135px;
     width: 120px;
     text-indent: -10px;
     border: 1px solid #717B87;
     background-color: #fff;
+    margin-right: 5px;
 }
 
 #weatherBar label {

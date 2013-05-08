@@ -186,11 +186,14 @@ function initialize() {
 
         }
     ];
+    
+    // Create the DIV to hold the control and call the HomeControl() constructor
+    // passing in this DIV.
+    var weatherControlDiv = document.getElementById('weatherBar');
+    //var homeControl = new HomeControl(homeControlDiv, map);
 
-    // placeholders for ImageMapTypes
-    //for (i = 0; i < overlayMaps.length; i++){
-    //    map.overlayMapTypes.push(null);
-    //}
+    weatherControlDiv.index = 1;
+    map.controls[google.maps.ControlPosition.RIGHT_TOP].push(weatherControlDiv);
 
     overlay.draw = function() {
     };
