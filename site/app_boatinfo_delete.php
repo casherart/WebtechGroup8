@@ -16,7 +16,7 @@ require_once ('db_configuration.php');
 	 * Some SQL-Injektion Protection
 	 */
 	settype($_POST['bnr'], 'integer');
-	$sql = "DELETE FROM seapal.bootinfo WHERE bnr = " . $_POST['bnr'] . ";";
+	$sql = "DELETE FROM ". MYSQL_DB .".bootinfo WHERE bnr = " . $_POST['bnr'] . ";";
 	
 	$result = mysql_query($sql, $conn);
 	

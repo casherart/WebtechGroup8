@@ -13,7 +13,7 @@
 	 * Some SQL-Injektion Protection
 	*/
 	settype($_GET['tnr'], 'integer');
-	$sql = "SELECT * FROM seapal.tripinfo WHERE tnr = '" . $_GET['tnr'] . "';";
+	$sql = "SELECT * FROM ". MYSQL_DB . ".tripinfo WHERE tnr = '" . $_GET['tnr'] . "';";
 	
 	$result = mysql_query($sql, $conn);
 	

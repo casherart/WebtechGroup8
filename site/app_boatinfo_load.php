@@ -13,7 +13,7 @@ require_once ('db_configuration.php');
 	 * Some SQL-Injektion Protection
 	*/
 	settype($_GET['bnr'], 'integer');
-	$sql = "SELECT * FROM seapal.bootinfo WHERE bnr = '" . $_GET['bnr'] . "';";
+	$sql = "SELECT * FROM ". MYSQL_DB .".bootinfo WHERE bnr = '" . $_GET['bnr'] . "';";
 	
 	$result = mysql_query($sql, $conn);
 	

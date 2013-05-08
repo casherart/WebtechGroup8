@@ -26,7 +26,7 @@ require_once ('db_configuration.php');
 	settype($_POST['genuagroesse'], 'integer');
 	settype($_POST['spigroesse'], 'integer');
 		
-	$sql = "INSERT INTO seapal.bootinfo (bootname, registernummer, segelzeichen, heimathafen, yachtclub, eigner, versicherung,
+	$sql = "INSERT INTO ". MYSQL_DB .".bootinfo (bootname, registernummer, segelzeichen, heimathafen, yachtclub, eigner, versicherung,
 			rufzeichen, typ, konstrukteur, laenge, breite, tiefgang, masthoehe, verdraengung, rigart,	
 			baujahr, motor, tankgroesse, wassertankgroesse, abwassertankgroesse, grosssegelgroesse,
 			genuagroesse, spigroesse) VALUES(
