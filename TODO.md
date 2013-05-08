@@ -2,13 +2,15 @@ Webtechnologie To-Do Liste
 	•	Logging im Intervall (Sebastian)
             ⁃	Wellenhöhe und Wellenrichtung über openweathermap nicht enthalten!?
 	•	Google Maps
-            ⁃	Filter für das Wetter (Duy)
+            ⁃	Filter für das Wetter, position noch korrigieren! (Duy)
             ⁃	Centerposition Wetter 
             ⁃	Vorhersagen ebenfalls intergrieren!? (Optional)
             ⁃	Displaybox für Wetter (Duy, Fred)
 	•	Formular (Fred)
             ⁃	Validierung der Einträge
             ⁃	SQL Skripte mit sinnvollen Daten füllen
+        •       Datenbank konfigurationsdatei erstellen 
+
 
 
 
