@@ -1,3 +1,6 @@
+<?php
+require_once ('db_configuration.php');
+?>
 <!DOCTYPE html>
 
 <html lang="de">
@@ -162,9 +165,9 @@
 		                <tbody id="entries">
 	
 	                        <?php
-		                        $conn = mysql_connect("localhost", "root", "root");
+		                        $conn = mysql_connect(MYSQL_HOST, MYSQL_USER, MYSQL_PW);
 		
-		                        $db_selected = mysql_select_db('seapal', $conn);
+		                        $db_selected = mysql_select_db(MYSQL_DB, $conn);
 		
 		                        if (!$db_selected) {
 		                            die('Can\'t use foo : ' . mysql_error());

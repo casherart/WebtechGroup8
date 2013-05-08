@@ -1,8 +1,9 @@
 <?php
+    require_once ('db_configuration.php');
 
-	$conn = mysql_connect("localhost", "root", "root");
+	$conn = mysql_connect(MYSQL_HOST, MYSQL_USER, MYSQL_PW);
 	
-	$db_selected = mysql_select_db('seapal', $conn);
+	$db_selected = mysql_select_db(MYSQL_DB, $conn);
 	
 	if (!$db_selected) {
 	    $err = array( "tnr" => 'Error: ' . mysql_error() );
@@ -14,7 +15,7 @@
 	 * Some SQL-Injektion Protection
 	*/
 	settype($_POST['tank'], 'integer');
-	$sql = "INSERT INTO seapal.tripinfo (titel, von, nach, skipper, crew, tstart, tende, tdauer, motor, tank) VALUES (
+	$sql = "INSERT INTO " . MYSQL_DB . ".tripinfo (titel, von, nach, skipper, crew, tstart, tende, tdauer, motor, tank) VALUES (
 				'" . $_POST['titel'] . "',
 				'" . $_POST['von'] . "',
 				'" . $_POST['nach'] . "',

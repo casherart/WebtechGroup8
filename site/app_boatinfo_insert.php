@@ -1,8 +1,9 @@
 <?php
+require_once ('db_configuration.php');
 
-	$conn = mysql_connect("localhost", "root", "root");
+	$conn = mysql_connect(MYSQL_HOST, MYSQL_USER, MYSQL_PW);
 	
-	$db_selected = mysql_select_db('seapal', $conn);
+	$db_selected = mysql_select_db(MYSQL_DB, $conn);
 	
 	if (!$db_selected) {
 	    $err = array( "bnr" => 'Error: ' . mysql_error() );
@@ -25,7 +26,7 @@
 	settype($_POST['genuagroesse'], 'integer');
 	settype($_POST['spigroesse'], 'integer');
 		
-	$sql = "INSERT INTO seapal.bootinfo (bootname, registernummer, segelzeichen, heimathafen, yachtclub, eigner, versicherung,
+	$sql = "INSERT INTO ". MYSQL_DB .".bootinfo (bootname, registernummer, segelzeichen, heimathafen, yachtclub, eigner, versicherung,
 			rufzeichen, typ, konstrukteur, laenge, breite, tiefgang, masthoehe, verdraengung, rigart,	
 			baujahr, motor, tankgroesse, wassertankgroesse, abwassertankgroesse, grosssegelgroesse,
 			genuagroesse, spigroesse) VALUES(

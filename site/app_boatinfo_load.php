@@ -1,8 +1,9 @@
 <?php
+require_once ('db_configuration.php');
+
+	$conn = mysql_connect(MYSQL_HOST, MYSQL_USER, MYSQL_PW);
 	
-	$conn = mysql_connect("localhost", "root", "root");
-	
-	$db_selected = mysql_select_db('seapal', $conn);
+	$db_selected = mysql_select_db(MYSQL_DB, $conn);
 	
 	if (!$db_selected) {
 	    die('Error: ' . mysql_error());
@@ -12,7 +13,7 @@
 	 * Some SQL-Injektion Protection
 	*/
 	settype($_GET['bnr'], 'integer');
-	$sql = "SELECT * FROM seapal.bootinfo WHERE bnr = '" . $_GET['bnr'] . "';";
+	$sql = "SELECT * FROM ". MYSQL_DB .".bootinfo WHERE bnr = '" . $_GET['bnr'] . "';";
 	
 	$result = mysql_query($sql, $conn);
 	
