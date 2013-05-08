@@ -58,7 +58,7 @@ include('database_library.php');
                  <form id="appForm" class="form-horizontal" onsubmit="return handleWeatherForm($(this).serialize());">
                  	<input type="hidden" id="wId" name="wId" value="">
                     <div class="container-fluid">
-                    	<div class="row well" style="margin-left: 15%;">
+                    	<div class="row well" style="margin-left: 15%; height: 30px;">
                             <div class="span4">
                                 <div class="control-group">
                                 	<label class="control-label padding-right10">Trip</label> 
