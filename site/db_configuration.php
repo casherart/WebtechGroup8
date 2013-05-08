@@ -5,16 +5,22 @@
  
 // Damit alle Fehler angezeigt werden
 error_reporting(E_ALL);
- 
-// Zum Aufbau der Verbindung zur Datenbank
-// die Daten erhalten Sie von Ihrem Provider
-define ('MYSQL_HOST','localhost');
- 
-// bei XAMPP ist der MYSQL_Benutzer: root
-define ('MYSQL_USER','root');
-define ('MYSQL_PW','root');
-// für unser Bsp. nennen wir die DB adressverwaltung
-define ('MYSQL_DB','seapal');
+
+if ($_SERVER['HTTP_HOST'] == "localhost:8888") 
+{
+    // local
+    define ('MYSQL_HOST','localhost');
+    define ('MYSQL_USER','root');
+    define ('MYSQL_PW','root');
+    define ('MYSQL_DB','seapal');
+} 
+else
+{
+    define ('MYSQL_HOST','rdbms.strato.de');
+    define ('MYSQL_USER','U1323276');
+    define ('MYSQL_PW','seapal2711');
+    define ('MYSQL_DB','DB1323276');
+}
 ?>
 
 
