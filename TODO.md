@@ -1,5 +1,4 @@
 Webtechnologie To-Do Liste
-	•	Logging im Intervall (Sebastian)
             ⁃	Wellenhöhe und Wellenrichtung über openweathermap nicht enthalten!?
 	•	Google Maps
             ⁃	Filter für das Wetter, position noch korrigieren! (Duy)
