@@ -77,8 +77,24 @@
                     <input type="checkbox" class="weat" id="1" value="tempOverlay"> Temperatur
                 </label>
                 <label class="checkbox inline">
-                    <input type="checkbox" class="weat" id="0" value="cloudsOverlay"> Wolken
+                    <input type="checkbox" class="weat" id="0" value="cloudsOverlay"> Wind
                 </label>
+            </div>
+            <!-- bft scale -->
+            <div id="bft_scale" style="display: none;">
+                <label>bft</label>
+                <span style="padding-left:53px;">12</span>
+                <span style="padding-left:13px;">11</span>
+                <span style="padding-left:13px;">10</span>
+                <span style="padding-left:17px;">9</span>
+                <span style="padding-left:20px;">8</span>
+                <span style="padding-left:20px;">7</span>
+                <span style="padding-left:20px;">6</span>
+                <span style="padding-left:20px;">5</span>
+                <span style="padding-left:21px;">4</span>
+                <span style="padding-left:20px;">3</span>
+                <span style="padding-left:21px;">2</span>
+                <span style="padding-left:21px;">1</span>
             </div>
 			<!-- Weather log -->
 			<div id="weatherLog" class="well well-large" style="display:none;"></div>

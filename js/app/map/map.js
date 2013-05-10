@@ -190,9 +190,11 @@ function initialize() {
     // Create the DIV to hold the control and call the HomeControl() constructor
     // passing in this DIV.
     var weatherControlDiv = document.getElementById('weatherBar');
-    //var homeControl = new HomeControl(homeControlDiv, map);
-
+    var windBarControlDiv = document.getElementById('bft_scale');
+    
     weatherControlDiv.index = 1;
+    windBarControlDiv.index = 1;
+    map.controls[google.maps.ControlPosition.TOP_LEFT].push(windBarControlDiv);
     map.controls[google.maps.ControlPosition.RIGHT_TOP].push(weatherControlDiv);
 
     overlay.draw = function() {
@@ -210,6 +212,7 @@ function initialize() {
                 map.overlayMapTypes.clear();
                 $('.weat').attr('checked', false);
             }
+            $("#bft_scale").fadeOut("slow");
         }
     });
     //addDropDown(map);
@@ -240,9 +243,16 @@ $('.weat').click(function() {
     if ($(this).attr('checked')) {
         var overlayMap = new google.maps.ImageMapType(overlayMaps[layerID]);
         map.overlayMapTypes.setAt(layerID, overlayMap);
+        // wind filter display scala
+        if (layerID === 0) {
+            $("#bft_scale").fadeIn("slow");
+        }
     } else {
         if (map.overlayMapTypes.getLength() > 0) {
             map.overlayMapTypes.setAt(layerID, null);
+        }
+        if (layerID === 0) {
+            $("#bft_scale").fadeOut("slow");
         }
     }
 });
