@@ -116,21 +116,20 @@ label {
 }
 
 #bft_scale {
-    z-index: 2;
+    background-image: url("../img/wind_bar.png");
+    background-position: 7px 5px;
     background-repeat: no-repeat;
-    background-color: #fff;
-    width: 450px;
     border: 1px solid #717B87;
-    height: 50px;
-    background-position: 30px 5px;
     box-shadow: 5px 5px 15px #424242;
-    margin-top: 5px;
-    background-image: url(../img/wind_bar.png);
     margin-left: 5px;
+    margin-top: 5px;
+    padding-bottom: 2px;
+    padding-left: 24px;
+    padding-right: 10px;
 }
 
-#bft_scale label {
-    color: #000000;
-    margin-left: 5px;
-    margin-top: 3px;
+#bft_scale .add-on {
+    cursor: pointer; 
+    padding-left: 6px; 
+    font-size:12px;
 }

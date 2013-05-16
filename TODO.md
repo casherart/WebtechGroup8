@@ -5,7 +5,6 @@
 <li>Vorhersagen ebenfalls intergrieren (Sebastian, Duy)</li>
 <li>Wettersymbole einführen, Graphen?! (Duy)</li>
 <li>Displaybox Einheiten ergänzen/umrechen und Box Updaten (Duy)</li>
-<li>bft Skala einheitlich wie die Weatherbox (Duy)</li>
 </ul>
 
 <b>Formular</b>

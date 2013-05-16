@@ -108,10 +108,10 @@
                     <input type="checkbox" class="weat" id="cloudsOverlay" value="0"> Wind
                 </label>
             </div>
+            
             <!-- bft scale -->
-            <div id="bft_scale" style="display: none;">
-                <label>bft</label>
-                <span style="padding-left:53px;">12</span>
+            <div id="bft_scale" class="well well-large btn-inverse disabled" style="display: none;">
+                <span style="padding-left:4px;">12</span>
                 <span style="padding-left:13px;">11</span>
                 <span style="padding-left:13px;">10</span>
                 <span style="padding-left:17px;">9</span>
@@ -122,7 +122,8 @@
                 <span style="padding-left:21px;">4</span>
                 <span style="padding-left:20px;">3</span>
                 <span style="padding-left:21px;">2</span>
-                <span style="padding-left:21px;">1</span>
+                <span style="padding-left:20px;">1</span>
+                <span class="add-on" title="Beaufort Scale">bft</span>
             </div>
 			<!-- Weather log -->
 			<div id="weatherLog" class="well well-large" style="display:none;"></div>
