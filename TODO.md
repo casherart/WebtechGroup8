@@ -28,5 +28,5 @@
 <b>Sonstiges</b>
 <ul>
 <li>FORM/URL Parameter in den SQL-Statements absichern (auch in den, die nicht von uns sind)</li>
-<li>User check for DB Querys</li>
+<li>User check for DB Querys  </li>
 </ul>
