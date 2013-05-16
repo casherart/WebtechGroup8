@@ -139,7 +139,7 @@ function initialize() {
         },
         tileSize: new google.maps.Size(256, 256),
         name: "WeatherMap",
-        maxZoom: 7
+        maxZoom: 18
     }));
 
     overlayMaps = [
@@ -186,6 +186,24 @@ function initialize() {
 
         }
     ];
+    
+    /*
+     * function to show tiles or div with weather data
+     */
+    google.maps.event.addListener(map, 'bounds_changed', function() {
+    	if(map.getMapTypeId()=="weather"){
+    		if (map.getZoom() <= 7) {
+            	console.log("show Tiles");            	
+            	//show overlays tile
+            }else{
+            	console.log("show div");
+            	//show weather div
+            }
+    	}else{
+    		//hideDiv
+    	}
+        
+    });
     
     // Create the DIV to hold the control and call the HomeControl() constructor
     // passing in this DIV.
