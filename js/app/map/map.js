@@ -186,7 +186,7 @@ function initialize() {
 
         }
     ];
-    
+
     /*
      * function to show tiles or div with weather data
      */
