@@ -1,3 +1,1 @@
-{
-
-}
+{"lon":100,"lat:50,"timestamp":"<script>new Date().getTime();</script>"}

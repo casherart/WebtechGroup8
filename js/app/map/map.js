@@ -202,7 +202,7 @@ function initialize() {
 
             } else {
                 // city level (weatherbox)
-                getWeatherData();
+            	handleWeather(null, "box");
                 $("#weatherDisplayBox").fadeIn("slow");
                 $("#weatherBar").slideUp("slow");
                 $("#bft_scale").fadeOut("slow");
@@ -237,7 +237,7 @@ function initialize() {
         if (map.getMapTypeId() === 'weather') {
             // weatherbox city level
             if (map.getZoom() > 7) {
-                getWeatherData();
+            	handleWeather(null, "box");
                 $("#weatherBar").slideUp("slow");
                 $("#weatherDisplayBox").fadeIn("slow");
             } else {
@@ -330,7 +330,7 @@ $(function() {
                 temporaryMarkerInfobox.setMap(null);
 
             } else if (key == "weather") {
-                addWeatherForPosition(currentPositionMarker.position);
+            	handleWeather(currentPositionMarker.position);
             }
         },
         items: {
@@ -360,7 +360,7 @@ $(function() {
                 fixedMarkerArray.splice(fixedMarkerArray.indexOf(selectedMarker), 1);
 
             } else if (key == "weather") {
-                addWeatherForPosition(currentPositionMarker.position);
+            	handleWeather(currentPositionMarker.position);
             }
         },
         items: {
@@ -530,22 +530,28 @@ function toggleFollowCurrentPosition() {
 }
 
 function followBoatPosition(boatID){
+	console.log("1")
 	var boatID = boatID || 1;
+	var timestamp = timestamp || new Date().getTime();
+	console.log("2")
 	$.ajax({
 		type : 'get',
 		url : "../server/getBoatPosition.php?boardId="+boatID,
 		dataType : 'json', 
 		data : {'timestamp' : timestamp},
 		success : function(response) {
+			console.log("3")
 			timestamp = response.timestamp;			
 			map.setCenter(new google.maps.LatLng(response.lat, response.lon));
 			noerror = true;
 		},
-		complete : function(response) {
+		complete : function(response) {			
+			console.log("4")
+			console.log(response.responseText);
 			// send a new ajax request when this request is finished
 			if (!self.noerror) {
 				// if a connection problem occurs, try to reconnect each 5 seconds
-				setTimeout(function(){ connect(); }, 5000);
+				setTimeout(function(){ followBoatPosition(boatID); }, 5000);
 			} else {
 				// persistent connection
 				connect(); 
