@@ -82,12 +82,12 @@ function handleWeather(time, target, timespan) {
     		        + "&whight=" + whight + "&clouds=" + data.clouds + "&rain=" + data.rain + "&wind_direction=" +  data.deg + "&wave_direction=" + wave_direction;
     		        handleWeatherForm(urlString, true);
                 }else if(target  == "box"){
-	               	 $("#tempData").text(data.temp.day);
-	                 $("#airPressData").text(data.pressure);
-	                 $("#windStrData").text(data.speed);
-	                 $("#windDirData").text(data.deg);
-	                 $("#rainData").text(data.rain);
-	                 $("#cloudsData").text(data.clouds);
+	               	 $("#tempData").text(data.temp.day.toFixed(0));
+	                 $("#airPressData").text(data.pressure.toFixed(2));
+	                 $("#windStrData").text(bftIdToBftDescription(data.speed));
+	                 $("#windDirData").text(SkyDirToSkyDirDescription(data.deg));
+	                 $("#rainData").text(rainIdTorainDescription(data.rain));
+	                 $("#cloudsData").text(CloudIdToDescription(data.clouds));
 	            }
         	}else{
         		//fill forecast box;
@@ -137,7 +137,7 @@ function correctWeatherData(data){
 			listElement.rain = mm3ToMM(data.snow);
 		}
 		listElement.deg = dagreeToSkyDir(data.wind.deg);//degree
-		listElement.speed = data.wind.speed;
+		listElement.speed = kmhToBftId(data.wind.speed);
 		listElement.pressure = data.main.pressure;
 		listElement.humidity = data.main.humidity;
 		listElement.temp = {};
@@ -157,7 +157,7 @@ function correctWeatherData(data){
 					listElement.rain = mm3ToMM(data.list[i].snow);
 				}
 				listElement.deg = dagreeToSkyDir(data.list[i].wind.deg);//degree
-				listElement.speed = data.list[i].wind.speed;
+				listElement.speed = kmhToBftId(data.list[i].wind.speed);
 				listElement.pressure = data.list[i].main.pressure;
 				listElement.humidity = data.list[i].main.humidity;
 				listElement.temp = {};
@@ -212,6 +212,39 @@ function dagreeToSkyDir(deg) {
     return 1;
 }
 
+function SkyDirToSkyDirDescription(id) {
+    switch(id) {
+        case 1:
+            return "undefiniert";
+            break;
+        case 2:
+            return "Norden";
+            break;
+        case 3:
+            return "Osten";
+            break;
+        case 4:
+            return "Süden";
+            break;
+        case 5:
+            return "Westen";
+            break;
+        case 6:
+            return "Nordost";
+            break;
+        case 7:
+            return "Nordwest";
+            break;
+        case 8:
+            return "Südost";
+            break;
+        case 9:
+            return "Südwest";
+            break;
+        default:
+    }
+}
+
 function mm3ToMM(mm) {
     mm /= 3;
     if (mm < 0.5)
@@ -224,6 +257,164 @@ function mm3ToMM(mm) {
         return 5;
 }
 
+function rainIdTorainDescription(id) {
+            switch(id) {
+        case 1:
+            return "Kein Regen";
+            break;
+        case 2:
+            return "Leichter Regen";
+            break;
+        case 3:
+            return "Gemäßigter Regen";
+            break;
+        case 4:
+            return "Starker Regen";
+            break;
+        case 5:
+            return "Heftiger Regen";
+            break;
+        default:
+    }
+}
+
 function percentToCloud(perc) {
+    if (perc === 0)
+        return 2;
+    else if (perc > 0 && perc <= 12)
+        return 3;
+    else if (perc > 12 && perc <= 25)
+        return 4;
+    else if (perc > 25 && perc <= 37)
+        return 5;
+    else if (perc > 37 && perc <= 50)
+        return 6;
+    else if (perc > 50 && perc <= 62)
+        return 7;
+    else if (perc > 62 && perc <= 75)
+        return 8;
+    else if (perc > 75 && perc <= 87)
+        return 9;
+    else if (perc > 87 && perc <= 100)
+        return 10;
+    else if (perc > 100)
+        return 11;
     return 1;
+}
+
+function CloudIdToDescription(id) {
+        switch(id) {
+        case 1:
+            return "undefiniert";
+            break;
+        case 2:
+            return "wolkenlos";
+            break;
+        case 3:
+            return "sonnig";
+            break;
+        case 4:
+            return "heiter";
+            break;
+        case 5:
+            return "leicht bewölkt";
+            break;
+        case 6:
+            return "wolkig";
+            break;
+        case 7:
+            return "bewölkt";
+            break;
+        case 8:
+            return "stark bewölkt";
+            break;
+        case 9:
+            return "fast bedeckt";
+            break;
+        case 10:
+            return "bedeckt";
+            break;
+        case 11:
+            return "Himmel nicht erkennbar";
+            break;
+        default:
+    }
+}
+
+function kmhToBftId(kmh) {
+    if (kmh > 0 && kmh <= 2)
+        return 2;
+    else if (kmh > 2 && kmh <= 5)
+        return 3;
+    else if (kmh > 5 && kmh <= 11)
+        return 4;
+    else if (kmh > 11 && kmh <= 19)
+        return 5;
+    else if (kmh > 19 && kmh <= 28)
+        return 6;
+    else if (kmh > 28 && kmh <= 38)
+        return 7;
+    else if (kmh > 38 && kmh <= 49)
+        return 8;
+    else if (kmh > 49 && kmh <= 61)
+        return 9;
+    else if (kmh > 61 && kmh <= 74)
+        return 10;
+    else if (kmh > 74 && kmh <= 88)
+        return 11;
+    else if (kmh > 88 && kmh <= 102)
+        return 12;
+    else if (kmh > 102 && kmh <= 117)
+        return 13;
+    else if (kmh >= 117)
+        return 14;
+    return 1;
+}
+
+function bftIdToBftDescription(id) {
+            switch(id) {
+        case 1:
+            return "undefiniert";
+            break;
+        case 2:
+            return "0 bft (0 - 2 km/h)";
+            break;
+        case 3:
+            return "1 bft (2 - 5 km/h)";
+            break;
+        case 4:
+            return "2 bft (6 - 11 km/h)";
+            break;
+        case 5:
+            return "3 bft (12 - 19 km/h)";
+            break;
+        case 6:
+            return "4 bft (20 - 28 km/h)";
+            break;
+        case 7:
+            return "5 bft (29 - 38 km/h)";
+            break;
+        case 8:
+            return "6 bft (39 - 49 km/h)";
+            break;
+        case 9:
+            return "7 bft (50 - 61 km/h)";
+            break;
+        case 10:
+            return "8 bft (62 - 74 km/h)";
+            break;
+        case 11:
+            return "9 bft (75 - 88 km/h)";
+            break;
+        case 12:
+            return "10 bft (89 - 102 km/h)";
+            break;
+        case 13:
+            return "11 bft (103 - 117 km/h)";
+            break;
+        case 14:
+            return "12 bft ≥ 117 km/h";
+            break;
+        default:
+    }
 }
