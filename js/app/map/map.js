@@ -528,3 +528,29 @@ function toggleFollowCurrentPosition() {
     }
     document.getElementById('followCurrentPositionContainer').style.width = document.body.offsetWidth + "px";
 }
+
+function followBoatPosition(boatID){
+	var boatID = boatID || 1;
+	$.ajax({
+		type : 'get',
+		url : "../server/getBoatPosition.php?boardId="+boatID,
+		dataType : 'json', 
+		data : {'timestamp' : timestamp},
+		success : function(response) {
+			timestamp = response.timestamp;			
+			map.setCenter(new google.maps.LatLng(response.lat, response.lon));
+			noerror = true;
+		},
+		complete : function(response) {
+			// send a new ajax request when this request is finished
+			if (!self.noerror) {
+				// if a connection problem occurs, try to reconnect each 5 seconds
+				setTimeout(function(){ connect(); }, 5000);
+			} else {
+				// persistent connection
+				connect(); 
+			}
+			noerror = false; 
+		}
+	});
+}
