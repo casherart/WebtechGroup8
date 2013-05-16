@@ -1,8 +1,7 @@
-
 var weatherLogIntervall = null;
 var inserTimeMin = 15 * 1000 * 60; //value in ms -> time x 6000 = Minut.
 var currentTripToLog = 1;
-
+//test for jenkins
 
 function openWeatherLogWindow() {
     $.ajax({
