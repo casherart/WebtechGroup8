@@ -1,27 +1,23 @@
-Webtechnologie To-Do Liste
-            ⁃	Wellenhöhe und Wellenrichtung über openweathermap nicht enthalten!?
-	•	Google Maps
-            ⁃	Filter für das Wetter, position noch korrigieren! (Duy)
-            ⁃	Centerposition Wetter 
-            ⁃	Vorhersagen ebenfalls intergrieren!? (Optional)
-            ⁃	Displaybox für Wetter (Duy, Fred)
-	•	Formular (Fred)
-            ⁃	Validierung der Einträge
-            ⁃	SQL Skripte mit sinnvollen Daten füllen
-        •       Datenbank konfigurationsdatei erstellen 
+<h2>To-Do Liste</h2>
 
+<b>Google Maps</b>
+-Wellenhöhe und Wellenrichtung für Weatherbox entfernen (Duy)
+-Vorhersagen ebenfalls intergrieren (Sebastian, Duy)
+-Wettersymbole einführen, Graphen?! (Duy)
+-Displaybox Einheiten ergänzen/umrechen und Box Updaten (Duy)
+-bft Skala einheitlich wie die Weatherbox (Duy)
 
+<b>Formular</b>
+-Validierung der Einträge (Fred)
+-SQL Skripte mit sinnvollen Daten füllen (Fred)
+-Formularangaben und MessageBox auf Deutsch ändern (Fred)
+-Einheiten Tooltip updaten mit richtiger Beschreibung (Fred)
 
+<b>Comet und Websocket</b>
+-Etwas überlegen um COmet und Websocket zu zeigen, beispielsweise Wetterwarnungen (Sebastian)
 
+<b>Jenkins</b>
+-Server einrichten (Sebastian)
 
-
-
-- FORM/URL Parameter in den SQL-Statements absichern (auch in den, die nicht von uns sind)
-- User check for DB Querys
-
-
-- is it possible in php to set global variable for db user and pw? The problem currently is that on funpic 
-"root/root" is not allowed. And i don't want to make if else on every db connection.
-
-
-?? User validation ??
+-FORM/URL Parameter in den SQL-Statements absichern (auch in den, die nicht von uns sind)
+-User check for DB Querys
