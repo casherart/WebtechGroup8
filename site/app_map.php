@@ -63,7 +63,7 @@
             </div>
             
             <!-- Weather Display Box-->
-            <div id="weatherDisplayBox" class="well well-large span3 btn-inverse">
+            <div id="weatherDisplayBox" class="well well-large span3 btn-inverse" style="display: none;">
                 <span class="span2">
                     Temperatur:
                 </span>
@@ -101,19 +101,19 @@
             <!-- Weather Bar -->
             <div id="weatherBar" style="display:none;">
                 <label class="checkbox inline">
-                    <input type="checkbox" class="weat" id="3" value="rainOverlay"> Niederschlag
+                    <input type="checkbox" class="weat" id="rainOverlay" value="3"> Niederschlag
                 </label>
                 <label class="checkbox inline">
-                    <input type="checkbox" class="weat" id="2" value="airOverlay"> Luftdruck
+                    <input type="checkbox" class="weat" id="airOverlay" value="2"> Luftdruck
                 </label>
                 <label class="checkbox inline">
-                    <input type="checkbox" class="weat" id="4" value="waveOverlay"> Wellenhöhe
+                    <input type="checkbox" class="weat" id="waveOverlay" value="4"> Wellenhöhe
                 </label>
                 <label class="checkbox inline">
-                    <input type="checkbox" class="weat" id="1" value="tempOverlay"> Temperatur
+                    <input type="checkbox" class="weat" id="tempOverlay" value="1"> Temperatur
                 </label>
                 <label class="checkbox inline">
-                    <input type="checkbox" class="weat" id="0" value="cloudsOverlay"> Wind
+                    <input type="checkbox" class="weat" id="cloudsOverlay" value="0"> Wind
                 </label>
             </div>
             <!-- bft scale -->
