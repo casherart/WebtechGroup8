@@ -56,10 +56,46 @@
             </div>
 
             <!-- Current Position -->
-            <div id="followCurrentPositionContainer">
+            <div id="followCurrentPositionContainer" style="display:none;">
                 <div id="followCurrentPosition_button" class="well">
                     <input type="button" class="btn" value="Eigener Position folgen" id="followCurrentPositionbutton" onclick="javascript: toggleFollowCurrentPosition()" />
                 </div>
+            </div>
+            
+            <!-- Weather Display Box-->
+            <div id="weatherDisplayBox" class="well well-large span3 btn-inverse">
+                <span class="span2">
+                    Temperatur:
+                </span>
+                <span id="tempData" class="data span1"></span>
+                <span class="span2">
+                    Luftdruck:
+                </span>
+                <span id="airPressData" class="data span1"></span>
+                <span class="span2">
+                    Windstärke:
+                </span>
+                <span id="windStrData" class="data span1"></span>
+                <span class="span2">
+                    Windrichtung:
+                </span>
+                <span id="windDirData" class="data span1"></span>
+                <span class="span2">
+                    Regen:
+                </span>
+                <span id="rainData" class="data span1"></span>
+                <span class="span2">
+                    Wolken:
+                </span>
+                <span id="cloudsData" class="data span1"></span>
+                <span class="span2">
+                    Wellenhöhe:
+                </span>
+                <span id="whightData" class="data span1"></span>
+                <span class="span2">
+                    Wellenrichtung:
+                </span>
+                <span id="waveDirData" class="data span1"></span>
             </div>
 
             <!-- Weather Bar -->

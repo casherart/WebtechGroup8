@@ -7,8 +7,8 @@ include('database_library.php');
 <html lang="de">
     <head>
         <!-- Headerinformation -->
-        <?php include("./_include/header.php") ?>  
-        
+        <?php include("./_include/header.php") ?> 
+
 	    <!-- Additional Java-Script -->
 	    <script src="../js/app/ajax/weather.js" type="text/javascript"></script>      
 	    
@@ -191,7 +191,7 @@ include('database_library.php');
 				<a href="#" class="btn" data-dismiss="modal"><i class="icon-ok"></i> ok</a>
 			</div>
 		</div>
-		
+                
         <!-- Footer -->
         <?php /* include("./_include/footer.php") */?><!-- Java-Script -->
 	    <script src="../js/bootstrap/bootstrap-modal.js"></script>

@@ -191,11 +191,14 @@ function initialize() {
     // passing in this DIV.
     var weatherControlDiv = document.getElementById('weatherBar');
     var windBarControlDiv = document.getElementById('bft_scale');
+    var weatherDisplayDiv = document.getElementById('weatherDisplayBox');
     
     weatherControlDiv.index = 1;
     windBarControlDiv.index = 1;
+    weatherDisplayDiv.index = 1;
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(windBarControlDiv);
     map.controls[google.maps.ControlPosition.RIGHT_TOP].push(weatherControlDiv);
+    map.controls[google.maps.ControlPosition.TOP_CENTER].push(weatherDisplayDiv);
 
     overlay.draw = function() {
     };
@@ -206,6 +209,7 @@ function initialize() {
         // if WeatherMap
         if (map.getMapTypeId() === 'weather') {
             $('#weatherBar').slideDown('slow');
+            getWeatherData();
         } else {
             $('#weatherBar').slideUp('slow');
             if (map.overlayMapTypes.getLength() > 0) {
