@@ -2,7 +2,6 @@
 
 <b>Google Maps</b>
 <ul>
-<li>Wellenhöhe und Wellenrichtung für Weatherbox entfernen (Duy)</li>
 <li>Vorhersagen ebenfalls intergrieren (Sebastian, Duy)</li>
 <li>Wettersymbole einführen, Graphen?! (Duy)</li>
 <li>Displaybox Einheiten ergänzen/umrechen und Box Updaten (Duy)</li>
@@ -10,16 +9,25 @@
 </ul>
 
 <b>Formular</b>
+<ul>
 <li>Validierung der Einträge (Fred)</li>
 <li>SQL Skripte mit sinnvollen Daten füllen (Fred)</li>
 <li>Formularangaben und MessageBox auf Deutsch ändern (Fred)</li>
 <li>Einheiten Tooltip updaten mit richtiger Beschreibung (Fred)</li>
+</ul>
 
 <b>Comet und Websocket</b>
-<li>Etwas überlegen um COmet und Websocket zu zeigen, beispielsweise Wetterwarnungen (Sebastian)</li>
+<ul>
+<li>Etwas überlegen um Comet und Websocket zu zeigen, beispielsweise Wetterwarnungen (Sebastian)</li>
+</ul>
 
 <b>Jenkins</b>
+<ul>
 <li>Server einrichten (Sebastian)</li>
+</ul>
 
+<b>Sonstiges</b>
+<ul>
 <li>FORM/URL Parameter in den SQL-Statements absichern (auch in den, die nicht von uns sind)</li>
 <li>User check for DB Querys</li>
+</ul>

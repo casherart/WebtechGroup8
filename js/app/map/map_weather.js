@@ -207,8 +207,6 @@ function getWeatherData(time) {
             $("#windDirData").text(wind_direction);
             $("#rainData").text(rain);
             $("#cloudsData").text(clouds);
-            $("#waveDirData").text(wave_direction);
-            $("#whightData").text(whight);
         }
     });
 }

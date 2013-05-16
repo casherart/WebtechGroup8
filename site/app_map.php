@@ -88,14 +88,6 @@
                     Wolken:
                 </span>
                 <span id="cloudsData" class="data span1"></span>
-                <span class="span2">
-                    Wellenhöhe:
-                </span>
-                <span id="whightData" class="data span1"></span>
-                <span class="span2">
-                    Wellenrichtung:
-                </span>
-                <span id="waveDirData" class="data span1"></span>
             </div>
 
             <!-- Weather Bar -->
