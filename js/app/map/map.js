@@ -191,29 +191,41 @@ function initialize() {
      * function to show tiles or div with weather data
      */
     google.maps.event.addListener(map, 'bounds_changed', function() {
-    	if(map.getMapTypeId()=="weather"){
-    		if (map.getZoom() <= 7) {
-            	console.log("show Tiles");            	
-            	//show overlays tile
-            }else{
-            	console.log("show div");
-            	//show weather div
+        if (map.getMapTypeId() === "weather") {
+            // overlay level
+            if (map.getZoom() <= 7) {
+                $("#weatherDisplayBox").fadeOut("slow");
+                $('#weatherBar').slideDown('slow');
+                // if filter cloud 
+                if ($('#cloudsOverlay').attr("checked"))
+                    $("#bft_scale").fadeIn("slow");
+
+            } else {
+                // city level (weatherbox)
+                getWeatherData();
+                $("#weatherDisplayBox").fadeIn("slow");
+                $("#weatherBar").slideUp("slow");
+                $("#bft_scale").fadeOut("slow");
             }
-    	}else{
-    		//hideDiv
-    	}
-        
+        } else {
+            // hide weatherbox
+            $("#weatherDisplayBox").fadeOut("slow");
+        }
+
     });
-    
+
     // Create the DIV to hold the control and call the HomeControl() constructor
     // passing in this DIV.
     var weatherControlDiv = document.getElementById('weatherBar');
     var windBarControlDiv = document.getElementById('bft_scale');
-    
+    var weatherDisplayDiv = document.getElementById('weatherDisplayBox');
+
     weatherControlDiv.index = 1;
     windBarControlDiv.index = 1;
+    weatherDisplayDiv.index = 1;
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(windBarControlDiv);
     map.controls[google.maps.ControlPosition.RIGHT_TOP].push(weatherControlDiv);
+    map.controls[google.maps.ControlPosition.TOP_CENTER].push(weatherDisplayDiv);
 
     overlay.draw = function() {
     };
@@ -223,14 +235,25 @@ function initialize() {
     google.maps.event.addListener(map, 'maptypeid_changed', function(event) {
         // if WeatherMap
         if (map.getMapTypeId() === 'weather') {
-            $('#weatherBar').slideDown('slow');
+            // weatherbox city level
+            if (map.getZoom() > 7) {
+                getWeatherData();
+                $("#weatherBar").slideUp("slow");
+                $("#weatherDisplayBox").fadeIn("slow");
+            } else {
+                // overlay level
+                $('#weatherBar').slideDown('slow');
+            }
+            // no weather map
         } else {
             $('#weatherBar').slideUp('slow');
+            $("#bft_scale").fadeOut("slow");
+            $("#weatherDisplayBox").fadeOut("slow");
+            // checkbox reset
             if (map.overlayMapTypes.getLength() > 0) {
                 map.overlayMapTypes.clear();
                 $('.weat').attr('checked', false);
             }
-            $("#bft_scale").fadeOut("slow");
         }
     });
     //addDropDown(map);
@@ -257,7 +280,7 @@ function initialize() {
 
 // filter for Google Maps
 $('.weat').click(function() {
-    var layerID = parseInt($(this).attr('id'));
+    var layerID = parseInt($(this).val());
     if ($(this).attr('checked')) {
         var overlayMap = new google.maps.ImageMapType(overlayMaps[layerID]);
         map.overlayMapTypes.setAt(layerID, overlayMap);
@@ -504,4 +527,30 @@ function toggleFollowCurrentPosition() {
         document.getElementById("followCurrentPositionbutton").value = "Eigener Position folgen";
     }
     document.getElementById('followCurrentPositionContainer').style.width = document.body.offsetWidth + "px";
+}
+
+function followBoatPosition(boatID){
+	var boatID = boatID || 1;
+	$.ajax({
+		type : 'get',
+		url : "../server/getBoatPosition.php?boardId="+boatID,
+		dataType : 'json', 
+		data : {'timestamp' : timestamp},
+		success : function(response) {
+			timestamp = response.timestamp;			
+			map.setCenter(new google.maps.LatLng(response.lat, response.lon));
+			noerror = true;
+		},
+		complete : function(response) {
+			// send a new ajax request when this request is finished
+			if (!self.noerror) {
+				// if a connection problem occurs, try to reconnect each 5 seconds
+				setTimeout(function(){ connect(); }, 5000);
+			} else {
+				// persistent connection
+				connect(); 
+			}
+			noerror = false; 
+		}
+	});
 }
