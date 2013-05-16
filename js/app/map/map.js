@@ -225,7 +225,7 @@ function initialize() {
     weatherDisplayDiv.index = 1;
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(windBarControlDiv);
     map.controls[google.maps.ControlPosition.RIGHT_TOP].push(weatherControlDiv);
-    map.controls[google.maps.ControlPosition.TOP_CENTER].push(weatherDisplayDiv);
+    map.controls[google.maps.ControlPosition.TOP_LEFT].push(weatherDisplayDiv);
 
     overlay.draw = function() {
     };

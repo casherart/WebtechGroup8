@@ -63,31 +63,31 @@
             </div>
             
             <!-- Weather Display Box-->
-            <div id="weatherDisplayBox" class="well well-large span3 btn-inverse" style="display: none;">
+            <div id="weatherDisplayBox" class="well well-large span4 btn-inverse disabled" style="display: none;">
                 <span class="span2">
                     Temperatur:
                 </span>
-                <span id="tempData" class="data span1"></span>
+                <span id="tempData" class="data span2" style="text-align: right;"></span>
                 <span class="span2">
                     Luftdruck:
                 </span>
-                <span id="airPressData" class="data span1"></span>
+                <span id="airPressData" class="data span2" style="text-align: right;"></span>
                 <span class="span2">
                     Windstärke:
                 </span>
-                <span id="windStrData" class="data span1"></span>
+                <span id="windStrData" class="data span2" style="text-align: right;"></span>
                 <span class="span2">
                     Windrichtung:
                 </span>
-                <span id="windDirData" class="data span1"></span>
+                <span id="windDirData" class="data span2" style="text-align: right;"></span>
                 <span class="span2">
                     Regen:
                 </span>
-                <span id="rainData" class="data span1"></span>
+                <span id="rainData" class="data span2" style="text-align: right;"></span>
                 <span class="span2">
                     Wolken:
                 </span>
-                <span id="cloudsData" class="data span1"></span>
+                <span id="cloudsData" class="data span2" style="text-align: right;"></span>
             </div>
 
             <!-- Weather Bar -->
@@ -111,7 +111,7 @@
             
             <!-- bft scale -->
             <div id="bft_scale" class="well well-large btn-inverse disabled" style="display: none;">
-                <span style="padding-left:4px;">12</span>
+                <span style="padding-left:5px;">12</span>
                 <span style="padding-left:13px;">11</span>
                 <span style="padding-left:13px;">10</span>
                 <span style="padding-left:17px;">9</span>

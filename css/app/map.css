@@ -133,3 +133,13 @@ label {
     padding-left: 6px; 
     font-size:12px;
 }
+
+#weatherDisplayBox {
+    background-image: url("../img/icons/weather_icons/33.png");
+    background-repeat: no-repeat;
+    margin-left: 5px;
+    margin-top: 5px;
+    box-shadow: 5px 5px 15px #424242;
+    background-position: 170px 10px;
+    background-size: 90px;
+}
