@@ -4,7 +4,8 @@
 <ul>
 <li>Vorhersagen ebenfalls intergrieren (Sebastian, Duy)</li>
 <li>Wettersymbole einführen, Graphen?! (Duy)</li>
-<li>Displaybox Einheiten ergänzen/umrechen und Box Updaten (Duy)</li>
+<li>Displaybox Umrechnung von REGEN noch Fehlerhaft & Windrichtungsangabe wohin oder woher? (Duy)</li>
+<li>Tooltips für Wetter ergänzen</li> (Duy)
 </ul>
 
 <b>Formular</b>

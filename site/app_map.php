@@ -61,33 +61,40 @@
                     <input type="button" class="btn" value="Eigener Position folgen" id="followCurrentPositionbutton" onclick="javascript: toggleFollowCurrentPosition()" />
                 </div>
             </div>
-            
+
             <!-- Weather Display Box-->
-            <div id="weatherDisplayBox" class="well well-large span4 btn-inverse disabled" style="display: none;">
-                <span class="span2">
-                    Temperatur:
-                </span>
-                <span id="tempData" class="data span2" style="text-align: right;"></span>
-                <span class="span2">
-                    Luftdruck:
-                </span>
-                <span id="airPressData" class="data span2" style="text-align: right;"></span>
-                <span class="span2">
-                    Windstärke:
-                </span>
-                <span id="windStrData" class="data span2" style="text-align: right;"></span>
-                <span class="span2">
-                    Windrichtung:
-                </span>
-                <span id="windDirData" class="data span2" style="text-align: right;"></span>
-                <span class="span2">
-                    Regen:
-                </span>
-                <span id="rainData" class="data span2" style="text-align: right;"></span>
-                <span class="span2">
-                    Wolken:
-                </span>
-                <span id="cloudsData" class="data span2" style="text-align: right;"></span>
+            <div id="weatherDisplayBox" class="well well-small btn-inverse disabled" style="display: none;">
+                <div id="navDisplayBox" data-toggle="buttons-radio" class="btn-group span4">
+                    <button class="btn btn-info span1">Aktuell</button>
+                    <button class="btn btn-info span1">Heute</button>
+                    <button class="btn btn-info span1">Morgen</button>
+                    <button class="btn btn-info span1">3 Tage</button>
+                    <button class="btn btn-info span1">7 Tage</button>
+                </div>
+                <div id="weatherDisplayTop">
+                    <div id="tempDataMax" class="data" style="padding-left: 50px;"></div>
+                    <div id="tempDataMin" class="data" style="padding-left: 50px; float: left; padding-top: 20px;"></div>
+                    <div id="tempData" class="data" style=""></div>
+                </div>
+                <div id="weatherDisplayBottom">
+                    <div align="center">
+                        <span id="rainData" class="data"></span>
+                        und 
+                        <span id="cloudsData" class="data"></span>
+                    </div>
+                    <span class="span2">
+                        Luftdruck:
+                    </span>
+                    <span id="airPressData" class="data span2" style="text-align: right;"></span>
+                    <span class="span2">
+                        Windstärke:
+                    </span>
+                    <span id="windStrData" class="data span2" style="text-align: right;"></span>
+                    <span class="span2">
+                        Windrichtung:
+                    </span>
+                    <span id="windDirData" class="data span2" style="text-align: right;"></span>
+                </div>
             </div>
 
             <!-- Weather Bar -->
@@ -108,7 +115,7 @@
                     <input type="checkbox" class="weat" id="cloudsOverlay" value="0"> Wind
                 </label>
             </div>
-            
+
             <!-- bft scale -->
             <div id="bft_scale" class="well well-large btn-inverse disabled" style="display: none;">
                 <span style="padding-left:5px;">12</span>
@@ -125,8 +132,8 @@
                 <span style="padding-left:20px;">1</span>
                 <span class="add-on" title="Beaufort Scale">bft</span>
             </div>
-			<!-- Weather log -->
-			<div id="weatherLog" class="well well-large" style="display:none;"></div>
+            <!-- Weather log -->
+            <div id="weatherLog" class="well well-large" style="display:none;"></div>
             <!-- Map -->
             <div id="appWrapper">
                 <div id="map_canvas"></div>
@@ -144,9 +151,9 @@
         </div><!-- Container -->
 
         <!-- Java-Script -->
-        
+
         <script src="../js/app/ajax/weather.js" type="text/javascript"></script>
-        
+
         <script src="../js/bootstrap/bootstrap-dropdown.js"></script>
         <script src="../js/bootstrap/bootstrap-modal.js"></script>
         <script src="../js/bootstrap/bootstrap-transition.js"></script>

@@ -81,8 +81,10 @@ function handleWeather(time, target, timespan) {
     		        + "&whight=" + whight + "&clouds=" + data.clouds + "&rain=" + data.rain + "&wind_direction=" +  data.deg + "&wave_direction=" + wave_direction;
     		        handleWeatherForm(urlString, true);
                 }else if(target  == "box"){
-	               	 $("#tempData").text(data.temp.day.toFixed(0));
-	                 $("#airPressData").text(data.pressure.toFixed(2));
+	               	 $("#tempData").text(data.temp.day.toFixed(0) + "°");
+                         $("#tempDataMax").text("H: " + data.temp.max.toFixed(0) + "°");
+	               	 $("#tempDataMin").text("L: " + data.temp.min.toFixed(0) + "°");
+	                 $("#airPressData").text(data.pressure.toFixed(2) + " hPa");
 	                 $("#windStrData").text(bftIdToBftDescription(data.speed));
 	                 $("#windDirData").text(SkyDirToSkyDirDescription(data.deg));
 	                 $("#rainData").text(rainIdTorainDescription(data.rain));
