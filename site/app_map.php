@@ -77,7 +77,7 @@
                     <div id="tempData" class="data" style=""></div>
                 </div>
                 <div id="weatherDisplayBottom">
-                    <div align="center">
+                    <div align="center" id="state">
                         <span id="rainData" class="data"></span>
                         und 
                         <span id="cloudsData" class="data"></span>

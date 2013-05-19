@@ -157,9 +157,12 @@ label {
 
 #weatherDisplayBox #weatherDisplayBottom {
     border-top: 1px solid #FFFFFF;
-    padding-top: 10px;
 }
 
+#weatherDisplayBox #weatherDisplayBottom #state {
+    border-bottom:1px solid #FFF; 
+    padding-bottom:2px;
+}
 #weatherDisplayBox #weatherDisplayTop {
     height: 125px;
 }
