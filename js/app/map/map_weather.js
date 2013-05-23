@@ -436,60 +436,83 @@ function getWeatherIcon(dt, temp, cloud, rain) {
      var minutes = date.getMinutes();
      var seconds = date.getSeconds();
      */
+    rain ="Leichter Regen";
     var icon = "D";
     switch (cloud) {
         case "wolkenlos":
-            icon = icon + "_1";
+            if (rain === "Kein Regen")
+                icon = icon + "_1";
             break;
         case "sonnig":
-            icon = icon + "_1";
+            if (rain === "Kein Regen")
+                icon = icon + "_1";
             break;
         case "heiter":
-            icon = icon + "_1";
+            if (rain === "Kein Regen")
+                icon = icon + "_1";
             break;
         case "leicht bewölkt":
-            icon = icon + "_2";
+            if (rain === "Kein Regen")
+                icon = icon + "_2";
+            else if (rain === "Leichter Regen")
+                icon = icon + "_5";
             break;
         case "wolkig":
-            icon = icon + "_3";
+            if (rain === "Kein Regen")
+                icon = icon + "_3";
+            else if (rain === "Leichter Regen")
+                icon = icon + "_5";
             break;
         case "bewölkt":
-            icon = icon + "_4";
+            if (rain === "Kein Regen")
+                icon = icon + "_4";
+            else if (rain === "Gemäßigter Regen")
+                icon = icon + "_6";
+            else if (rain === "Starker Regen")
+                icon = icon + "_7";
             break;
         case "stark bewölkt":
-            icon = icon + "_4";
+            if (rain === "Kein Regen")
+                icon = icon + "_4";
+            else if (rain === "Gemäßigter Regen")
+                icon = icon + "_6";
+            else if (rain === "Starker Regen")
+                icon = icon + "_7";
+            else if (rain === "Heftiger Regen")
+                icon = icon + "_8";
             break;
         case "fast bedeckt":
-            icon = icon + "_4";
+            if (rain === "Kein Regen")
+                icon = icon + "_4";
+            else if (rain === "Gemäßigter Regen")
+                icon = icon + "_6";
+            else if (rain === "Starker Regen")
+                icon = icon + "_7";
+            else if (rain === "Heftiger Regen")
+                icon = icon + "_8";
             break;
         case "bedeckt":
-            icon = icon + "_4";
+            if (rain === "Kein Regen")
+                icon = icon + "_4";
+            else if (rain === "Gemäßigter Regen")
+                icon = icon + "_6";
+            else if (rain === "Starker Regen")
+                icon = icon + "_7";
+            else if (rain === "Heftiger Regen")
+                icon = icon + "_8";
             break;
         case "Himmel nicht erkennbar":
-            icon = icon + "_4";
+            if (rain === "Kein Regen")
+                icon = icon + "_4";
+            else if (rain === "Gemäßigter Regen")
+                icon = icon + "_6";
+            else if (rain === "Starker Regen")
+                icon = icon + "_7";
+            else if (rain === "Heftiger Regen")
+                icon = icon + "_8";
             break;
         default:
     }
     
-    switch(rain)
-    {
-        case "Kein Regen":
-            icon = icon + "_0";
-            break;
-        case "Leichter Regen":
-            icon = icon + "_1";
-            break;
-        case "Gemäßigter Regen":
-            icon = icon + "_2";
-            break;
-        case "Starker Regen":
-            icon = icon + "_3";
-            break;
-        case "Heftiger Regen":
-            icon = icon + "_4";
-            break;
-        default:
-    }
-    
-    return "D_1_0";
+    return icon;
 }

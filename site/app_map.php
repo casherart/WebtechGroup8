@@ -65,7 +65,7 @@
             <!-- Weather Display Box-->
             <div id="weatherDisplayBox" class="well well-small btn-inverse disabled" style="display: none;">
                 <div id="navDisplayBox" data-toggle="buttons-radio" class="btn-group span4">
-                    <button class="btn btn-info span1">Aktuell</button>
+                    <button class="btn btn-info span1 active">Aktuell</button>
                     <button class="btn btn-info span1">Heute</button>
                     <button class="btn btn-info span1">Morgen</button>
                     <button class="btn btn-info span1">3 Tage</button>
