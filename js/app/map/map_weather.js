@@ -87,7 +87,7 @@ function handleWeather(time, target, timespan) {
                     $("#airPressData").text(data.pressure.toFixed(2) + " hPa");
                     $("#windStrData").text(bftIdToBftDescription(data.speed));
                     $("#windDirData").text(SkyDirToSkyDirDescription(data.deg));
-                    $("#rainData").text(rainIdTorainDescription(data.rain));
+                    $("#rainData").text(", " + rainIdTorainDescription(data.rain));
                     $("#cloudsData").text(CloudIdToDescription(data.clouds));
                     $("#nameData").text(data.name);
                     $("#weatherDisplayBox").css("background-image", "url(../../../css/img/icons/weather_icons/" + getWeatherIcon(data.dt, data.temp.day.toFixed(0), CloudIdToDescription(data.clouds), rainIdTorainDescription(data.rain)) + ".png)");
@@ -436,83 +436,63 @@ function getWeatherIcon(dt, temp, cloud, rain) {
      var minutes = date.getMinutes();
      var seconds = date.getSeconds();
      */
-    rain ="Leichter Regen";
-    var icon = "D";
+    rain = "Leichter Regen";
+    var icon = "";
     switch (cloud) {
         case "wolkenlos":
-            if (rain === "Kein Regen")
-                icon = icon + "_1";
+            icon = "_1";
+            checkRain(icon, rain);
             break;
         case "sonnig":
-            if (rain === "Kein Regen")
-                icon = icon + "_1";
+            icon = "_1";
+            checkRain(icon, rain);
             break;
         case "heiter":
-            if (rain === "Kein Regen")
-                icon = icon + "_1";
+            icon = "_1";
+            checkRain(icon, rain);
             break;
         case "leicht bewölkt":
-            if (rain === "Kein Regen")
-                icon = icon + "_2";
-            else if (rain === "Leichter Regen")
-                icon = icon + "_5";
+            icon = "_2";
+            checkRain(icon, rain);
             break;
         case "wolkig":
-            if (rain === "Kein Regen")
-                icon = icon + "_3";
-            else if (rain === "Leichter Regen")
-                icon = icon + "_5";
+            icon = "_3";
+            checkRain(icon, rain);
             break;
         case "bewölkt":
-            if (rain === "Kein Regen")
-                icon = icon + "_4";
-            else if (rain === "Gemäßigter Regen")
-                icon = icon + "_6";
-            else if (rain === "Starker Regen")
-                icon = icon + "_7";
+            icon = "_4";
+            checkRain(icon, rain);
             break;
         case "stark bewölkt":
-            if (rain === "Kein Regen")
-                icon = icon + "_4";
-            else if (rain === "Gemäßigter Regen")
-                icon = icon + "_6";
-            else if (rain === "Starker Regen")
-                icon = icon + "_7";
-            else if (rain === "Heftiger Regen")
-                icon = icon + "_8";
+            icon = "_4";
+            checkRain(icon, rain);
             break;
         case "fast bedeckt":
-            if (rain === "Kein Regen")
-                icon = icon + "_4";
-            else if (rain === "Gemäßigter Regen")
-                icon = icon + "_6";
-            else if (rain === "Starker Regen")
-                icon = icon + "_7";
-            else if (rain === "Heftiger Regen")
-                icon = icon + "_8";
+            icon = "_4";
+            checkRain(icon, rain);
             break;
         case "bedeckt":
-            if (rain === "Kein Regen")
-                icon = icon + "_4";
-            else if (rain === "Gemäßigter Regen")
-                icon = icon + "_6";
-            else if (rain === "Starker Regen")
-                icon = icon + "_7";
-            else if (rain === "Heftiger Regen")
-                icon = icon + "_8";
+            icon = "_4";
+            checkRain(icon, rain);
             break;
         case "Himmel nicht erkennbar":
-            if (rain === "Kein Regen")
-                icon = icon + "_4";
-            else if (rain === "Gemäßigter Regen")
-                icon = icon + "_6";
-            else if (rain === "Starker Regen")
-                icon = icon + "_7";
-            else if (rain === "Heftiger Regen")
-                icon = icon + "_8";
+            icon = "_4";
+            checkRain(icon, rain);
             break;
         default:
     }
-    
+
+    icon = "D" + icon;
     return icon;
+}
+
+function checkRain(icon, rain) {        
+    if (rain === "Leichter Regen")
+        icon = "_5";
+    else if (rain === "Gemäßigter Regen")
+        icon = "_6";
+    else if (rain === "Starker Regen")
+        icon = "_7";
+    else if (rain === "Heftiger Regen")
+        icon = "_8";
 }

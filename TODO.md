@@ -6,7 +6,7 @@
 <li>Wettersymbole einführen, Graphen?! (Duy)</li>
 <li>Displaybox Umrechnung von REGEN noch Fehlerhaft & Windrichtungsangabe wohin oder woher? (Duy)</li>
 <li>Tooltips für Wetter ergänzen (Duy)</li>
-<li>Richtige Wettersymbole einblenden (Duy) </li>
+<li>Richtige Wettersymbole einblenden, Unterscheidung zwischen Nacht und Tag(Duy) </li>
 </ul>
 
 <b>Formular</b>

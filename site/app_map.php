@@ -83,7 +83,6 @@
                 <div id="weatherDisplayBottom">
                     <div align="center" id="state">
                         <span id="cloudsData" class="data"></span>
-                        und
                         <span id="rainData" class="data"></span>
                     </div>
                     <span class="span2">
