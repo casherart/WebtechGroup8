@@ -63,37 +63,39 @@ function handleWeather(time, target, timespan) {
     var time = time || "weather"; //forcast (3h) //forecast/daily (x daxs max 14)
     var target = target || "log";
     var timespan = timespan || null;
-    var timespanString = (timespan!=null?"cnt="+timespan:"");//if forecast && empty -> 3 hours else param in days
-    
+    var timespanString = (timespan != null ? "cnt=" + timespan : "");//if forecast && empty -> 3 hours else param in days
+
     $.ajax({
-        url: "http://api.openweathermap.org/data/2.5/"+time+"?mode=json&units=metric&lat=" + lat + "&lon=" + lon+ timespanString,
+        url: "http://api.openweathermap.org/data/2.5/" + time + "?mode=json&units=metric&lat=" + lat + "&lon=" + lon + timespanString,
         type: "GET", dataType: 'jsonp',
         crossDomain: true
     }).done(function(data) {
         if (data) {
-        	data = correctWeatherData(data);
-        	if(time == "weather"){
-        		data = data.list[0];
-                if(target == "log"){
+            data = correctWeatherData(data);
+            if (time == "weather") {
+                data = data.list[0];
+                if (target == "log") {
                     var wave_direction = 1;
-                    var whight = 0;                	
-    		        var urlString = "trip=" + currentTripToLog + "&wId=&temp=" + data.temp.day + "&airpress=" + data.pressure + "&wind_strength=" + data.speed
-    		        + "&whight=" + whight + "&clouds=" + data.clouds + "&rain=" + data.rain + "&wind_direction=" +  data.deg + "&wave_direction=" + wave_direction;
-    		        handleWeatherForm(urlString, true);
-                }else if(target  == "box"){
-	               	 $("#tempData").text(data.temp.day.toFixed(0) + "°");
-                         $("#tempDataMax").text("H: " + data.temp.max.toFixed(0) + "°");
-	               	 $("#tempDataMin").text("L: " + data.temp.min.toFixed(0) + "°");
-	                 $("#airPressData").text(data.pressure.toFixed(2) + " hPa");
-	                 $("#windStrData").text(bftIdToBftDescription(data.speed));
-	                 $("#windDirData").text(SkyDirToSkyDirDescription(data.deg));
-	                 $("#rainData").text(rainIdTorainDescription(data.rain));
-	                 $("#cloudsData").text(CloudIdToDescription(data.clouds));
-	            }
-        	}else{
-        		//fill forecast box;
-        	}
-            
+                    var whight = 0;
+                    var urlString = "trip=" + currentTripToLog + "&wId=&temp=" + data.temp.day + "&airpress=" + data.pressure + "&wind_strength=" + data.speed
+                            + "&whight=" + whight + "&clouds=" + data.clouds + "&rain=" + data.rain + "&wind_direction=" + data.deg + "&wave_direction=" + wave_direction;
+                    handleWeatherForm(urlString, true);
+                } else if (target == "box") {
+                    $("#tempData").text(data.temp.day.toFixed(0) + "°");
+                    $("#tempDataMax").text("H: " + data.temp.max.toFixed(0) + "°");
+                    $("#tempDataMin").text("L: " + data.temp.min.toFixed(0) + "°");
+                    $("#airPressData").text(data.pressure.toFixed(2) + " hPa");
+                    $("#windStrData").text(bftIdToBftDescription(data.speed));
+                    $("#windDirData").text(SkyDirToSkyDirDescription(data.deg));
+                    $("#rainData").text(rainIdTorainDescription(data.rain));
+                    $("#cloudsData").text(CloudIdToDescription(data.clouds));
+                    $("#nameData").text(data.name);
+                    $("#weatherDisplayBox").css("background-image", "url(../../../css/img/icons/weather_icons/" + getWeatherIcon(data.dt, data.temp.day.toFixed(0), CloudIdToDescription(data.clouds), rainIdTorainDescription(data.rain)) + ".png)");
+                }
+            } else {
+                //fill forecast box;
+            }
+
         }
     });
 }
@@ -123,74 +125,81 @@ function handleWeather(time, target, timespan) {
  * 
  * 
  */
-function correctWeatherData(data){
-	var newData = {};
-	var list = [];
-	newData.list = list;
-	if(data.wind){
-		var listElement = {};
-		listElement.dt = data.dt;
-		listElement.clouds = percentToCloud(data.clouds.all);//Percent
-		var rain = 1;
-		if (data.rain) {
-			listElement.rain = mm3ToMM(data.rain);
-		} else if (data.snow) {
-			listElement.rain = mm3ToMM(data.snow);
-		}
-		listElement.deg = dagreeToSkyDir(data.wind.deg);//degree
-		listElement.speed = kmhToBftId(data.wind.speed);
-		listElement.pressure = data.main.pressure;
-		listElement.humidity = data.main.humidity;
-		listElement.temp = {};
-		listElement.temp.day = data.main.temp;
-		listElement.temp.min = data.main.temp_min;
-		listElement.temp.max = data.main.temp_max;
-		list.push(listElement);
-	}else{
-		for(var i in data.list){
-			var listElement = {};
-			if(data.list[i].main){
-				listElement.clouds = percentToCloud(data.list[i].clouds.all);//Percent
-				var rain = 1;
-				if (data.list[i].rain) {
-					listElement.rain = mm3ToMM(data.list[i].rain);
-				} else if (data.snow) {
-					listElement.rain = mm3ToMM(data.list[i].snow);
-				}
-				listElement.deg = dagreeToSkyDir(data.list[i].wind.deg);//degree
-				listElement.speed = kmhToBftId(data.list[i].wind.speed);
-				listElement.pressure = data.list[i].main.pressure;
-				listElement.humidity = data.list[i].main.humidity;
-				listElement.temp = {};
-				listElement.temp.day = data.list[i].main.temp;
-				listElement.temp.min = data.list[i].main.temp_min;
-				listElement.temp.max = data.list[i].main.temp_max;
-			}else{
-				listElement.clouds = percentToCloud(data.list[i].clouds);//Percent
-				var rain = 1;
-				if (data.list[i].rain) {
-					listElement.rain = mm3ToMM(data.list[i].rain);
-				} else if (data.list[i].snow) {
-					listElement.rain = mm3ToMM(data.list[i].snow);
-				}
-				listElement.deg = dagreeToSkyDir(data.list[i].deg);//degree
-				listElement.speed = data.list[i].speed;
-				listElement.pressure = data.list[i].pressure;
-				listElement.humidity = data.list[i].humidity;
-				listElement.temp.day = data.list[i].temp.day;
-				listElement.temp.min = data.list[i].temp.min;
-				listElement.temp.max = data.list[i].temp.max;
-				if(data.list[i].temp.night && data.list[i].temp.eve && data.list[i].temp.morn){
-					listElement.temp.night = data.list[i].temp.night;
-					listElement.temp.eve = data.list[i].temp.eve;
-					listElement.temp.morn = data.list[i].temp.morn;
-				}
-			}
+function correctWeatherData(data) {
+    var newData = {};
+    var list = [];
+    newData.list = list;
+    if (data.wind) {
+        var listElement = {};
+        listElement.dt = data.dt;
+        listElement.name = data.name;
+        listElement.clouds = percentToCloud(data.clouds.all);//Percent
+        var rain = 1;
+        if (data.rain) {
+            listElement.rain = mm3ToMM(data.rain);
+        } else if (data.snow) {
+            listElement.rain = mm3ToMM(data.snow);
+        }
+        listElement.deg = dagreeToSkyDir(data.wind.deg);//degree
+        listElement.speed = kmhToBftId(data.wind.speed);
+        listElement.pressure = data.main.pressure;
+        listElement.humidity = data.main.humidity;
+        listElement.temp = {};
+        listElement.temp.day = data.main.temp;
+        listElement.temp.min = data.main.temp_min;
+        listElement.temp.max = data.main.temp_max;
+        list.push(listElement);
+    } else {
+        for (var i in data.list) {
+            var listElement = {};
+            if (data.list[i].main) {
+                listElement.clouds = percentToCloud(data.list[i].clouds.all);//Percent
+                var rain = 1;
+                if (data.list[i].rain) {
+                    listElement.rain = mm3ToMM(data.list[i].rain);
+                } else if (data.snow) {
+                    listElement.rain = mm3ToMM(data.list[i].snow);
+                }
+                listElement.deg = dagreeToSkyDir(data.list[i].wind.deg);//degree
+                listElement.speed = kmhToBftId(data.list[i].wind.speed);
+                listElement.pressure = data.list[i].main.pressure;
+                listElement.humidity = data.list[i].main.humidity;
+                listElement.temp = {};
+                listElement.temp.day = data.list[i].main.temp;
+                listElement.temp.min = data.list[i].main.temp_min;
+                listElement.temp.max = data.list[i].main.temp_max;
+                listElement.name = data.list[i].main.name;
+                listElement.dt = data.list[i].main.dt;
 
-			list.push(listElement);
-		}
-	}console.log(newData);
-	return newData;
+            } else {
+                listElement.clouds = percentToCloud(data.list[i].clouds);//Percent
+                var rain = 1;
+                if (data.list[i].rain) {
+                    listElement.rain = mm3ToMM(data.list[i].rain);
+                } else if (data.list[i].snow) {
+                    listElement.rain = mm3ToMM(data.list[i].snow);
+                }
+                listElement.deg = dagreeToSkyDir(data.list[i].deg);//degree
+                listElement.speed = data.list[i].speed;
+                listElement.pressure = data.list[i].pressure;
+                listElement.humidity = data.list[i].humidity;
+                listElement.temp.day = data.list[i].temp.day;
+                listElement.temp.min = data.list[i].temp.min;
+                listElement.temp.max = data.list[i].temp.max;
+                listElement.name = data.list[i].name;
+                listElement.dt = data.list[i].dt;
+                if (data.list[i].temp.night && data.list[i].temp.eve && data.list[i].temp.morn) {
+                    listElement.temp.night = data.list[i].temp.night;
+                    listElement.temp.eve = data.list[i].temp.eve;
+                    listElement.temp.morn = data.list[i].temp.morn;
+                }
+            }
+
+            list.push(listElement);
+        }
+    }
+    console.log(newData);
+    return newData;
 }
 
 function dagreeToSkyDir(deg) {
@@ -214,7 +223,7 @@ function dagreeToSkyDir(deg) {
 }
 
 function SkyDirToSkyDirDescription(id) {
-    switch(id) {
+    switch (id) {
         case 1:
             return "undefiniert";
             break;
@@ -254,12 +263,12 @@ function mm3ToMM(mm) {
         return 3;
     if (mm < 10)
         return 4;
-    else
+    if (mm > 10)
         return 5;
 }
 
 function rainIdTorainDescription(id) {
-            switch(id) {
+    switch (id) {
         case 1:
             return "Kein Regen";
             break;
@@ -304,7 +313,7 @@ function percentToCloud(perc) {
 }
 
 function CloudIdToDescription(id) {
-        switch(id) {
+    switch (id) {
         case 1:
             return "undefiniert";
             break;
@@ -373,7 +382,7 @@ function kmhToBftId(kmh) {
 }
 
 function bftIdToBftDescription(id) {
-            switch(id) {
+    switch (id) {
         case 1:
             return "undefiniert";
             break;
@@ -418,4 +427,69 @@ function bftIdToBftDescription(id) {
             break;
         default:
     }
+}
+
+function getWeatherIcon(dt, temp, cloud, rain) {
+    /*
+     var date = new Date(dt*1000);
+     var hours = date.getHours();
+     var minutes = date.getMinutes();
+     var seconds = date.getSeconds();
+     */
+    var icon = "D";
+    switch (cloud) {
+        case "wolkenlos":
+            icon = icon + "_1";
+            break;
+        case "sonnig":
+            icon = icon + "_1";
+            break;
+        case "heiter":
+            icon = icon + "_1";
+            break;
+        case "leicht bewölkt":
+            icon = icon + "_2";
+            break;
+        case "wolkig":
+            icon = icon + "_3";
+            break;
+        case "bewölkt":
+            icon = icon + "_4";
+            break;
+        case "stark bewölkt":
+            icon = icon + "_4";
+            break;
+        case "fast bedeckt":
+            icon = icon + "_4";
+            break;
+        case "bedeckt":
+            icon = icon + "_4";
+            break;
+        case "Himmel nicht erkennbar":
+            icon = icon + "_4";
+            break;
+        default:
+    }
+    
+    switch(rain)
+    {
+        case "Kein Regen":
+            icon = icon + "_0";
+            break;
+        case "Leichter Regen":
+            icon = icon + "_1";
+            break;
+        case "Gemäßigter Regen":
+            icon = icon + "_2";
+            break;
+        case "Starker Regen":
+            icon = icon + "_3";
+            break;
+        case "Heftiger Regen":
+            icon = icon + "_4";
+            break;
+        default:
+    }
+    
+    return "D_1_0";
 }

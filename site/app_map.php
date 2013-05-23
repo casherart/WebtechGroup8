@@ -72,15 +72,19 @@
                     <button class="btn btn-info span1">7 Tage</button>
                 </div>
                 <div id="weatherDisplayTop">
-                    <div id="tempDataMax" class="data" style="padding-left: 50px;"></div>
-                    <div id="tempDataMin" class="data" style="padding-left: 50px; float: left; padding-top: 20px;"></div>
+                    <div align="center" style="width: 140px; height: 80px; float: left;">
+                        <div id="tempDataMax" class="data" style=""></div>
+                        <div id="nameData" class="data" style=""></div>
+                        <div id="tempDataMin" class="data" style=""></div>
+                    </div>
                     <div id="tempData" class="data" style=""></div>
                 </div>
+                <div class="clearfix"></div>
                 <div id="weatherDisplayBottom">
                     <div align="center" id="state">
-                        <span id="rainData" class="data"></span>
-                        und 
                         <span id="cloudsData" class="data"></span>
+                        und
+                        <span id="rainData" class="data"></span>
                     </div>
                     <span class="span2">
                         Luftdruck:
