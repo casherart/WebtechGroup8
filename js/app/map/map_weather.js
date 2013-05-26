@@ -129,7 +129,7 @@ function correctWeatherData(data) {
     var newData = {};
     var list = [];
     newData.list = list;
-    if (data.wind) {
+    if (data.wind) {console.log("asd");
         var listElement = {};
         listElement.dt = data.dt;
         listElement.name = data.name;
@@ -198,7 +198,6 @@ function correctWeatherData(data) {
             list.push(listElement);
         }
     }
-    console.log(newData);
     return newData;
 }
 
@@ -256,6 +255,11 @@ function SkyDirToSkyDirDescription(id) {
 }
 
 function mm3ToMM(mm) {
+	if(mm.hasOwnProperty("1h")){
+		mm = mm["1h"];		
+	}else{
+		return 1;
+	}
     mm /= 3;
     if (mm < 0.5)
         return 2;
