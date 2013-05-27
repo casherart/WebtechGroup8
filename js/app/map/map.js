@@ -201,11 +201,31 @@ function initialize() {
                     $("#bft_scale").fadeIn("slow");
 
             } else {
-                // city level (weatherbox)
-            	handleWeather(null, "box");
-                $("#weatherDisplayBox").fadeIn("slow");
-                $("#weatherBar").slideUp("slow");
-                $("#bft_scale").fadeOut("slow");
+                if ($("#now").hasClass("active"))
+                {
+                    // city level (weatherbox)
+                    handleWeather(null, "box");
+                    $("#weatherDisplayBox").fadeIn("slow");
+                    $("#weatherBar").slideUp("slow");
+                    $("#bft_scale").fadeOut("slow");
+                }
+                else if ($("#today").hasClass("active"))
+                {
+                    $("#tempData").text("HEUTE");
+                }
+                else if ($("#tomorrow").hasClass("active"))
+                {
+                    $("#tempData").text("MORGEN");
+                }
+                else if ($("#3days").hasClass("active"))
+                {
+                    $("#tempData").text("3TAGE");
+                }
+                else if ($("#7days").hasClass("active"))
+                {
+                    $("#tempData").text("7TAGE");
+                }
+
             }
         } else {
             // hide weatherbox
@@ -237,7 +257,7 @@ function initialize() {
         if (map.getMapTypeId() === 'weather') {
             // weatherbox city level
             if (map.getZoom() > 7) {
-            	handleWeather(null, "box");
+                handleWeather(null, "box");
                 $("#weatherBar").slideUp("slow");
                 $("#weatherDisplayBox").fadeIn("slow");
             } else {
@@ -330,7 +350,7 @@ $(function() {
                 temporaryMarkerInfobox.setMap(null);
 
             } else if (key == "weather") {
-            	handleWeather(currentPositionMarker.position);
+                handleWeather(currentPositionMarker.position);
             }
         },
         items: {
@@ -360,7 +380,7 @@ $(function() {
                 fixedMarkerArray.splice(fixedMarkerArray.indexOf(selectedMarker), 1);
 
             } else if (key == "weather") {
-            	handleWeather(currentPositionMarker.position);
+                handleWeather(currentPositionMarker.position);
             }
         },
         items: {
@@ -529,34 +549,36 @@ function toggleFollowCurrentPosition() {
     document.getElementById('followCurrentPositionContainer').style.width = document.body.offsetWidth + "px";
 }
 
-function followBoatPosition(boatID){
-	console.log("1")
-	var boatID = boatID || 1;
-	var timestamp = timestamp || new Date().getTime();
-	console.log("2")
-	$.ajax({
-		type : 'get',
-		url : "../server/getBoatPosition.php?boardId="+boatID,
-		dataType : 'json', 
-		data : {'timestamp' : timestamp},
-		success : function(response) {
-			console.log("3")
-			timestamp = response.timestamp;			
-			map.setCenter(new google.maps.LatLng(response.lat, response.lon));
-			noerror = true;
-		},
-		complete : function(response) {			
-			console.log("4")
-			console.log(response.responseText);
-			// send a new ajax request when this request is finished
-			if (!self.noerror) {
-				// if a connection problem occurs, try to reconnect each 5 seconds
-				setTimeout(function(){ followBoatPosition(boatID); }, 5000);
-			} else {
-				// persistent connection
-				connect(); 
-			}
-			noerror = false; 
-		}
-	});
+function followBoatPosition(boatID) {
+    console.log("1")
+    var boatID = boatID || 1;
+    var timestamp = timestamp || new Date().getTime();
+    console.log("2")
+    $.ajax({
+        type: 'get',
+        url: "../server/getBoatPosition.php?boardId=" + boatID,
+        dataType: 'json',
+        data: {'timestamp': timestamp},
+        success: function(response) {
+            console.log("3")
+            timestamp = response.timestamp;
+            map.setCenter(new google.maps.LatLng(response.lat, response.lon));
+            noerror = true;
+        },
+        complete: function(response) {
+            console.log("4")
+            console.log(response.responseText);
+            // send a new ajax request when this request is finished
+            if (!self.noerror) {
+                // if a connection problem occurs, try to reconnect each 5 seconds
+                setTimeout(function() {
+                    followBoatPosition(boatID);
+                }, 5000);
+            } else {
+                // persistent connection
+                connect();
+            }
+            noerror = false;
+        }
+    });
 }
