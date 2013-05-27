@@ -57,7 +57,6 @@ function handleWeather(time, target, timespan) {
     /*
      * get Weather data from Position and create urlString with correct data.
      */
-
     var lat = map.getCenter().lat();
     var lon = map.getCenter().lng();
     var time = time || "weather"; //forcast (3h) //forecast/daily (x daxs max 14)
@@ -129,7 +128,7 @@ function correctWeatherData(data) {
     var newData = {};
     var list = [];
     newData.list = list;
-    if (data.wind) {console.log("asd");
+    if (data.wind) {
         var listElement = {};
         listElement.dt = data.dt;
         listElement.name = data.name;
@@ -168,8 +167,8 @@ function correctWeatherData(data) {
                 listElement.temp.day = data.list[i].main.temp;
                 listElement.temp.min = data.list[i].main.temp_min;
                 listElement.temp.max = data.list[i].main.temp_max;
-                listElement.name = data.list[i].main.name;
-                listElement.dt = data.list[i].main.dt;
+                listElement.name = data.city.name;
+                listElement.dt = data.list[i].dt;
 
             } else {
                 listElement.clouds = percentToCloud(data.list[i].clouds);//Percent
@@ -183,10 +182,11 @@ function correctWeatherData(data) {
                 listElement.speed = data.list[i].speed;
                 listElement.pressure = data.list[i].pressure;
                 listElement.humidity = data.list[i].humidity;
+                listElement.temp = {};
                 listElement.temp.day = data.list[i].temp.day;
                 listElement.temp.min = data.list[i].temp.min;
                 listElement.temp.max = data.list[i].temp.max;
-                listElement.name = data.list[i].name;
+                listElement.name = data.city.name;
                 listElement.dt = data.list[i].dt;
                 if (data.list[i].temp.night && data.list[i].temp.eve && data.list[i].temp.morn) {
                     listElement.temp.night = data.list[i].temp.night;
