@@ -219,13 +219,12 @@ function initialize() {
                 }
                 else if ($("#3days").hasClass("active"))
                 {
-                    $("#tempData").text("3TAGE");
+                    handleWeather("forecast/daily", "box");
                 }
                 else if ($("#7days").hasClass("active"))
                 {
                     $("#tempData").text("7TAGE");
                 }
-
             }
         } else {
             // hide weatherbox
@@ -318,6 +317,23 @@ $('.weat').click(function() {
     }
 });
 
+// tabs for weatherbox
+$('#today').click(function() {
+    handleWeather(null, "box");
+});
+$("#today").click(function() {
+    $("#tempData").text("HEUTE");
+});
+$("#tomorrow").click(function() {
+    $("#tempData").text("MORGEN");
+});
+$("#3days").click(function() {
+    handleWeather("forecast/daily", "box");
+});
+$("#7days").click(function() {
+    $("#tempData").text("7TAGE");
+});
+
 // temporary marker context menu ----------------------------------------- //
 $(function() {
     $.contextMenu({
@@ -336,19 +352,15 @@ $(function() {
             } else if (key == "startroute") {
 
                 startNewRoute(temporaryMarker.position, false);
-
             } else if (key == "distance") {
 
                 startNewRoute(temporaryMarker.position, true);
-
             } else if (key == "destination") {
 
                 startNewNavigation(currentPositionMarker.position, temporaryMarker.position);
-
             } else if (key == "delete") {
                 temporaryMarker.setMap(null);
                 temporaryMarkerInfobox.setMap(null);
-
             } else if (key == "weather") {
                 handleWeather(currentPositionMarker.position);
             }
@@ -364,7 +376,6 @@ $(function() {
         }
     });
 });
-
 // fixed marker context menu ------------------------------------------------ //
 $(function() {
     $.contextMenu({
@@ -373,12 +384,10 @@ $(function() {
             if (key == "destination") {
 
                 startNewNavigation(currentPositionMarker.position, selectedMarker.reference.position);
-
             } else if (key == "delete") {
                 selectedMarker.reference.setMap(null);
                 selectedMarker.infobox.setMap(null);
                 fixedMarkerArray.splice(fixedMarkerArray.indexOf(selectedMarker), 1);
-
             } else if (key == "weather") {
                 handleWeather(currentPositionMarker.position);
             }
@@ -391,7 +400,6 @@ $(function() {
         }
     });
 });
-
 // helper functions --------------------------------------------------------- //
 
 // start marker timout
@@ -444,7 +452,7 @@ function setTemporaryMarker(position) {
         draggable: true
     }
 
-    // delete temp marker & infobox
+// delete temp marker & infobox
     if (temporaryMarker != null) {
         temporaryMarker.setMap(null);
     }
@@ -454,34 +462,28 @@ function setTemporaryMarker(position) {
 
     stopTimeout();
     temporaryMarker = new google.maps.Marker(temporaryMarkerOptions);
-
     // click on marker
     google.maps.event.addListener(temporaryMarker, 'click', function(event) {
         var pixel = fromLatLngToPixel(event.latLng);
-
         if (currentMode != MODE.NAVIGATION) {
             $('#temporaryMarkerContextMenu').contextMenu({x: pixel.x, y: pixel.y});
         }
 
         stopTimeout();
     });
-
     // marker is dragged
     google.maps.event.addListener(temporaryMarker, 'drag', function(event) {
         temporaryMarkerInfobox.setMap(null);
         temporaryMarkerInfobox = drawTemporaryMarkerInfobox(event.latLng);
     });
-
     // marker drag start
     google.maps.event.addListener(temporaryMarker, 'dragstart', function(event) {
         stopTimeout();
     });
-
     // marker drag end
     google.maps.event.addListener(temporaryMarker, 'dragend', function(event) {
         startTimeout();
     });
-
     startTimeout();
     temporaryMarkerInfobox = drawTemporaryMarkerInfobox(position);
 }
@@ -491,7 +493,6 @@ function setFixedMarker(position) {
     temporaryMarker.setMap(null);
     temporaryMarkerInfobox.setMap(null);
     stopTimeout();
-
     fixedMarkerCount++;
     var fixedMarkerOptions = {
         position: position,
@@ -502,24 +503,20 @@ function setFixedMarker(position) {
     }
 
     fixedMarker = new google.maps.Marker(fixedMarkerOptions);
-
     // click on fixed marker
     google.maps.event.addListener(fixedMarker, 'click', function(event) {
         selectedMarker = getMarkerWithInfobox(event);
         var pixel = fromLatLngToPixel(event.latLng);
-
         if (currentMode != MODE.NAVIGATION) {
             $('#fixedMarkerContextMenu').contextMenu({x: pixel.x, y: pixel.y});
         }
     });
-
     // marker is dragged
     google.maps.event.addListener(fixedMarker, 'drag', function(event) {
         selectedMarker = getMarkerWithInfobox(event);
         selectedMarker.infobox.setMap(null);
         selectedMarker.infobox = drawFixedMarkerInfobox(event.latLng, selectedMarker.counter);
     });
-
     fixedMarker.setMap(map);
     fixedMarkerInfoBox = drawFixedMarkerInfobox(temporaryMarker.position, fixedMarkerCount);
     fixedMarkerArray.push(new MarkerWithInfobox(fixedMarker, fixedMarkerInfoBox, fixedMarkerCount));
@@ -570,12 +567,12 @@ function followBoatPosition(boatID) {
             console.log(response.responseText);
             // send a new ajax request when this request is finished
             if (!self.noerror) {
-                // if a connection problem occurs, try to reconnect each 5 seconds
+// if a connection problem occurs, try to reconnect each 5 seconds
                 setTimeout(function() {
                     followBoatPosition(boatID);
                 }, 5000);
             } else {
-                // persistent connection
+// persistent connection
                 connect();
             }
             noerror = false;
