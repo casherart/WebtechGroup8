@@ -557,7 +557,7 @@ function getWeatherWarning() {
             timestamp = response.timestamp;
             if(response.warningLevel == 10){
             	document.body.style.backgroundColor = "red";
-            }else if(response.warningLevel > 9){
+            }else if(response.warningLevel > 7){
             	document.body.style.backgroundColor = "yellow";
             }else if(response.warningLevel < 3){
             	document.body.style.backgroundColor = "white";
@@ -569,7 +569,7 @@ function getWeatherWarning() {
             if (!self.noerror) {
 // if a connection problem occurs, try to reconnect each 5 seconds
                 setTimeout(function() {
-                    followBoatPosition(boatID);
+                	getWeatherWarning();
                 }, 5000);
             } else {
 // persistent connection
