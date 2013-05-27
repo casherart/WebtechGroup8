@@ -555,9 +555,9 @@ function getWeatherWarning() {
         data: {'timestamp': timestamp},
         success: function(response) {
             timestamp = response.timestamp;
-            if(response.warningLevel == 10){
+            if(response.warningLevel > 90){
             	document.body.style.backgroundColor = "red";
-            }else if(response.warningLevel > 9){
+            }else if(response.warningLevel > 75){
             	document.body.style.backgroundColor = "yellow";
             }else if(response.warningLevel < 3){
             	document.body.style.backgroundColor = "white";
