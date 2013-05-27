@@ -211,11 +211,11 @@ function initialize() {
                 }
                 else if ($("#today").hasClass("active"))
                 {
-                    $("#tempData").text("HEUTE");
+                    handleWeather("forecast", "box");
                 }
                 else if ($("#tomorrow").hasClass("active"))
                 {
-                    $("#tempData").text("MORGEN");
+                    handleWeather("forecast/daily", "box");
                 }
                 else if ($("#3days").hasClass("active"))
                 {
@@ -223,7 +223,7 @@ function initialize() {
                 }
                 else if ($("#7days").hasClass("active"))
                 {
-                    $("#tempData").text("7TAGE");
+                    handleWeather("forecast/daily", "box");
                 }
             }
         } else {
@@ -318,20 +318,20 @@ $('.weat').click(function() {
 });
 
 // tabs for weatherbox
-$('#today').click(function() {
+$('#now').click(function() {
     handleWeather(null, "box");
 });
 $("#today").click(function() {
-    $("#tempData").text("HEUTE");
+    handleWeather("forecast", "box");
 });
 $("#tomorrow").click(function() {
-    $("#tempData").text("MORGEN");
+    handleWeather("forecast/daily", "box");
 });
 $("#3days").click(function() {
     handleWeather("forecast/daily", "box");
 });
 $("#7days").click(function() {
-    $("#tempData").text("7TAGE");
+    handleWeather("forecast/daily", "box");
 });
 
 // temporary marker context menu ----------------------------------------- //

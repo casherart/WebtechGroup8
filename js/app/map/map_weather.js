@@ -69,6 +69,7 @@ function handleWeather(time, target, timespan) {
         type: "GET", dataType: 'jsonp',
         crossDomain: true
     }).done(function(data) {
+        console.log(data);
         if (data) {
             data = correctWeatherData(data);
             if (time == "weather") {
@@ -92,7 +93,63 @@ function handleWeather(time, target, timespan) {
                     $("#weatherDisplayBox").css("background-image", "url(../../../css/img/icons/weather_icons/" + getWeatherIcon(data.dt, data.temp.day.toFixed(0), CloudIdToDescription(data.clouds), rainIdTorainDescription(data.rain)) + ".png)");
                 }
             } else {
-                //fill forecast box;
+                if($("#today").hasClass("active"))
+                {
+                    $("#tempData").text(data.list[1].temp.day.toFixed(0) + "°");
+                    $("#tempDataMax").text("H: " + data.list[1].temp.max.toFixed(0) + "°");
+                    $("#tempDataMin").text("L: " + data.list[1].temp.min.toFixed(0) + "°");
+                    $("#airPressData").text(data.list[1].pressure.toFixed(0) + " hPa");
+                    $("#windStrData").text(bftIdToBftDescription(data.list[1].speed));
+                    $("#windDirData").text(SkyDirToSkyDirDescription(data.list[1].deg));
+                    $("#rainData").text(", " + rainIdTorainDescription(data.list[1].rain));
+                    $("#cloudsData").text(CloudIdToDescription(data.list[1].clouds));
+                    $("#nameData").text(data.list[1].name);
+                    $("#weatherDisplayBox").css("background-image", "url(../../../css/img/icons/weather_icons/" + getWeatherIcon(data.list[1].dt, data.list[1].temp.day.toFixed(0), CloudIdToDescription(data.list[1].clouds), rainIdTorainDescription(data.list[1].rain)) + ".png)");
+                    
+                }
+                else if ($("#tomorrow").hasClass(("active")))
+                {
+                                        //3 days forecast box;
+                    $("#tempData").text(data.list[1].temp.day.toFixed(0) + "°");
+                    $("#tempDataMax").text("H: " + data.list[1].temp.max.toFixed(0) + "°");
+                    $("#tempDataMin").text("L: " + data.list[1].temp.min.toFixed(0) + "°");
+                    $("#airPressData").text(data.list[1].pressure.toFixed(1) + " hPa");
+                    $("#windStrData").text(bftIdToBftDescription(data.list[1].speed));
+                    $("#windDirData").text(SkyDirToSkyDirDescription(data.list[1].deg));
+                    $("#rainData").text(", " + rainIdTorainDescription(data.list[1].rain));
+                    $("#cloudsData").text(CloudIdToDescription(data.list[1].clouds));
+                    $("#nameData").text(data.list[1].name);
+                    $("#weatherDisplayBox").css("background-image", "url(../../../css/img/icons/weather_icons/" + getWeatherIcon(data.list[1].dt, data.list[1].temp.day.toFixed(0), CloudIdToDescription(data.list[1].clouds), rainIdTorainDescription(data.list[1].rain)) + ".png)");
+                        
+                }
+                else if ($("#3days").hasClass("active"))
+                {
+                    //3 days forecast box;
+                    $("#tempData").text(data.list[2].temp.day.toFixed(0) + "°");
+                    $("#tempDataMax").text("H: " + data.list[2].temp.max.toFixed(0) + "°");
+                    $("#tempDataMin").text("L: " + data.list[2].temp.min.toFixed(0) + "°");
+                    $("#airPressData").text(data.list[2].pressure.toFixed(2) + " hPa");
+                    $("#windStrData").text(bftIdToBftDescription(data.list[2].speed));
+                    $("#windDirData").text(SkyDirToSkyDirDescription(data.list[2].deg));
+                    $("#rainData").text(", " + rainIdTorainDescription(data.list[2].rain));
+                    $("#cloudsData").text(CloudIdToDescription(data.list[2].clouds));
+                    $("#nameData").text(data.list[2].name);
+                    $("#weatherDisplayBox").css("background-image", "url(../../../css/img/icons/weather_icons/" + getWeatherIcon(data.list[2].dt, data.list[2].temp.day.toFixed(0), CloudIdToDescription(data.list[2].clouds), rainIdTorainDescription(data.list[2].rain)) + ".png)");
+                }
+                else if ($("#7days").hasClass("active"))
+                {
+                    //3 days forecast box;
+                    $("#tempData").text(data.list[6].temp.day.toFixed(0) + "°");
+                    $("#tempDataMax").text("H: " + data.list[6].temp.max.toFixed(0) + "°");
+                    $("#tempDataMin").text("L: " + data.list[6].temp.min.toFixed(0) + "°");
+                    $("#airPressData").text(data.list[6].pressure.toFixed(2) + " hPa");
+                    $("#windStrData").text(bftIdToBftDescription(data.list[6].speed));
+                    $("#windDirData").text(SkyDirToSkyDirDescription(data.list[6].deg));
+                    $("#rainData").text(", " + rainIdTorainDescription(data.list[6].rain));
+                    $("#cloudsData").text(CloudIdToDescription(data.list[6].clouds));
+                    $("#nameData").text(data.list[6].name);
+                    $("#weatherDisplayBox").css("background-image", "url(../../../css/img/icons/weather_icons/" + getWeatherIcon(data.list[6].dt, data.list[6].temp.day.toFixed(0), CloudIdToDescription(data.list[6].clouds), rainIdTorainDescription(data.list[6].rain)) + ".png)");
+                }
             }
 
         }
@@ -255,11 +312,11 @@ function SkyDirToSkyDirDescription(id) {
 }
 
 function mm3ToMM(mm) {
-	if(mm.hasOwnProperty("1h")){
-		mm = mm["1h"];		
-	}else{
-		return 1;
-	}
+    if (mm.hasOwnProperty("1h")) {
+        mm = mm["1h"];
+    } else {
+        return 1;
+    }
     mm /= 3;
     if (mm < 0.5)
         return 2;
@@ -490,7 +547,7 @@ function getWeatherIcon(dt, temp, cloud, rain) {
     return icon;
 }
 
-function checkRain(icon, rain) {        
+function checkRain(icon, rain) {
     if (rain === "Leichter Regen")
         icon = "_5";
     else if (rain === "Gemäßigter Regen")
