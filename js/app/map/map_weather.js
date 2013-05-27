@@ -68,7 +68,6 @@ function handleWeather(time, target, timespan) {
         type: "GET", dataType: 'jsonp',
         crossDomain: true
     }).done(function(data) {
-        console.log(data);
         if (data) {
             data = correctWeatherData(data);
             if (time == "weather") {
