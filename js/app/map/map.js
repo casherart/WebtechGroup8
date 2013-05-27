@@ -546,25 +546,25 @@ function toggleFollowCurrentPosition() {
     document.getElementById('followCurrentPositionContainer').style.width = document.body.offsetWidth + "px";
 }
 
-function followBoatPosition(boatID) {
-    console.log("1")
-    var boatID = boatID || 1;
+function getWeatherWarning() {
     var timestamp = timestamp || new Date().getTime();
-    console.log("2")
     $.ajax({
         type: 'get',
-        url: "../server/getBoatPosition.php?boardId=" + boatID,
+        url: "../server/getWeatherWarning.php",
         dataType: 'json',
         data: {'timestamp': timestamp},
         success: function(response) {
-            console.log("3")
             timestamp = response.timestamp;
-            map.setCenter(new google.maps.LatLng(response.lat, response.lon));
+            if(response.warningLevel == 10){
+            	document.body.style.backgroundColor = "red";
+            }else if(response.warningLevel > 9){
+            	document.body.style.backgroundColor = "yellow";
+            }else if(response.warningLevel < 3){
+            	document.body.style.backgroundColor = "white";
+            }
             noerror = true;
         },
         complete: function(response) {
-            console.log("4")
-            console.log(response.responseText);
             // send a new ajax request when this request is finished
             if (!self.noerror) {
 // if a connection problem occurs, try to reconnect each 5 seconds
@@ -573,7 +573,7 @@ function followBoatPosition(boatID) {
                 }, 5000);
             } else {
 // persistent connection
-                connect();
+            	getWeatherWarning();
             }
             noerror = false;
         }
