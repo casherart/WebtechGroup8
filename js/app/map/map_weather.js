@@ -63,7 +63,6 @@ function handleWeather(time, target, timespan) {
     var target = target || "log";
     var timespan = timespan || null;
     var timespanString = (timespan != null ? "cnt=" + timespan : "");//if forecast && empty -> 3 hours else param in days
-
     $.ajax({
         url: "http://api.openweathermap.org/data/2.5/" + time + "?mode=json&units=metric&lat=" + lat + "&lon=" + lon + timespanString,
         type: "GET", dataType: 'jsonp',
@@ -187,7 +186,8 @@ function correctWeatherData(data) {
     newData.list = list;
     if (data.wind) {
         var listElement = {};
-        listElement.dt = data.dt;
+        var date = new Date(data.dt*1000);
+        listElement.dt = date.toLocaleString();
         listElement.name = data.name;
         listElement.clouds = percentToCloud(data.clouds.all);//Percent
         var rain = 1;
@@ -225,7 +225,8 @@ function correctWeatherData(data) {
                 listElement.temp.min = data.list[i].main.temp_min;
                 listElement.temp.max = data.list[i].main.temp_max;
                 listElement.name = data.city.name;
-                listElement.dt = data.list[i].dt;
+                var date = new Date(data.list[i].dt*1000);
+                listElement.dt = date.toLocaleString();
 
             } else {
                 listElement.clouds = percentToCloud(data.list[i].clouds);//Percent
@@ -244,7 +245,8 @@ function correctWeatherData(data) {
                 listElement.temp.min = data.list[i].temp.min;
                 listElement.temp.max = data.list[i].temp.max;
                 listElement.name = data.city.name;
-                listElement.dt = data.list[i].dt;
+                var date = new Date(data.list[i].dt*1000);
+                listElement.dt = date.toLocaleString();
                 if (data.list[i].temp.night && data.list[i].temp.eve && data.list[i].temp.morn) {
                     listElement.temp.night = data.list[i].temp.night;
                     listElement.temp.eve = data.list[i].temp.eve;
