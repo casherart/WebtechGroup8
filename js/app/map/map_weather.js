@@ -71,6 +71,7 @@ function handleWeather(time, target, timespan) {
         if (data) {
             data = correctWeatherData(data);
             if (time == "weather") {
+            	console.log(data);
                 data = data.list[0];
                 if (target == "log") {
                     var wave_direction = 1;
@@ -132,12 +133,13 @@ function correctWeatherData(data) {
         var date = new Date(data.dt*1000);
         listElement.dt = date.toLocaleString();
         listElement.name = data.name;
-        listElement.clouds = percentToCloud(data.clouds.all);//Percent
-        var rain = 1;
+        listElement.clouds = percentToCloud(data.clouds.all);//Percent        
         if (data.rain) {
             listElement.rain = mm3ToMM(data.rain);
         } else if (data.snow) {
             listElement.rain = mm3ToMM(data.snow);
+        }else{
+        	listElement.rain = 1;
         }
         listElement.deg = dagreeToSkyDir(data.wind.deg);//degree
         listElement.speed = kmhToBftId(data.wind.speed);
@@ -153,11 +155,13 @@ function correctWeatherData(data) {
             var listElement = {};
             if (data.list[i].main) {
                 listElement.clouds = percentToCloud(data.list[i].clouds.all);//Percent
-                var rain = 1;
+                
                 if (data.list[i].rain) {
                     listElement.rain = mm3ToMM(data.list[i].rain);
                 } else if (data.snow) {
                     listElement.rain = mm3ToMM(data.list[i].snow);
+                }else{
+                	listElement.rain = 1;
                 }
                 listElement.deg = dagreeToSkyDir(data.list[i].wind.deg);//degree
                 listElement.speed = kmhToBftId(data.list[i].wind.speed);
@@ -173,11 +177,13 @@ function correctWeatherData(data) {
 
             } else {
                 listElement.clouds = percentToCloud(data.list[i].clouds);//Percent
-                var rain = 1;
+                
                 if (data.list[i].rain) {
                     listElement.rain = mm3ToMM(data.list[i].rain);
                 } else if (data.list[i].snow) {
                     listElement.rain = mm3ToMM(data.list[i].snow);
+                }else{
+                	listElement.rain = 1;
                 }
                 listElement.deg = dagreeToSkyDir(data.list[i].deg);//degree
                 listElement.speed = data.list[i].speed;
@@ -273,24 +279,26 @@ function mm3ToMM(mm) {
         return 5;
 }
 
-function rainIdTorainDescription(id) {
+function rainIdTorainDescription(id) {	
     switch (id) {
         case 1:
-            return "Kein Regen";
+            return "kein Regen";
             break;
         case 2:
-            return "Leichter Regen";
+            return "leichter Regen";
             break;
         case 3:
-            return "Gemäßigter Regen";
+            return "gemäßigter Regen";
             break;
         case 4:
-            return "Starker Regen";
+            return "starker Regen";
             break;
         case 5:
-            return "Heftiger Regen";
+            return "heftiger Regen";
             break;
         default:
+        	return "";
+        	break;
     }
 }
 
