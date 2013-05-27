@@ -68,10 +68,10 @@ function handleWeather(time, target, timespan) {
         type: "GET", dataType: 'jsonp',
         crossDomain: true
     }).done(function(data) {
+        console.log(data);
         if (data) {
             data = correctWeatherData(data);
             if (time == "weather") {
-            	console.log(data);
                 data = data.list[0];
                 if (target == "log") {
                     var wave_direction = 1;
@@ -92,7 +92,22 @@ function handleWeather(time, target, timespan) {
                     $("#weatherDisplayBox").css("background-image", "url(../../../css/img/icons/weather_icons/" + getWeatherIcon(data.dt, data.temp.day.toFixed(0), CloudIdToDescription(data.clouds), rainIdTorainDescription(data.rain)) + ".png)");
                 }
             } else {
-                //fill forecast box;
+                if ($("#today").hasClass("active"))
+                {
+                    getForecast(data.list[1]);
+                }
+                else if ($("#tomorrow").hasClass(("active")))
+                {
+                    getForecast(data.list[1]);
+                }
+                else if ($("#3days").hasClass("active"))
+                {
+                    getForecast(data.list[2]);
+                }
+                else if ($("#7days").hasClass("active"))
+                {
+                    getForecast(data.list[6]);
+                }
             }
 
         }
@@ -130,10 +145,10 @@ function correctWeatherData(data) {
     newData.list = list;
     if (data.wind) {
         var listElement = {};
-        var date = new Date(data.dt*1000);
+        var date = new Date(data.dt * 1000);
         listElement.dt = date.toLocaleString();
         listElement.name = data.name;
-        listElement.clouds = percentToCloud(data.clouds.all);//Percent        
+        listElement.clouds = percentToCloud(data.clouds.all);//Percent
         if (data.rain) {
             listElement.rain = mm3ToMM(data.rain);
         } else if (data.snow) {
@@ -172,7 +187,7 @@ function correctWeatherData(data) {
                 listElement.temp.min = data.list[i].main.temp_min;
                 listElement.temp.max = data.list[i].main.temp_max;
                 listElement.name = data.city.name;
-                var date = new Date(data.list[i].dt*1000);
+                var date = new Date(data.list[i].dt * 1000);
                 listElement.dt = date.toLocaleString();
 
             } else {
@@ -194,7 +209,7 @@ function correctWeatherData(data) {
                 listElement.temp.min = data.list[i].temp.min;
                 listElement.temp.max = data.list[i].temp.max;
                 listElement.name = data.city.name;
-                var date = new Date(data.list[i].dt*1000);
+                var date = new Date(data.list[i].dt * 1000);
                 listElement.dt = date.toLocaleString();
                 if (data.list[i].temp.night && data.list[i].temp.eve && data.list[i].temp.morn) {
                     listElement.temp.night = data.list[i].temp.night;
@@ -263,11 +278,11 @@ function SkyDirToSkyDirDescription(id) {
 }
 
 function mm3ToMM(mm) {
-	if(mm.hasOwnProperty("1h")){
-		mm = mm["1h"];		
-	}else{
-		return 1;
-	}
+    if (mm.hasOwnProperty("1h")) {
+        mm = mm["1h"];
+    } else {
+        return 1;
+    }
     mm /= 3;
     if (mm < 0.5)
         return 2;
@@ -500,7 +515,7 @@ function getWeatherIcon(dt, temp, cloud, rain) {
     return icon;
 }
 
-function checkRain(icon, rain) {        
+function checkRain(icon, rain) {
     if (rain === "Leichter Regen")
         icon = "_5";
     else if (rain === "Gemäßigter Regen")
@@ -509,4 +524,17 @@ function checkRain(icon, rain) {
         icon = "_7";
     else if (rain === "Heftiger Regen")
         icon = "_8";
+}
+
+function getForecast(data) {
+    $("#tempData").text(data.temp.day.toFixed(0) + "°");
+    $("#tempDataMax").text("H: " + data.temp.max.toFixed(0) + "°");
+    $("#tempDataMin").text("L: " + data.temp.min.toFixed(0) + "°");
+    $("#airPressData").text(data.pressure.toFixed(2) + " hPa");
+    $("#windStrData").text(bftIdToBftDescription(data.speed));
+    $("#windDirData").text(SkyDirToSkyDirDescription(data.deg));
+    $("#rainData").text(", " + rainIdTorainDescription(data.rain));
+    $("#cloudsData").text(CloudIdToDescription(data.clouds));
+    $("#nameData").text(data.name);
+    $("#weatherDisplayBox").css("background-image", "url(../../../css/img/icons/weather_icons/" + getWeatherIcon(data.dt, data.temp.day.toFixed(0), CloudIdToDescription(data.clouds), rainIdTorainDescription(data.rain)) + ".png)");
 }
