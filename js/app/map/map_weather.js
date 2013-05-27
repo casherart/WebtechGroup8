@@ -149,12 +149,11 @@ function correctWeatherData(data) {
         listElement.dt = date.toLocaleString();
         listElement.name = data.name;
         listElement.clouds = percentToCloud(data.clouds.all);//Percent
+        var rain = 1;
         if (data.rain) {
             listElement.rain = mm3ToMM(data.rain);
         } else if (data.snow) {
             listElement.rain = mm3ToMM(data.snow);
-        }else{
-        	listElement.rain = 1;
         }
         listElement.deg = dagreeToSkyDir(data.wind.deg);//degree
         listElement.speed = kmhToBftId(data.wind.speed);
@@ -170,13 +169,11 @@ function correctWeatherData(data) {
             var listElement = {};
             if (data.list[i].main) {
                 listElement.clouds = percentToCloud(data.list[i].clouds.all);//Percent
-                
+                var rain = 1;
                 if (data.list[i].rain) {
                     listElement.rain = mm3ToMM(data.list[i].rain);
                 } else if (data.snow) {
                     listElement.rain = mm3ToMM(data.list[i].snow);
-                }else{
-                	listElement.rain = 1;
                 }
                 listElement.deg = dagreeToSkyDir(data.list[i].wind.deg);//degree
                 listElement.speed = kmhToBftId(data.list[i].wind.speed);
@@ -192,13 +189,11 @@ function correctWeatherData(data) {
 
             } else {
                 listElement.clouds = percentToCloud(data.list[i].clouds);//Percent
-                
+                var rain = 1;
                 if (data.list[i].rain) {
                     listElement.rain = mm3ToMM(data.list[i].rain);
                 } else if (data.list[i].snow) {
                     listElement.rain = mm3ToMM(data.list[i].snow);
-                }else{
-                	listElement.rain = 1;
                 }
                 listElement.deg = dagreeToSkyDir(data.list[i].deg);//degree
                 listElement.speed = data.list[i].speed;
@@ -294,26 +289,24 @@ function mm3ToMM(mm) {
         return 5;
 }
 
-function rainIdTorainDescription(id) {	
+function rainIdTorainDescription(id) {
     switch (id) {
         case 1:
-            return "kein Regen";
+            return "Kein Regen";
             break;
         case 2:
-            return "leichter Regen";
+            return "Leichter Regen";
             break;
         case 3:
-            return "gemäßigter Regen";
+            return "Gemäßigter Regen";
             break;
         case 4:
-            return "starker Regen";
+            return "Starker Regen";
             break;
         case 5:
-            return "heftiger Regen";
+            return "Heftiger Regen";
             break;
         default:
-        	return "";
-        	break;
     }
 }
 
