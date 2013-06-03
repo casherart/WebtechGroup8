@@ -533,3 +533,51 @@ function getForecast(data) {
     $("#nameData").text(data.name);
     $("#weatherDisplayBox").css("background-image", "url(../../../css/img/icons/weather_icons/" + getWeatherIcon(data.dt, data.temp.day.toFixed(0), CloudIdToDescription(data.clouds), rainIdTorainDescription(data.rain)) + ".png)");
 }
+
+
+function getWeatherWarning() {
+    var timestamp = timestamp || new Date().getTime();
+    $.ajax({
+        type: 'get',
+        url: "../server/getWeatherWarning.php",
+        dataType: 'json',
+        data: {'timestamp': timestamp},
+        success: function(response) {
+        	$('#weatherWarningWindow').html(response.msg);
+            timestamp = response.timestamp;
+            if(response.warningLevel > 90){
+            	$("#showWeatherWarning").removeClass("btn-warning").addClass("btn-danger");            	
+            }else if(response.warningLevel > 75){
+            	$("#showWeatherWarning").removeClass("btn-danger").addClass("btn-warning");
+            }else {
+            	$("#showWeatherWarning").removeClass("btn-warning btn-danger");
+            }
+            noerror = true;
+        },
+        complete: function(response) {
+            // send a new ajax request when this request is finished
+            if (!self.noerror) {
+// if a connection problem occurs, try to reconnect each 5 seconds
+                setTimeout(function() {
+                	getWeatherWarning();
+                }, 5000);
+            } else {
+// persistent connection
+            	getWeatherWarning();
+            }
+            noerror = false;
+        }
+    });
+}
+
+function openWeatherWarnings(){
+	if( $('#weatherWarningWindow').css("display") == "none"){
+	    $('#weatherWarningWindow').css("zIndex", "999999999");
+	    $('#weatherWarningWindow').css("position", "absolute");
+	    $('#weatherWarningWindow').css("top", $("#showWeatherWarning").offset().top + 35);
+	    $('#weatherWarningWindow').css("left", $("#showWeatherWarning").offset().left - 250);
+	    $('#weatherWarningWindow').fadeIn('slow');		
+	}else{
+	    $('#weatherWarningWindow').fadeOut('slow');
+	}
+}
