@@ -69,6 +69,7 @@ function handleWeather(time, target, timespan) {
         crossDomain: true
     }).done(function(data) {
         if (data) {
+            console.log(data);
             data = correctWeatherData(data);
             if (time == "weather") {
                 data = data.list[0];
@@ -88,6 +89,7 @@ function handleWeather(time, target, timespan) {
                     $("#rainData").text(", " + rainIdTorainDescription(data.rain));
                     $("#cloudsData").text(CloudIdToDescription(data.clouds));
                     $("#nameData").text(data.name);
+                    $("#time").text("");
                     $("#weatherDisplayBox").css("background-image", "url(../../../css/img/icons/weather_icons/" + getWeatherIcon(data.dt, data.temp.day.toFixed(0), CloudIdToDescription(data.clouds), rainIdTorainDescription(data.rain)) + ".png)");
                 }
             } else {
@@ -145,7 +147,7 @@ function correctWeatherData(data) {
     if (data.wind) {
         var listElement = {};
         var date = new Date(data.dt * 1000);
-        listElement.dt = date.toLocaleString();
+        listElement.dt = date.toLocaleFormat('%a %d %b');
         listElement.name = data.name;
         listElement.clouds = percentToCloud(data.clouds.all);//Percent        
         if (data.rain) {
@@ -186,7 +188,7 @@ function correctWeatherData(data) {
                 listElement.temp.max = data.list[i].main.temp_max;
                 listElement.name = data.city.name;
                 var date = new Date(data.list[i].dt * 1000);
-                listElement.dt = date.toLocaleString();
+                listElement.dt = date.toLocaleFormat('%a %d %b');
 
             } else {
                 listElement.clouds = percentToCloud(data.list[i].clouds);//Percent
@@ -207,7 +209,7 @@ function correctWeatherData(data) {
                 listElement.temp.max = data.list[i].temp.max;
                 listElement.name = data.city.name;
                 var date = new Date(data.list[i].dt * 1000);
-                listElement.dt = date.toLocaleString();
+                listElement.dt = date.toLocaleFormat('%a %d %b');
                 if (data.list[i].temp.night && data.list[i].temp.eve && data.list[i].temp.morn) {
                     listElement.temp.night = data.list[i].temp.night;
                     listElement.temp.eve = data.list[i].temp.eve;
@@ -531,6 +533,7 @@ function getForecast(data) {
     $("#rainData").text(", " + rainIdTorainDescription(data.rain));
     $("#cloudsData").text(CloudIdToDescription(data.clouds));
     $("#nameData").text(data.name);
+    $("#time").text(data.dt);
     $("#weatherDisplayBox").css("background-image", "url(../../../css/img/icons/weather_icons/" + getWeatherIcon(data.dt, data.temp.day.toFixed(0), CloudIdToDescription(data.clouds), rainIdTorainDescription(data.rain)) + ".png)");
 }
 

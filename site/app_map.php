@@ -66,7 +66,7 @@
             <div id="weatherDisplayBox" class="well well-small btn-inverse disabled" style="display: none;">
                 <div id="navDisplayBox" data-toggle="buttons-radio" class="btn-group span4">
                     <button id="now" class="btn btn-info span1 active">Aktuell</button>
-                    <button id="today" class="btn btn-info span1">3 Std.</button>
+                    <button id="today" class="btn btn-info span1">Heute</button>
                     <button id="tomorrow" class="btn btn-info span1">Morgen</button>
                     <button id="3days" class="btn btn-info span1">3 Tage</button>
                     <button id="7days" class="btn btn-info span1">7 Tage</button>
@@ -78,6 +78,7 @@
                         <div id="tempDataMin" class="data" style=""></div>
                     </div>
                     <div id="tempData" class="data" style=""></div>
+                    <div id="time" class="data" style="padding-top: 18px; text-align: right;"></div>
                 </div>
                 <div class="clearfix"></div>
                 <div id="weatherDisplayBottom">
