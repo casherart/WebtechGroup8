@@ -81,14 +81,14 @@ INSERT INTO wegpunkte (tnr, name, btm, dtm, lat, lng, sog, cog, manoever, vorseg
 INSERT INTO direction (description)
 VALUES 
 	(''),
-	('North'),
-	('East'),
-	('South'),
+	('Nord'),
+	('Ost'),
+	('S&uuml;d'),
 	('West'),
-	('North-East'),
-	('North-West'),
-	('South-East'),
-	('South-West')
+	('Nord-Ost'),
+	('Nord-West'),
+	('S&uuml;d-Ost'),
+	('S&uuml;d-West')
 ;	
 
 INSERT INTO wind_direction (direction_id)
@@ -119,26 +119,26 @@ VALUES
 
 INSERT INTO rain (description)
 VALUES
-	('No rain'), 
-	('Light rain < 0.5 mm/h'), 
-	('Moderate rain < 4 mm/h'), 
-	('Heavy rain < 10 mm/h'), 
-	('Violent rain > 8 mm/min')
+	('kein Regen'), 
+	('leichter Regen < 0.5 mm/h'), 
+	('moderater Regen < 4 mm/h'), 
+	('starker Regen < 10 mm/h'), 
+	('gewaltiger Regen > 8 mm/min')
 ;
 
 INSERT INTO clouds (description)
 VALUES
 	(''),
-	('0/8 (sky completely clear)'),
-	('1/8 (sunny)'),
-	('2/8 (mainly clear)'),
-	('3/8 (partly cloudy)'),
-	('4/8 (sky half cloudy)'),
-	('5/8 (cloudy)'),
-	('6/8 (strong cloudy)'),
-	('7/8 (almost overcast)'),
-	('8/8 (completely overcast)'),
-	('9/8 (sky not visible)')
+	('0/8 (klarer Himmel/wolkenlos)'),
+	('1/8 (sonnig)'),
+	('2/8 (&Uuml;berwiegend klar/heiter)'),
+	('3/8 (leicht/teilweise bew&ouml;lkt)'),
+	('4/8 (Himmel halb bedeckt/wolkig)'),
+	('5/8 (bew&ouml;lkt)'),
+	('6/8 (stark bew&ouml;lkt )'),
+	('7/8 (fast bedeckt)'),
+	('8/8 (komplett bedeckt)'),
+	('9/8 (Himmel nicht erkennbar)')
 ;
 
 INSERT INTO wind_strength (description)
