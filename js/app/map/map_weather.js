@@ -98,7 +98,7 @@ function handleWeather(time, target, timespan) {
                     getForecast(data.list[1]);
                     fillDetailForecast("today", data);
                 }
-                else if ($("#tomorrow").hasClass(("active")))
+                else if ($("#tomorrow").hasClass("active"))
                 {
                     getForecast(data.list[1]);
                     fillDetailForecast("tomorrow", data);
@@ -645,7 +645,7 @@ function fillDetailForecast(art, data) {
 
 function fillForecastRows(index, data) {
     console.log(data);
-    $("#boxDate" + index).text(timeConverter(data.dt,"forecast"));
+    $("#boxDate" + index).text(timeConverter(data.dt, "forecast"));
     $("#boxTemp" + index).text(data.temp.day.toFixed(0) + "°");
     $("#boxCloud" + index).text(CloudIdToDescription(data.clouds));
     $("#boxIcon" + index).css("background-image", "url(../../../css/img/icons/weather_icons/" + getWeatherIcon(data.dt, data.temp.day.toFixed(0), CloudIdToDescription(data.clouds), rainIdTorainDescription(data.rain)) + ".png)");
