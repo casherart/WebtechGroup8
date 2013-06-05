@@ -96,18 +96,22 @@ function handleWeather(time, target, timespan) {
                 if ($("#today").hasClass("active"))
                 {
                     getForecast(data.list[1]);
+                    fillDetailForecast("today", data);
                 }
                 else if ($("#tomorrow").hasClass(("active")))
                 {
                     getForecast(data.list[1]);
+                    fillDetailForecast("tomorrow", data);
                 }
                 else if ($("#3days").hasClass("active"))
                 {
                     getForecast(data.list[2]);
+                    fillDetailForecast("3days", data);
                 }
                 else if ($("#7days").hasClass("active"))
                 {
                     getForecast(data.list[6]);
+                    fillDetailForecast("7days", data);
                 }
             }
 
@@ -147,15 +151,15 @@ function correctWeatherData(data) {
     if (data.wind) {
         var listElement = {};
         var date = new Date(data.dt * 1000);
-        listElement.dt = date.toLocaleFormat('%a %d %b');
+        listElement.dt = data.dt; //Format('%a %d %B %H'));
         listElement.name = data.name;
         listElement.clouds = percentToCloud(data.clouds.all);//Percent        
         if (data.rain) {
             listElement.rain = mm3ToMM(data.rain);
         } else if (data.snow) {
             listElement.rain = mm3ToMM(data.snow);
-        } else{
-        	 listElement.rain = 1;
+        } else {
+            listElement.rain = 1;
         }
         listElement.deg = dagreeToSkyDir(data.wind.deg);//degree
         listElement.speed = kmhToBftId(data.wind.speed);
@@ -167,6 +171,7 @@ function correctWeatherData(data) {
         listElement.temp.max = data.main.temp_max;
         list.push(listElement);
     } else {
+        // Heute
         for (var i in data.list) {
             var listElement = {};
             if (data.list[i].main) {
@@ -175,8 +180,8 @@ function correctWeatherData(data) {
                     listElement.rain = mm3ToMM(data.list[i].rain);
                 } else if (data.snow) {
                     listElement.rain = mm3ToMM(data.list[i].snow);
-                } else{
-               	 	listElement.rain = 1;
+                } else {
+                    listElement.rain = 1;
                 }
                 listElement.deg = dagreeToSkyDir(data.list[i].wind.deg);//degree
                 listElement.speed = kmhToBftId(data.list[i].wind.speed);
@@ -188,16 +193,16 @@ function correctWeatherData(data) {
                 listElement.temp.max = data.list[i].main.temp_max;
                 listElement.name = data.city.name;
                 var date = new Date(data.list[i].dt * 1000);
-                listElement.dt = date.toLocaleFormat('%a %d %b');
-
+                listElement.dt = data.list[i].dt;
+                //forecast tomorrow - 7days
             } else {
                 listElement.clouds = percentToCloud(data.list[i].clouds);//Percent
                 if (data.list[i].rain) {
                     listElement.rain = mm3ToMM(data.list[i].rain);
                 } else if (data.list[i].snow) {
                     listElement.rain = mm3ToMM(data.list[i].snow);
-                } else{
-               	 	listElement.rain = 1;
+                } else {
+                    listElement.rain = 1;
                 }
                 listElement.deg = dagreeToSkyDir(data.list[i].deg);//degree
                 listElement.speed = data.list[i].speed;
@@ -209,7 +214,7 @@ function correctWeatherData(data) {
                 listElement.temp.max = data.list[i].temp.max;
                 listElement.name = data.city.name;
                 var date = new Date(data.list[i].dt * 1000);
-                listElement.dt = date.toLocaleFormat('%a %d %b');
+                listElement.dt = data.list[i].dt;
                 if (data.list[i].temp.night && data.list[i].temp.eve && data.list[i].temp.morn) {
                     listElement.temp.night = data.list[i].temp.night;
                     listElement.temp.eve = data.list[i].temp.eve;
@@ -221,6 +226,29 @@ function correctWeatherData(data) {
         }
     }
     return newData;
+}
+
+function timeConverter(UNIX_timestamp, option) {
+    var a = new Date(UNIX_timestamp * 1000);
+    var months = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'];
+    var days = ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'];
+    var daysShort = ['So.', 'Mo.', 'Di.', 'Mi.', 'Do.', 'Fr.', 'Sa.'];
+    var year = a.getFullYear();
+    var month = months[a.getMonth()];
+    var day = days[a.getDay()];
+    var dayShort = daysShort[a.getDay()];
+    var date = a.getDate();
+    var hour = a.getHours();
+    var min = a.getMinutes();
+    if (option === "box")
+    {
+        var time = day + ' ' + date + '. ' + month;
+    }
+    else if (option === "forecast") {
+        var time = dayShort + ' ' + date + '. ' + month + ' ' + hour + ':0' + min + ' Uhr';
+    }
+    return time;
+
 }
 
 function dagreeToSkyDir(deg) {
@@ -533,7 +561,7 @@ function getForecast(data) {
     $("#rainData").text(", " + rainIdTorainDescription(data.rain));
     $("#cloudsData").text(CloudIdToDescription(data.clouds));
     $("#nameData").text(data.name);
-    $("#time").text(data.dt);
+    $("#time").text(timeConverter(data.dt, "box"));
     $("#weatherDisplayBox").css("background-image", "url(../../../css/img/icons/weather_icons/" + getWeatherIcon(data.dt, data.temp.day.toFixed(0), CloudIdToDescription(data.clouds), rainIdTorainDescription(data.rain)) + ".png)");
 }
 
@@ -546,14 +574,14 @@ function getWeatherWarning() {
         dataType: 'json',
         data: {'timestamp': timestamp},
         success: function(response) {
-        	$('#weatherWarningWindow').html(response.msg);
+            $('#weatherWarningWindow').html(response.msg);
             timestamp = response.timestamp;
-            if(response.warningLevel > 90){
-            	$("#showWeatherWarning").removeClass("btn-warning").addClass("btn-danger");            	
-            }else if(response.warningLevel > 75){
-            	$("#showWeatherWarning").removeClass("btn-danger").addClass("btn-warning");
-            }else {
-            	$("#showWeatherWarning").removeClass("btn-warning btn-danger");
+            if (response.warningLevel > 90) {
+                $("#showWeatherWarning").removeClass("btn-warning").addClass("btn-danger");
+            } else if (response.warningLevel > 75) {
+                $("#showWeatherWarning").removeClass("btn-danger").addClass("btn-warning");
+            } else {
+                $("#showWeatherWarning").removeClass("btn-warning btn-danger");
             }
             noerror = true;
         },
@@ -562,25 +590,67 @@ function getWeatherWarning() {
             if (!self.noerror) {
 // if a connection problem occurs, try to reconnect each 5 seconds
                 setTimeout(function() {
-                	getWeatherWarning();
+                    getWeatherWarning();
                 }, 5000);
             } else {
 // persistent connection
-            	getWeatherWarning();
+                getWeatherWarning();
             }
             noerror = false;
         }
     });
 }
 
-function openWeatherWarnings(){
-	if( $('#weatherWarningWindow').css("display") == "none"){
-	    $('#weatherWarningWindow').css("zIndex", "999999999");
-	    $('#weatherWarningWindow').css("position", "absolute");
-	    $('#weatherWarningWindow').css("top", $("#showWeatherWarning").offset().top + 35);
-	    $('#weatherWarningWindow').css("left", $("#showWeatherWarning").offset().left - 250);
-	    $('#weatherWarningWindow').fadeIn('slow');		
-	}else{
-	    $('#weatherWarningWindow').fadeOut('slow');
-	}
+function openWeatherWarnings() {
+    if ($('#weatherWarningWindow').css("display") == "none") {
+        $('#weatherWarningWindow').css("zIndex", "999999999");
+        $('#weatherWarningWindow').css("position", "absolute");
+        $('#weatherWarningWindow').css("top", $("#showWeatherWarning").offset().top + 35);
+        $('#weatherWarningWindow').css("left", $("#showWeatherWarning").offset().left - 250);
+        $('#weatherWarningWindow').fadeIn('slow');
+    } else {
+        $('#weatherWarningWindow').fadeOut('slow');
+    }
+}
+
+function fillDetailForecast(art, data) {
+    switch (art)
+    {
+        case "today":
+            $('#dialogTitle').text("Das Wetter für Heute");
+            for (var i = 1; i <= 7; i++) {
+                fillForecastRows(i, data.list[i]);
+            }
+            break;
+        case "tomorrow":
+            $('#dialogTitle').text("Das Wetter für Morgen");
+            for (var i = 1; i <= 7; i++) {
+                fillForecastRows(i, data.list[i]);
+            }
+            break;
+        case "3days":
+            $('#dialogTitle').text("Das Wetter für die nächsten 3 Tage");
+            for (var i = 1; i <= 2; i++) {
+                fillForecastRows(i, data.list[i]);
+            }
+            break;
+        case "7days":
+            $('#dialogTitle').text("Das Wetter für die nächsten 7 Tage");
+            for (var i = 1; i <= 6; i++) {
+                fillForecastRows(i, data.list[i]);
+            }
+            break;
+    }
+}
+
+function fillForecastRows(index, data) {
+    console.log(data);
+    $("#boxDate" + index).text(timeConverter(data.dt,"forecast"));
+    $("#boxTemp" + index).text(data.temp.day.toFixed(0) + "°");
+    $("#boxCloud" + index).text(CloudIdToDescription(data.clouds));
+    $("#boxIcon" + index).css("background-image", "url(../../../css/img/icons/weather_icons/" + getWeatherIcon(data.dt, data.temp.day.toFixed(0), CloudIdToDescription(data.clouds), rainIdTorainDescription(data.rain)) + ".png)");
+    $("#boxAirPress" + index).text(data.pressure.toFixed(2) + " hPa");
+    $("#boxWindStr" + index).text(bftIdToBftDescription(data.speed));
+    $("#boxWindDir" + index).text(SkyDirToSkyDirDescription(data.deg));
+    $("#boxRain" + index).text(rainIdTorainDescription(data.rain));
 }

@@ -167,3 +167,57 @@ label {
 #weatherDisplayBox #weatherDisplayTop {
     height: 125px;
 }
+
+#forecastBox .BoxRow {
+    height: 100px;
+    border-top: 1px solid gray;
+}
+
+#forecastBox .BoxIcon {
+    width: 100px;
+    height: 80px;
+    background-repeat: no-repeat;
+    background-size: 80px auto;
+    background-position: 10px center;
+}
+
+#forecastBox .BoxTemp {
+    width: 100px;
+    height: 20px;
+}
+
+#forecastBox .BoxDate {
+}
+
+#forecastBox .BoxCloud {
+    
+}
+
+#forecastBox .BoxMiddle {
+    float: left;
+    padding-bottom: 30px;
+    padding-top: 30px;
+    width: 150px;
+    padding-right: 20px;
+}
+
+#forecastBox .BoxRight {
+    float: left;
+    height: 70px;
+    padding: 15px 0;
+    width: 200px;
+}
+
+#detail {
+    text-decoration: none;
+    color: white;
+}
+
+#detail:hover {
+    text-decoration: none !important;
+}
+
+.left {
+    float: left;
+    width: 145px;
+}

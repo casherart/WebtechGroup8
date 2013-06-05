@@ -334,6 +334,11 @@ $("#7days").click(function() {
     handleWeather("forecast/daily", "box");
 });
 
+// get detailed forecast
+$('#detail').click(function() {
+    $('#messageBox').modal('show');
+});
+
 // temporary marker context menu ----------------------------------------- //
 $(function() {
     $.contextMenu({

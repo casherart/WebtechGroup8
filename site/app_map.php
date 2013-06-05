@@ -71,34 +71,36 @@
                     <button id="3days" class="btn btn-info span1">3 Tage</button>
                     <button id="7days" class="btn btn-info span1">7 Tage</button>
                 </div>
-                <div id="weatherDisplayTop">
-                    <div align="center" style="width: 140px; height: 80px; float: left;">
-                        <div id="tempDataMax" class="data" style=""></div>
-                        <div id="nameData" class="data" style=""></div>
-                        <div id="tempDataMin" class="data" style=""></div>
+                <a id ="detail" style="" href="#">
+                    <div id="weatherDisplayTop">
+                        <div align="center" style="width: 140px; height: 80px; float: left;">
+                            <div id="tempDataMax" class="data" style=""></div>
+                            <div id="nameData" class="data" style=""></div>
+                            <div id="tempDataMin" class="data" style=""></div>
+                        </div>
+                        <div id="tempData" class="data" style=""></div>
+                        <div id="time" class="data" style="padding-top: 18px; text-align: right; float: right;"></div>
                     </div>
-                    <div id="tempData" class="data" style=""></div>
-                    <div id="time" class="data" style="padding-top: 18px; text-align: right;"></div>
-                </div>
-                <div class="clearfix"></div>
-                <div id="weatherDisplayBottom">
-                    <div align="center" id="state">
-                        <span id="cloudsData" class="data"></span>
-                        <span id="rainData" class="data"></span>
+                    <div class="clearfix"></div>
+                    <div id="weatherDisplayBottom">
+                        <div align="center" id="state">
+                            <span id="cloudsData" class="data"></span>
+                            <span id="rainData" class="data"></span>
+                        </div>
+                        <span class="span2">
+                            Luftdruck:
+                        </span>
+                        <span id="airPressData" class="data span2" style="text-align: right;"></span>
+                        <span class="span2">
+                            Windstärke:
+                        </span>
+                        <span id="windStrData" class="data span2" style="text-align: right;"></span>
+                        <span class="span2">
+                            Windrichtung:
+                        </span>
+                        <span id="windDirData" class="data span2" style="text-align: right;"></span>
                     </div>
-                    <span class="span2">
-                        Luftdruck:
-                    </span>
-                    <span id="airPressData" class="data span2" style="text-align: right;"></span>
-                    <span class="span2">
-                        Windstärke:
-                    </span>
-                    <span id="windStrData" class="data span2" style="text-align: right;"></span>
-                    <span class="span2">
-                        Windrichtung:
-                    </span>
-                    <span id="windDirData" class="data span2" style="text-align: right;"></span>
-                </div>
+                </a>
             </div>
 
             <!-- Weather Bar -->
@@ -136,6 +138,144 @@
                 <span style="padding-left:20px;">1</span>
                 <span class="add-on" title="Beaufort Scale">bft</span>
             </div>
+
+            <!-- Menu Modal -->
+            <div class="modal hide fade" id="messageBox">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3 id="dialogTitle"></h3>
+                </div>
+                <div class="modal-body" id="forecastBox">
+                    <div id="row1" class="BoxRow">
+                        <div class="left">
+                            <span id="boxDate1" class="BoxDate">
+                            </span>
+                            <div id="boxIcon1" class="BoxIcon">
+                            </div>
+                        </div>
+                        <div class="BoxMiddle">
+                            <div id="boxTemp1" class="BoxTemp"></div>
+                            <div id="boxCloud1" class="BoxCloud"></div>
+                        </div>
+                        <div class="BoxRight">
+                            <div id="boxRain1"></div>
+                            <div id="boxAirPress1"></div>
+                            <div id="boxWindStr1"></div>
+                            <div id="boxWindDir1"></div>
+                        </div>
+                    </div>
+                    <div id="row2" class="BoxRow">
+                        <div class="left">
+                            <span id="boxDate2" class="BoxDate">
+                            </span>
+                            <div id="boxIcon2" class="BoxIcon"></div>
+                        </div>
+                        <div class="BoxMiddle">
+                            <div id="boxTemp2" class="BoxTemp"></div>
+                            <div id="boxCloud2" class="BoxCloud"></div>
+                        </div>
+                        <div class="BoxRight">
+                            <div id="boxRain2"></div>
+                            <div id="boxAirPress2"></div>
+                            <div id="boxWindStr2"></div>
+                            <div id="boxWindDir2"></div>
+                        </div>
+                    </div>
+                    <div id="row3" class="BoxRow">
+                        <div class="left">
+
+                            <span id="boxDate3" class="BoxDate">
+                            </span>
+                            <div id="boxIcon3" class="BoxIcon"></div>
+                        </div>
+                        <div class="BoxMiddle">
+                            <div id="boxTemp3" class="BoxTemp"></div>
+                            <div id="boxCloud3" class="BoxCloud"></div>
+                        </div>
+                        <div class="BoxRight">
+                            <div id="boxRain3"></div>
+                            <div id="boxAirPress3"></div>
+                            <div id="boxWindStr3"></div>
+                            <div id="boxWindDir3"></div>
+                        </div>
+                    </div>
+                    <div id="row4" class="BoxRow">
+                        <div class="left">
+
+                            <span id="boxDate4" class="BoxDate">
+                            </span>
+                            <div id="boxIcon4" class="BoxIcon"></div>
+                        </div>
+                        <div class="BoxMiddle">
+                            <div id="boxTemp4" class="BoxTemp"></div>
+                            <div id="boxCloud4" class="BoxCloud"></div>
+                        </div>
+                        <div class="BoxRight">
+                            <div id="boxRain4"></div>
+                            <div id="boxAirPress4"></div>
+                            <div id="boxWindStr4"></div>
+                            <div id="boxWindDir4"></div>
+                        </div>
+                    </div>
+                    <div id="row5" class="BoxRow">
+                        <div class="left">
+                            <span id="boxDate5" class="BoxDate">
+                            </span> 
+                            <div id="boxIcon5" class="BoxIcon"></div>
+                        </div>
+                        <div class="BoxMiddle">
+                            <div id="boxTemp5" class="BoxTemp"></div>
+                            <div id="boxCloud5" class="BoxCloud"></div>
+                        </div>
+                        <div class="BoxRight">
+                            <div id="boxRain5"></div>
+                            <div id="boxAirPress5"></div>
+                            <div id="boxWindStr5"></div>
+                            <div id="boxWindDir5"></div>
+                        </div>
+                    </div>
+                    <div id="row6" class="BoxRow">
+                        <div class="left">
+
+                            <span id="boxDate6" class="BoxDate">
+                            </span>  
+                            <div id="boxIcon6" class="BoxIcon"></div>
+                        </div>
+                        <div class="BoxMiddle">
+                            <div id="boxTemp6" class="BoxTemp"></div>
+                            <div id="boxCloud6" class="BoxCloud"></div>
+                        </div>
+                        <div class="BoxRight">
+                            <div id="boxRain6"></div>
+                            <div id="boxAirPress6"></div>
+                            <div id="boxWindStr6"></div>
+                            <div id="boxWindDir6"></div>
+                        </div>
+                    </div>
+                    <div id="row7" class="BoxRow">
+                        <div class="left">
+
+                            <span id="boxDate7" class="BoxDate">
+                            </span>
+                            <div id="boxIcon7" class="BoxIcon"></div>
+                        </div>
+                        <div class="BoxMiddle">
+                            <div id="boxTemp7" class="BoxTemp"></div>
+                            <div id="boxCloud7" class="BoxCloud"></div>
+                        </div>
+                        <div class="BoxRight">
+                            <div id="boxRain7"></div>
+                            <div id="boxAirPress7"></div>
+                            <div id="boxWindStr7"></div>
+                            <div id="boxWindDir7"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn" data-dismiss="modal"><i class="icon-ok"></i> O.K</a>
+                </div>
+            </div>
+
             <!-- Weather log -->
             <div id="weatherLog" class="well well-large" style="display:none;"></div>
             <!-- Weather Warning -->
