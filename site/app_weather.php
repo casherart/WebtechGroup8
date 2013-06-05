@@ -61,7 +61,7 @@ include('database_library.php');
                     	<div class="row well" style="margin-left: 15%; height: 30px;">
                             <div class="span4">
                                 <div class="control-group">
-                                	<label class="control-label padding-right10">Trip</label> 
+                                	<label class="control-label padding-right10">Reise</label> 
                                     <select name="trip" id="trip" class="select-long">
                                     	<?php
                                             get_select_options(MYSQL_HOST, MYSQL_USER, MYSQL_PW, MYSQL_DB, "SELECT tnr as id, titel as description FROM tripinfo ORDER BY tnr asc;");
@@ -73,21 +73,21 @@ include('database_library.php');
                         <div class="row well" style="margin-left: 15%;">
                             <div class="span4">
                                 <div class="control-group">
-                                    <label class="control-label padding-right10">Temperature</label> 								 
+                                    <label class="control-label padding-right10">Temperatur</label> 								 
                                     <div class="input-append">
                                         <input class="input-medium" type="text" id="temp" name="temp" /> 
-                                        <span title="C°" style="cursor: pointer" class="add-on">C°</span>
+                                        <span title="Celsius" style="cursor: pointer" class="add-on">C°</span>
                                     </div>
                                 </div>
                                 <div class="control-group">
-                                    <label class="control-label padding-right10">Air Pressure</label>  
+                                    <label class="control-label padding-right10">Luftdruck</label>  
                                     <div class="input-append">
                                         <input class="input-medium" type="text" id="airpress" name="airpress" /> 
-                                        <span title="Pa" style="cursor: pointer" class="add-on">Pa</span>
+                                        <span title="Pascal" style="cursor: pointer" class="add-on">Pa</span>
                                     </div>
                                 </div>
                                 <div class="control-group">
-                                    <label class="control-label padding-right10">Wind Strength</label> 
+                                    <label class="control-label padding-right10">Windstärke</label> 
                                     <div class="input-append">
                                         <select	name="wind_strength" id="windstr" class="select-medium">
                                             <?php
@@ -98,10 +98,10 @@ include('database_library.php');
                                     </div>
                                 </div>
                                 <div class="control-group">
-                                    <label class="control-label padding-right10">Wave Hight</label> 
+                                    <label class="control-label padding-right10">Wellenh&ouml;he</label> 
                                     <div class="input-append">
                                         <input class="input-medium" type="text" id="whight" name="whight"/> 
-                                        <span title="meter" style="cursor: pointer" class="add-on">m</span>
+                                        <span title="Meter" style="cursor: pointer" class="add-on">m</span>
                                     </div>
                                 </div>
 
@@ -110,7 +110,7 @@ include('database_library.php');
                                 <div class="control-group">
 
                                     <div class="control-group">
-                                        <label class="control-label padding-right10">Clouds</label> 
+                                        <label class="control-label padding-right10">Bew&ouml;lkung</label> 
                                         <div class="input-append">
                                             <select name="clouds" id="cloud" class="select-medium">
                                                 <?php
@@ -121,7 +121,7 @@ include('database_library.php');
                                         </div>
                                     </div>
                                     <div class="control-group">
-                                        <label class="control-label padding-right10">Rain</label> 
+                                        <label class="control-label padding-right10">Regen</label> 
                                         <select name="rain" id="rain" class="select-medium">
                                             <?php
                                             get_select_options(MYSQL_HOST, MYSQL_USER, MYSQL_PW, MYSQL_DB, "SELECT id, description FROM rain ORDER BY id asc;");
@@ -129,7 +129,7 @@ include('database_library.php');
                                         </select>
                                     </div>
                                     <div class="control-group">
-                                        <label class="control-label padding-right10">Wind Direction</label> 
+                                        <label class="control-label padding-right10">Windrichtung</label> 
                                         <select name="wind_direction" id="winddir" class="select-medium">
                                             <?php
                                             get_select_options(MYSQL_HOST, MYSQL_USER, MYSQL_PW, MYSQL_DB, "SELECT wd.id as id, d.description as description FROM wind_direction as wd left join direction as d on wd.direction_id = d.id ORDER BY id asc;");
@@ -137,7 +137,7 @@ include('database_library.php');
                                         </select>
                                     </div>
                                     <div class="control-group">
-                                        <label class="control-label padding-right10">Wave Direction</label> 
+                                        <label class="control-label padding-right10">Wellenrichtung</label> 
                                         <select name="wave_direction" id="wavedir" class="select-medium">
                                             <?php
                                             get_select_options(MYSQL_HOST, MYSQL_USER, MYSQL_PW, MYSQL_DB, "SELECT wd.id as id, d.description as description FROM wave_direction as wd left join direction as d on wd.direction_id = d.id ORDER BY id asc;");
@@ -159,15 +159,15 @@ include('database_library.php');
 	                <table class="appTable table table-hover" cellspacing="0px" cellpadding="5px">
 	                    <thead>
 	                        <tr>
-	                            <th>Trip</th>
-	                            <th>Temperature</th>
-	                            <th>Air Pressure</th>
-	                            <th>Wind Strength</th>
-	                            <th>Wind Direction</th>
-	                            <th>Wave Hight</th>
-	                            <th>Wave Direction</th>
-	                            <th>Clouds</th>
-	                            <th>Rain</th>
+	                            <th>Reise</th>
+	                            <th>Temperatur</th>
+	                            <th>Luftdruck</th>
+	                            <th>Windst&auml;rke</th>
+	                            <th>Windrichtung</th>
+	                            <th>Wellenh&ouml;he</th>
+	                            <th>Wellenrichtung</th>
+	                            <th>Bew&ouml;lkung</th>
+	                            <th>Regen</th>
 	                            <th></th>
 	                        </tr>
 	                    </thead>
