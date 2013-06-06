@@ -325,7 +325,7 @@ $("#today").click(function() {
     handleWeather("forecast", "box");
 });
 $("#tomorrow").click(function() {
-    handleWeather("forecast/daily", "box");
+    handleWeather("forecast", "box");
 });
 $("#3days").click(function() {
     handleWeather("forecast/daily", "box");
@@ -336,7 +336,7 @@ $("#7days").click(function() {
 
 // get detailed forecast
 $('#detail').click(function() {
-    $('#messageBox').modal('show');
+    $('#forecastMessageBox').modal('show');
 });
 
 // temporary marker context menu ----------------------------------------- //
