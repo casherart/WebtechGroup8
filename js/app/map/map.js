@@ -216,7 +216,7 @@ function initialize() {
                 }
                 else if ($("#today").hasClass("active"))
                 {
-                    forecastBoxIntervall = window.setTimeout("handleWeather('forecast', 'box');console.log(111111);", forecastBoxUpdateWait);
+                    forecastBoxIntervall = window.setTimeout("handleWeather('forecast', 'box');", forecastBoxUpdateWait);
                 }
                 else if ($("#tomorrow").hasClass("active"))
                 {
