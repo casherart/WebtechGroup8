@@ -13,7 +13,7 @@
 <ul>
 <li>Validierung der Einträge (Fred)</li>
 <li>SQL Skripte mit sinnvollen Daten füllen (Fred) ###-Done-###</li>
-<li>Formularangaben und MessageBox auf Deutsch ändern (Fred)</li>
+<li>Formularangaben und MessageBox auf Deutsch ändern (Fred)###-Done-###</li>
 <li>Einheiten Tooltip updaten mit richtiger Beschreibung (Fred)###-Done-####</li>
 </ul>
 
