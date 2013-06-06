@@ -6,7 +6,7 @@
 // Damit alle Fehler angezeigt werden
 error_reporting(E_ALL);
 
-if ($_SERVER['HTTP_HOST'] == "seapal.dnguyen.de" || $_SERVER['HTTP_HOST'] == "dnguyen.de") 
+if ($_SERVER['HTTP_HOST'] == "piraten.dnguyen.de") 
 {
     define ('MYSQL_HOST','rdbms.strato.de');
     define ('MYSQL_USER','U1323276');
