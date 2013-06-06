@@ -69,7 +69,6 @@ function handleWeather(time, target, timespan) {
         crossDomain: true
     }).done(function(data) {
         if (data) {
-            console.log(data);
             data = correctWeatherData(data);
             if (time == "weather") {
                 data = data.list[0];
@@ -172,7 +171,7 @@ function correctWeatherData(data) {
         list.push(listElement);
     } else {
         // Heute
-        for (var i in data.list) {
+        for (var i in data.list) {        	
             var listElement = {};
             if (data.list[i].main) {
                 listElement.clouds = percentToCloud(data.list[i].clouds.all);//Percent
@@ -192,7 +191,6 @@ function correctWeatherData(data) {
                 listElement.temp.min = data.list[i].main.temp_min;
                 listElement.temp.max = data.list[i].main.temp_max;
                 listElement.name = data.city.name;
-                var date = new Date(data.list[i].dt * 1000);
                 listElement.dt = data.list[i].dt;
                 //forecast tomorrow - 7days
             } else {
@@ -213,7 +211,6 @@ function correctWeatherData(data) {
                 listElement.temp.min = data.list[i].temp.min;
                 listElement.temp.max = data.list[i].temp.max;
                 listElement.name = data.city.name;
-                var date = new Date(data.list[i].dt * 1000);
                 listElement.dt = data.list[i].dt;
                 if (data.list[i].temp.night && data.list[i].temp.eve && data.list[i].temp.morn) {
                     listElement.temp.night = data.list[i].temp.night;
@@ -223,7 +220,10 @@ function correctWeatherData(data) {
             }
 
             list.push(listElement);
+            var date = new Date(data.list[i].dt*1000);
+            console.log(date.toLocaleString());
         }
+
     }
     return newData;
 }
@@ -620,6 +620,8 @@ function openWeatherWarnings() {
 // iterate through data list and check the date
 function fillDetailForecast(art, data) {
     var buffer;
+    $("#forecastBox").html("");
+    
     for (var i = 0; i < data.list.length; i++) {
         buffer = checkForecast(data.list[i].dt, art);
         if (buffer === true)
@@ -629,23 +631,22 @@ function fillDetailForecast(art, data) {
 
 // fill the forecast box
 function fillForecastRows(index, data) {
-    //var str = '<div id="row'+index+'" class="BoxRow"><div class="left"><span id="boxDate'+index+'" class="BoxDate"></span><div id="boxIcon'+index+'" class="BoxIcon"></div></div><div class="BoxMiddle"><div id="boxTemp'+index+'" class="BoxTemp"></div><div id="boxCloud'+index+'" class="BoxCloud"></div></div><div class="BoxRight"><div id="boxRain'+index+'"></div><div id="boxAirPress'+index+'"></div><div id="boxWindStr'+index+'"></div><div id="boxWindDir'+index+'"></div></div></div>';
-    if (data !== "clear")
-    {        
-        //document.getElementById("forecastBox").appendChild(str);        
-        $("#boxDate" + index).text(timeConverter(data.dt, "forecast"));
-        $("#boxTemp" + index).text(data.temp.day.toFixed(0) + "°");
-        $("#boxCloud" + index).text(CloudIdToDescription(data.clouds));
-        $("#boxIcon" + index).css("background-image", "url(../../../css/img/icons/weather_icons/" + getWeatherIcon(data.dt, data.temp.day.toFixed(0), CloudIdToDescription(data.clouds), rainIdTorainDescription(data.rain)) + ".png)");
-        $("#boxAirPress" + index).text(data.pressure.toFixed(2) + " hPa");
-        $("#boxWindStr" + index).text(bftIdToBftDescription(data.speed));
-        $("#boxWindDir" + index).text(SkyDirToSkyDirDescription(data.deg));
-        $("#boxRain" + index).text(rainIdTorainDescription(data.rain));
-    }
+    var str = '<div id="row'+index+'" class="BoxRow"><div class="left"><span id="boxDate'+index+'" class="BoxDate"></span><div id="boxIcon'+index+'" class="BoxIcon"></div></div><div class="BoxMiddle"><div id="boxTemp'+index+'" class="BoxTemp"></div><div id="boxCloud'+index+'" class="BoxCloud"></div></div><div class="BoxRight"><div id="boxRain'+index+'"></div><div id="boxAirPress'+index+'"></div><div id="boxWindStr'+index+'"></div><div id="boxWindDir'+index+'"></div></div></div>';
+    $("#forecastBox").append(str);
+    $("#boxDate" + index).text(timeConverter(data.dt, "forecast"));
+    $("#boxTemp" + index).text(data.temp.day.toFixed(0) + "°");
+    $("#boxCloud" + index).text(CloudIdToDescription(data.clouds));
+    $("#boxIcon" + index).css("background-image", "url(../../../css/img/icons/weather_icons/" + getWeatherIcon(data.dt, data.temp.day.toFixed(0), CloudIdToDescription(data.clouds), rainIdTorainDescription(data.rain)) + ".png)");
+    $("#boxAirPress" + index).text(data.pressure.toFixed(2) + " hPa");
+    $("#boxWindStr" + index).text(bftIdToBftDescription(data.speed));
+    $("#boxWindDir" + index).text(SkyDirToSkyDirDescription(data.deg));
+    $("#boxRain" + index).text(rainIdTorainDescription(data.rain));
+    
 }
 
 // check for forecast equal dates
-function checkForecast(data, art) {
+/*function checkForecast(data, art) {
+ 
     // get Date of today
     var now = Date.now();
     now = (now / 1000).toFixed(0);
@@ -707,6 +708,49 @@ function checkForecast(data, art) {
             break;
         default:
     }
+}*/
+
+function checkForecast(data, art) {
+	var date = new Date(data*1000);
+	switch(art){
+		case "today":
+			var currDate = new Date();
+			if(date.getDay() == currDate.getDay() && date.getMonth() == currDate.getMonth() && date.getFullYear() == currDate.getFullYear()){
+				$('#dialogTitle').text("Das Wetter für Heute");
+				return true;
+			}		
+			break;	
+		case "tomorrow":
+            // tomorrow
+			var currDate = new Date();
+			currDate.setHours(currDate.getHours() + 24);
+			if(date.getDay() == currDate.getDay() && date.getMonth() == currDate.getMonth() && date.getFullYear() == currDate.getFullYear()){
+				$('#dialogTitle').text("Das Wetter für Morgen");
+				return true;
+			}
+			break;
+        case "3days":
+	        var nextDate = new Date();
+	        var lastDate = new Date();
+	        nextDate.setHours(currDate.getHours() + 24);
+	        nextDate.setHours(currDate.getHours() + 72);
+			if(nextDate >= date && date <= lastDate){
+	            $('#dialogTitle').text("Das Wetter für die nächsten 3 Tage");
+				return true;
+			}
+			break;
+        case "7days":
+	        var nextDate = new Date();
+	        var lastDate = new Date();
+	        nextDate.setHours(currDate.getHours() + 24);
+	        nextDate.setHours(currDate.getHours() + 7*24);
+			if(nextDate >= date && date <= lastDate){
+	            $('#dialogTitle').text("Das Wetter für die nächsten 3 Tage");
+				return true;
+			}
+			break;
+	}	
+	return false;
 }
 
 function toTimestamp(strDate) {
