@@ -11,7 +11,7 @@ function handleWeatherForm(formularData, showMessage) {
     var isOK = true;
     //TODO check entries
     if (!isOK) {
-        alert("please verify entered Data");
+        alert("Überprüfen Sie bitte Ihre Eingabe");
     } else {
         $.ajax({
             type: "GET",
@@ -29,10 +29,10 @@ function handleWeatherForm(formularData, showMessage) {
             console.log(jsonData);
             if (showMessage) {
                 if (jsonData.status != "ok") {
-                    showAlert("error", "Something went horrible wrong!");
+                    showAlert("error", "OHHHH Entschuldigung! Da lief wohl etwas gewaltig schief");
                 } else {
                     addWeatherToTable(jsonData.id);
-                    showAlert("success", "Your weather data has been stored and are now visible in table below.");
+                    showAlert("Erfolgreich", "Ihre Wetterdaten wurden gespeichert und in die untere Tabelle aufgenommen.");
                 }
             }
         });
@@ -68,7 +68,7 @@ function addWeatherToTable(weather_id) {
         }).done(function(jsonData) {
             jsonData = $.parseJSON(jsonData);
             if (jsonData.status != "ok") {
-                $("#wTR_" + jsonData.weather_id).html("<td colspan='" + weatherTableColCount + "'>Error when loading Data!</td>");
+                $("#wTR_" + jsonData.weather_id).html("<td colspan='" + weatherTableColCount + "'>Fehler beim laden der Daten!</td>");
             } else {
                 var tr = $("#wTR_" + weather_id);
                 tr.html("");
@@ -155,7 +155,7 @@ function weatherDataToForm(weather_id) {
     }).done(function(jsonData) {
         jsonData = $.parseJSON(jsonData);
         if (jsonData.status != "ok") {
-            $("#wTR_" + jsonData.weather_id).html("<td colspan='" + weatherTableColCount + "'>Error when loading Data!</td>");
+            $("#wTR_" + jsonData.weather_id).html("<td colspan='" + weatherTableColCount + "'>Fehler beim laden der Daten!</td>");
         } else {
             console.log(jsonData);
             var form = $("#appForm");
@@ -186,10 +186,10 @@ function removeWeatherData(weather_id) {
             console.log(jsonData);
             jsonData = $.parseJSON(jsonData);
             if (jsonData.status != "ok") {
-                showAlert("error", "The Entry may be deleted or may be not.")
+                showAlert("error", "Der Eintrag wurde vielleicht gelöscht, vielleicht auch nicht.")
             } else {
                 $("#wTR_" + weather_id).remove();
-                showAlert("success", "The Entry has been deleted successfully.");
+                showAlert("Erfolgreich", "Der Eintrag wurde erfolgreich gelöscht");
             }
         });
     }
