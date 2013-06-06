@@ -65,7 +65,7 @@ function handleWeather(time, target, timespan) {
     var timespan = timespan || null;
     var timespanString = (timespan != null ? "&cnt=" + timespan : "");//if forecast && empty -> 3 hours else param in days
     $.ajax({
-    	url: "http://api.openweathermap.org/data/2.5/" + time + "?mode=json&units=metric&lat=" + lat + "&lon=" + lon + timespanString,
+        url: "http://api.openweathermap.org/data/2.5/" + time + "?mode=json&units=metric&lat=" + lat + "&lon=" + lon + timespanString,
         type: "GET", dataType: 'jsonp',
         crossDomain: true
     }).done(function(data) {
@@ -100,15 +100,15 @@ function handleWeather(time, target, timespan) {
                 }
                 else if ($("#tomorrow").hasClass("active"))
                 {
-                	var buffer = false;
-                	for (var i = 0; i < data.list.length; i++) {
-				        buffer = checkForecast(data.list[i].dt, "tomorrow");
-				        if (buffer === true) {
-				        	getForecast(data.list[i]);
-				        	break;
-				        } 	
-				    }
-                  
+                    var buffer = false;
+                    for (var i = 0; i < data.list.length; i++) {
+                        buffer = checkForecast(data.list[i].dt, "tomorrow");
+                        if (buffer === true) {
+                            getForecast(data.list[i]);
+                            break;
+                        }
+                    }
+
                     fillDetailForecast("tomorrow", data);
                 }
                 else if ($("#3days").hasClass("active"))
@@ -180,7 +180,7 @@ function correctWeatherData(data) {
         list.push(listElement);
     } else {
         // Heute
-        for (var i in data.list) {        	
+        for (var i in data.list) {
             var listElement = {};
             if (data.list[i].main) {
                 listElement.clouds = percentToCloud(data.list[i].clouds.all);//Percent
@@ -201,7 +201,7 @@ function correctWeatherData(data) {
                 listElement.temp.max = data.list[i].main.temp_max;
                 listElement.name = data.city.name;
                 listElement.dt = data.list[i].dt;
-            //forecast tomorrow - 7days
+                //forecast tomorrow - 7days
             } else {
                 listElement.clouds = percentToCloud(data.list[i].clouds);//Percent
                 if (data.list[i].rain) {
@@ -318,7 +318,7 @@ function SkyDirToSkyDirDescription(id) {
 function mm3ToMM(mm) {
     if (mm.hasOwnProperty("1h")) {
         mm = mm["1h"];
-    } else if(mm==null){
+    } else if (mm == null) {
         return 1;
     }
     mm /= 3;
@@ -495,71 +495,72 @@ function bftIdToBftDescription(id) {
 }
 
 function getWeatherIcon(dt, temp, cloud, rain) {
-    /*
      var date = new Date(dt*1000);
      var hours = date.getHours();
-     var minutes = date.getMinutes();
-     var seconds = date.getSeconds();
-     */
-    rain = "Leichter Regen";
+    //rain = "Leichter Regen";
     var icon = "";
     switch (cloud) {
         case "wolkenlos":
             icon = "_1";
-            checkRain(icon, rain);
+            icon = checkRain(icon, rain);
             break;
         case "sonnig":
             icon = "_1";
-            checkRain(icon, rain);
+            icon = checkRain(icon, rain);
             break;
         case "heiter":
             icon = "_1";
-            checkRain(icon, rain);
+            icon = checkRain(icon, rain);
             break;
         case "leicht bewölkt":
             icon = "_2";
-            checkRain(icon, rain);
+            icon = checkRain(icon, rain);
             break;
         case "wolkig":
             icon = "_3";
-            checkRain(icon, rain);
+            icon = checkRain(icon, rain);
             break;
         case "bewölkt":
             icon = "_4";
-            checkRain(icon, rain);
+            icon = checkRain(icon, rain);
             break;
         case "stark bewölkt":
             icon = "_4";
-            checkRain(icon, rain);
+            icon = checkRain(icon, rain);
             break;
         case "fast bedeckt":
             icon = "_4";
-            checkRain(icon, rain);
+            icon = checkRain(icon, rain);
             break;
         case "bedeckt":
             icon = "_4";
-            checkRain(icon, rain);
+            icon = checkRain(icon, rain);
             break;
         case "Himmel nicht erkennbar":
             icon = "_4";
-            checkRain(icon, rain);
+            icon = checkRain(icon, rain);
             break;
         default:
     }
-
-    icon = "D" + icon;
+    if(hours === 23 || hours === 0 || hours === 1 || hours === 2 || hours === 3 || hours === 4 || hours === 5 || hours === 6) {
+        icon = "N" + icon;
+    } else {
+        icon = "D" + icon;
+    }
     return icon;
 }
 
 function checkRain(icon, rain) {
     if (rain === "Leichter Regen")
-        icon = "_5";
+        return icon = "_5";
     else if (rain === "Gemäßigter Regen")
-        icon = "_6";
+        return icon = "_6";
     else if (rain === "Starker Regen")
-        icon = "_7";
+        return icon = "_7";
     else if (rain === "Heftiger Regen")
-        icon = "_8";
+        return icon = "_8";
+    else
+        return icon;
 }
 
 function getForecast(data) {
@@ -627,7 +628,7 @@ function openWeatherWarnings() {
 // iterate through data list and check the date
 function fillDetailForecast(art, data) {
     var buffer;
-    $("#forecastBox").html("");    
+    $("#forecastBox").html("");
     for (var i = 0; i < data.list.length; i++) {
         buffer = checkForecast(data.list[i].dt, art);
         if (buffer === true)
@@ -637,7 +638,7 @@ function fillDetailForecast(art, data) {
 
 // fill the forecast box
 function fillForecastRows(index, data) {
-    var str = '<div id="row'+index+'" class="BoxRow"><div class="Boxleft"><span id="boxDate'+index+'" class="BoxDate"></span><div id="boxIcon'+index+'" class="BoxIcon"></div></div><div class="BoxMiddle"><div id="boxTemp'+index+'" class="BoxTemp"></div><div id="boxCloud'+index+'" class="BoxCloud"></div></div><div class="BoxRight"><div id="boxRain'+index+'"></div><div id="boxAirPress'+index+'"></div><div id="boxWindStr'+index+'"></div><div id="boxWindDir'+index+'"></div></div></div>';
+    var str = '<div id="row' + index + '" class="BoxRow"><div class="Boxleft"><span id="boxDate' + index + '" class="BoxDate"></span><div id="boxIcon' + index + '" class="BoxIcon"></div></div><div class="BoxMiddle"><div id="boxTemp' + index + '" class="BoxTemp"></div><div id="boxCloud' + index + '" class="BoxCloud"></div></div><div class="BoxRight"><div id="boxRain' + index + '"></div><div id="boxAirPress' + index + '"></div><div id="boxWindStr' + index + '"></div><div id="boxWindDir' + index + '"></div></div></div>';
     $("#forecastBox").append(str);
     $("#boxDate" + index).text(timeConverter(data.dt, "forecast"));
     $("#boxTemp" + index).text(data.temp.day.toFixed(0) + "°");
@@ -647,136 +648,136 @@ function fillForecastRows(index, data) {
     $("#boxWindStr" + index).text(bftIdToBftDescription(data.speed));
     $("#boxWindDir" + index).text(SkyDirToSkyDirDescription(data.deg));
     $("#boxRain" + index).text(rainIdTorainDescription(data.rain));
-    
+
 }
 
 // check for forecast equal dates
 /*function checkForecast(data, art) {
  
-    // get Date of today
-    var now = Date.now();
-    now = (now / 1000).toFixed(0);
-    var days1 = new Date(now * 1000);
-    days1.setDate(days1.getDate() + 1);
-    var days3 = new Date(now * 1000);
-    days3.setDate(days3.getDate() + 2);
-    var days4 = new Date(now *1000);
-    days4.setDate(days4.getDate() + 3);
-    var days5 = new Date(now *1000);
-    days5.setDate(days5.getDate() + 4);
-    var days6 = new Date(now *1000);
-    days6.setDate(days6.getDate() + 5);
-    var days7 = new Date(now * 1000);
-    days7.setDate(days7.getDate() + 6);
-    switch (art)
-    {
+ // get Date of today
+ var now = Date.now();
+ now = (now / 1000).toFixed(0);
+ var days1 = new Date(now * 1000);
+ days1.setDate(days1.getDate() + 1);
+ var days3 = new Date(now * 1000);
+ days3.setDate(days3.getDate() + 2);
+ var days4 = new Date(now *1000);
+ days4.setDate(days4.getDate() + 3);
+ var days5 = new Date(now *1000);
+ days5.setDate(days5.getDate() + 4);
+ var days6 = new Date(now *1000);
+ days6.setDate(days6.getDate() + 5);
+ var days7 = new Date(now * 1000);
+ days7.setDate(days7.getDate() + 6);
+ switch (art)
+ {
+ case "today":
+ $('#dialogTitle').text("Das Wetter für Heute");
+ if (timeConverter(now, "calculation") === timeConverter(data, "calculation")) {
+ return true;
+ } else {
+ return false;
+ }
+ break;
+ case "tomorrow":
+ // tomorrow
+ $('#dialogTitle').text("Das Wetter für Morgen");
+ if (timeConverter(toTimestamp(days1), "calculation") === timeConverter(data, "calculation")) {
+ return true;
+ } else {
+ return false;
+ }
+ break;
+ case "3days":
+ // 3 days 
+ $('#dialogTitle').text("Das Wetter für die nächsten 3 Tage");
+ if ((timeConverter(toTimestamp(days3), "calculation") === timeConverter(data, "calculation"))
+ || (timeConverter(toTimestamp(days1, "calculation")) === timeConverter(data, "calculation"))
+ || (timeConverter(toTimestamp(now, "calculation")) === timeConverter(data, "calculation"))) {
+ return true;
+ } else {
+ return false;
+ }
+ break;
+ case "7days":
+ $('#dialogTitle').text("Das Wetter für die nächsten 7 Tage");
+ if ((timeConverter(toTimestamp(days7), "calculation") === timeConverter(data, "calculation"))
+ ||(timeConverter(toTimestamp(days1, "calculation")) === timeConverter(data, "calculation"))
+ ||(timeConverter(toTimestamp(days3, "calculation")) === timeConverter(data, "calculation"))
+ ||(timeConverter(toTimestamp(days4, "calculation")) === timeConverter(data, "calculation"))
+ ||(timeConverter(toTimestamp(days5, "calculation")) === timeConverter(data, "calculation"))
+ ||(timeConverter(toTimestamp(days6, "calculation")) === timeConverter(data, "calculation"))
+ ||(timeConverter(toTimestamp(now, "calculation")) === timeConverter(data, "calculation"))) {
+ return true;
+ } else {
+ return false;
+ }
+ break;
+ default:
+ }
+ }*/
+
+function checkForecast(data, art) {
+    var date = new Date(data * 1000);
+    switch (art) {
         case "today":
-            $('#dialogTitle').text("Das Wetter für Heute");
-            if (timeConverter(now, "calculation") === timeConverter(data, "calculation")) {
+            var currDate = new Date();
+            if (date.getDay() == currDate.getDay() && date.getMonth() == currDate.getMonth() && date.getFullYear() == currDate.getFullYear()) {
+                $('#dialogTitle').text("Das Wetter für Heute");
                 return true;
-            } else {
-                return false;
             }
             break;
         case "tomorrow":
             // tomorrow
-            $('#dialogTitle').text("Das Wetter für Morgen");
-            if (timeConverter(toTimestamp(days1), "calculation") === timeConverter(data, "calculation")) {
+            var currDate = new Date();
+            currDate.setHours(0);
+            currDate.setMinutes(0);
+            currDate.setSeconds(0);
+            currDate.setMilliseconds(0);
+            currDate.setHours(currDate.getHours() + 24);
+            if (date.getDay() == currDate.getDay() && date.getMonth() == currDate.getMonth() && date.getFullYear() == currDate.getFullYear()) {
+                $('#dialogTitle').text("Das Wetter für Morgen");
                 return true;
-            } else {
-                return false;
             }
             break;
         case "3days":
-            // 3 days 
-            $('#dialogTitle').text("Das Wetter für die nächsten 3 Tage");
-            if ((timeConverter(toTimestamp(days3), "calculation") === timeConverter(data, "calculation"))
-                    || (timeConverter(toTimestamp(days1, "calculation")) === timeConverter(data, "calculation"))
-                    || (timeConverter(toTimestamp(now, "calculation")) === timeConverter(data, "calculation"))) {
+            var nextDate = new Date();
+            var lastDate = new Date();
+            nextDate.setHours(0);
+            nextDate.setMinutes(0);
+            nextDate.setSeconds(0);
+            nextDate.setMilliseconds(0);
+            lastDate.setHours(0);
+            lastDate.setMinutes(0);
+            lastDate.setSeconds(0);
+            lastDate.setMilliseconds(0);
+            nextDate.setHours(nextDate.getHours() + 24);
+            lastDate.setHours(lastDate.getHours() + (4 * 24));
+            if (nextDate <= date && date <= lastDate) {
+                $('#dialogTitle').text("Das Wetter für die nächsten 3 Tage");
                 return true;
-            } else {
-                return false;
             }
             break;
         case "7days":
-            $('#dialogTitle').text("Das Wetter für die nächsten 7 Tage");
-            if ((timeConverter(toTimestamp(days7), "calculation") === timeConverter(data, "calculation"))
-                    ||(timeConverter(toTimestamp(days1, "calculation")) === timeConverter(data, "calculation"))
-                    ||(timeConverter(toTimestamp(days3, "calculation")) === timeConverter(data, "calculation"))
-                    ||(timeConverter(toTimestamp(days4, "calculation")) === timeConverter(data, "calculation"))
-                    ||(timeConverter(toTimestamp(days5, "calculation")) === timeConverter(data, "calculation"))
-                    ||(timeConverter(toTimestamp(days6, "calculation")) === timeConverter(data, "calculation"))
-                    ||(timeConverter(toTimestamp(now, "calculation")) === timeConverter(data, "calculation"))) {
+            var nextDate = new Date();
+            var lastDate = new Date();
+            nextDate.setHours(0);
+            nextDate.setMinutes(0);
+            nextDate.setSeconds(0);
+            nextDate.setMilliseconds(0);
+            lastDate.setHours(0);
+            lastDate.setMinutes(0);
+            lastDate.setSeconds(0);
+            lastDate.setMilliseconds(0);
+            nextDate.setHours(nextDate.getHours() + 24);
+            lastDate.setHours(lastDate.getHours() + (8 * 24));
+            if (nextDate <= date && date <= lastDate) {
+                $('#dialogTitle').text("Das Wetter für die nächsten 7 Tage");
                 return true;
-            } else {
-                return false;
             }
-            break;
-        default:
+            break
     }
-}*/
-
-function checkForecast(data, art) {
-	var date = new Date(data*1000);
-	switch(art){
-		case "today":
-			var currDate = new Date();
-			if(date.getDay() == currDate.getDay() && date.getMonth() == currDate.getMonth() && date.getFullYear() == currDate.getFullYear()){
-				$('#dialogTitle').text("Das Wetter für Heute");
-				return true;
-			}		
-			break;	
-		case "tomorrow":
-            // tomorrow
-			var currDate = new Date();
-			currDate.setHours(0);
-			currDate.setMinutes(0);
-			currDate.setSeconds(0);
-			currDate.setMilliseconds(0);
-			currDate.setHours(currDate.getHours() + 24);
-			if(date.getDay() == currDate.getDay() && date.getMonth() == currDate.getMonth() && date.getFullYear() == currDate.getFullYear()){
-				$('#dialogTitle').text("Das Wetter für Morgen");
-				return true;
-			}
-			break;
-        case "3days":
-	        var nextDate = new Date();
-	        var lastDate = new Date();
-	        nextDate.setHours(0);
-	        nextDate.setMinutes(0);
-	        nextDate.setSeconds(0);
-	        nextDate.setMilliseconds(0);
-	        lastDate.setHours(0);
-	        lastDate.setMinutes(0);
-	        lastDate.setSeconds(0);
-	        lastDate.setMilliseconds(0);
-	        nextDate.setHours(nextDate.getHours() + 24);
-	        lastDate.setHours(lastDate.getHours() + (4*24));
-			if(nextDate <= date && date <= lastDate){
-	            $('#dialogTitle').text("Das Wetter für die nächsten 3 Tage");
-				return true;
-			}
-			break;
-        case "7days":
-        	var nextDate = new Date();
-	        var lastDate = new Date();
-	        nextDate.setHours(0);
-	        nextDate.setMinutes(0);
-	        nextDate.setSeconds(0);
-	        nextDate.setMilliseconds(0);
-	        lastDate.setHours(0);
-	        lastDate.setMinutes(0);
-	        lastDate.setSeconds(0);
-	        lastDate.setMilliseconds(0);
-	        nextDate.setHours(nextDate.getHours() + 24);
-	        lastDate.setHours(lastDate.getHours() + (8*24));
-			if(nextDate <= date && date <= lastDate){
-	            $('#dialogTitle').text("Das Wetter für die nächsten 7 Tage");
-				return true;
-			}
-			break
-	}	
-	return false;
+    return false;
 }
 
 function toTimestamp(strDate) {
@@ -787,22 +788,22 @@ function toTimestamp(strDate) {
 
 //tabs for weatherbox
 $('#now').click(function() {
- handleWeather(null, "box");
+    handleWeather(null, "box");
 });
 $("#today").click(function() {
- handleWeather("forecast", "box");
+    handleWeather("forecast", "box");
 });
 $("#tomorrow").click(function() {
- handleWeather("forecast", "box");
+    handleWeather("forecast", "box");
 });
 $("#3days").click(function() {
- handleWeather("forecast/daily", "box");
+    handleWeather("forecast/daily", "box");
 });
 $("#7days").click(function() {
- handleWeather("forecast/daily", "box", 14);
+    handleWeather("forecast/daily", "box", 14);
 });
 
 //get detailed forecast
 $('#detail').click(function() {
- $('#forecastMessageBox').modal('show');
+    $('#forecastMessageBox').modal('show');
 });
