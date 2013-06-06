@@ -1,4 +1,5 @@
 var weatherLogIntervall = null;
+var forecastBoxIntervall = null;
 var inserTimeMin = 15 * 1000 * 60; //value in ms -> time x 6000 = Minut.
 var currentTripToLog = 1;
 //test for jenkins
@@ -776,3 +777,26 @@ function toTimestamp(strDate) {
     var datum = Date.parse(strDate);
     return datum / 1000;
 }
+
+
+//tabs for weatherbox
+$('#now').click(function() {
+ handleWeather(null, "box");
+});
+$("#today").click(function() {
+ handleWeather("forecast", "box");
+});
+$("#tomorrow").click(function() {
+ handleWeather("forecast", "box");
+});
+$("#3days").click(function() {
+ handleWeather("forecast/daily", "box");
+});
+$("#7days").click(function() {
+ handleWeather("forecast/daily", "box", 14);
+});
+
+//get detailed forecast
+$('#detail').click(function() {
+ $('#forecastMessageBox').modal('show');
+});

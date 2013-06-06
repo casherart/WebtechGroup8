@@ -27,6 +27,9 @@ var fixedMarkerArray = new Array();
 
 var selectedMarker = null;
 
+var forecastBoxIntervall = null;
+var forecastBoxUpdateWait = 1000;
+
 var currentPositionMarkerImage = new google.maps.MarkerImage('../img/icons/boat.png',
         new google.maps.Size(50, 50), //size
         new google.maps.Point(0, 0), //origin point
@@ -191,6 +194,7 @@ function initialize() {
      * function to show tiles or div with weather data
      */
     google.maps.event.addListener(map, 'bounds_changed', function() {
+        window.clearTimeout(forecastBoxIntervall);
         if (map.getMapTypeId() === "weather") {
             // overlay level
             if (map.getZoom() <= 7) {
@@ -204,26 +208,27 @@ function initialize() {
                 if ($("#now").hasClass("active"))
                 {
                     // city level (weatherbox)
-                    handleWeather(null, "box");
+                    forecastBoxIntervall = window.setTimeout("handleWeather(null, 'box');", forecastBoxUpdateWait);
+                    
                     $("#weatherDisplayBox").fadeIn("slow");
                     $("#weatherBar").slideUp("slow");
                     $("#bft_scale").fadeOut("slow");
                 }
                 else if ($("#today").hasClass("active"))
                 {
-                    handleWeather("forecast", "box");
+                    forecastBoxIntervall = window.setTimeout("handleWeather('forecast', 'box');console.log(111111);", forecastBoxUpdateWait);
                 }
                 else if ($("#tomorrow").hasClass("active"))
                 {
-                    handleWeather("forecast/daily", "box");
+                    forecastBoxIntervall = window.setTimeout("handleWeather('forecast/daily', 'box');", forecastBoxUpdateWait);
                 }
                 else if ($("#3days").hasClass("active"))
                 {
-                    handleWeather("forecast/daily", "box");
+                    forecastBoxIntervall = window.setTimeout("handleWeather('forecast/daily', 'box');", forecastBoxUpdateWait);
                 }
                 else if ($("#7days").hasClass("active"))
                 {
-                    handleWeather("forecast/daily", "box");
+                    forecastBoxIntervall = window.setTimeout("handleWeather('forecast/daily', 'box');", forecastBoxUpdateWait);
                 }
             }
         } else {
@@ -317,27 +322,6 @@ $('.weat').click(function() {
     }
 });
 
-// tabs for weatherbox
-$('#now').click(function() {
-    handleWeather(null, "box");
-});
-$("#today").click(function() {
-    handleWeather("forecast", "box");
-});
-$("#tomorrow").click(function() {
-    handleWeather("forecast", "box");
-});
-$("#3days").click(function() {
-    handleWeather("forecast/daily", "box");
-});
-$("#7days").click(function() {
-    handleWeather("forecast/daily", "box", 14);
-});
-
-// get detailed forecast
-$('#detail').click(function() {
-    $('#forecastMessageBox').modal('show');
-});
 
 // temporary marker context menu ----------------------------------------- //
 $(function() {
