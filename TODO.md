@@ -2,31 +2,25 @@
 
 <b>Google Maps</b>
 <ul>
-<li>Vorhersagen ebenfalls intergrieren (Sebastian, Duy)</li>
-<li>Wettersymbole einführen, Graphen?! (Duy)</li>
-<li>Displaybox Umrechnung von REGEN noch Fehlerhaft & Windrichtungsangabe wohin oder woher? (Duy)</li>
-<li>Tooltips für Wetter ergänzen (Duy)</li>
+<li>Displaybox Umrechnung von REGEN noch keine da oder fehlerhaft? (Sebastian)</li>
 <li>Richtige Wettersymbole einblenden, Unterscheidung zwischen Nacht und Tag(Duy) </li>
+<li>Sleep before Reload Weatherdata on move (Sebastian)</li>
+<li>Fehler Umschalten der Wetterbox (Duy) </li>
+<li>Formatierung der Forecastbox (Duy) </li>
+<li>Wetterbox für Mobile anpassen (Detect Handheld Device in Javascript) (Duy) </li>
 </ul>
 
 <b>Formular</b>
 <ul>
 <li>Validierung der Einträge (Fred)</li>
-<li> Icons nur bei Map ###-Done-###</li>
-<li>SQL Skripte mit sinnvollen Daten füllen (Fred) ###-Done-###</li>
-<li>Formularangaben und MessageBox auf Deutsch ändern (Fred)###-Done-###</li>
-<li>Einheiten Tooltip updaten mit richtiger Beschreibung (Fred)###-Done-####</li>
 </ul>
 
-<b>Comet und Websocket</b>
+<b>Java Play</b>
 <ul>
-<li>Etwas überlegen um Comet und Websocket zu zeigen, beispielsweise Wetterwarnungen (Sebastian)</li>
+<li>Einrichten</li>
+<li>Projekt umschreiben auf Play</li>
 </ul>
 
-<b>Jenkins</b>
-<ul>
-<li>Server einrichten (Sebastian)</li>
-</ul>
 
 <b>Sonstiges</b>
 <ul>
