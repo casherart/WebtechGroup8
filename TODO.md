@@ -12,9 +12,9 @@
 <b>Formular</b>
 <ul>
 <li>Validierung der Einträge (Fred)</li>
-<li>SQL Skripte mit sinnvollen Daten füllen (Fred)</li>
-<li>Formularangaben und MessageBox auf Deutsch ändern (Fred test tes)</li>
-<li>Einheiten Tooltip updaten mit richtiger Beschreibung (Fred)</li>
+<li>SQL Skripte mit sinnvollen Daten füllen (Fred) ###-Done-###</li>
+<li>Formularangaben und MessageBox auf Deutsch ändern (Fred)</li>
+<li>Einheiten Tooltip updaten mit richtiger Beschreibung (Fred)###-Done-####</li>
 </ul>
 
 <b>Comet und Websocket</b>
