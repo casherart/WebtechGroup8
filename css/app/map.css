@@ -168,9 +168,14 @@ label {
     height: 125px;
 }
 
+#forecastMessageBox {
+    
+}
+
 #forecastBox .BoxRow {
     height: 100px;
-    border-top: 1px solid gray;
+    border-top: 1px solid white;
+    padding-top: 10px;
 }
 
 #forecastBox .BoxIcon {
@@ -184,9 +189,11 @@ label {
 #forecastBox .BoxTemp {
     width: 100px;
     height: 20px;
+    font-size: 20px;
 }
 
 #forecastBox .BoxDate {
+    font-weight: bold;
 }
 
 #forecastBox .BoxCloud {
@@ -198,14 +205,13 @@ label {
     padding-bottom: 30px;
     padding-top: 30px;
     width: 150px;
-    padding-right: 20px;
 }
 
 #forecastBox .BoxRight {
     float: left;
     height: 70px;
     padding: 15px 0;
-    width: 200px;
+    width: 150px;
 }
 
 #detail {
@@ -217,7 +223,7 @@ label {
     text-decoration: none !important;
 }
 
-.left {
+#forecastBox .Boxleft {
     float: left;
-    width: 145px;
+    width: 210px;
 }

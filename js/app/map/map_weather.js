@@ -253,7 +253,7 @@ function timeConverter(UNIX_timestamp, option) {
         var time = day + ' ' + date + '. ' + month;
     }
     else if (option === "forecast") {
-        var time = dayShort + ' ' + date + '. ' + month + ' ' + hour + ':0' + min + ' Uhr';
+        var time = day + ' ' + date + '. ' + month + ' ' + hour + ':0' + min + ' Uhr';
     }
     else if (option === "calculation") {
         var time = date + '-' + month + '-' + year;
@@ -637,7 +637,7 @@ function fillDetailForecast(art, data) {
 
 // fill the forecast box
 function fillForecastRows(index, data) {
-    var str = '<div id="row'+index+'" class="BoxRow"><div class="left"><span id="boxDate'+index+'" class="BoxDate"></span><div id="boxIcon'+index+'" class="BoxIcon"></div></div><div class="BoxMiddle"><div id="boxTemp'+index+'" class="BoxTemp"></div><div id="boxCloud'+index+'" class="BoxCloud"></div></div><div class="BoxRight"><div id="boxRain'+index+'"></div><div id="boxAirPress'+index+'"></div><div id="boxWindStr'+index+'"></div><div id="boxWindDir'+index+'"></div></div></div>';
+    var str = '<div id="row'+index+'" class="BoxRow"><div class="Boxleft"><span id="boxDate'+index+'" class="BoxDate"></span><div id="boxIcon'+index+'" class="BoxIcon"></div></div><div class="BoxMiddle"><div id="boxTemp'+index+'" class="BoxTemp"></div><div id="boxCloud'+index+'" class="BoxCloud"></div></div><div class="BoxRight"><div id="boxRain'+index+'"></div><div id="boxAirPress'+index+'"></div><div id="boxWindStr'+index+'"></div><div id="boxWindDir'+index+'"></div></div></div>';
     $("#forecastBox").append(str);
     $("#boxDate" + index).text(timeConverter(data.dt, "forecast"));
     $("#boxTemp" + index).text(data.temp.day.toFixed(0) + "°");
