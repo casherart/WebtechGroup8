@@ -26,7 +26,6 @@ function handleWeatherForm(formularData, showMessage) {
             } catch (e) {
                 console.error(jsonData);
             }
-            console.log(jsonData);
             if (showMessage) {
                 if (jsonData.status != "ok") {
                     showAlert("error", "OHHHH Entschuldigung! Da lief wohl etwas gewaltig schief");

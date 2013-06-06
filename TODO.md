@@ -2,7 +2,6 @@
 
 <b>Google Maps</b>
 <ul>
-<li>Displaybox Umrechnung von REGEN noch keine da oder fehlerhaft? (Sebastian)</li>
 <li>Richtige Wettersymbole einblenden, Unterscheidung zwischen Nacht und Tag(Duy) </li>
 <li>Sleep before Reload Weatherdata on move (Sebastian)</li>
 <li>Fehler Umschalten der Wetterbox (Duy) </li>

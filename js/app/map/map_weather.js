@@ -62,9 +62,9 @@ function handleWeather(time, target, timespan) {
     var time = time || "weather"; //forcast (3h) //forecast/daily (x daxs max 14)
     var target = target || "log";
     var timespan = timespan || null;
-    var timespanString = (timespan != null ? "cnt=" + timespan : "");//if forecast && empty -> 3 hours else param in days
+    var timespanString = (timespan != null ? "&cnt=" + timespan : "");//if forecast && empty -> 3 hours else param in days
     $.ajax({
-        url: "http://api.openweathermap.org/data/2.5/" + time + "?mode=json&units=metric&lat=" + lat + "&lon=" + lon + timespanString,
+    	url: "http://api.openweathermap.org/data/2.5/" + time + "?mode=json&units=metric&lat=" + lat + "&lon=" + lon + timespanString,
         type: "GET", dataType: 'jsonp',
         crossDomain: true
     }).done(function(data) {
@@ -192,7 +192,7 @@ function correctWeatherData(data) {
                 listElement.temp.max = data.list[i].main.temp_max;
                 listElement.name = data.city.name;
                 listElement.dt = data.list[i].dt;
-                //forecast tomorrow - 7days
+            //forecast tomorrow - 7days
             } else {
                 listElement.clouds = percentToCloud(data.list[i].clouds);//Percent
                 if (data.list[i].rain) {
@@ -309,7 +309,7 @@ function SkyDirToSkyDirDescription(id) {
 function mm3ToMM(mm) {
     if (mm.hasOwnProperty("1h")) {
         mm = mm["1h"];
-    } else {
+    } else if(mm==null){
         return 1;
     }
     mm /= 3;

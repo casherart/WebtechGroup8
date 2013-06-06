@@ -331,7 +331,7 @@ $("#3days").click(function() {
     handleWeather("forecast/daily", "box");
 });
 $("#7days").click(function() {
-    handleWeather("forecast/daily", "box");
+    handleWeather("forecast/daily", "box", 14);
 });
 
 // get detailed forecast
