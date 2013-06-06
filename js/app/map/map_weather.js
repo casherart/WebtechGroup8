@@ -100,7 +100,15 @@ function handleWeather(time, target, timespan) {
                 }
                 else if ($("#tomorrow").hasClass("active"))
                 {
-                    getForecast(data.list[1]);
+                	var buffer = false;
+                	for (var i = 0; i < data.list.length; i++) {
+				        buffer = checkForecast(data.list[i].dt, "tomorrow");
+				        if (buffer === true) {
+				        	getForecast(data.list[i]);
+				        	break;
+				        } 	
+				    }
+                  
                     fillDetailForecast("tomorrow", data);
                 }
                 else if ($("#3days").hasClass("active"))
@@ -619,8 +627,7 @@ function openWeatherWarnings() {
 // iterate through data list and check the date
 function fillDetailForecast(art, data) {
     var buffer;
-    $("#forecastBox").html("");
-    
+    $("#forecastBox").html("");    
     for (var i = 0; i < data.list.length; i++) {
         buffer = checkForecast(data.list[i].dt, art);
         if (buffer === true)
@@ -767,8 +774,7 @@ function checkForecast(data, art) {
 	            $('#dialogTitle').text("Das Wetter für die nächsten 7 Tage");
 				return true;
 			}
-			break;
-	        break;
+			break
 	}	
 	return false;
 }

@@ -194,7 +194,8 @@ function initialize() {
      * function to show tiles or div with weather data
      */
     google.maps.event.addListener(map, 'bounds_changed', function() {
-        window.clearTimeout(forecastBoxIntervall);
+
+    	window.clearTimeout(forecastBoxIntervall);
         if (map.getMapTypeId() === "weather") {
             // overlay level
             if (map.getZoom() <= 7) {
@@ -205,14 +206,12 @@ function initialize() {
                     $("#bft_scale").fadeIn("slow");
 
             } else {
+            	$("#weatherDisplayBox").fadeIn("slow");
+                $("#weatherBar").slideUp("slow");
+                $("#bft_scale").fadeOut("slow");
                 if ($("#now").hasClass("active"))
                 {
-                    // city level (weatherbox)
-                    forecastBoxIntervall = window.setTimeout("handleWeather(null, 'box');", forecastBoxUpdateWait);
-                    
-                    $("#weatherDisplayBox").fadeIn("slow");
-                    $("#weatherBar").slideUp("slow");
-                    $("#bft_scale").fadeOut("slow");
+                    forecastBoxIntervall = window.setTimeout("handleWeather(null, 'box');", forecastBoxUpdateWait);                  
                 }
                 else if ($("#today").hasClass("active"))
                 {
