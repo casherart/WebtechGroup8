@@ -220,8 +220,6 @@ function correctWeatherData(data) {
             }
 
             list.push(listElement);
-            var date = new Date(data.list[i].dt*1000);
-            console.log(date.toLocaleString());
         }
 
     }
@@ -723,6 +721,10 @@ function checkForecast(data, art) {
 		case "tomorrow":
             // tomorrow
 			var currDate = new Date();
+			currDate.setHours(0);
+			currDate.setMinutes(0);
+			currDate.setSeconds(0);
+			currDate.setMilliseconds(0);
 			currDate.setHours(currDate.getHours() + 24);
 			if(date.getDay() == currDate.getDay() && date.getMonth() == currDate.getMonth() && date.getFullYear() == currDate.getFullYear()){
 				$('#dialogTitle').text("Das Wetter für Morgen");
@@ -732,23 +734,40 @@ function checkForecast(data, art) {
         case "3days":
 	        var nextDate = new Date();
 	        var lastDate = new Date();
-	        nextDate.setHours(currDate.getHours() + 24);
-	        nextDate.setHours(currDate.getHours() + 72);
-			if(nextDate >= date && date <= lastDate){
+	        nextDate.setHours(0);
+	        nextDate.setMinutes(0);
+	        nextDate.setSeconds(0);
+	        nextDate.setMilliseconds(0);
+	        lastDate.setHours(0);
+	        lastDate.setMinutes(0);
+	        lastDate.setSeconds(0);
+	        lastDate.setMilliseconds(0);
+	        nextDate.setHours(nextDate.getHours() + 24);
+	        lastDate.setHours(lastDate.getHours() + (4*24));
+			if(nextDate <= date && date <= lastDate){
 	            $('#dialogTitle').text("Das Wetter für die nächsten 3 Tage");
 				return true;
 			}
 			break;
         case "7days":
-	        var nextDate = new Date();
+        	var nextDate = new Date();
 	        var lastDate = new Date();
-	        nextDate.setHours(currDate.getHours() + 24);
-	        nextDate.setHours(currDate.getHours() + 7*24);
-			if(nextDate >= date && date <= lastDate){
-	            $('#dialogTitle').text("Das Wetter für die nächsten 3 Tage");
+	        nextDate.setHours(0);
+	        nextDate.setMinutes(0);
+	        nextDate.setSeconds(0);
+	        nextDate.setMilliseconds(0);
+	        lastDate.setHours(0);
+	        lastDate.setMinutes(0);
+	        lastDate.setSeconds(0);
+	        lastDate.setMilliseconds(0);
+	        nextDate.setHours(nextDate.getHours() + 24);
+	        lastDate.setHours(lastDate.getHours() + (8*24));
+			if(nextDate <= date && date <= lastDate){
+	            $('#dialogTitle').text("Das Wetter für die nächsten 7 Tage");
 				return true;
 			}
 			break;
+	        break;
 	}	
 	return false;
 }
