@@ -321,8 +321,8 @@ $('.weat').click(function() {
     }
 });
 
-if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
-    $('.weatherDisplayBox').hide();
+if( /Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent) ) {
+    $('#weatherDisplayBox').hide();
 }
 
 
