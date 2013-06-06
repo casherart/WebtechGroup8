@@ -321,6 +321,10 @@ $('.weat').click(function() {
     }
 });
 
+if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
+    alert("Im a pirate!");
+}
+
 
 // temporary marker context menu ----------------------------------------- //
 $(function() {
