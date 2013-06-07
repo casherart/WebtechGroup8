@@ -2,8 +2,9 @@
 
 <b>Google Maps</b>
 <ul>
-<li>Fehler Umschalten der Wetterbox (Duy) //ich hab mal geschaut ob ich den Fehler finde und ich glaube es liegt daran das openstreetmap manchmal die daten nicht schnell genug liefert und einen Fehler wirft.</li>
-<li>Wetterbox für Mobile anpassen (Detect Handheld Device in Javascript) (Duy) </li>
+<li>Fehler Umschalten der Wetterbox (Sebastian) //ich hab mal geschaut ob ich den Fehler finde und ich glaube es liegt daran das openstreetmap manchmal die daten nicht schnell genug liefert und einen Fehler wirft.</li>
+<li>Wetterbox für Mobile optimieren. (Detect Handheld Device in Javascript) (Sebastian) </li>
+<li>In der Weatherbox soll bei der Aktuell-Ansicht, keine ForecastBox aufgehen (Sebastian) </li>
 </ul>
 
 <b>Formular</b>
@@ -13,8 +14,7 @@
 
 <b>Java Play</b>
 <ul>
-<li>Einrichten</li>
-<li>Projekt umschreiben auf Play</li>
+<li>Projekt auf Java Play migrieren (Duy)</li>
 </ul>
 
 
