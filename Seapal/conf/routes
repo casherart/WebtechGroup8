@@ -20,6 +20,12 @@ GET     /app_trip.html          	controllers.Trip.index()
 GET     /app_trip_load.html     	controllers.Trip.load(tnr: Int)
 POST    /app_trip_insert.html   	controllers.Trip.insert()
 GET     /app_trip_delete.html   	controllers.Trip.delete(tnr: Int)
+# Weatherform
+GET		/app_weather.html			controllers.Weather.index()
+GET		/app_weather_load.html		controllers.Weather.load(tnr: Int)
+POST	/app_weather_insert.html	controllers.Weather.insert()
+GET		/app_weather_delete.html	controllers.Weather.delete(tnr: Int)
+#
 GET     /app_tripinfo.html          controllers.Tripinfo.index(tnr: Int)
 GET     /app_tripinfo_load.html     controllers.Tripinfo.load(wnr: Int)
 POST    /app_tripinfo_insert.html   controllers.Tripinfo.insert()
