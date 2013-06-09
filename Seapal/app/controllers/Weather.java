@@ -155,7 +155,7 @@ public class Weather extends Controller {
 	    	   e.printStackTrace();
 	       }
     }
-    return ok(trip.render(header.render(), navigation.render("app_map"), navigation_app.render("app_weather"), data));
+    return ok(weather.render(header.render(), navigation.render("app_map"), navigation_app.render("app_weather"), data));
   }
   
 }
