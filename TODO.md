@@ -17,6 +17,9 @@
 <b>Java Play</b>
 <ul>
 <li>Projekt auf Java Play migrieren (Duy)</li>
+<li>Java Play Datenbank Einbindung (JDBC?)</li>
+<li>Wetterformular Funktionalitäten integrieren SQL über Helpferfunktion</li>
+<li>Weathermap in Maps intergrieren</li>
 </ul>
 
 
