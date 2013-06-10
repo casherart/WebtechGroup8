@@ -1,7 +1,7 @@
 // Php-Server JS-Code auslagern?
-// andere M�glichkeit zur Routenbenennung �berlegen
+// andere Moeglichkeit zur Routenbenennung ueberlegen
 // wozu lat/long anzeige? entfernen?
-// openseamap fehler beheben falls m�glich
+// openseamap fehler beheben falls moeglich
 // Benutzerposition bestimmen
 
 var map = null;
