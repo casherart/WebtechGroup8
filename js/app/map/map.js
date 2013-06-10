@@ -206,7 +206,9 @@ function initialize() {
                     $("#bft_scale").fadeIn("slow");
 
             } else {
-            	$("#weatherDisplayBox").fadeIn("slow");
+            	if($("body").width() > 700){//go to hendheld view{
+            		$("#weatherDisplayBox").fadeIn("slow");
+            	}            	
                 $("#weatherBar").slideUp("slow");
                 $("#bft_scale").fadeOut("slow");
                 if ($("#now").hasClass("active"))
@@ -262,7 +264,9 @@ function initialize() {
             if (map.getZoom() > 7) {
                 handleWeather(null, "box");
                 $("#weatherBar").slideUp("slow");
-                $("#weatherDisplayBox").fadeIn("slow");
+                if($("body").width() > 700){//go to hendheld view{
+            		$("#weatherDisplayBox").fadeIn("slow");
+            	} 
             } else {
                 // overlay level
                 $('#weatherBar').slideDown('slow');

@@ -15,7 +15,9 @@ function openWeatherLogWindow() {
         $('#weatherLog').css("zIndex", "999999999");
         $('#weatherLog').css("position", "absolute");
         $('#weatherLog').css("top", $("#startLog").offset().top + 35);
-        $('#weatherLog').css("left", $("#startLog").offset().left - 250);
+//        $('#weatherLog').css("left", Math.max($("#startLog").offset().left - 250, 20));
+
+        $('#weatherLog').css("left", Math.max(($(".navbar").width() - $("#weatherLog").width() - 39), 20));
         $('#weatherLog').fadeIn('slow');
     });
 }
@@ -108,7 +110,6 @@ function handleWeather(time, target, timespan) {
                             break;
                         }
                     }
-
                     fillDetailForecast("tomorrow", data);
                 }
                 else if ($("#3days").hasClass("active"))
@@ -592,6 +593,7 @@ function getWeatherWarning() {
         data: {'timestamp': timestamp},
         success: function(response) {
             $('#weatherWarningWindow').html(response.msg);
+            $('#weatherWarningWindow').css("left", Math.max(($(".navbar").width()/2 - $("#weatherWarningWindow").width()/2), 20));
             timestamp = response.timestamp;
             if (response.warningLevel > 90) {
                 $("#showWeatherWarning").removeClass("btn-warning").addClass("btn-danger");
@@ -623,7 +625,7 @@ function openWeatherWarnings() {
         $('#weatherWarningWindow').css("zIndex", "999999999");
         $('#weatherWarningWindow').css("position", "absolute");
         $('#weatherWarningWindow').css("top", $("#showWeatherWarning").offset().top + 35);
-        $('#weatherWarningWindow').css("left", $("#showWeatherWarning").offset().left - 250);
+        $('#weatherWarningWindow').css("left", Math.max(($(".navbar").width()/2 - $("#weatherWarningWindow").width()/2), 20));
         $('#weatherWarningWindow').fadeIn('slow');
     } else {
         $('#weatherWarningWindow').fadeOut('slow');
@@ -655,72 +657,6 @@ function fillForecastRows(index, data) {
     $("#boxRain" + index).text(rainIdTorainDescription(data.rain));
 
 }
-
-// check for forecast equal dates
-/*function checkForecast(data, art) {
- 
- // get Date of today
- var now = Date.now();
- now = (now / 1000).toFixed(0);
- var days1 = new Date(now * 1000);
- days1.setDate(days1.getDate() + 1);
- var days3 = new Date(now * 1000);
- days3.setDate(days3.getDate() + 2);
- var days4 = new Date(now *1000);
- days4.setDate(days4.getDate() + 3);
- var days5 = new Date(now *1000);
- days5.setDate(days5.getDate() + 4);
- var days6 = new Date(now *1000);
- days6.setDate(days6.getDate() + 5);
- var days7 = new Date(now * 1000);
- days7.setDate(days7.getDate() + 6);
- switch (art)
- {
- case "today":
- $('#dialogTitle').text("Das Wetter für Heute");
- if (timeConverter(now, "calculation") === timeConverter(data, "calculation")) {
- return true;
- } else {
- return false;
- }
- break;
- case "tomorrow":
- // tomorrow
- $('#dialogTitle').text("Das Wetter für Morgen");
- if (timeConverter(toTimestamp(days1), "calculation") === timeConverter(data, "calculation")) {
- return true;
- } else {
- return false;
- }
- break;
- case "3days":
- // 3 days 
- $('#dialogTitle').text("Das Wetter für die nächsten 3 Tage");
- if ((timeConverter(toTimestamp(days3), "calculation") === timeConverter(data, "calculation"))
- || (timeConverter(toTimestamp(days1, "calculation")) === timeConverter(data, "calculation"))
- || (timeConverter(toTimestamp(now, "calculation")) === timeConverter(data, "calculation"))) {
- return true;
- } else {
- return false;
- }
- break;
- case "7days":
- $('#dialogTitle').text("Das Wetter für die nächsten 7 Tage");
- if ((timeConverter(toTimestamp(days7), "calculation") === timeConverter(data, "calculation"))
- ||(timeConverter(toTimestamp(days1, "calculation")) === timeConverter(data, "calculation"))
- ||(timeConverter(toTimestamp(days3, "calculation")) === timeConverter(data, "calculation"))
- ||(timeConverter(toTimestamp(days4, "calculation")) === timeConverter(data, "calculation"))
- ||(timeConverter(toTimestamp(days5, "calculation")) === timeConverter(data, "calculation"))
- ||(timeConverter(toTimestamp(days6, "calculation")) === timeConverter(data, "calculation"))
- ||(timeConverter(toTimestamp(now, "calculation")) === timeConverter(data, "calculation"))) {
- return true;
- } else {
- return false;
- }
- break;
- default:
- }
- }*/
 
 function checkForecast(data, art) {
     var date = new Date(data * 1000);

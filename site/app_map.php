@@ -152,9 +152,9 @@
             </div>
 
             <!-- Weather log -->
-            <div id="weatherLog" class="well well-large" style="display:none;"></div>
+            <div id="weatherLog" class="well well-small btn-inverse disabled" style="display:none;"></div>
             <!-- Weather Warning -->
-            <div id="weatherWarningWindow" class="well well-large" style="display:none;">Keine Meldungen</div>
+            <div id="weatherWarningWindow" class="well well-small btn-inverse disabled" style="display:none;">Keine Meldungen</div>
             <!-- Map -->
             <div id="appWrapper">
                 <div id="map_canvas"></div>

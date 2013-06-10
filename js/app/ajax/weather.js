@@ -156,7 +156,6 @@ function weatherDataToForm(weather_id) {
         if (jsonData.status != "ok") {
             $("#wTR_" + jsonData.weather_id).html("<td colspan='" + weatherTableColCount + "'>Fehler beim laden der Daten!</td>");
         } else {
-            console.log(jsonData);
             var form = $("#appForm");
             $("#temp").val(jsonData.temperature);
             $("#airpress").val(jsonData.airpreasure);
