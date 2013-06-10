@@ -1,4 +1,4 @@
-@(header: Html)(navigation: Html)(navigation_app: Html)(data: String)
+@(header: Html)(navigation: Html)(navigation_app: Html)(data: String)(trip: String)(wind_str: String)(clouds: String)(rain: String)(wind_dir: String)(wave_dir: String)
 
 <!DOCTYPE html>
 <html lang="de">
@@ -61,9 +61,7 @@
                                 <div class="control-group">
                                 	<label class="control-label padding-right10">Reise</label> 
                                     <select name="trip" id="trip" class="select-long">
-                                    	<?php
-                                            get_select_options(MYSQL_HOST, MYSQL_USER, MYSQL_PW, MYSQL_DB, "SELECT tnr as id, titel as description FROM tripinfo ORDER BY tnr asc;");
-                                        ?>
+										@Html(trip)
                                     </select>
                                 </div>
                         	</div>                        	
@@ -88,9 +86,7 @@
                                     <label class="control-label padding-right10">Windstärke</label> 
                                     <div class="input-append">
                                         <select	name="wind_strength" id="windstr" class="select-medium">
-                                            <?php
-                                            get_select_options(MYSQL_HOST, MYSQL_USER, MYSQL_PW, MYSQL_DB, "SELECT id, description FROM wind_strength ORDER BY id asc;");
-                                            ?>
+											@Html(wind_str)
                                         </select> 
                                         <span title="Beaufort Scale" style="cursor: pointer;" class="add-on">bft</span>
                                     </div>
@@ -111,9 +107,7 @@
                                         <label class="control-label padding-right10">Bew&ouml;lkung</label> 
                                         <div class="input-append">
                                             <select name="clouds" id="cloud" class="select-medium">
-                                                <?php
-                                                get_select_options(MYSQL_HOST, MYSQL_USER, MYSQL_PW, MYSQL_DB, "SELECT id, description FROM clouds ORDER BY id asc;");
-                                                ?>
+												@Html(clouds)
                                             </select> 
                                             <span title="Octa" style="cursor: pointer" class="add-on">Octa</span>
                                         </div>
@@ -121,25 +115,19 @@
                                     <div class="control-group">
                                         <label class="control-label padding-right10">Regen</label> 
                                         <select name="rain" id="rain" class="select-medium">
-                                            <?php
-                                            get_select_options(MYSQL_HOST, MYSQL_USER, MYSQL_PW, MYSQL_DB, "SELECT id, description FROM rain ORDER BY id asc;");
-                                            ?>
+											@Html(rain)
                                         </select>
                                     </div>
                                     <div class="control-group">
                                         <label class="control-label padding-right10">Windrichtung</label> 
                                         <select name="wind_direction" id="winddir" class="select-medium">
-                                            <?php
-                                            get_select_options(MYSQL_HOST, MYSQL_USER, MYSQL_PW, MYSQL_DB, "SELECT wd.id as id, d.description as description FROM wind_direction as wd left join direction as d on wd.direction_id = d.id ORDER BY id asc;");
-                                            ?>
+											@Html(wind_dir)
                                         </select>
                                     </div>
                                     <div class="control-group">
                                         <label class="control-label padding-right10">Wellenrichtung</label> 
                                         <select name="wave_direction" id="wavedir" class="select-medium">
-                                            <?php
-                                            get_select_options(MYSQL_HOST, MYSQL_USER, MYSQL_PW, MYSQL_DB, "SELECT wd.id as id, d.description as description FROM wave_direction as wd left join direction as d on wd.direction_id = d.id ORDER BY id asc;");
-                                            ?>
+											@Html(wave_dir)
                                         </select>
                                     </div>
                                 </div>

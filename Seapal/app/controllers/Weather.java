@@ -4,6 +4,8 @@ import play.*;
 import play.mvc.*;
 import play.db.*;
 import java.sql.*;
+import java.util.List;
+import java.util.ArrayList;
 import javax.sql.*;
 import play.libs.Json;
 import play.data.DynamicForm;
@@ -13,149 +15,179 @@ import views.html._include.*;
 
 public class Weather extends Controller {
   
-  public static Result insert() {
+	public static Result insert() {
   
-    DynamicForm data = form().bindFromRequest();
-    Connection conn = DB.getConnection();
+		DynamicForm data = form().bindFromRequest();
+		Connection conn = DB.getConnection();
 		Statement query;            
-    ResultSet result;
-    ObjectNode respJSON = Json.newObject();
-    int nextId = 0;
+		ResultSet result;
+		ObjectNode respJSON = Json.newObject();
+		int nextId = 0;
 
-    try {
-	      query = conn.createStatement();
+		try {
+			query = conn.createStatement();
+			
+			if(data.get("wId") != "") {
+				query.execute("UPDATE seapal_weather SET"
+					+ " temperatur = " + data.get("temp")
+						+ ", airpreasure = " + data.get("airpress")
+							+ ", wind_strength = " + data.get("wind_strength")
+								+ ", wind_direction = " + data.get("wind_direction")
+									+ ", wave_height = " + data.get("whight")
+										+ ", wave_direction = " + data.get("wave_direction")
+											+ ", clouds = " + data.get("clouds")
+												+ ", rain = " + data.get("rain")
+													+ " WHERE ID = " + data.get("wId") + " AND (bnr = 1 OR bnr = 2);");
+			} else {
+				query.execute("INSERT INTO seapal_weather(temperatur, airpreasure, wind_strength, wind_direction, wave_height, wave_direction, clouds, rain, tnr, bnr) VALUES("
+					+ "'" + data.get("temp") + "',"
+						+ "'" + data.get("airpress") + "',"
+							+ "'" + data.get("wind_strength") + "',"
+								+ "'" + data.get("wind_direction") + "',"
+									+ "'" + data.get("whight") + "',"
+										+ "'" + data.get("wave_direction") + "',"
+											+ "'" + data.get("clouds") + "',"
+												+ "'" + data.get("rain") + "',"
+													+ "'" + data.get("trip") + "',1);");					
+			}
+			
+			result = query.executeQuery("SHOW TABLE STATUS FROM seapal LIKE 'seapal_weather'");
+			if (result.next()) {
+				nextId = result.getInt("Auto_increment");
+			}
+			conn.close();
 
-        query.execute("INSERT INTO seapal.tripinfo (titel, von, nach, skipper, crew, tstart, tende, tdauer, motor, tank) VALUES ("
-                + "'" + data.get("titel") + "',"
-                + "'" + data.get("von") + "',"
-                + "'" + data.get("nach") + "',"
-                + "'" + data.get("skipper") + "',"
-                + "'" + data.get("crew") + "',"
-                + "'" + data.get("tstart") + "',"
-                + "'" + data.get("tende") + "',"
-                + "'" + data.get("tdauer") + "',"
-                + "'" + data.get("motor") + "',"
-                + " " + data.get("tank") + ");");
+			respJSON.put("wId", "" + (nextId - 1));
 
-         result = query.executeQuery("SHOW TABLE STATUS FROM seapal LIKE 'tripinfo'");
-         if (result.next()) {
-             nextId = result.getInt("Auto_increment");
-         }
-         conn.close();
+		} catch (Exception e) {
+			respJSON.put("wId", "Error: " + e);
+		}
 
-         respJSON.put("tnr", "" + (nextId - 1));
-
-    } catch (Exception e) {
-        respJSON.put("tnr", "Error: " + e);
-    }
-
-    return ok(respJSON);
-  }
+		return ok(respJSON);
+	}
   
-  public static Result delete(int tnr) {
+	public static Result delete(int wnr) {
 
-    Connection conn = DB.getConnection();
+		Connection conn = DB.getConnection();
 		Statement query;            
-    ResultSet result;
-    ObjectNode respJSON = Json.newObject();
+		ResultSet result;
+		ObjectNode respJSON = Json.newObject();
   
-    try {
-	      query = conn.createStatement();
-        query.execute("DELETE FROM seapal.tripinfo WHERE tnr = " + tnr);
+		try {
+			query = conn.createStatement();
+			query.execute("DELETE FROM seapal_weather WHERE tnr = " + wnr);
 
-        conn.close();
+			conn.close();
 
-        respJSON.put("tnr", "ok");
+			respJSON.put("wID", "ok");
 
-    } catch (Exception e) {
-        respJSON.put("tnr", "Error: " + e);
-    }
+		} catch (Exception e) {
+			respJSON.put("wID", "Error: " + e);
+		}
   
-    return ok(respJSON);
-  }
+		return ok(respJSON);
+	}
   
-  public static Result load(int tnr) {
+	public static Result load(int wnr) {
   
-    Connection conn = DB.getConnection();
+		Connection conn = DB.getConnection();
 		Statement query;
-    ResultSet result;
-    ObjectNode respJSON = Json.newObject();
+		ResultSet result;
+		ObjectNode respJSON = Json.newObject();
 
 		if(conn != null)
 		{
-        try {
+			try {
             	
-	          query = conn.createStatement();
+				query = conn.createStatement();
     
-	          String sql = "SELECT * FROM seapal.tripinfo WHERE tnr = " + tnr;
+				String sql = "SELECT  sw.id,"
+					+ "sw.temperatur,"
+						+ "sw.airpreasure,"
+							+ "windStr.description as wind_strength,"
+								+ "windDesc.description as wind_direction,"
+									+ "sw.wave_height,"            		 
+										+ "waveDesc.description as wave_direction,"
+											+ "clouds.description as clouds,"
+												+ "rain.description as rain,"
+													+ "windDir.id as windDirId,"
+														+ "windStr.id as windStrId,"
+															+ "waveDir.id as waveDirId,"
+																+ "clouds.id as cloudsId,"
+																	+ "rain.id as rainId,"
+																		+ "trip.titel as trip"
+																			+ "FROM seapal_weather as sw LEFT JOIN wind_strength as windStr ON (sw.wind_strength = windStr.id)"
+																				+ "LEFT JOIN wind_direction as windDir ON (sw.wind_direction = windDir.id)"							  	                        							  
+																					+ "LEFT JOIN wave_direction as waveDir ON (sw.wave_direction = waveDir.id)"							  
+																						+ "LEFT JOIN clouds ON (sw.clouds = clouds.id)"
+																							+ "LEFT JOIN rain ON (sw.rain = rain.id)"
+																								+ "LEFT JOIN direction as windDesc ON (windDesc.id = windDir.direction_id)"
+																									+ "LEFT JOIN direction as waveDesc ON (waveDesc.id = waveDir.direction_id)"
+																										+ "LEFT JOIN tripinfo as trip ON (sw.tnr = trip.tnr)"
+																											+ "WHERE sw.id = " + wnr;
 	        
-	          result = query.executeQuery(sql);
-            java.sql.ResultSetMetaData rsmd = result.getMetaData();
-            int numColumns = rsmd.getColumnCount();
+				result = query.executeQuery(sql);
+				java.sql.ResultSetMetaData rsmd = result.getMetaData();
+				int numColumns = rsmd.getColumnCount();
 
-            while (result.next()) {
-                for (int i = 1; i < numColumns + 1; i++) {
-                    String columnName = rsmd.getColumnName(i);
-                    respJSON.put(columnName, result.getString(i));
-                }
-            }
-            conn.close();
+				while (result.next()) {
+					for (int i = 1; i < numColumns + 1; i++) {
+						String columnName = rsmd.getColumnName(i);
+						respJSON.put(columnName, result.getString(i));
+					}
+				}
+				conn.close();
 
-        } catch (Exception e) {
-	    	   e.printStackTrace();
-        }
-    }
-    return ok(respJSON);
-  }
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return ok(respJSON);
+	}
 
-  public static Result index() {
-    Connection conn = DB.getConnection();
-		
+	public static Result index() {
+		// Verbindung aufbauen
+		Connection conn = DB.getConnection();
 		String data = "";
-    
+		String trip = "", wind_str = "", clouds = "", rain = "", wind_dir = "", wave_dir = "";
+		List rowValues = new ArrayList();
+		String[] rows = new String[6];
+	  
 		if(conn != null)
 		{
-            Statement query;
-            ResultSet result;
-            
-            try {
-            	
-	            query = conn.createStatement();
-	 
-	            String sql = "SELECT * " + "FROM seapal.tripinfo ";
-	        
-	            result = query.executeQuery(sql);
-	        
-	            while (result.next()) {
-              
-	        		  StringBuilder row = new StringBuilder();
-
-                row.append("<tr class='selectable' id='" + result.getString("tnr") + "'>");
-                row.append("<td>" + result.getString("titel") + "</td>");
-                row.append("<td>" + result.getString("skipper") + "</td>");
-                row.append("<td>" + result.getString("tstart") + "</td>");
-                row.append("<td>" + result.getString("tende") + "</td>");
-                row.append("<td>" + result.getString("tdauer") + "</td>");
-                row.append("<td>" + result.getString("motor") + "</td>");
-                row.append("<td style='width:30px; text-align:left;'><div class='btn-group'>");
-                row.append("<a class='btn btn-small view' id='" + result.getString("tnr")
-                  + "'><span><i class='icon-eye-open'></i></span></a>");
-                row.append("<a class='btn btn-small remove' id='" + result.getString("tnr")
-                  + "'><span><i class='icon-remove'></i></span></a>");
-                row.append("<a class='btn btn-small redirect' id='" + result.getString("tnr")
-                  + "' href='app_tripinfo.html?tnr=" + result.getString("tnr")
-                  + "'><span><i class='icon-chevron-right'></i></span></a>");
-                row.append("</div></td>");
-                row.append("</tr>");
-            
-		            data += row.toString();
-			    }
-               
-	       } catch (Exception e) {
-	    	   e.printStackTrace();
-	       }
-    }
-    return ok(weather.render(header.render(), navigation.render("app_map"), navigation_app.render("app_weather"), data));
-  }
-  
+			// Formularoptionen für Trips abrufen
+			trip = getFormOptions("SELECT tnr as id, titel as description FROM tripinfo ORDER BY tnr asc;", conn);
+			// Formularoptionen für Windstaerke abrufen
+			wind_str = getFormOptions("SELECT id, description FROM wind_strength ORDER BY id asc;", conn);		
+			// Formularoptionen für Wolken abrufen
+			clouds = getFormOptions("SELECT id, description FROM clouds ORDER BY id asc;", conn);		
+			// Formularoptionen für Regen abrufen
+			rain = getFormOptions("SELECT id, description FROM rain ORDER BY id asc;", conn);		
+			// Formularoptionen für Windrichtung abrufen
+			wind_dir = getFormOptions("SELECT wd.id as id, d.description as description FROM wind_direction as wd left join direction as d on wd.direction_id = d.id ORDER BY id asc;", conn);		
+			// Formularoptionen für Wellenrichtung abrufen
+			wave_dir = getFormOptions("SELECT wd.id as id, d.description as description FROM wave_direction as wd left join direction as d on wd.direction_id = d.id ORDER BY id asc;", conn);						
+		}
+		return ok(weather.render(header.render(), navigation.render("app_map"), navigation_app.render("app_weather"), data, trip, wind_str, clouds, rain, wind_dir, wave_dir));
+	}
+	
+	private static String getFormOptions(String sql, Connection conn) {
+		Statement query;
+		ResultSet result;
+		String data = "";
+		try {
+			// Abfrage erzeugen
+			query = conn.createStatement();
+			// Sql Abfrage ausführen und Eintraege speichern
+			result = query.executeQuery(sql);
+			while (result.next()) {
+				StringBuilder row = new StringBuilder();
+				row.append("<option value='" + result.getString(1) + "'>" + result.getString(2) + "</option>");
+				data += row.toString();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}  
+		return data;
+	}
 }

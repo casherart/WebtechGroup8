@@ -37,6 +37,16 @@ a:hover {
     background-color: #f5f5f5;
 }
 
+/* paddings */
+.padding-right10 {
+    padding-right: 15px;
+}
+
+/* aligns */
+.align-center {
+    text-align: center;
+}
+
 /* Individual Sidebar Style */
 
 .bs-docs-sidenav {

@@ -1191,6 +1191,10 @@ textarea::-webkit-input-placeholder {
   width: 150px;
 }
 
+.input-medium.tooltip {
+  width: 150px;
+}
+
 .input-large {
   width: 210px;
 }
@@ -1201,6 +1205,10 @@ textarea::-webkit-input-placeholder {
 
 .input-xxlarge {
   width: 530px;
+}
+
+.select-medium {
+  width: 165px;
 }
 
 input[class*="span"],
