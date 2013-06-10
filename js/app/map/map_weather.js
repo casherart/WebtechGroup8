@@ -113,12 +113,12 @@ function handleWeather(time, target, timespan) {
                 }
                 else if ($("#3days").hasClass("active"))
                 {
-                    getForecast(data.list[2]);
+                    getForecast(data.list[3]);
                     fillDetailForecast("3days", data);
                 }
                 else if ($("#7days").hasClass("active"))
                 {
-                    getForecast(data.list[6]);
+                    getForecast(data.list[7]);
                     fillDetailForecast("7days", data);
                 }
             }
@@ -316,12 +316,17 @@ function SkyDirToSkyDirDescription(id) {
 }
 
 function mm3ToMM(mm) {
-    if (mm.hasOwnProperty("1h")) {
+	if (mm.hasOwnProperty("1h")) {
         mm = mm["1h"];
-    } else if (mm == null) {
+    } else if (mm.hasOwnProperty("3h")) {
+        mm = mm["3h"]/3;//definition is rain/1h
+    } else if (mm === null) {
         return 1;
     }
     mm /= 3;
+	if(mm == 0){
+		return 1;
+	}
     if (mm < 0.5)
         return 2;
     if (mm < 4)
@@ -805,5 +810,7 @@ $("#7days").click(function() {
 
 //get detailed forecast
 $('#detail').click(function() {
-    $('#forecastMessageBox').modal('show');
+	if(!$("#now").hasClass("active")){
+	    $('#forecastMessageBox').modal('show');		
+	}
 });
