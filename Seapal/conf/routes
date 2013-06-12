@@ -24,7 +24,7 @@ GET     /app_trip_delete.html   	controllers.Trip.delete(tnr: Int)
 GET		/app_weather.html			controllers.Weather.index()
 GET		/app_weather_load.html		controllers.Weather.load(wID: Int)
 POST	/app_weather_insert.html	controllers.Weather.insert()
-GET		/app_weather_delete.html	controllers.Weather.delete(wnr: Int)
+GET		/app_weather_delete.html	controllers.Weather.delete(wID: Int)
 #
 GET     /app_tripinfo.html          controllers.Tripinfo.index(tnr: Int)
 GET     /app_tripinfo_load.html     controllers.Tripinfo.load(wnr: Int)
