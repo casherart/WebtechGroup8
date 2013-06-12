@@ -92,7 +92,7 @@ function handleWeather(time, target, timespan) {
                     $("#cloudsData").text(CloudIdToDescription(data.clouds));
                     $("#nameData").text(data.name);
                     $("#time").text("");
-                    $("#weatherDisplayBox").css("background-image", "url(../../../css/img/icons/weather_icons/" + getWeatherIcon(data.dt, data.temp.day.toFixed(0), CloudIdToDescription(data.clouds), rainIdTorainDescription(data.rain)) + ".png)");
+                    $("#weatherDisplayTop").css("background-image", "url(../../../css/img/icons/weather_icons/" + getWeatherIcon(data.dt, data.temp.day.toFixed(0), CloudIdToDescription(data.clouds), rainIdTorainDescription(data.rain)) + ".png)");
                 }
             } else {
                 if ($("#today").hasClass("active"))
@@ -580,7 +580,7 @@ function getForecast(data) {
     $("#cloudsData").text(CloudIdToDescription(data.clouds));
     $("#nameData").text(data.name);
     $("#time").text(timeConverter(data.dt, "box"));
-    $("#weatherDisplayBox").css("background-image", "url(../../../css/img/icons/weather_icons/" + getWeatherIcon(data.dt, data.temp.day.toFixed(0), CloudIdToDescription(data.clouds), rainIdTorainDescription(data.rain)) + ".png)");
+    $("#weatherDisplayTop").css("background-image", "url(../../../css/img/icons/weather_icons/" + getWeatherIcon(data.dt, data.temp.day.toFixed(0), CloudIdToDescription(data.clouds), rainIdTorainDescription(data.rain)) + ".png)");
 }
 
 

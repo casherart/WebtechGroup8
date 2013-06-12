@@ -166,6 +166,8 @@ label {
 }
 #weatherDisplayBox #weatherDisplayTop {
     height: 125px;
+    background-repeat:no-repeat;
+    background-position:110px -15px;
 }
 
 #forecastMessageBox {

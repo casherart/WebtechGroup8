@@ -63,19 +63,24 @@
             </div>
 
             <!-- Weather Display Box-->
-            <div id="weatherDisplayBox" class="well well-small btn-inverse disabled" style="display: none;">
-                <div id="navDisplayBox" data-toggle="buttons-radio" class="btn-group span4">
-                    <button id="now" class="btn btn-info span1 active">Aktuell</button>
-                    <button id="today" class="btn btn-info span1">Heute</button>
-                    <button id="tomorrow" class="btn btn-info span1">Morgen</button>
-                    <button id="3days" class="btn btn-info span1">3 Tage</button>
-                    <button id="7days" class="btn btn-info span1">7 Tage</button>
+            <div id="weatherDisplayBox" class="well well-small btn-inverse disabled container" style="display: none;">
+                <div id="navDisplayBox" data-toggle="buttons-radio" class="btn-group row-fluid">
+	                <div class="span12">
+	                    <button id="now" class="btn btn-info span1 active" style="min-width:69px;margin:0px;padding:0px;">Aktuell</button>
+	                    <button id="today" class="btn btn-info span1" style="min-width:69px;margin:0px;padding:0px;">Heute</button>
+	                    <button id="tomorrow" class="btn btn-info span1" style="min-width:69px;margin:0px;padding:0px;">Morgen</button>
+	                    <button id="3days" class="btn btn-info span1" style="min-width:69px;margin:0px;padding:0px;">3 Tage</button>
+	                    <button id="7days" class="btn btn-info span1" style="min-width:69px;margin:0px;padding:0px;">7 Tage</button>
+	                </div>
                 </div>
+                <div class="clearfix"></div>
                 <a id ="detail" style="" href="#">
                     <div id="weatherDisplayTop">
                         <div align="center" style="width: 140px; height: 80px; float: left;">
                             <div id="tempDataMax" class="data" style=""></div>
-                            <div id="nameData" class="data" style=""></div>
+                            <div id="nameData" class="data" style="">
+                            	<img src="/img/icons/ajax-loader-black.gif">
+                            </div>
                             <div id="tempDataMin" class="data" style=""></div>
                         </div>
                         <div id="tempData" class="data" style=""></div>
