@@ -149,7 +149,7 @@ include('database_library.php');
                             <div class="clearfix"></div>
                         </div>
                         <div class="control-group">
-                            <input type="reset" class="btn" id="delete" value="Zur&uuml;ck setzten" class="button"/>
+                            <input type="reset" class="btn" id="delete" value="Zur&uuml;cksetzten" class="button"/>
                             <input type="submit" class="btn" id="save" name="submit" value="Speichern" class="button"/>
                         </div>
                     </div>
