@@ -2,13 +2,41 @@
  * checks and sends form
  */
 var weatherTableColCount = 10;
+function validate_handleWeatherForm(formularData){
+    
+    var datas = formularData.split("&"); 
+    var test = new Array();
+    var check = true;
+    
+    datas.shift();
+    datas.shift();
+    var i = 0;    
+    while(datas.length !== 0 ){
 
+       var tmp = datas.shift();
+       var CheckNaN = parseInt(tmp.substring(tmp.indexOf("=")+1,tmp.length));
+       
+        if(isNaN(CheckNaN) || CheckNaN === 1 && i>2 ){
+            if ( i !== 5 && i !== 3){
+            check = false;
+            }
+        }
+        if((i>1 && CheckNaN < 0 )|| (i ===1 && CheckNaN<=0 )){
+                check = false;
+        }
+        console.log(i ,CheckNaN );
+        i++;
+
+    }
+    console.log(check);
+    return check;
+}
 
 function handleWeatherForm(formularData, showMessage) {
     $("#save").val("Speichern");
     console.log(formularData);
     var showMessage = showMessage || true;
-    var isOK = true;
+    var isOK = validate_handleWeatherForm(formularData);
     //TODO check entries
     if (!isOK) {
         alert("Überprüfen Sie bitte Ihre Eingabe");
