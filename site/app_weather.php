@@ -83,7 +83,7 @@ include('database_library.php');
                                     <label class="control-label padding-right10">Luftdruck</label>  
                                     <div class="input-append">
                                         <input class="input-medium" type="text" id="airpress" name="airpress" /> 
-                                        <span title="Pascal" style="cursor: pointer" class="add-on">Pa</span>
+                                        <span title="Pascal" style="cursor: pointer" class="add-on">hPa</span>
                                     </div>
                                 </div>
                                 <div class="control-group">
