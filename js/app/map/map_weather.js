@@ -750,3 +750,11 @@ $('#detail').click(function() {
 	    $('#forecastMessageBox').modal('show');		
 	}
 });
+
+$('#detail').mouseover(function() {
+    if($("#now").hasClass("active")) {
+        $("#detail").css("cursor", "default");
+    } else {
+        $("#detail").css("cursor", "pointer");
+    }
+});
