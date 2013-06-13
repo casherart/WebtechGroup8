@@ -34,13 +34,9 @@ function validate_handleWeatherForm(formularData){
 
 function handleWeatherForm(formularData, showMessage) {
     $("#save").val("Speichern");
-    console.log(formularData);
     var showMessage = showMessage || true;
-    var isOK = validate_handleWeatherForm(formularData);
     //TODO check entries
-    if (!isOK) {
-        showAlert("Fehlerhafte Eingabe","Das Formular ist fehlerhaft. Überprüfen Sie bitte Ihre Eingabe.");
-    } else {
+   
         $.ajax({
             type: "GET",
             url: "app_weather_insert.php",
@@ -63,9 +59,10 @@ function handleWeatherForm(formularData, showMessage) {
                 }
             }
         });
-    }
+    
     return false;
 }
+
 
 
 function addWeatherToTable(weather_id) {
@@ -185,9 +182,9 @@ function weatherDataToForm(weather_id) {
             $("#wTR_" + jsonData.weather_id).html("<td colspan='" + weatherTableColCount + "'>Fehler beim laden der Daten!</td>");
         } else {
             var form = $("#appForm");
-            $("#temp").val(jsonData.temperature);
-            $("#airpress").val(jsonData.airpreasure);
-            $("#whight").val(jsonData.wave_height);
+            $("#temp").parseFloat(jsonData.temperature);
+            $("#airpress").parseFloat(jsonData.airpreasure);
+            $("#whight").parseFloat(jsonData.wave_height);
 
 
             $("#windstr").val(jsonData.windStrId);

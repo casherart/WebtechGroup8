@@ -12,9 +12,9 @@ settype( $_GET["wind_direction"], 'integer');
 settype( $_GET["wave_direction"], 'integer');
 settype( $_GET["clouds"], 'integer');
 settype( $_GET["rain"], 'integer');
-settype( $_GET["temp"], 'integer');
-settype( $_GET["airpress"], 'integer');
-settype( $_GET["whight"], 'integer');
+settype( $_GET["temp"], 'float');
+settype( $_GET["airpress"], 'float');
+settype( $_GET["whight"], 'float');
 settype( $_GET["trip"], 'integer');
 
 
