@@ -21,6 +21,7 @@ function handleWeatherForm(formularData, showMessage) {
             error: function() {
             }
         }).done(function(jsonData) {
+        	console.log(jsonData);
             try {
                 jsonData = $.parseJSON(jsonData);
             } catch (e) {
@@ -55,7 +56,7 @@ function addWeatherToTable(weather_id) {
     var td = document.createElement("td");
     td.style.colspan = weatherTableColCount;
     var img = document.createElement("img");
-    img.src = "../img/icons/ajax-loader.gif";
+    img.src = "/assets/images/icons/ajax-loader.gif";
 
     td.appendChild(img);
     tr.appendChild(td);
