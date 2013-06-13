@@ -3,25 +3,49 @@
  */
 var weatherTableColCount = 10;
 
+function validate_handleWeatherForm(formularData){
+    
+    var datas = formularData.split("&"); 
+    var test = new Array();
+    var check = true;
+    
+    datas.shift();
+    datas.shift();
+    var i = 0;    
+    while(datas.length !== 0 ){
+
+       var tmp = datas.shift();
+       var CheckNaN = parseFloat(tmp.substring(tmp.indexOf("=")+1,tmp.length));
+       
+        if(isNaN(CheckNaN) || CheckNaN === 1 && i>2 ){
+            if ( i !== 5 && i !== 3){
+            check = false;
+            }
+        }
+        if((i>1 && CheckNaN < 0 )|| (i ===1 && CheckNaN<=0 )){
+                check = false;
+        }
+        console.log(i ,CheckNaN );
+        i++;
+
+    }
+    console.log(check);
+    return check;
+}
 
 function handleWeatherForm(formularData, showMessage) {
     $("#save").val("Speichern");
-    console.log(formularData);
     var showMessage = showMessage || true;
-    var isOK = true;
     //TODO check entries
-    if (!isOK) {
-        alert("Überprüfen Sie bitte Ihre Eingabe");
-    } else {
+   
         $.ajax({
-            type: "POST",
-            url: "app_weather_insert.html",
+            type: "GET",
+            url: "app_weather_insert.php",
             data: formularData,
             dataType: "html",
             error: function() {
             }
         }).done(function(jsonData) {
-        	console.log(jsonData);
             try {
                 jsonData = $.parseJSON(jsonData);
             } catch (e) {
@@ -36,7 +60,7 @@ function handleWeatherForm(formularData, showMessage) {
                 }
             }
         });
-    }
+    
     return false;
 }
 
