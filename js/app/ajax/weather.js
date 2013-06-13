@@ -185,9 +185,9 @@ function weatherDataToForm(weather_id) {
             $("#wTR_" + jsonData.weather_id).html("<td colspan='" + weatherTableColCount + "'>Fehler beim laden der Daten!</td>");
         } else {
             var form = $("#appForm");
-            $("#temp").val(jsonData.temperature);
-            $("#airpress").val(jsonData.airpreasure);
-            $("#whight").val(jsonData.wave_height);
+            $("#temp").parseFloat(jsonData.temperature);
+            $("#airpress").parseFloat(jsonData.airpreasure);
+            $("#whight").parseFloat(jsonData.wave_height);
 
 
             $("#windstr").val(jsonData.windStrId);
