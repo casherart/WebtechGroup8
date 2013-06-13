@@ -12,6 +12,6 @@
 	<div id="logTimer"></div>
 	</div>
 	<div class="control-group">
-    	<input type="reset" class="btn btn-primary" id="closeWeatherLog" value="Close" class="button" onclick="closeWeatherLog()"/>
-        <input type="submit" class="btn btn-success" id="startStopWeatherLog" name="submit" value="Start Logging" class="button" onclick="startWeatherlogging();"/>
+    	<input type="reset" class="btn btn-primary" id="closeWeatherLog" value="Schließen" class="button" onclick="closeWeatherLog()"/>
+        <input type="submit" class="btn btn-success" id="startStopWeatherLog" name="submit" value="Log starten" class="button" onclick="startWeatherlogging();"/>
     </div>
