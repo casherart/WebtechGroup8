@@ -366,7 +366,6 @@ $(function() {
             "startroute": {name: "Neue Route setzen", icon: "startroute"},
             "distance": {name: "Distanz messen", icon: "distance"},
             "destination": {name: "Zum Ziel machen", icon: "destination"},
-            "weather": {name: "Wetterdaten speichern", icon: "certificate"},
             "sep1": "---------",
             "delete": {name: "L&ouml;schen", icon: "delete"}
         }
@@ -390,7 +389,6 @@ $(function() {
         },
         items: {
             "destination": {name: "Zum Ziel machen", icon: "destination"},
-            "weather": {name: "Wetterdaten speichern", icon: "certificate"},
             "sep1": "---------",
             "delete": {name: "L&ouml;schen", icon: "delete"}
         }
