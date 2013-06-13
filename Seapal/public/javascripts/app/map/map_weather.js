@@ -6,7 +6,7 @@ var currentTripToLog = 1;
 
 function openWeatherLogWindow() {
     $.ajax({
-        url: "app_weather_log_window.php",
+        url: "app_weather_log_window.html",
         type: "GET",
         dataType: 'html'
     }).done(function(data) {
@@ -588,7 +588,7 @@ function getWeatherWarning() {
     var timestamp = timestamp || new Date().getTime();
     $.ajax({
         type: 'get',
-        url: "getWeatherWarning.php",
+        url: "getWeatherWarning.html",
         dataType: 'json',
         data: {'timestamp': timestamp},
         success: function(response) {
