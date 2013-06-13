@@ -55,7 +55,7 @@ include('database_library.php');
                     <h2>Wetter Informationen</h2>
                     <br>
                 </div>
-                 <form id="appForm" class="form-horizontal" onsubmit="return handleWeatherForm($(this).serialize());">
+                 <form id="appForm" class="form-horizontal" onsubmit="if(validate_handleWeatherForm( $(this).serialize()) ){	handleWeatherForm($(this).serialize());	return false;}else{	showAlert('Fehlerhafte Eingabe','Das Formular ist fehlerhaft. Überprüfen Sie bitte Ihre Eingabe.');	return false;}">
                  	<input type="hidden" id="wId" name="wId" value="">
                     <div class="container-fluid">
                     	<div class="row well" style="margin-left: 15%; height: 30px;">
