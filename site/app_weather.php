@@ -39,7 +39,6 @@ include('database_library.php');
 
     </head>
     <body>
-
         <!-- Navigation -->
         <?php include("./_include/navigation.php") ?>
         <!-- Container -->
