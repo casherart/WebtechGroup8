@@ -1,14 +1,19 @@
 <?php
+    require_once ('db_configuration.php');
 	
-	$conn = mysql_connect("localhost", "root", "root");
+	$conn = mysql_connect(MYSQL_HOST, MYSQL_USER, MYSQL_PW);
 	
-	$db_selected = mysql_select_db('seapal', $conn);
+	$db_selected = mysql_select_db(MYSQL_DB, $conn);
 	
 	if (!$db_selected) {
 	    die('Error: ' . mysql_error());
 	}
-	
-	$sql = "SELECT * FROM seapal.tripinfo WHERE tnr = '" . $_GET['tnr'] . "';";
+
+	/*
+	 * Some SQL-Injektion Protection
+	*/
+	settype($_GET['tnr'], 'integer');
+	$sql = "SELECT * FROM ". MYSQL_DB . ".tripinfo WHERE tnr = '" . $_GET['tnr'] . "';";
 	
 	$result = mysql_query($sql, $conn);
 	

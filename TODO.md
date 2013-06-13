@@ -1,15 +1,27 @@
+<h2>To-Do Liste</h2>
 
-- FORM/URL Parameter in den SQL-Statements absichern (auch in den, die nicht von uns sind)
-- JS-CHECK bei senden des Wetter-Forms
-	+ form is now send with ajax and if ok the entered Data will appear be inserted in weather table on the fly.
+<b>Google Maps</b>
+<ul>
+<li>Fehler Umschalten der Wetterbox (Sebastian) //ich hab mal geschaut ob ich den Fehler finde und ich glaube es liegt daran das openstreetmap manchmal die daten nicht schnell genug liefert und einen Fehler wirft.</li>
+<li>Aufzeichnungs Button auf Deutsch überstzten (Fred)</li>
+</ul>
 
-- app_wether_LOAD JS und SQL/PHP Function 
-	+ addutional TODO in file
-	
-- app_wether_DELETE JS Fuction
+<b>Formular</b>
+<ul>
+<li>Validierung der Einträge (Fred)</li>
+</ul>
 
+<b>Java Play</b>
+<ul>
+<li>Projekt auf Java Play migrieren (Duy)</li>
+<li>Java Play Datenbank Einbindung (JDBC?)</li>
+<li>Wetterformular Funktionalitäten integrieren SQL über Helpferfunktion</li>
+<li>Weathermap in Maps intergrieren</li>
+</ul>
+sadasdasd
 
-- is it possible in php to set global variable for db user and pw? The problem currently is that on funpic 
-"root/root" is not allowed. And i don't want to make if else on every db connection.
-
-?? User validation ??
+<b>Sonstiges</b>
+<ul>
+<li>FORM/URL Parameter in den SQL-Statements absichern (auch in den, die nicht von uns sind)</li>
+<li>User check for DB Querys  </li>
+</ul>

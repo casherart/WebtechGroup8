@@ -1,16 +1,21 @@
 <?php
+    require_once ('db_configuration.php');
 
-	$conn = mysql_connect("localhost", "root", "root");
+	$conn = mysql_connect(MYSQL_HOST, MYSQL_USER, MYSQL_PW);
 	
-	$db_selected = mysql_select_db('seapal', $conn);
+	$db_selected = mysql_select_db(MYSQL_DB, $conn);
 	
 	if (!$db_selected) {
 	    $err = array( "wnr" => 'Error: ' . mysql_error() );
 	    echo json_encode($err);
 	    exit;
 	}
-	
-	$sql = "INSERT INTO seapal.wegpunkte(tnr, name, btm, dtm, lat, lng, sog, cog, manoever, vorsegel, wdate, wtime, marker) VALUES (
+
+	/*
+	 * Some SQL-Injektion Protection
+	*/
+	settype( $_POST['tnr'], 'integer');
+	$sql = "INSERT INTO ". MYSQL_DB .".wegpunkte(tnr, name, btm, dtm, lat, lng, sog, cog, manoever, vorsegel, wdate, wtime, marker) VALUES (
 				" . $_POST['tnr'] . ", 
 				'" . $_POST['name'] . "',
 				'" . $_POST['btm'] . "', 
