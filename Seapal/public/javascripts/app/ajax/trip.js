@@ -32,7 +32,7 @@ $(function() {
 	    entry += "<td style='width:30px; text-align:right;'><div class='btn-group'>";
 		entry += "<a class='btn btn-small view' id='" + tnr + "'><span><i class='icon-eye-open'></i></span></a>";
 		entry += "<a class='btn btn-small remove' id='" + tnr + "'><span><i class='icon-remove'></i></span></a>";
-		entry += "<a href='app_tripinfo.php?tnr=" + tnr + "' class='btn btn-small redirect' id='" + tnr + "'><span><i class='icon-chevron-right'></i></span></a>";
+		entry += "<a href='app_tripinfo.html?tnr=" + tnr + "' class='btn btn-small redirect' id='" + tnr + "'><span><i class='icon-chevron-right'></i></span></a>";
 		entry += "</div></td>";
 	    entry += "</tr>";
 	    
