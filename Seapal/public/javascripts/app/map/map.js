@@ -1,3 +1,8 @@
+// Php-Server JS-Code auslagern?
+// andere Moeglichkeit zur Routenbenennung ueberlegen
+// wozu lat/long anzeige? entfernen?
+// openseamap fehler beheben falls moeglich
+// Benutzerposition bestimmen
 
 var map = null;
 
@@ -6,6 +11,7 @@ var overlay = new google.maps.OverlayView();
 var MODE = { DEFAULT: { value: 0, name: "default" }, ROUTE: { value: 1, name: "route" }, DISTANCE: { value: 2, name: "distance" }, NAVIGATION: { value: 3, name: "navigation" } };
 var currentMode = MODE.DEFAULT;
 
+var overlayMaps;
 var currentPositionMarker = null;
 var followCurrentPosition = false;
 var noToggleOfFollowCurrentPositionButton = false;
@@ -20,6 +26,9 @@ var fixedMarkerCount = 0;
 var fixedMarkerArray = new Array();
 
 var selectedMarker = null;
+
+var forecastBoxIntervall = null;
+var forecastBoxUpdateWait = 1000;
 
 var currentPositionMarkerImage = new google.maps.MarkerImage('/assets/images/icons/boat.png',
     new google.maps.Size(50, 50), //size
@@ -67,7 +76,7 @@ function MarkerWithInfobox(marker, infobox, counter) {
 function initialize() {
 
     // set different map types
-    var mapTypeIds = ["roadmap", "satellite", "OSM"];
+    var mapTypeIds = ["roadmap", "satellite", "OSM", "weather"];
 
     // set map Options
     var mapOptions = {
@@ -118,7 +127,6 @@ function initialize() {
     }));
 
     google.maps.event.addListener(currentPositionMarker, 'position_changed', function () {
-        
         if (followCurrentPosition) {
             map.setCenter(currentPositionMarker.getPosition());
         }
@@ -128,18 +136,163 @@ function initialize() {
         }
     });
 
-    map.overlayMapTypes.push(new google.maps.ImageMapType({
-        getTileUrl: function (coord, zoom) {
-            return "http://tiles.openseamap.org/seamark/" + zoom + "/" + coord.x + "/" + coord.y + ".png";
+//    map.overlayMapTypes.push(new google.maps.ImageMapType({
+//        getTileUrl: function (coord, zoom) {
+//            return "http://tiles.openseamap.org/seamark/" + zoom + "/" + coord.x + "/" + coord.y + ".png";
+//        },
+//       tileSize: new google.maps.Size(256, 256),
+//        name: "OpenSeaMap",
+//        maxZoom: 18
+//    }));
+    
+    map.mapTypes.set("weather", new google.maps.ImageMapType({
+        getTileUrl: function(coord, zoom) {
+            return "http://tile.openstreetmap.org/" + zoom + "/" + coord.x + "/" + coord.y + ".png";
         },
-       tileSize: new google.maps.Size(256, 256),
-        name: "OpenSeaMap",
+        tileSize: new google.maps.Size(256, 256),
+        name: "WeatherMap",
         maxZoom: 18
     }));
 
+    overlayMaps = [
+        {
+            getTileUrl: function(coord, zoom) {
+                return "http://www.openportguide.org/tiles/actual/wind_vector/5/" + zoom + "/" + coord.x + "/" + coord.y + ".png";
+            },
+            tileSize: new google.maps.Size(256, 256),
+            name: "wind",
+            maxZoom: 7
+        },
+        {
+            getTileUrl: function(coord, zoom) {
+                return "http://www.openportguide.org/tiles/actual/air_temperature/5/" + zoom + "/" + coord.x + "/" + coord.y + ".png";
+            },
+            tileSize: new google.maps.Size(256, 256),
+            name: "temp",
+            maxZoom: 7
+        },
+        {
+            getTileUrl: function(coord, zoom) {
+                return "http://www.openportguide.org/tiles/actual/surface_pressure/5/" + zoom + "/" + coord.x + "/" + coord.y + ".png";
+            },
+            tileSize: new google.maps.Size(256, 256),
+            name: "air_pressure",
+            maxZoom: 7
+        },
+        {
+            getTileUrl: function(coord, zoom) {
+                return "http://www.openportguide.org/tiles/actual/precipitation/5/" + zoom + "/" + coord.x + "/" + coord.y + ".png";
+            },
+            tileSize: new google.maps.Size(256, 256),
+            name: "rain",
+            maxZoom: 7
+
+        },
+        {
+            getTileUrl: function(coord, zoom) {
+                return "http://www.openportguide.org/tiles/actual/significant_wave_height/5/" + zoom + "/" + coord.x + "/" + coord.y + ".png";
+            },
+            tileSize: new google.maps.Size(256, 256),
+            name: "wave_height",
+            maxZoom: 7
+
+        }
+    ];
+
+    /*
+     * function to show tiles or div with weather data
+     */
+    google.maps.event.addListener(map, 'bounds_changed', function() {
+
+    	window.clearTimeout(forecastBoxIntervall);
+        if (map.getMapTypeId() === "weather") {
+            // overlay level
+            if (map.getZoom() <= 7) {
+                $("#weatherDisplayBox").fadeOut("slow");
+                $('#weatherBar').slideDown('slow');
+                // if filter cloud 
+                if ($('#cloudsOverlay').attr("checked"))
+                    $("#bft_scale").fadeIn("slow");
+
+            } else {
+            	if($("body").width() > 700){//go to hendheld view{
+            		$("#weatherDisplayBox").fadeIn("slow");
+            	}            	
+                $("#weatherBar").slideUp("slow");
+                $("#bft_scale").fadeOut("slow");
+                if ($("#now").hasClass("active"))
+                {
+                    forecastBoxIntervall = window.setTimeout("handleWeather(null, 'box');", forecastBoxUpdateWait);                  
+                }
+                else if ($("#today").hasClass("active"))
+                {
+                    forecastBoxIntervall = window.setTimeout("handleWeather('forecast', 'box');", forecastBoxUpdateWait);
+                }
+                else if ($("#tomorrow").hasClass("active"))
+                {
+                    forecastBoxIntervall = window.setTimeout("handleWeather('forecast/daily', 'box');", forecastBoxUpdateWait);
+                }
+                else if ($("#3days").hasClass("active"))
+                {
+                    forecastBoxIntervall = window.setTimeout("handleWeather('forecast/daily', 'box');", forecastBoxUpdateWait);
+                }
+                else if ($("#7days").hasClass("active"))
+                {
+                    forecastBoxIntervall = window.setTimeout("handleWeather('forecast/daily', 'box');", forecastBoxUpdateWait);
+                }
+            }
+        } else {
+            // hide weatherbox
+            $("#weatherDisplayBox").fadeOut("slow");
+        }
+
+    });
+
+    // Create the DIV to hold the control and call the HomeControl() constructor
+    // passing in this DIV.
+    var weatherControlDiv = document.getElementById('weatherBar');
+    var windBarControlDiv = document.getElementById('bft_scale');
+    var weatherDisplayDiv = document.getElementById('weatherDisplayBox');
+
+    weatherControlDiv.index = 1;
+    windBarControlDiv.index = 1;
+    weatherDisplayDiv.index = 1;
+    map.controls[google.maps.ControlPosition.TOP_LEFT].push(windBarControlDiv);
+    map.controls[google.maps.ControlPosition.RIGHT_TOP].push(weatherControlDiv);
+    map.controls[google.maps.ControlPosition.TOP_LEFT].push(weatherDisplayDiv);
+
     overlay.draw = function () { };
     overlay.setMap(map);
-
+    
+ // click on WeatherMap
+    google.maps.event.addListener(map, 'maptypeid_changed', function(event) {
+        // if WeatherMap
+        if (map.getMapTypeId() === 'weather') {
+            // weatherbox city level
+            if (map.getZoom() > 7) {
+                handleWeather(null, "box");
+                $("#weatherBar").slideUp("slow");
+                if($("body").width() > 700){//go to hendheld view{
+            		$("#weatherDisplayBox").fadeIn("slow");
+            	} 
+            } else {
+                // overlay level
+                $('#weatherBar').slideDown('slow');
+            }
+            // no weather map
+        } else {
+            $('#weatherBar').slideUp('slow');
+            $("#bft_scale").fadeOut("slow");
+            $("#weatherDisplayBox").fadeOut("slow");
+            // checkbox reset
+            if (map.overlayMapTypes.getLength() > 0) {
+                map.overlayMapTypes.clear();
+                $('.weat').attr('checked', false);
+            }
+        }
+    });
+    //addDropDown(map);
+    
     // click on map
     google.maps.event.addListener(map, 'click', function (event) {
 
@@ -158,6 +311,31 @@ function initialize() {
             noToggleOfFollowCurrentPositionButton = false;
         }
     });
+}
+
+
+//filter for Google Maps
+$('.weat').click(function() {
+ var layerID = parseInt($(this).val());
+ if ($(this).attr('checked')) {
+     var overlayMap = new google.maps.ImageMapType(overlayMaps[layerID]);
+     map.overlayMapTypes.setAt(layerID, overlayMap);
+     // wind filter display scala
+     if (layerID === 0) {
+         $("#bft_scale").fadeIn("slow");
+     }
+ } else {
+     if (map.overlayMapTypes.getLength() > 0) {
+         map.overlayMapTypes.setAt(layerID, null);
+     }
+     if (layerID === 0) {
+         $("#bft_scale").fadeOut("slow");
+     }
+ }
+});
+
+if( /Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent) ) {
+ $('#weatherDisplayBox').hide();
 }
 
 // temporary marker context menu ----------------------------------------- //
