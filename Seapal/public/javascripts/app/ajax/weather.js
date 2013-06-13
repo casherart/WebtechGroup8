@@ -39,8 +39,8 @@ function handleWeatherForm(formularData, showMessage) {
     //TODO check entries
    
         $.ajax({
-            type: "GET",
-            url: "app_weather_insert.php",
+            type: "POST",
+            url: "app_weather_insert.html",
             data: formularData,
             dataType: "html",
             error: function() {

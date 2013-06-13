@@ -1,0 +1,1 @@
+INSERT INTO seapal_weather(temperatur, airpreasure, wind_strength, wind_direction, wave_height, wave_direction, clouds, rain, tnr, bnr) VALUES('4444','4444','3','3','4444','2','5','2','8',1);
