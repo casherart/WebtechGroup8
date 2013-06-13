@@ -14,7 +14,7 @@ function validate_handleWeatherForm(formularData){
     while(datas.length !== 0 ){
 
        var tmp = datas.shift();
-       var CheckNaN = parseInt(tmp.substring(tmp.indexOf("=")+1,tmp.length));
+       var CheckNaN = parseFloat(tmp.substring(tmp.indexOf("=")+1,tmp.length));
        
         if(isNaN(CheckNaN) || CheckNaN === 1 && i>2 ){
             if ( i !== 5 && i !== 3){
@@ -39,7 +39,7 @@ function handleWeatherForm(formularData, showMessage) {
     var isOK = validate_handleWeatherForm(formularData);
     //TODO check entries
     if (!isOK) {
-        alert("Überprüfen Sie bitte Ihre Eingabe");
+        showAlert("Fehlerhafte Eingabe","Das Formular ist fehlerhaft. Überprüfen Sie bitte Ihre Eingabe.");
     } else {
         $.ajax({
             type: "GET",
