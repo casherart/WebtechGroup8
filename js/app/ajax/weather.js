@@ -39,7 +39,7 @@ function handleWeatherForm(formularData, showMessage) {
     var isOK = validate_handleWeatherForm(formularData);
     //TODO check entries
     if (!isOK) {
-        showAlert("Fehlerhafte Eingabe","Das Formular ist fehlerhaft.Überprüfen Sie bitte Ihre Eingabe.");
+        showAlert("Fehlerhafte Eingabe","Das Formular ist fehlerhaft. Überprüfen Sie bitte Ihre Eingabe.");
     } else {
         $.ajax({
             type: "GET",
