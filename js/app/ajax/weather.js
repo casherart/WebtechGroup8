@@ -24,11 +24,9 @@ function validate_handleWeatherForm(formularData){
         if((i>1 && CheckNaN < 0 )|| (i ===1 && CheckNaN<=0 )){
                 check = false;
         }
-        console.log(i ,CheckNaN );
         i++;
 
     }
-    console.log(check);
     return check;
 }
 
@@ -74,7 +72,6 @@ function addWeatherToTable(weather_id) {
         $("#weather_entries").append(tr);
     } else {
         $("#wTR_" + weather_id).empty();
-        console.log(tr);
     }
 
     var td = document.createElement("td");

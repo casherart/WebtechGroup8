@@ -588,7 +588,7 @@ function getWeatherWarning() {
     var timestamp = timestamp || new Date().getTime();
     $.ajax({
         type: 'get',
-        url: "../server/getWeatherWarning.php",
+        url: "../server/getWeatherWarning.php",//app_weather_warning.html for play
         dataType: 'json',
         data: {'timestamp': timestamp},
         success: function(response) {
