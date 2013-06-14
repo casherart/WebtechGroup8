@@ -11,15 +11,15 @@
 				@if(file == "app_weather") { <li class="active"> } else { <li> } <a href="app_weather.html">Wetter</a></li>
 			</ul>
 			<ul class="navbar-form pull-right" style="list-style-type: none;">
-				<li><a class="btn" id="startSimulation"><i class="icon-play"></i></a><li>
-			</ul>			
-			<ul class="navbar-form pull-right" style="list-style-type: none;">
-				@if(file != "app_map") { <li style="display:hidden;"> } else { <li> } <a class="btn" id="showWeatherWarning" title="Wetter-Warnungen" onclick="openWeatherWarnings();"><i class="icon-warning-sign"></i></a><li>
-			</ul>
-			<ul class="navbar-form pull-right" style="list-style-type: none;">
-				@if(file != "app_map") { <li style="display:hidden;"> } else { <li> } <a class="btn" id="startLog" title="Wetter-Aufzeichnung" onclick="openWeatherLogWindow();"><i class="icon-pencil"></i></a><li>
-			</ul>
+				@if(file != "app_map") { <li style="visibility:hidden;"> } else { <li> } <a class="btn" id="startSimulation"><i class="icon-play"></i></a><li>
+				</ul>			
+				<ul class="navbar-form pull-right" style="list-style-type: none;">
+					@if(file != "app_map") { <li style="visibility:hidden;"> } else { <li> } <a class="btn" id="showWeatherWarning" title="Wetter-Warnungen" onclick="openWeatherWarnings();"><i class="icon-warning-sign"></i></a><li>
+					</ul>
+					<ul class="navbar-form pull-right" style="list-style-type: none;">
+						@if(file != "app_map") { <li style="visibility:hidden;"> } else { <li> } <a class="btn" id="startLog" title="Wetter-Aufzeichnung" onclick="openWeatherLogWindow();"><i class="icon-pencil"></i></a><li>
+						</ul>
 			
-		</div>
-	</div>
-</div>
+					</div>
+				</div>
+			</div>
