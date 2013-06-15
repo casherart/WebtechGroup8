@@ -203,7 +203,6 @@ function initialize() {
      * function to show tiles or div with weather data
      */
     google.maps.event.addListener(map, 'bounds_changed', function() {
-
     	window.clearTimeout(forecastBoxIntervall);
         if (map.getMapTypeId() === "weather") {
             // overlay level
@@ -313,7 +312,7 @@ function initialize() {
     });
 }
 
-
+$(function() {
 //filter for Google Maps
 $('.weat').click(function() {
  var layerID = parseInt($(this).val());
@@ -332,6 +331,7 @@ $('.weat').click(function() {
          $("#bft_scale").fadeOut("slow");
      }
  }
+});
 });
 
 if( /Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent) ) {
