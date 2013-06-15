@@ -726,7 +726,7 @@ function toTimestamp(strDate) {
     return datum / 1000;
 }
 
-
+$(function() {
 //tabs for weatherbox
 $('#now').click(function() {
     handleWeather(null, "box");
@@ -743,18 +743,23 @@ $("#3days").click(function() {
 $("#7days").click(function() {
     handleWeather("forecast/daily", "box", 14);
 });
+});
 
+$(function() {
 //get detailed forecast
 $('#detail').click(function() {
 	if(!$("#now").hasClass("active")){
 	    $('#forecastMessageBox').modal('show');		
 	}
 });
+});
 
+$(function() {
 $('#detail').mouseover(function() {
     if($("#now").hasClass("active")) {
         $("#detail").css("cursor", "default");
     } else {
         $("#detail").css("cursor", "pointer");
     }
+});
 });
