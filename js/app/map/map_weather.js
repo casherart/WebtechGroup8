@@ -597,10 +597,13 @@ function getWeatherWarning() {
             timestamp = response.timestamp;
             if (response.warningLevel > 90) {
                 $("#showWeatherWarning").removeClass("btn-warning").addClass("btn-danger");
+                $("#weatherWarningWindow").removeClass("btn-inverse").removeClass("btn-warning").addClass("btn-danger");
             } else if (response.warningLevel > 75) {
                 $("#showWeatherWarning").removeClass("btn-danger").addClass("btn-warning");
+                $("#weatherWarningWindow").removeClass("btn-inverse").removeClass("btn-danger").addClass("btn-warning");
             } else {
                 $("#showWeatherWarning").removeClass("btn-warning btn-danger");
+                $("#weatherWarningWindow").removeClass("btn-danger").removeClass("btn-warning").addClass("btn-inverse");
             }
             noerror = true;
         },
@@ -623,9 +626,9 @@ function getWeatherWarning() {
 function openWeatherWarnings() {
     if ($('#weatherWarningWindow').css("display") == "none") {
         $('#weatherWarningWindow').css("zIndex", "999999999");
-        $('#weatherWarningWindow').css("position", "absolute");
-        $('#weatherWarningWindow').css("top", $("#showWeatherWarning").offset().top + 35);
-        $('#weatherWarningWindow').css("left", Math.max(($(".navbar").width()/2 - $("#weatherWarningWindow").width()/2), 20));
+        //$('#weatherWarningWindow').css("position", "absolute");
+        //$('#weatherWarningWindow').css("top", $("#showWeatherWarning").offset().top + 35);
+        //$('#weatherWarningWindow').css("left", Math.max(($(".navbar").width()/2 - $("#weatherWarningWindow").width()/2), 20));
         $('#weatherWarningWindow').fadeIn('slow');
     } else {
         $('#weatherWarningWindow').fadeOut('slow');

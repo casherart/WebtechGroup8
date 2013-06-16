@@ -159,7 +159,7 @@
             <!-- Weather log -->
             <div id="weatherLog" class="well well-small btn-inverse disabled" style="display:none;"></div>
             <!-- Weather Warning -->
-            <div id="weatherWarningWindow" class="well well-small btn-inverse disabled" style="display:none;">Keine Meldungen</div>
+            <div id="weatherWarningWindow" class="well well-small btn-inverse disabled" style="display:none;"><b>Aktuell keine Wetterwarnungen</b></div>
             <!-- Map -->
             <div id="appWrapper">
                 <div id="map_canvas"></div>
@@ -186,7 +186,7 @@
         <script src="../js/bootstrap/bootstrap-button.js"></script>
         <script src="../js/bootstrap/bootstrap-collapse.js"></script>
         <script src="../js/bootstrap/bootstrap-affix.js"></script>
-
+   
         <!-- Additional Java-Script -->
         <script src="../js/app/map/fancywebsocket.js" type="text/javascript" ></script>
         <script src="../js/app/map/chat.js" type="text/javascript" ></script>
