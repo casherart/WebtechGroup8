@@ -12,9 +12,9 @@ function openWeatherLogWindow() {
     }).done(function(data) {
         $('#weatherLog').html(data);
         $("#trip_log").val(currentTripToLog);
-        $('#weatherLog').css("zIndex", "999999999");
-        $('#weatherLog').css("position", "absolute");
-        $('#weatherLog').css("top", $("#startLog").offset().top + 35);
+       // $('#weatherLog').css("zIndex", "999999999");
+        //$('#weatherLog').css("position", "absolute");
+       // $('#weatherLog').css("top", $("#startLog").offset().top + 35);
 //        $('#weatherLog').css("left", Math.max($("#startLog").offset().left - 250, 20));
 
         $('#weatherLog').css("left", Math.max(($(".navbar").width() - $("#weatherLog").width() - 39), 20));

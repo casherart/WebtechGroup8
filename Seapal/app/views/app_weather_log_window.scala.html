@@ -1,12 +1,12 @@
 @(trips: String)
 
-<div class="control-group">
+<div class="" style="float: left;">
 	<select name="trip_log" id="trip_log" class="select-long">
     	@Html(trips)
 	</select>
 	<div id="logTimer"></div>
 	</div>
-	<div class="control-group">
-    	<input type="reset" class="btn btn-primary" id="closeWeatherLog" value="Schließen" class="button" onclick="closeWeatherLog();"/>
+	<div class="" style="float: right; padding-top: 2px;">
         <input type="submit" class="btn btn-success" id="startStopWeatherLog" name="submit" value="Log starten" class="button" onclick="startWeatherlogging();"/>
+		    	<input type="reset" class="btn btn-primary" id="closeWeatherLog" value="Schließen" class="button" onclick="closeWeatherLog();"/>
     </div>
