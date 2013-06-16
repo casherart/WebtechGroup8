@@ -216,7 +216,11 @@ function initialize() {
             } else {
             	if($("body").width() > 700){//go to hendheld view{
             		$("#weatherDisplayBox").fadeIn("slow");
-            	}            	
+            	}        
+                if (map.overlayMapTypes.getLength() > 0) {
+                    map.overlayMapTypes.clear();
+                    $('.weat').attr('checked', false);
+                }    	
                 $("#weatherBar").slideUp("slow");
                 $("#bft_scale").fadeOut("slow");
                 if ($("#now").hasClass("active"))
