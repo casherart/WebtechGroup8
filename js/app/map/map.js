@@ -209,10 +209,9 @@ function initialize() {
             	if($("body").width() > 700){//go to hendheld view{
             		$("#weatherDisplayBox").fadeIn("slow");
             	}            	
-                                if (map.overlayMapTypes.getLength() > 0) {
+                if (map.overlayMapTypes.getLength() > 0) {
                     map.overlayMapTypes.clear();
                     $('.weat').attr('checked', false);
-                    alert("reset");
                 }
                 $("#weatherBar").slideUp("slow");
                 $("#bft_scale").fadeOut("slow");
