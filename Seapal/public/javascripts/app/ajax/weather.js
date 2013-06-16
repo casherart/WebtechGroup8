@@ -29,7 +29,6 @@ function validate_handleWeatherForm(formularData){
         i++;
 
     }
-    console.log(check);
     return check;
 }
 
