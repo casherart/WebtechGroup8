@@ -237,7 +237,7 @@ function initialize() {
                 }
                 else if ($("#7days").hasClass("active"))
                 {
-                    forecastBoxIntervall = window.setTimeout("handleWeather('forecast/daily', 'box');", forecastBoxUpdateWait);
+                    forecastBoxIntervall = window.setTimeout("handleWeather('forecast/daily', 'box', 14);", forecastBoxUpdateWait);
                 }
             }
         } else {
