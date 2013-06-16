@@ -100,22 +100,22 @@
     .context-menu-item.icon:before {}
 */
 .context-menu-item.icon { min-height: 18px; background-repeat: no-repeat; background-position: 4px 2px; }
-.context-menu-item.icon-edit { background-image: url(images/page_white_edit.png); }
-.context-menu-item.icon-cut { background-image: url(images/cut.png); }
-.context-menu-item.icon-copy { background-image: url(images/page_white_copy.png); }
-.context-menu-item.icon-paste { background-image: url(images/page_white_paste.png); }
-.context-menu-item.icon-delete1 { background-image: url(images/page_white_delete.png); }
-.context-menu-item.icon-add { background-image: url(images/page_white_add.png); }
-.context-menu-item.icon-quit { background-image: url(images/door.png); }
+.context-menu-item.icon-edit { background-image: url(/assets/images/page_white_edit.png); }
+.context-menu-item.icon-cut { background-image: url(/assets/images/cut.png); }
+.context-menu-item.icon-copy { background-image: url(/assets/images/page_white_copy.png); }
+.context-menu-item.icon-paste { background-image: url(/assets/images/page_white_paste.png); }
+.context-menu-item.icon-delete1 { background-image: url(/assets/images/page_white_delete.png); }
+.context-menu-item.icon-add { background-image: url(/assets/images/page_white_add.png); }
+.context-menu-item.icon-quit { background-image: url(/assets/images/door.png); }
 
-.context-menu-item.icon-marker { background-image: url(../../img/icons/marker.png); }
-.context-menu-item.icon-startroute { background-image: url(../../img/icons/startroute.png); }
-.context-menu-item.icon-destination { background-image: url(../../img/icons/destination.png); }
-.context-menu-item.icon-distance { background-image: url(../../img/icons/distance.png); }
-.context-menu-item.icon-delete { background-image: url(../../img/icons/delete.png); }
-.context-menu-item.icon-addMarker { background-image: url(../../img/icons/add_marker.png); }
-.context-menu-item.icon-deleteMarker { background-image: url(../../img/icons/delete_marker.png); }
-.context-menu-item.icon-selectRoute { background-image: url(../../img/icons/select_route.png); }
+.context-menu-item.icon-marker { background-image: url(/assets/images/icons/marker.png); }
+.context-menu-item.icon-startroute { background-image: url(/assets/images/icons/startroute.png); }
+.context-menu-item.icon-destination { background-image: url(/assets/images/icons/destination.png); }
+.context-menu-item.icon-distance { background-image: url(/assets/images/icons/distance.png); }
+.context-menu-item.icon-delete { background-image: url(/assets/images/icons/delete.png); }
+.context-menu-item.icon-addMarker { background-image: url(/assets/images/icons/add_marker.png); }
+.context-menu-item.icon-deleteMarker { background-image: url(/assets/images/icons/delete_marker.png); }
+.context-menu-item.icon-selectRoute { background-image: url(/assets/images/icons/select_route.png); }
 
 /* vertically align inside labels */
 .context-menu-input > label > * { vertical-align: top; }
