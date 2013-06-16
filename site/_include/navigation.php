@@ -16,7 +16,7 @@
             <div class="nav-collapse collapse">
             	<ul class="nav nav-pills" style="padding-left:0px; padding-top: 24px; font-size: 18px;">
 			        <li <?php if ($filename == "index") echo("class='active'"); ?>><a href='/site/index.php'>Home</a></li>
-			        <li <?php if ($filename == "app_map" || $filename == "app_boatinfo" || $filename == "app_trip" || $filename || "app_weather") echo("class='active'"); ?>><a href='/site/app_map.php'>App</a></li>
+			        <li <?php if ($filename == "app_map" || $filename == "app_boatinfo" || $filename == "app_trip" || $filename == "app_weather") echo("class='active'"); ?>><a href='/site/app_map.php'>App</a></li>
 			        <li <?php if ($filename == "userguide") echo("class='active'"); ?>><a href='/site/userguide.php'>User Guide</a></li>
 			        <li <?php if ($filename == "screenshots") echo("class='active'"); ?>><a href='/site/screenshots.php'>Screenshots</a></li>
 			        <li <?php if ($filename == "about") echo("class='active'"); ?>><a href='/site/about.php'>About</a></li>

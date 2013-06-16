@@ -157,7 +157,7 @@
             </div>
 
             <!-- Weather log -->
-            <div id="weatherLog" class="well well-small btn-inverse disabled" style="display:none;"></div>
+            <div id="weatherLog" class="well well-small btn-inverse disabled" style="display:none; height:30px;"></div>
             <!-- Weather Warning -->
             <div id="weatherWarningWindow" class="well well-small btn-inverse disabled" style="display:none;"><b>Aktuell keine Wetterwarnungen</b></div>
             <!-- Map -->
