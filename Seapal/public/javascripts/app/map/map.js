@@ -313,25 +313,25 @@ function initialize() {
 }
 
 $(function() {
-//filter for Google Maps
-$('.weat').click(function() {
- var layerID = parseInt($(this).val());
- if ($(this).attr('checked')) {
-     var overlayMap = new google.maps.ImageMapType(overlayMaps[layerID]);
-     map.overlayMapTypes.setAt(layerID, overlayMap);
-     // wind filter display scala
-     if (layerID === 0) {
-         $("#bft_scale").fadeIn("slow");
-     }
- } else {
-     if (map.overlayMapTypes.getLength() > 0) {
-         map.overlayMapTypes.setAt(layerID, null);
-     }
-     if (layerID === 0) {
-         $("#bft_scale").fadeOut("slow");
-     }
- }
-});
+	//filter for Google Maps
+	$('.weat').click(function() {
+	 var layerID = parseInt($(this).val());
+	 if ($(this).attr('checked')) {
+	     var overlayMap = new google.maps.ImageMapType(overlayMaps[layerID]);
+	     map.overlayMapTypes.setAt(layerID, overlayMap);
+	     // wind filter display scala
+	     if (layerID === 0) {
+	         $("#bft_scale").fadeIn("slow");
+	     }
+	 } else {
+	     if (map.overlayMapTypes.getLength() > 0) {
+	         map.overlayMapTypes.setAt(layerID, null);
+	     }
+	     if (layerID === 0) {
+	         $("#bft_scale").fadeOut("slow");
+	     }
+	 }
+	});
 });
 
 
