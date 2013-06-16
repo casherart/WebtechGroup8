@@ -21,6 +21,8 @@ GET     /app_trip_load.html     	controllers.Trip.load(tnr: Int)
 POST    /app_trip_insert.html   	controllers.Trip.insert()
 GET     /app_trip_delete.html   	controllers.Trip.delete(tnr: Int)
 GET		/getWeatherWarning.html		controllers.Map.getWeatherWarning()
+GET 	/app_weather_log_window.html	controllers.Map.getLogWeatherWindow()
+
 # Weatherform
 GET		/app_weather.html			controllers.Weather.index()
 GET		/app_weather_load.html		controllers.Weather.load(wID: Int)
