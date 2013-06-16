@@ -34,9 +34,14 @@ label {
     margin-left: auto;
 }
 
+#followCurrentPositionContainer {
+	width: 170px !important;
+	padding-top: 5px !important;
+}
+
 #followCurrentPosition_button {
-    position: absolute;
-    z-index: 2;
+    /*position: absolute;
+    z-index: 2;*/
 }
 
 #routeMenu, #distanceToolMenu, #navigationMenu {
@@ -89,9 +94,9 @@ label {
 }
 
 #followCurrentPosition_button {
-    padding: 5px 5px 5px 5px;
+    /*padding: 5px 5px 5px 5px;
     left:500px;
-    top:5px;
+    top:5px;*/
 }
 
 #weatherBar {

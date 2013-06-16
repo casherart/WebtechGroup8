@@ -256,13 +256,16 @@ function initialize() {
     var weatherControlDiv = document.getElementById('weatherBar');
     var windBarControlDiv = document.getElementById('bft_scale');
     var weatherDisplayDiv = document.getElementById('weatherDisplayBox');
+	var followPositionDiv = document.getElementById('followCurrentPositionContainer');
 
     weatherControlDiv.index = 1;
     windBarControlDiv.index = 1;
     weatherDisplayDiv.index = 1;
+	followPositionDiv.index = 1;
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(windBarControlDiv);
     map.controls[google.maps.ControlPosition.RIGHT_TOP].push(weatherControlDiv);
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(weatherDisplayDiv);
+	map.controls[google.maps.ControlPosition.TOP_CENTER].push(followPositionDiv);
 
     overlay.draw = function () { };
     overlay.setMap(map);
