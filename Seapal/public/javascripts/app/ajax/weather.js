@@ -42,7 +42,6 @@ function handleWeatherForm(formularData, showMessage) {
     $("#save").val("Speichern");
     var showMessage = showMessage || true;
     	//TODO check entries
-    	console.log(formularData);
         $.ajax({
             type: "POST",
             url: "app_weather_insert.html",
