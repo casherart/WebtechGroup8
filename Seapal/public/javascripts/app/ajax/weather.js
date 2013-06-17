@@ -54,7 +54,7 @@ function handleWeatherForm(formularData, showMessage) {
                 if (jsonData.status != "ok") {
                     showAlert("error", "OHHHH Entschuldigung! Da lief wohl etwas gewaltig schief");
                 } else {
-                    addWeatherToTable(jsonData.id);
+                    addWeatherToTable(jsonData.id, true);
                     showAlert("Erfolgreich", "Ihre Wetterdaten wurden gespeichert und in die untere Tabelle aufgenommen.");
                 }
             }
@@ -64,16 +64,23 @@ function handleWeatherForm(formularData, showMessage) {
 }
 
 
-function addWeatherToTable(weather_id) {
+function addWeatherToTable(weather_id, newItem) {
+	var newItem = newItem || false;
     var tr = document.getElementById("wTR_" + weather_id)
     if (!tr) {
         tr = document.createElement("tr");
         tr.id = "wTR_" + weather_id;
         tr.className = "selectable";
         $("#weather_entries").append(tr);
-    } else {
+    } else {    	
         $("#wTR_" + weather_id).empty();
-    }
+    }    
+    if(newItem){
+	    $(tr).mouseover(function() {
+	        $(this).removeClass("success");
+	    });
+	    $(tr).addClass("success");
+	}
 
     var td = document.createElement("td");
     td.style.colspan = weatherTableColCount;
@@ -94,7 +101,7 @@ function addWeatherToTable(weather_id) {
             } else {
                 var tr = $("#wTR_" + weather_id);
                 tr.html("");
-
+                
                 var td_trip = document.createElement("td");
                 td_trip.innerHTML = jsonData.trip;
                 tr.append(td_trip);
