@@ -6,17 +6,17 @@ function validate_handleWeatherForm(formularData){
     
     var datas = formularData.split("&"); 
     var test = new Array();
-    var check = true;
-    
+    var formOK = true;
     datas.shift();
     datas.shift();
     var i = 0;    
     while(datas.length !== 0 ){
 
+       var check = true;
        var tmp = datas.shift();
        var CheckNaN = parseFloat(tmp.substring(tmp.indexOf("=")+1,tmp.length));
-       
-        if(isNaN(CheckNaN) || CheckNaN === 1 && i>2 ){
+       var id = tmp.substring(0,tmp.indexOf("="));
+       if(isNaN(CheckNaN) || CheckNaN === 1 && i>2 ){
             if ( i !== 5 && i !== 3){
             check = false;
             }
@@ -24,10 +24,17 @@ function validate_handleWeatherForm(formularData){
         if((i>1 && CheckNaN < 0 )|| (i ===1 && CheckNaN<=0 )){
                 check = false;
         }
+        
+        if(check){
+        	$("#"+id).parents(".control-group").removeClass("error");
+        }else{
+        	formOK = false;
+        	$("#"+id).parents(".control-group").addClass("error");
+        }
         i++;
 
     }
-    return check;
+    return formOK;
 }
 
 function handleWeatherForm(formularData, showMessage) {
@@ -179,9 +186,9 @@ function weatherDataToForm(weather_id) {
             $("#wTR_" + jsonData.weather_id).html("<td colspan='" + weatherTableColCount + "'>Fehler beim laden der Daten!</td>");
         } else {
             var form = $("#appForm");
-            $("#temp").parseFloat(jsonData.temperature);
-            $("#airpress").parseFloat(jsonData.airpreasure);
-            $("#whight").parseFloat(jsonData.wave_height);
+            $("#temp").val(jsonData.temperature);
+            $("#airpress").val(jsonData.airpreasure);
+            $("#whight").val(jsonData.wave_height);
 
 
             $("#windstr").val(jsonData.windStrId);
