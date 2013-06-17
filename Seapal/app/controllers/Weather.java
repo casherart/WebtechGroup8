@@ -38,7 +38,7 @@ public class Weather extends Controller {
 						+ ", airpreasure = " + data.get("airpress")
 						+ ", wind_strength = " + data.get("wind_strength")
 						+ ", wind_direction = " + data.get("wind_direction")
-						+ ", wave_height = " + data.get("whight")
+						+ ", wave_height = " + data.get("wave_height")
 						+ ", wave_direction = " + data.get("wave_direction")
 						+ ", clouds = " + data.get("clouds")
 						+ ", rain = " + data.get("rain")
