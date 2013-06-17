@@ -106,7 +106,7 @@ function handleWeather(time, target, timespan) {
                     for (var i = 0; i < data.list.length; i++) {
                         buffer = checkForecast(data.list[i].dt, "tomorrow");
                         if (buffer === true) {
-                            getForecast(data.list[i]);
+                            getForecast(data.list[i+4]);
                             break;
                         }
                     }
