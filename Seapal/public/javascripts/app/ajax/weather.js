@@ -186,7 +186,6 @@ function weatherDataToForm(weather_id) {
         if (jsonData.status != "ok") {
             $("#wTR_" + jsonData.weather_id).html("<td colspan='" + weatherTableColCount + "'>Fehler beim laden der Daten!</td>");
         } else {
-            console.log(jsonData);
             var form = $("#appForm");
             $("#temp").val(jsonData.temperature);
             $("#airpress").val(jsonData.airpreasure);
@@ -212,7 +211,6 @@ function removeWeatherData(weather_id) {
             type: "GET",
             url: "app_weather_delete.html?wID=" + weather_id
         }).done(function(jsonData) {
-            console.log(jsonData);
             //jsonData = $.parseJSON(jsonData);
             if (jsonData.status != "ok") {
                 showAlert("error", "Der Eintrag wurde vielleicht gelöscht, vielleicht auch nicht.")
@@ -226,7 +224,6 @@ function removeWeatherData(weather_id) {
 
 
 function showAlert(className, text) {
-
     $('#dialogTitle').text(className.toUpperCase());
     $('#dialogMessage').text(text);
     $('#messageBox').modal('show');
