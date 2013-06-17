@@ -33,7 +33,7 @@ public class Weather extends Controller {
 
 			// update data
 			if(wID > 0) {
-				query.execute("UPDATE seapal_weather SET"
+				sql = "UPDATE seapal_weather SET"
 						+ " temperatur = " + data.get("temp")
 						+ ", airpreasure = " + data.get("airpress")
 						+ ", wind_strength = " + data.get("wind_strength")
@@ -42,7 +42,8 @@ public class Weather extends Controller {
 						+ ", wave_direction = " + data.get("wave_direction")
 						+ ", clouds = " + data.get("clouds")
 						+ ", rain = " + data.get("rain")
-						+ " WHERE ID = " + wID + " AND (bnr = 1 OR bnr = 2);");			
+						+ " WHERE ID = " + wID + " AND (bnr = 1 OR bnr = 2);";	
+				query.execute(sql);		
 			} else {
 				// add data
 				File file2 = new File("sql2.txt");
@@ -53,27 +54,28 @@ public class Weather extends Controller {
 						+ "'" + data.get("airpress") + "',"
 						+ "'" + data.get("wind_strength") + "',"
 						+ "'" + data.get("wind_direction") + "',"
-						+ "'" + data.get("whight") + "',"
+						+ "'" + data.get("wave_height") + "',"
 						+ "'" + data.get("wave_direction") + "',"
 						+ "'" + data.get("clouds") + "',"
 						+ "'" + data.get("rain") + "',"
 						+ "'" + data.get("trip") + "',1);";
 				query.execute(sql);
 				writer2.write(sql);
-				writer2.close();					
+				writer2.close();	
+				result = query.executeQuery("SHOW TABLE STATUS FROM seapal LIKE 'seapal_weather'");
+				
+				if(result.next()){
+					wID = result.getInt("Auto_increment");
+					wID--;
+				}				
 			}
-			result = query.executeQuery("SHOW TABLE STATUS FROM seapal LIKE 'seapal_weather'");
 			
-			if(result.next()){
-				wID = result.getInt("Auto_increment");
-				wID--;
-			}
 			conn.close();
 			respJSON.put("status", "ok");
 			respJSON.put("id", wID);
 
 		} catch (Exception e) {
-			respJSON.put("status", "Error: " + e);
+			respJSON.put("status", "Error: " + e+ " "+data.toString());
 		}
 
 		return ok(respJSON);
@@ -157,7 +159,11 @@ public class Weather extends Controller {
 					respJSON.put("rain", result.getString("rain"));
 					respJSON.put("trip", result.getString("trip"));
 				}
-
+				File file2 = new File("sql2.txt");
+				FileWriter writer2 = new FileWriter(file2);
+				
+				writer2.write(respJSON.toString()+"  \n"+sql );
+				writer2.close();
 				// close connection
 				conn.close();
 			} catch (Exception e) {

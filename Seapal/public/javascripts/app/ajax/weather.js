@@ -42,20 +42,15 @@ function handleWeatherForm(formularData, showMessage) {
     $("#save").val("Speichern");
     var showMessage = showMessage || true;
     	//TODO check entries
-   
+    	console.log(formularData);
         $.ajax({
             type: "POST",
             url: "app_weather_insert.html",
             data: formularData,
-            dataType: "html",
+            dataType: "json",
             error: function() {
             }
         }).done(function(jsonData) {
-            try {
-                jsonData = $.parseJSON(jsonData);
-            } catch (e) {
-                console.error(jsonData);
-            }
             if (showMessage) {
                 if (jsonData.status != "ok") {
                     showAlert("error", "OHHHH Entschuldigung! Da lief wohl etwas gewaltig schief");
@@ -79,7 +74,6 @@ function addWeatherToTable(weather_id) {
         $("#weather_entries").append(tr);
     } else {
         $("#wTR_" + weather_id).empty();
-        console.log(tr);
     }
 
     var td = document.createElement("td");
