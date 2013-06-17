@@ -41,7 +41,7 @@ function validate_handleWeatherForm(formularData){
 function handleWeatherForm(formularData, showMessage) {
     $("#save").val("Speichern");
     var showMessage = showMessage || true;
-    //TODO check entries
+    	//TODO check entries
    
         $.ajax({
             type: "POST",
