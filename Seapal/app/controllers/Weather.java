@@ -34,11 +34,11 @@ public class Weather extends Controller {
 			// update data
 			if(wID > 0) {
 				sql = "UPDATE seapal_weather SET"
-						+ " temperatur = " + data.get("temp")
-						+ ", airpreasure = " + data.get("airpress")
+						+ " temperatur = " + data.get("temp").replaceAll(",",".")
+						+ ", airpreasure = " + data.get("airpress").replaceAll(",",".")
 						+ ", wind_strength = " + data.get("wind_strength")
 						+ ", wind_direction = " + data.get("wind_direction")
-						+ ", wave_height = " + data.get("wave_height")
+						+ ", wave_height = " + data.get("wave_height").replaceAll(",",".")
 						+ ", wave_direction = " + data.get("wave_direction")
 						+ ", clouds = " + data.get("clouds")
 						+ ", rain = " + data.get("rain")
@@ -50,11 +50,11 @@ public class Weather extends Controller {
 
 				FileWriter writer2 = new FileWriter(file2);
 				sql = "INSERT INTO seapal_weather(temperatur, airpreasure, wind_strength, wind_direction, wave_height, wave_direction, clouds, rain, tnr, bnr) VALUES("
-						+ "'" + data.get("temp") + "',"
-						+ "'" + data.get("airpress") + "',"
+						+ "'" + data.get("temp").replaceAll(",",".") + "',"
+						+ "'" + data.get("airpress").replaceAll(",",".") + "',"
 						+ "'" + data.get("wind_strength") + "',"
 						+ "'" + data.get("wind_direction") + "',"
-						+ "'" + data.get("wave_height") + "',"
+						+ "'" + data.get("wave_height").replaceAll(",",".") + "',"
 						+ "'" + data.get("wave_direction") + "',"
 						+ "'" + data.get("clouds") + "',"
 						+ "'" + data.get("rain") + "',"
@@ -75,7 +75,7 @@ public class Weather extends Controller {
 			respJSON.put("id", wID);
 
 		} catch (Exception e) {
-			respJSON.put("status", "Error: " + e+ " "+data.toString());
+			respJSON.put("status", "Error: " + e+ " "+sql.toString());
 		}
 
 		return ok(respJSON);

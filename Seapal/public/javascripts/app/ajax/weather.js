@@ -29,10 +29,8 @@ function validate_handleWeatherForm(formularData){
         
         // alert
         if(check){
-            console.log(i,true,id);
         	$("#"+id).parents(".control-group").removeClass("error");
         }else{
-             console.log(i, false,id);
         	formOK = false;
         	$("#"+id).parents(".control-group").addClass("error");
         }
