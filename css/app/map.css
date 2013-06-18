@@ -169,8 +169,8 @@ label {
 #weatherDisplayBox #weatherDisplayTop {
     height: 90px;
     background-repeat:no-repeat;
-    background-position:125px -10px;
-    background-size: 100px auto;
+    background-position:125px -5px;
+    background-size: 90px auto;
 }
 
 #weatherDisplayTop #weatherLoader {
