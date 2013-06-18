@@ -5,7 +5,6 @@ var weatherTableColCount = 10;
 function validate_handleWeatherForm(formularData){
 
     var datas = formularData.split("&"); 
-    var test = new Array();
     var formOK = true;
     datas.shift();
     datas.shift();
@@ -17,7 +16,7 @@ function validate_handleWeatherForm(formularData){
        var CheckNaN = parseFloat(tmp.substring(tmp.indexOf("=")+1,tmp.length));
        var id = tmp.substring(0,tmp.indexOf("="));
        
-       //if empty          or nothing selevted
+       //if empty          or nothing selected
        if(isNaN(CheckNaN) || (CheckNaN === 1 && i>2 && i !== 6 && i !== 4) ){
             check = false;
             
