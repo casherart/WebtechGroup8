@@ -48,10 +48,8 @@ function validate_handleWeatherForm(formularData){
         
         // alert
         if(check){
-            console.log(i,true,id);
         	$("#"+id).parents(".control-group").removeClass("error");
         }else{
-             console.log(i, false,id);
         	formOK = false;
         	$("#"+id).parents(".control-group").addClass("error");
         }
@@ -77,7 +75,6 @@ function handleWeatherForm(formularData, showMessage) {
             try {
                 jsonData = $.parseJSON(jsonData);
             } catch (e) {
-                console.error(jsonData);
             }
             if (showMessage) {
                 if (jsonData.status != "ok") {
@@ -242,7 +239,6 @@ function removeWeatherData(weather_id) {
             type: "GET",
             url: "app_weather_delete.php?wID=" + weather_id
         }).done(function(jsonData) {
-            console.log(jsonData);
             jsonData = $.parseJSON(jsonData);
             if (jsonData.status != "ok") {
                 showAlert("error", "Der Eintrag wurde vielleicht gelöscht, vielleicht auch nicht.")
