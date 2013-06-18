@@ -2,159 +2,156 @@
 
 <!DOCTYPE html>
 <html lang="de">
-    <head>
-    	<!-- Header -->
-        @header
+<head>
+	<!-- Header -->
+	@header
 		
-	    <!-- when doc ready start loading weatherdatatable content -->
-		<script>
-		$(document).ready(function() {
-			@Html(weatherTable)
-		});
-		</script>		
+	<!-- when doc ready start loading weatherdatatable content -->
+	<script>
+	$(document).ready(function() {
+		@Html(weatherTable)
+	});
+	</script>		
 
-    </head>
-    <body>
+</head>
+<body>
 
-    	<!-- Navigation -->
-    	@navigation
+	<!-- Navigation -->
+	@navigation
 
-        <!-- Container -->
-        <div class="container-fluid">
+	<!-- Container -->
+	<div class="container-fluid">
 
-	    	<!-- Navigation -->
-	    	@navigation_app
+		<!-- Navigation -->
+		@navigation_app
 
-            <!-- Content -->
-            <div id="appWrapper" align="center">
-                <div class="align-center">
-                    <br>
-                    <h2>Wetter Informationen</h2>
-                    <br>
-                </div>
-                 <form id="appForm" class="form-horizontal" onsubmit="if(validate_handleWeatherForm( $(this).serialize()) ){	handleWeatherForm($(this).serialize());	return false;}else{	showAlert('Fehlerhafte Eingabe','Das Formular ist fehlerhaft. Überprüfen Sie bitte Ihre Eingabe.');	return false;}">
-                 	<input type="hidden" id="wId" name="wId" value="">
-                    <div class="container-fluid">
-                    	<div class="row well" style="margin-left: 15%; height: 30px;">
-                            <div class="span4">
-                                <div class="control-group">
-                                	<label class="control-label padding-right10">Reise</label> 
-                                    <select name="trip" id="trip" class="select-long">
-										@Html(trip)
-                                    </select>
-                                </div>
-                        	</div>                        	
-                        </div>
-                        <div class="row well" style="margin-left: 15%;">
-                            <div class="span4">
-                                <div class="control-group">
-                                    <label class="control-label padding-right10">Temperatur</label> 								 
-                                    <div class="input-append">
-                                        <input class="input-medium" type="text" id="temp" name="temp" /> 
-                                        <span title="Celsius" style="cursor: pointer" class="add-on">C°</span>
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label padding-right10">Luftdruck</label>  
-                                    <div class="input-append">
-                                        <input class="input-medium" type="text" id="airpress" name="airpress" /> 
-                                        <span title="Pascal" style="cursor: pointer" class="add-on">Pa</span>
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label padding-right10">Windstärke</label> 
-                                    <div class="input-append">
-                                        <select	name="wind_strength" id="wind_strength" class="select-medium">
-											@Html(wind_str)
-                                        </select> 
-                                        <span title="Beaufort Scale" style="cursor: pointer;" class="add-on">bft</span>
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label padding-right10">Wellenh&ouml;he</label> 
-                                    <div class="input-append">
-                                        <input class="input-medium" type="text" id="wave_height" name="wave_height"/> 
-                                        <span title="Meter" style="cursor: pointer" class="add-on">m</span>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="span4">
-                                <div class="control-group">
-
-                                    <div class="control-group">
-                                        <label class="control-label padding-right10">Bew&ouml;lkung</label> 
-                                        <div class="input-append">
-                                            <select name="clouds" id="clouds" class="select-medium">
-												@Html(clouds)
-                                            </select> 
-                                            <span title="Octa" style="cursor: pointer" class="add-on">Octa</span>
-                                        </div>
-                                    </div>
-                                    <div class="control-group">
-                                        <label class="control-label padding-right10">Regen</label> 
-                                        <select name="rain" id="rain" class="select-medium">
-											@Html(rain)
-                                        </select>
-                                    </div>
-                                    <div class="control-group">
-                                        <label class="control-label padding-right10">Windrichtung</label> 
-                                        <select name="wind_direction" id="wind_direction" class="select-medium">
-											@Html(wind_dir)
-                                        </select>
-                                    </div>
-                                    <div class="control-group">
-                                        <label class="control-label padding-right10">Wellenrichtung</label> 
-                                        <select name="wave_direction" id="wave_direction" class="select-medium">
-											@Html(wave_dir)
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="control-group">
-                            <input type="reset" class="btn" id="delete" value="Zur&uuml;cksetzen" class="button"/>
-                            <input type="submit" class="btn" id="save" name="submit" value="Speichern" class="button"/>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="appTableDiv" align="center">
-	                <table class="appTable table table-hover" cellspacing="0px" cellpadding="5px">
-	                    <thead>
-	                        <tr>
-	                            <th>Reise</th>
-	                            <th>Temperatur</th>
-	                            <th>Luftdruck</th>
-	                            <th>Windst&auml;rke</th>
-	                            <th>Windrichtung</th>
-	                            <th>Wellenh&ouml;he</th>
-	                            <th>Wellenrichtung</th>
-	                            <th>Bew&ouml;lkung</th>
-	                            <th>Regen</th>
-	                            <th></th>
-	                        </tr>
-	                    </thead>
-		                <tbody id="weather_entries">
-	                    </tbody>
-	                </table>
-	                <br /><br />
-	            </div>
-        </div>
-        
-		<!-- Menu Modal -->
-		<div class="modal hide fade" id="messageBox">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				<h3 id="dialogTitle"></h3>
+		<!-- Content -->
+		<div id="appWrapper" align="center">
+			<div class="align-center">
+				<br>
+				<h2>Wetter Informationen</h2>
+				<br>
 			</div>
-			<div class="modal-body">
-				<p id="dialogMessage"></p>
-			</div>
-			<div class="modal-footer">
-				<a href="#" class="btn" data-dismiss="modal"><i class="icon-ok"></i> ok</a>
-			</div>
+			<form id="appForm" class="form-horizontal" onsubmit="if(validate_handleWeatherForm( $(this).serialize()) ){	handleWeatherForm($(this).serialize());	return false;}else{	showAlert('Fehlerhafte Eingabe','Das Formular ist fehlerhaft. Überprüfen Sie bitte Ihre Eingabe.');	return false;}">
+				<input type="hidden" id="wId" name="wId" value="">
+				<div class="container-fluid">
+					<div class="row well" style="margin-left: 15%; height: 30px;">
+						<div class="span4">
+							<div class="control-group">
+								<label class="control-label padding-right10">Reise</label> 
+								<select name="trip" id="trip" class="select-long">
+									@Html(trip)
+								</select>
+							</div>
+						</div>                        	
+					</div>
+					<div class="row well" style="margin-left: 15%;">
+						<div class="span4">
+							<div class="control-group">
+								<label class="control-label padding-right10">Temperatur</label> 								 
+								<div class="input-append">
+									<input class="input-medium" type="text" id="temp" name="temp" /> 
+									<span title="Celsius" style="cursor: pointer" class="add-on">C°</span>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label padding-right10">Luftdruck</label>  
+								<div class="input-append">
+									<input class="input-medium" type="text" id="airpress" name="airpress" /> 
+									<span title="Pascal" style="cursor: pointer" class="add-on">Pa</span>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label padding-right10">Windstärke</label> 
+								<div class="input-append">
+									<select	name="wind_strength" id="wind_strength" class="select-medium">
+										@Html(wind_str)
+									</select> 
+									<span title="Beaufort Scale" style="cursor: pointer;" class="add-on">bft</span>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label padding-right10">Wellenh&ouml;he</label> 
+								<div class="input-append">
+									<input class="input-medium" type="text" id="wave_height" name="wave_height"/> 
+									<span title="Meter" style="cursor: pointer" class="add-on">m</span>
+								</div>
+							</div>
+
+						</div>
+						<div class="span4">
+							<div class="control-group">
+								<label class="control-label padding-right10">Bew&ouml;lkung</label> 
+								<div class="input-append">
+									<select name="clouds" id="clouds" class="select-medium">
+										@Html(clouds)
+									</select> 
+									<span title="Octa" style="cursor: pointer" class="add-on">Octa</span>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label padding-right10">Regen</label> 
+								<select name="rain" id="rain" class="select-medium">
+									@Html(rain)
+								</select>
+							</div>
+							<div class="control-group">
+								<label class="control-label padding-right10">Windrichtung</label> 
+								<select name="wind_direction" id="wind_direction" class="select-medium">
+									@Html(wind_dir)
+								</select>
+							</div>
+							<div class="control-group">
+								<label class="control-label padding-right10">Wellenrichtung</label> 
+								<select name="wave_direction" id="wave_direction" class="select-medium">
+									@Html(wave_dir)
+								</select>
+							</div>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					<div class="control-group">
+						<input type="reset" class="btn" id="delete" value="Zur&uuml;cksetzen" class="button"/>
+						<input type="submit" class="btn" id="save" name="submit" value="Speichern" class="button"/>
+					</div>
+				</div>
+			</form>
 		</div>
-    </body>
+		<div class="appTableDiv" align="center">
+			<table class="appTable table table-hover" cellspacing="0px" cellpadding="5px">
+				<thead>
+					<tr>
+						<th>Reise</th>
+						<th>Temperatur</th>
+						<th>Luftdruck</th>
+						<th>Windst&auml;rke</th>
+						<th>Windrichtung</th>
+						<th>Wellenh&ouml;he</th>
+						<th>Wellenrichtung</th>
+						<th>Bew&ouml;lkung</th>
+						<th>Regen</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody id="weather_entries">
+				</tbody>
+			</table>
+			<br /><br />
+		</div>
+	</div>
+        
+	<!-- Menu Modal -->
+	<div class="modal hide fade" id="messageBox">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			<h3 id="dialogTitle"></h3>
+		</div>
+		<div class="modal-body">
+			<p id="dialogMessage"></p>
+		</div>
+		<div class="modal-footer">
+			<a href="#" class="btn" data-dismiss="modal"><i class="icon-ok"></i> ok</a>
+		</div>
+	</div>
+</body>
 </html>

@@ -4,31 +4,35 @@
 var weatherTableColCount = 10;
 
 function validate_handleWeatherForm(formularData){
-    
+
     var datas = formularData.split("&"); 
-    var test = new Array();
     var formOK = true;
     datas.shift();
     datas.shift();
-    var i = 0;    
+    var i = 1;    
     while(datas.length !== 0 ){
 
        var check = true;
        var tmp = datas.shift();
        var CheckNaN = parseFloat(tmp.substring(tmp.indexOf("=")+1,tmp.length));
        var id = tmp.substring(0,tmp.indexOf("="));
-       if(isNaN(CheckNaN) || CheckNaN === 1 && i>2 ){
-            if ( i !== 5 && i !== 3){
+       
+       //if empty          or nothing selected
+       if(isNaN(CheckNaN) || (CheckNaN === 1 && i>2 && i !== 6 && i !== 4) ){
             check = false;
-            }
+            
         }
-        if((i>1 && CheckNaN < 0 )|| (i ===1 && CheckNaN<=0 )){
+        //no neg. numbers and no 0 pascal
+        if((i>1 && i<5 && CheckNaN < 0  )|| (i ===2 && CheckNaN<=0 )){ 
                 check = false;
-        }
+        }     
         
+        // alert
         if(check){
+            console.log(i,true,id);
         	$("#"+id).parents(".control-group").removeClass("error");
         }else{
+             console.log(i, false,id);
         	formOK = false;
         	$("#"+id).parents(".control-group").addClass("error");
         }
