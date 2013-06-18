@@ -595,15 +595,21 @@ function getWeatherWarning() {
             $('#weatherWarningWindow').html(response.msg);
             $('#weatherWarningWindow').css("left", Math.max(($(".navbar").width()/2 - $("#weatherWarningWindow").width()/2), 20));
             timestamp = response.timestamp;
+            $('#weatherWarningWindow').html(response.msg);
+            $('#weatherWarningWindow').css("left", Math.max(($(".navbar").width()/2 - $("#weatherWarningWindow").width()/2), 20));
+            timestamp = response.timestamp;
             if (response.warningLevel > 90) {
-                $("#showWeatherWarning").removeClass("btn-warning").addClass("btn-danger");
-                $("#weatherWarningWindow").removeClass("btn-inverse").removeClass("btn-warning").addClass("btn-danger");
+                $("#showWeatherWarning").removeClass("btn-warning").removeClass("btn-info").addClass("btn-danger");
+                $("#weatherWarningWindow").removeClass("btn-inverse").removeClass("btn-warning").removeClass("btn-info").addClass("btn-danger");
             } else if (response.warningLevel > 75) {
-                $("#showWeatherWarning").removeClass("btn-danger").addClass("btn-warning");
-                $("#weatherWarningWindow").removeClass("btn-inverse").removeClass("btn-danger").addClass("btn-warning");
+                $("#showWeatherWarning").removeClass("btn-danger").removeClass("btn-info").addClass("btn-warning");
+                $("#weatherWarningWindow").removeClass("btn-inverse").removeClass("btn-danger").removeClass("btn-info").addClass("btn-warning");
+            } else if (response.warningLevel > 70) {
+                $("#showWeatherWarning").removeClass("btn-warning").removeClass("btn-danger").addClass("btn-info");
+                $("#weatherWarningWindow").removeClass("btn-inverse").removeClass("btn-danger").removeClass("btn-warning").addClass("btn-info");
             } else {
-                $("#showWeatherWarning").removeClass("btn-warning btn-danger");
-                $("#weatherWarningWindow").removeClass("btn-danger").removeClass("btn-warning").addClass("btn-inverse");
+                $("#showWeatherWarning").removeClass("btn-warning").removeClass("btn-danger").removeClass("btn-info");
+                $("#weatherWarningWindow").removeClass("btn-danger").removeClass("btn-warning").removeClass("btn-info").addClass("btn-inverse");
             }
             noerror = true;
         },
