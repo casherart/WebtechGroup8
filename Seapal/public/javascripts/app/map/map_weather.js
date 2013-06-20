@@ -79,7 +79,7 @@ function handleWeather(time, target, timespan) {
                     var wave_direction = 1;
                     var whight = 0;
                     var urlString = "trip=" + currentTripToLog + "&wId=&temp=" + data.temp.day + "&airpress=" + data.pressure + "&wind_strength=" + data.speed
-                            + "&whight=" + whight + "&clouds=" + data.clouds + "&rain=" + data.rain + "&wind_direction=" + data.deg + "&wave_direction=" + wave_direction;
+                            + "&wave_height=" + whight + "&clouds=" + data.clouds + "&rain=" + data.rain + "&wind_direction=" + data.deg + "&wave_direction=" + wave_direction;
                     handleWeatherForm(urlString, true);
                 } else if (target == "box") {
                     $("#tempData").text(data.temp.day.toFixed(0) + "°");
